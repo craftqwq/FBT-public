@@ -978,35 +978,10 @@ input:focus {
 }
 
 .tierRow {
-  --tier-max: 100%;
   display: grid;
   grid-template-columns: 58px minmax(0, 1fr);
   align-items: start;
   gap: 12px;
-}
-
-.tierRow0 {
-  --tier-max: 360px;
-}
-
-.tierRow1 {
-  --tier-max: 520px;
-}
-
-.tierRow2 {
-  --tier-max: 680px;
-}
-
-.tierRow3 {
-  --tier-max: 840px;
-}
-
-.tierRow4 {
-  --tier-max: 1000px;
-}
-
-.tierRow5 {
-  --tier-max: 1160px;
 }
 
 .tierLabel {
@@ -1023,10 +998,9 @@ input:focus {
 .tierHeroes {
   position: relative;
   width: max-content;
-  max-width: var(--tier-max);
   min-height: 54px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 8px;
   margin: 0 auto;
@@ -1470,7 +1444,6 @@ body.tierDragging .tierTooltip {
 
   .tierHeroes {
     width: max-content;
-    max-width: var(--tier-max);
     justify-content: center;
   }
 
