@@ -1225,12 +1225,26 @@ body.tierDragging .tierTooltip {
   line-height: 1;
 }
 
+.abilityGridRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+
 .abilityPanel {
   display: grid;
   grid-template-columns: repeat(4, 64px);
   grid-auto-rows: 76px;
   gap: 10px;
   align-items: stretch;
+}
+
+.exclusiveItemRail {
+  display: grid;
+  grid-template-columns: 64px;
+  grid-auto-rows: 76px;
+  gap: 10px;
 }
 
 .abilitySlot {

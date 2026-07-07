@@ -365,14 +365,27 @@ function localizedEntity(entity, language = state.language) {
   return { ...entity, ...translation };
 }
 
+function exclusiveGrantedSkills(weapon) {
+  if (!weapon) return [];
+
+  const skills = Array.isArray(weapon.grantedSkills) ? weapon.grantedSkills.filter(Boolean) : [];
+  if (weapon.grantedSkill && !skills.some((skill) => skill.id === weapon.grantedSkill.id)) {
+    skills.unshift(weapon.grantedSkill);
+  }
+
+  return skills;
+}
+
 function localizedHero(hero, language = state.language) {
   const result = localizedEntity(hero, language);
   result.abilities = (hero.abilities || []).map((ability) => localizedEntity(ability, language));
   result.relatedHeroes = (hero.relatedHeroes || []).map((relatedHero) => localizedHero(relatedHero, language));
   if (hero.exclusiveWeapon) {
     result.exclusiveWeapon = localizedEntity(hero.exclusiveWeapon, language);
-    if (hero.exclusiveWeapon.grantedSkill) {
-      result.exclusiveWeapon.grantedSkill = localizedEntity(hero.exclusiveWeapon.grantedSkill, language);
+    const grantedSkills = exclusiveGrantedSkills(hero.exclusiveWeapon).map((skill) => localizedEntity(skill, language));
+    if (grantedSkills.length) {
+      result.exclusiveWeapon.grantedSkills = grantedSkills;
+      result.exclusiveWeapon.grantedSkill = grantedSkills[0];
     }
   }
   return result;
@@ -385,6 +398,10 @@ function translationText(entity) {
 }
 
 function heroTextForSearch(hero) {
+  const grantedSkillText = exclusiveGrantedSkills(hero.exclusiveWeapon)
+    .map((skill) => `${skill.name || ""} ${skill.description || ""} ${translationText(skill)}`)
+    .join(" ");
+
   return [
     hero.id,
     hero.name,
@@ -395,7 +412,7 @@ function heroTextForSearch(hero) {
     (hero.abilities || []).map((ability) => `${ability.name} ${ability.description}`).join(" "),
     (hero.abilities || []).map((ability) => translationText(ability)).join(" "),
     hero.exclusiveWeapon
-      ? `${hero.exclusiveWeapon.name} ${hero.exclusiveWeapon.description} ${translationText(hero.exclusiveWeapon)} ${hero.exclusiveWeapon.grantedSkill?.name || ""} ${hero.exclusiveWeapon.grantedSkill?.description || ""} ${translationText(hero.exclusiveWeapon.grantedSkill)}`
+      ? `${hero.exclusiveWeapon.name} ${hero.exclusiveWeapon.description} ${translationText(hero.exclusiveWeapon)} ${grantedSkillText}`
       : "",
   ].join(" ");
 }
@@ -528,6 +545,54 @@ function defaultTierFromScore(score) {
 
 function heroOverride(id) {
   return state.ratingOverrides[id] || {};
+}
+
+function visitRelatedHeroes(hero, callback, baseHero = hero) {
+  for (const relatedHero of hero.relatedHeroes || []) {
+    callback(relatedHero, baseHero);
+    visitRelatedHeroes(relatedHero, callback, baseHero);
+  }
+}
+
+function ratingIdentityForId(id) {
+  for (const hero of state.heroes) {
+    if (hero.id === id) {
+      return { id: hero.id, hero, tierEditable: true, scoresEditable: true };
+    }
+
+    let found = null;
+    visitRelatedHeroes(hero, (relatedHero, baseHero) => {
+      if (found || relatedHero.id !== id) return;
+
+      if (relatedHero.relationType === "skin") {
+        found = { id: baseHero.id, hero: baseHero, tierEditable: true, scoresEditable: true, aliasId: relatedHero.id };
+      } else {
+        found = { id: relatedHero.id, hero: relatedHero, tierEditable: false, scoresEditable: true, sourceHeroId: baseHero.id };
+      }
+    });
+
+    if (found) return found;
+  }
+
+  return null;
+}
+
+function ratingTargetOrderMap() {
+  const order = new Map();
+  let index = 0;
+
+  for (const hero of state.heroes) {
+    order.set(hero.id, index);
+    index += 1;
+
+    visitRelatedHeroes(hero, (relatedHero) => {
+      if (relatedHero.relationType === "skin" || order.has(relatedHero.id)) return;
+      order.set(relatedHero.id, index);
+      index += 1;
+    });
+  }
+
+  return order;
 }
 
 function baseStandStats(hero) {
@@ -838,22 +903,22 @@ function readCompactScores(bytes, offset, scoreMask = 0) {
 function normalizedRatingOverrides(input) {
   const source = input?.heroes || input?.ratings || input || {};
   const result = {};
-  const heroIds = new Set(state.heroes.map((hero) => hero.id));
 
   for (const [id, value] of Object.entries(source)) {
-    if (!heroIds.has(id)) continue;
+    const target = ratingIdentityForId(id);
+    if (!target) continue;
 
-    const entry = {};
-    if (value?.tier != null) {
+    const entry = { ...(result[target.id] || {}) };
+    if (target.tierEditable && value?.tier != null) {
       entry.tier = normalizeTier(value.tier);
     }
     const order = normalizeOrder(value?.order);
-    if (order != null) {
+    if (target.tierEditable && order != null) {
       entry.order = order;
     }
 
     const sourceScores = value?.scores || value?.stand || value?.ratings || {};
-    const scores = {};
+    const scores = { ...(entry.scores || {}) };
     for (const axis of standAxes) {
       if (sourceScores[axis.key] != null) {
         scores[axis.key] = normalizeScore(sourceScores[axis.key]);
@@ -864,7 +929,7 @@ function normalizedRatingOverrides(input) {
     }
 
     if (Object.keys(entry).length) {
-      result[id] = entry;
+      result[target.id] = entry;
     }
   }
 
@@ -872,7 +937,7 @@ function normalizedRatingOverrides(input) {
 }
 
 function ratingEntries() {
-  const heroOrder = new Map(state.heroes.map((hero, index) => [hero.id, index]));
+  const heroOrder = ratingTargetOrderMap();
   return Object.entries(normalizedRatingOverrides(state.ratingOverrides))
     .map(([id, value]) => ({
       id,
@@ -965,7 +1030,6 @@ function decodeCompactRatingPayload(text) {
     throw new Error(t("unsupportedVersion", { version: bytes[4] }));
   }
 
-  const heroIds = new Set(state.heroes.map((hero) => hero.id));
   const count = (bytes[5] << 8) | bytes[6];
   const result = {};
   let offset = 7;
@@ -999,12 +1063,12 @@ function decodeCompactRatingPayload(text) {
       offset = decoded.offset;
     }
 
-    if (heroIds.has(id) && Object.keys(entry).length) {
+    if (Object.keys(entry).length) {
       result[id] = entry;
     }
   }
 
-  return result;
+  return normalizedRatingOverrides(result);
 }
 
 function decodeShortRatingPayload(text) {
@@ -1015,7 +1079,6 @@ function decodeShortRatingPayload(text) {
     throw new Error(t("unsupportedVersion", { version }));
   }
 
-  const heroIds = new Set(state.heroes.map((hero) => hero.id));
   const count = reader.read(8);
   const result = {};
 
@@ -1043,12 +1106,12 @@ function decodeShortRatingPayload(text) {
       entry.scores = scores;
     }
 
-    if (heroIds.has(id) && Object.keys(entry).length) {
+    if (Object.keys(entry).length) {
       result[id] = entry;
     }
   }
 
-  return result;
+  return normalizedRatingOverrides(result);
 }
 
 function ratingTextFromUrl(value, options = {}) {
@@ -1283,7 +1346,14 @@ function renderScoreSelect(hero, axis) {
   `;
 }
 
-function renderStandPanel(hero, editable = true) {
+function renderStandPanel(hero, options = true) {
+  const settings =
+    typeof options === "boolean"
+      ? { scoresEditable: options, tierEditable: options }
+      : {
+          scoresEditable: Boolean(options?.scoresEditable),
+          tierEditable: Boolean(options?.tierEditable),
+        };
   const ratings = calculateStandStats(hero);
   const ratingTotal = sumStandScores(ratings);
 
@@ -1292,7 +1362,7 @@ function renderStandPanel(hero, editable = true) {
       <div class="standHeader">
         <div class="standTitle">${escapeHtml(t("standTitle"))}</div>
         <div class="standHeaderControls">
-          ${editable ? renderTierSelect(hero) : ""}
+          ${settings.tierEditable ? renderTierSelect(hero) : ""}
           <div class="standSignature">${escapeHtml(t("hexScore", { score: ratingTotal }))}</div>
         </div>
       </div>
@@ -1309,7 +1379,7 @@ function renderStandPanel(hero, editable = true) {
                 <div class="standBar" aria-hidden="true">
                   <div class="standFill" style="width: ${axis.score * 20}%"></div>
                 </div>
-                ${editable ? renderScoreSelect(hero, axis) : ""}
+                ${settings.scoresEditable ? renderScoreSelect(hero, axis) : ""}
               </div>
             `,
           )
@@ -1434,13 +1504,13 @@ function exclusiveWeaponEntries(hero) {
     },
   ];
 
-  if (weapon.grantedSkill) {
+  for (const grantedSkill of exclusiveGrantedSkills(weapon)) {
     entries.push({
-      ...weapon.grantedSkill,
+      ...grantedSkill,
       buttonPos: { x: 0, y: 1 },
       kind: "exclusiveSkill",
       categoryKey: "exclusiveSkill",
-      buttonLabel: weapon.grantedSkill.hotkey || "G",
+      buttonLabel: grantedSkill.hotkey || "G",
       sourceWeapon: weapon.name || weapon.id,
       inheritedFrom: weapon.inheritedFrom,
     });
@@ -1529,25 +1599,38 @@ function renderRelatedHeroSwitch(hero, activeHero) {
 }
 
 function renderAbilities(hero) {
-  const entries = layoutEntriesForHero(localizedHero(hero));
-  if (!entries.length) {
+  const allEntries = layoutEntriesForHero(localizedHero(hero));
+  if (!allEntries.length) {
     return `<div class="muted">${escapeHtml(t("noAbilities"))}</div>`;
   }
 
-  const expanded = entries.find((ability) => ability.id === state.expandedAbilityId);
+  const sideEntries = allEntries.filter((ability) => ability.kind === "exclusiveItem");
+  const entries = allEntries.filter((ability) => ability.kind !== "exclusiveItem");
+  const expanded = allEntries.find((ability) => ability.id === state.expandedAbilityId);
   const { slots, loose } = groupAbilitiesByPosition(entries);
 
   return `
-    <div class="abilityPanel">
-      ${slots
-        .map(
-          (slot, index) => `
-            <div class="abilitySlot ${slot.length > 1 ? "multi" : ""}" data-slot="${index}">
-              ${slot.map((ability) => renderAbilityButton(ability)).join("")}
+    <div class="abilityGridRow">
+      <div class="abilityPanel">
+        ${slots
+          .map(
+            (slot, index) => `
+              <div class="abilitySlot ${slot.length > 1 ? "multi" : ""}" data-slot="${index}">
+                ${slot.map((ability) => renderAbilityButton(ability)).join("")}
+              </div>
+            `,
+          )
+          .join("")}
+      </div>
+      ${
+        sideEntries.length
+          ? `
+            <div class="exclusiveItemRail">
+              ${sideEntries.map((ability) => renderAbilityButton(ability)).join("")}
             </div>
-          `,
-        )
-        .join("")}
+          `
+          : ""
+      }
     </div>
     ${
       loose.length
@@ -1585,6 +1668,21 @@ function renderAbilities(hero) {
   `;
 }
 
+function standPanelContext(baseHero, activeHero) {
+  if (activeHero.relationType && activeHero.relationType !== "skin") {
+    return null;
+  }
+
+  const identity = ratingIdentityForId(activeHero.id) || ratingIdentityForId(baseHero.id);
+  const hero = identity?.hero || activeHero;
+
+  return {
+    hero,
+    scoresEditable: Boolean(identity?.scoresEditable),
+    tierEditable: Boolean(identity?.tierEditable),
+  };
+}
+
 function renderDetail(hero) {
   if (!hero) {
     els.detail.innerHTML = `<div class="empty">${escapeHtml(t("noMatchingHero"))}</div>`;
@@ -1601,6 +1699,7 @@ function renderDetail(hero) {
   const name = displayHero.name || t("unnamedHero");
   const title = displayHero.title || "";
   const description = (displayHero.description || "").trim();
+  const standContext = standPanelContext(hero, activeHero);
   const relatedSwitch = renderRelatedHeroSwitch(hero, activeHero);
   const gridClasses = ["contentGrid"];
   if (!relatedSwitch) gridClasses.push("noForms");
@@ -1646,7 +1745,7 @@ function renderDetail(hero) {
         <h2>${escapeHtml(t("statsTitle"))}</h2>
         <div class="panelBody">
           <div class="stats">${renderStats(activeHero)}</div>
-          ${renderStandPanel(activeHero, activeHero.id === hero.id)}
+          ${standContext ? renderStandPanel(standContext.hero, standContext) : ""}
         </div>
       </section>
     </div>
