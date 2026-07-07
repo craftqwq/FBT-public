@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FBT 角色资料</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>FBT 角色资料</h1>
+        <p id="summary">正在读取地图数据...</p>
+      </div>
+      <div class="topbarTools">
+        <div id="viewTabs" class="viewTabs" aria-label="页面切换"></div>
+        <div id="languageSwitch" class="languageSwitch" aria-label="语言切换"></div>
+        <div class="searchBox">
+          <input id="search" type="search" placeholder="搜索角色、称号、技能、说明" autocomplete="off" />
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="sectionTitle">角色列表</div>
+        <div id="heroList" class="heroList"></div>
+      </aside>
+
+      <section id="detail" class="detail" aria-live="polite">
+        <div class="empty">请选择一个角色</div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
