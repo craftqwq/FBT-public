@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-07T14:35:22.404Z",
+  "generatedAt": "2026-07-07T15:46:33.397Z",
   "source": {
     "unitStrings": "Mpq/Units/CampaignUnitStrings.txt",
     "abilityStrings": "Mpq/Units/CampaignAbilityStrings.txt",
@@ -630,6 +630,47 @@
           "relationSourceHeroId": "E00K",
           "relationSourceSkillId": "",
           "iconAsset": "assets/icons/3ee0d0ed5d33-BTNCT-HHTX.png"
+        },
+        {
+          "id": "h005",
+          "name": "冲太",
+          "title": "",
+          "hotkey": "F",
+          "icon": "ReplaceableTextures/CommandButtons/BTNCT-CT.blp",
+          "scoreIcon": "",
+          "summonTip": "生产步兵(F)",
+          "reviveTip": "",
+          "awakenTip": "",
+          "description": "步兵能学习到防御模式技能。\n能攻击地面单位。",
+          "requirements": [],
+          "stats": {
+            "hp": "3500",
+            "mana": "",
+            "str": "",
+            "agi": "",
+            "int": "",
+            "primary": "_",
+            "armor": "2",
+            "speed": "",
+            "attackBase": "350",
+            "attackDice": "1d1",
+            "range": "150",
+            "cooldown": "1.35"
+          },
+          "model": "war3mapImported/XZI_M.mdl",
+          "abilities": [],
+          "translations": {
+            "zhCN": {
+              "name": "冲太",
+              "summonTip": "生产步兵(F)",
+              "description": "步兵能学习到防御模式技能。\n能攻击地面单位。"
+            }
+          },
+          "relationType": "summon",
+          "relationLabel": "召唤单位",
+          "relationSourceHeroId": "E00K",
+          "relationSourceSkillId": "A01D",
+          "iconAsset": "assets/icons/05cd2e6d0bbb-BTNCT-CT.png"
         }
       ],
       "iconAsset": "assets/icons/eb37e92411f9-BTNCT-TX.png"
@@ -2693,6 +2734,303 @@
         },
         "iconAsset": "assets/icons/22a105b36512-BTNGoJo_ZS.png"
       },
+      "relatedHeroes": [
+        {
+          "id": "E09D",
+          "name": "圣德芬",
+          "title": "救世的十二翼",
+          "hotkey": "F",
+          "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_TX.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNSandalphone_TX.blp",
+          "summonTip": "【SK】圣德芬(救世的十二翼)",
+          "reviveTip": "부활 圣德芬[救世的十二翼]",
+          "awakenTip": "부활 圣德芬[救世的十二翼]",
+          "description": "주술계 최강으로서 모두의 신뢰를 받고 있긴 하지만 특유의 마이페이스적인 성격과 경박함 그리고 본인이 실력으로 인정하지 않으면 선배나 윗사람이라 해도 전혀 공경하지 않는 건방진 태도등으로 일관하여 주술계의 개혁을 목표로 하고 있다.\n“걱정 마. 난 최강이니까.”",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "9400",
+            "mana": "90",
+            "str": "85",
+            "agi": "92",
+            "int": "93",
+            "primary": "INT",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "297",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "0.65"
+          },
+          "model": "war3mapImported/Sandalphone_skin.mdl",
+          "abilities": [
+            {
+              "id": "HB0Q",
+              "name": "术式顺转・输出最大『苍』",
+              "description": "将「苍」的出力提升至最大后使用的术式，通过制造引力的中心点，将周围的事物强行吸引过来。\n 在指定范围内生成漩涡，周期性地将敌人拉扯至中心，并造成智力X1的伤害与1.5秒的眩晕效果。漩涡可通过右键操作进行移动，在结束时会爆发，对范围内敌人造成智力X7的爆炸伤害。\n技能类型：范围指定型\n伤害类型：魔法伤害\n防御等级：LV2（仅限投射物）\n射程：1100\n影响范围（吸引）：400\n影响范围（伤害）：325\n冷却时间：24秒",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "术式顺转・输出最大『苍』",
+                  "description": "将「苍」的出力提升至最大后使用的术式，通过制造引力的中心点，将周围的事物强行吸引过来。\n 在指定范围内生成漩涡，周期性地将敌人拉扯至中心，并造成智力X1的伤害与1.5秒的眩晕效果。漩涡可通过右键操作进行移动，在结束时会爆发，对范围内敌人造成智力X7的爆炸伤害。\n技能类型：范围指定型\n伤害类型：魔法伤害\n防御等级：LV2（仅限投射物）\n射程：1100\n影响范围（吸引）：400\n影响范围（伤害）：325\n冷却时间：24秒"
+                }
+              },
+              "iconAsset": "assets/icons/48ed6fe40623-BTNSandalphone_Q.png"
+            },
+            {
+              "id": "HB0W",
+              "name": "术式反转『赫』",
+              "description": "在术式顺转「苍」的基础上施加反转术式，改变其性质为推斥之力。向指定方向释放激光，命中敌人时造成智力X8的伤害与1.5秒的眩晕，并将其击退。\n 当被该技能击中的敌人处于击退状态时，若与其友军相撞，将会发生爆炸，造成智力X15的伤害与2秒的眩晕效果，并使双方同时被击退。\n技能类型：非指向性\n伤害类型：魔法伤害\n魔法等级：LV1\n射程：1800\n最大距离：1800\n冷却时间：8秒",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "术式反转『赫』",
+                  "description": "在术式顺转「苍」的基础上施加反转术式，改变其性质为推斥之力。向指定方向释放激光，命中敌人时造成智力X8的伤害与1.5秒的眩晕，并将其击退。\n 当被该技能击中的敌人处于击退状态时，若与其友军相撞，将会发生爆炸，造成智力X15的伤害与2秒的眩晕效果，并使双方同时被击退。\n技能类型：非指向性\n伤害类型：魔法伤害\n魔法等级：LV1\n射程：1800\n最大距离：1800\n冷却时间：8秒"
+                }
+              },
+              "iconAsset": "assets/icons/99c06742e98a-BTNSandalphone_W.png"
+            },
+            {
+              "id": "HB0E",
+              "name": "术式反转・输出最大『赫』",
+              "description": "将「赫」的出力提升至最大，以自身为中心将所有敌人击退。把周围的敌人击退1000距离，并造成智力X22的伤害与2秒的眩晕效果。\n技能类型：瞬发型\n伤害类型：魔法伤害\n防御等级：LV3\n影响范围：800\n冷却时间：13秒",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "术式反转・输出最大『赫』",
+                  "description": "将「赫」的出力提升至最大，以自身为中心将所有敌人击退。把周围的敌人击退1000距离，并造成智力X22的伤害与2秒的眩晕效果。\n技能类型：瞬发型\n伤害类型：魔法伤害\n防御等级：LV3\n影响范围：800\n冷却时间：13秒"
+                }
+              },
+              "iconAsset": "assets/icons/53c80c39a7b3-BTNSandalphone_E.png"
+            },
+            {
+              "id": "HB0R",
+              "name": "虚式『茈』",
+              "description": "将相互对立的「苍」与「赫」相互碰撞，生成虚拟的质量并发射出去。\n/施放期间免疫眩晕与击退效果，自施法1.2秒后开始发射，发射过程中球体周围会产生雷电，对敌人造成智力X3的伤害并附带0.6秒眩晕。球体会击退路径上的敌人，并在经过的位置留下持续5秒的废墟。到达最大距离时爆炸，对周围敌人造成智力X30的伤害和1.5秒的眩晕效果。\n技能类型：瞬发型\n伤害类型：魔法伤害\n魔法等级：LV3\n防御等级：LV2（废墟）\n射程：无限制\n最大距离：3700\n冷却时间：33秒",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "虚式『茈』",
+                  "description": "将相互对立的「苍」与「赫」相互碰撞，生成虚拟的质量并发射出去。\n/施放期间免疫眩晕与击退效果，自施法1.2秒后开始发射，发射过程中球体周围会产生雷电，对敌人造成智力X3的伤害并附带0.6秒眩晕。球体会击退路径上的敌人，并在经过的位置留下持续5秒的废墟。到达最大距离时爆炸，对周围敌人造成智力X30的伤害和1.5秒的眩晕效果。\n技能类型：瞬发型\n伤害类型：魔法伤害\n魔法等级：LV3\n防御等级：LV2（废墟）\n射程：无限制\n最大距离：3700\n冷却时间：33秒"
+                }
+              },
+              "iconAsset": "assets/icons/bb294ccae76d-BTNSandalphone_R.png"
+            },
+            {
+              "id": "HB0T",
+              "name": "处世转换",
+              "description": "在咒术与体术状态之间切换，并改变包括被动在内的自身 Q/W/E/R/D 技能。\n 若在咒术状态下使用，则会消耗自身全部咒力，并回复30点咒力；若在体术状态下使用，则需咒力≥60方可发动。\n技能类型：瞬发型\n冷却时间：0.5秒",
+              "hotkey": "T",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "处世转换",
+                  "description": "在咒术与体术状态之间切换，并改变包括被动在内的自身 Q/W/E/R/D 技能。\n 若在咒术状态下使用，则会消耗自身全部咒力，并回复30点咒力；若在体术状态下使用，则需咒力≥60方可发动。\n技能类型：瞬发型\n冷却时间：0.5秒"
+                }
+              },
+              "iconAsset": "assets/icons/1d40cd3fa1c2-BTNSandalphone_T.png"
+            },
+            {
+              "id": "HB0D",
+              "name": "无下限术式",
+              "description": "利用“无限”的概念来操纵空间的能力，使得对自身的攻击趋近于零。\n　【被动】：当受到超过1000的伤害时，该伤害无效化，仅承受1000点伤害。\n　【主动】：该技能不会因眩晕而中断，持续3秒期间在原地承受的伤害变为0。若在持续期间中断技能或技能结束时，会解除自身所受的眩晕状态。\n技能类型：瞬发型\n伤害类型：魔法伤害\n冷却时间：10秒（被动）/20秒",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "无下限术式",
+                  "description": "利用“无限”的概念来操纵空间的能力，使得对自身的攻击趋近于零。\n　【被动】：当受到超过1000的伤害时，该伤害无效化，仅承受1000点伤害。\n　【主动】：该技能不会因眩晕而中断，持续3秒期间在原地承受的伤害变为0。若在持续期间中断技能或技能结束时，会解除自身所受的眩晕状态。\n技能类型：瞬发型\n伤害类型：魔法伤害\n冷却时间：10秒（被动）/20秒"
+                }
+              },
+              "iconAsset": "assets/icons/dc61d6f3224e-BTNSandalphone_D.png"
+            },
+            {
+              "id": "HB0F",
+              "name": "反转术式",
+              "description": "施放后0.6秒内若受到超过200的伤害，则会解除自身眩晕，并向周围敌人释放「赫」，造成智力X10的伤害与2秒的眩晕，同时持续将敌人击退。若成功发动，则进入咒术状态。\n【「赫」】到达最大距离时会爆炸，对周围敌人造成智力X10的伤害与1.5秒的眩晕效果。\n【天上天下唯我独尊】当生命值低于20%时，若成功发动反击，则会对周围敌人造成眩晕效果，并使自身升空，在落地前进入非指向性免疫状态，同时逐渐回复2000生命值。随后会向触发反击的敌人发射追踪的虚式·「茈」。\n技能类型：瞬发型\n伤害类型：魔法伤害\n魔法等级：LV2/LV3（虚式）\n冷却时间：15秒\n内部冷却时间：80秒（天上天下唯我独尊）",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "反转术式",
+                  "description": "施放后0.6秒内若受到超过200的伤害，则会解除自身眩晕，并向周围敌人释放「赫」，造成智力X10的伤害与2秒的眩晕，同时持续将敌人击退。若成功发动，则进入咒术状态。\n【「赫」】到达最大距离时会爆炸，对周围敌人造成智力X10的伤害与1.5秒的眩晕效果。\n【天上天下唯我独尊】当生命值低于20%时，若成功发动反击，则会对周围敌人造成眩晕效果，并使自身升空，在落地前进入非指向性免疫状态，同时逐渐回复2000生命值。随后会向触发反击的敌人发射追踪的虚式·「茈」。\n技能类型：瞬发型\n伤害类型：魔法伤害\n魔法等级：LV2/LV3（虚式）\n冷却时间：15秒\n内部冷却时间：80秒（天上天下唯我独尊）"
+                }
+              },
+              "iconAsset": "assets/icons/69ac09b0a76a-BTNSandalphone_F.png"
+            },
+            {
+              "id": "HB02",
+              "name": "术式顺转『苍』",
+              "description": "利用「苍」的出力进行的术式，能够瞬间高速移动至指定位置。\n 使用技能后，若在五条悟所面向方向1300距离内侦测到敌人，则会将「苍」的出力灌注于拳脚，迅速接近目标并造成最高敏捷X24的伤害与1.5秒的眩晕效果。若未侦测到敌人，则向前移动1300距离。\n技能类型：非指向性\n伤害类型：物理伤害\n射程：无限制\n影响范围：250\n冷却时间：16秒",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_TQ.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "术式顺转『苍』",
+                  "description": "利用「苍」的出力进行的术式，能够瞬间高速移动至指定位置。\n 使用技能后，若在五条悟所面向方向1300距离内侦测到敌人，则会将「苍」的出力灌注于拳脚，迅速接近目标并造成最高敏捷X24的伤害与1.5秒的眩晕效果。若未侦测到敌人，则向前移动1300距离。\n技能类型：非指向性\n伤害类型：物理伤害\n射程：无限制\n影响范围：250\n冷却时间：16秒"
+                }
+              },
+              "iconAsset": "assets/icons/e9536e56d8b7-BTNSandalphone_TQ.png"
+            },
+            {
+              "id": "HB05",
+              "name": "术式顺转・迅速『苍』",
+              "description": "利用「苍」的出力进行的术式，消耗30点咒力后瞬间移动至指定位置。发动过程中不会受到非指向性技能的影响。\n技能类型：非指向性\n最大距离：650\n冷却时间：0.8秒",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_R2.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "术式顺转・迅速『苍』",
+                  "description": "利用「苍」的出力进行的术式，消耗30点咒力后瞬间移动至指定位置。发动过程中不会受到非指向性技能的影响。\n技能类型：非指向性\n最大距离：650\n冷却时间：0.8秒"
+                }
+              },
+              "iconAsset": "assets/icons/835dc80abedf-BTNSandalphone_R2.png"
+            },
+            {
+              "id": "HB06",
+              "name": "六眼",
+              "description": "作为五条悟天赋才能的根源，能够洞彻视野中一切事物的信息。\n ①：释放 Q/W/E 技能时，回复30点咒力。\n ②：Q/E 技能命中时获得 LV1 防御等级，W 技能发动时获得 LV2 防御等级。\n ③：普通攻击命中时造成敏捷X4的伤害并附带0.3秒的眩晕效果。\n技能类型：被动",
+              "hotkey": "",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_D2.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "六眼",
+                  "description": "作为五条悟天赋才能的根源，能够洞彻视野中一切事物的信息。\n ①：释放 Q/W/E 技能时，回复30点咒力。\n ②：Q/E 技能命中时获得 LV1 防御等级，W 技能发动时获得 LV2 防御等级。\n ③：普通攻击命中时造成敏捷X4的伤害并附带0.3秒的眩晕效果。\n技能类型：被动"
+                }
+              },
+              "iconAsset": "assets/icons/919b43da50f5-BTNSandalphone_D2.png"
+            },
+            {
+              "id": "HB04",
+              "name": "无差别连打",
+              "description": "对指定目标连续施展拳击，每一击造成敏捷X1.6的伤害并附带1秒的眩晕。随后借助「赫」的力量将敌人击退，再以「苍」的力量将其拉回，最后以灌注「苍」之力的踢击将敌人踢飞，造成敏捷X12的伤害与2秒的眩晕。\n 若再次使用该技能，则会立即终止技能效果。\n技能类型：指定型\n射程：225\n冷却时间：17秒",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_TE.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "无差别连打",
+                  "description": "对指定目标连续施展拳击，每一击造成敏捷X1.6的伤害并附带1秒的眩晕。随后借助「赫」的力量将敌人击退，再以「苍」的力量将其拉回，最后以灌注「苍」之力的踢击将敌人踢飞，造成敏捷X12的伤害与2秒的眩晕。\n 若再次使用该技能，则会立即终止技能效果。\n技能类型：指定型\n射程：225\n冷却时间：17秒"
+                }
+              },
+              "iconAsset": "assets/icons/c30a5bc529f4-BTNSandalphone_TE.png"
+            },
+            {
+              "id": "HB03",
+              "name": "迅速蹴击",
+              "description": "向指定方向前方施展踢击。将敌人击退500距离，并造成敏捷X16的伤害与1.5秒的眩晕效果。\n 若技能命中敌人，则返还一半冷却时间。\n技能类型：非指向性\n伤害类型：物理伤害\n物理等级：LV2\n射程：无限制\n影响范围：350\n冷却时间：9秒",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_TW.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "迅速蹴击",
+                  "description": "向指定方向前方施展踢击。将敌人击退500距离，并造成敏捷X16的伤害与1.5秒的眩晕效果。\n 若技能命中敌人，则返还一半冷却时间。\n技能类型：非指向性\n伤害类型：物理伤害\n物理等级：LV2\n射程：无限制\n影响范围：350\n冷却时间：9秒"
+                }
+              },
+              "iconAsset": "assets/icons/07ec12a99b25-BTNSandalphone_TW.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "圣德芬",
+              "title": "救世的十二翼",
+              "summonTip": "【SK】圣德芬(救世的十二翼)",
+              "reviveTip": "召唤 圣德芬[救世的十二翼]",
+              "awakenTip": "复活 圣德芬[救世的十二翼]",
+              "description": "作为咒术界最强者，虽然受到众人信赖，但他特有的我行我素、轻浮性格，以及只要不认可对方实力，即便是前辈或上级也毫不尊敬的傲慢态度始终如一，并以改革咒术界为目标。\n“别担心，我可是最强的。”"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I081",
+            "name": "世界的终焉",
+            "description": "跨越终焉、蜕变为全新姿态的赎罪象征。\n　①：领域展开（被动）：奥义获得：领域展开『无量空处』.\n　②：反转术式（被动）：“虚式『茈』” 等级提升至 LV4.\n　③：无下限（被动）：“无下限术式”触发追加攻击时，会在自身周围造成智力X10的伤害，并附带1.5秒的眩晕效果。",
+            "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "世界的终焉",
+                "description": "跨越终焉、蜕变为全新姿态的赎罪象征。\n　①：领域展开（被动）：奥义获得：领域展开『无量空处』.\n　②：反转术式（被动）：“虚式『茈』” 等级提升至 LV4.\n　③：无下限（被动）：“无下限术式”触发追加攻击时，会在自身周围造成智力X10的伤害，并附带1.5秒的眩晕效果。"
+              }
+            },
+            "grantedSkill": {
+              "id": "HB0G",
+              "name": "【奥义】领域展开『无量空处』",
+              "description": "只能在咒术状态下发动。\n 此领域为「无限」的内部，其本质即是将“无限”强制命中对手，使除五条悟本人及与其接触者以外的所有对象的精神活动陷入无尽的重复作业之中。\n 当领域展开时，除自身以外的领域内一切物体都会被强制静止。领域展开后无法进出，也无法施放其他技能。领域结束时，会摧毁范围内敌人的所有投射物并造成2秒的眩晕。若在领域持续时间内对敌人进行过一次普通攻击，则在领域结束时会引发“内伤爆裂”，造成智力X35的伤害。\n技能类型：瞬发型\n伤害类型：魔法伤害\n持续时间：6秒\n影响范围：1500\n冷却时间：260秒",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【奥义】领域展开『无量空处』",
+                  "description": "只能在咒术状态下发动。\n 此领域为「无限」的内部，其本质即是将“无限”强制命中对手，使除五条悟本人及与其接触者以外的所有对象的精神活动陷入无尽的重复作业之中。\n 当领域展开时，除自身以外的领域内一切物体都会被强制静止。领域展开后无法进出，也无法施放其他技能。领域结束时，会摧毁范围内敌人的所有投射物并造成2秒的眩晕。若在领域持续时间内对敌人进行过一次普通攻击，则在领域结束时会引发“内伤爆裂”，造成智力X35的伤害。\n技能类型：瞬发型\n伤害类型：魔法伤害\n持续时间：6秒\n影响范围：1500\n冷却时间：260秒"
+                }
+              },
+              "iconAsset": "assets/icons/45a5e205aa3f-BTNSandalphone_G.png"
+            },
+            "iconAsset": "assets/icons/6560ab4dfe6a-BTNSandalphone_ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E00Y",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/1bbb1bfe2c69-BTNSandalphone_TX.png"
+        }
+      ],
       "iconAsset": "assets/icons/2200932743ab-BTNSatoru_TX.png"
     },
     {
@@ -3096,6 +3434,211 @@
         "iconAsset": "assets/icons/a71bfdaca6b9-BTNZZ-ZS.png"
       },
       "relatedHeroes": [
+        {
+          "id": "E04T",
+          "name": "우치하 사스케",
+          "title": "번개를 다루는 자",
+          "hotkey": "Q",
+          "icon": "ReplaceableTextures/CommandButtons/BTNZZ-PF1.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNZZ-PF1.blp",
+          "summonTip": "【변환】우치하 사스케(번개를 다루는 자)",
+          "reviveTip": "부활 우치하 사스케[번개를 다루는 자]",
+          "awakenTip": "부활 우치하 사스케[번개를 다루는 자]",
+          "description": "나루토와 화해한 후 사스케는 처음으로 마음의 감정을 태연히 받아들이며 다른 곳으로 가서 자신이 놓쳤던 풍경들을 지켜보기로 하였다. 그는 그와 동행하겠다는 사쿠라의 요청을 거절하고 다시 돌아오겠다고 약속했다.\n“나는 알고싶어，내가 지금 이 세상을 어떻게 생각하고 있는지……”",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10460",
+            "mana": "100",
+            "str": "74",
+            "agi": "87",
+            "int": "86",
+            "primary": "INT",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "437",
+            "attackDice": "1d1",
+            "range": "150",
+            "cooldown": "0.8"
+          },
+          "model": "war3mapImported/SasukeD_M1 - Copy.mdl",
+          "abilities": [
+            {
+              "id": "A02F",
+              "name": "곡옥 윤회안",
+              "description": "외형은 사륜안의 곡옥과 윤회안이 곂쳐 놓은 상태이며 윤회안이 사용할 수 있는 모든 능력과 강력한 환술을 사용할 수 있다.\n　[검은눈] : 동력이 0%-33% 일 때，동력의 초당 회복량이 3%가 되며，“천수력”을 사용하지 못하게 된다.\n　[사륜안] : 동력이 34%-66%일 때，동력의 초당 회복량이 2.2%가 되며，민첩이 6 증가한다.\n　[윤회안] : 동력이67%-100%일 때，동력의 초당 회복량이 1.5%가 되며，민첩이 6증가하고 지능이 12증가한다.\n기술타입 : 패시브",
+              "hotkey": "",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "勾玉轮回眼",
+                  "description": "外形上呈现出勾玉与轮回眼叠加的状态，能够使用轮回眼的全部能力以及强力的幻术。\n　[无勾玉] :当瞳力在0％-33％时，每秒恢复3％的瞳力，并禁用“天手力”。\n　[三勾玉] :当瞳力在34％-66％时，每秒恢复2％的瞳力，并增加6点敏捷值。\n　[六勾玉] :当瞳力在67％-100％时，每秒恢复1.5％的瞳力，并增加6点敏捷值和12点智力值。\n技能类型 : 被动"
+                }
+              },
+              "iconAsset": "assets/icons/96adef45f57c-BTNZZ-T.png"
+            },
+            {
+              "id": "A023",
+              "name": "타케미카즈치",
+              "description": "치도리에 육도의 힘을 녹여 적에게 사용합니다. 3초동안 충전 후 사용하거나 바로 사용하면 공격합니다. 적에게 지능x15의 데미지와 2초의 스턴을 부여하며 0.5초의 충전시간마다 지능x3의 추가 데미지가 생깁니다. 이 기술은 논타겟팅 기술로 판정됩니다.\n　① : 충전이 1초이상 지속되면 자신의 주변에 번개가 내리면서 0.1초마다 주변 적에게 지능x1의 데미지와 0.1초의 스턴을 부여합니다.\n　② : 충전이 2초 이상 지속되면 치도리에 카구츠치가 녹아들어 표적 주위의 적까지 아마테라스로 물들이고 적에게 9초동안 120의 고정 피해량을 입힙니다.\n　③ : 충전이 3초에 도달하면 표적인 적을 순식간에 사스케 앞으로 이동시킵니다. 이 기술을 사용할 경우 15% 동력이 추가로 소모됩니다.\n기술타입 : 타겟팅\n피해타입 : 고정피해\n사정거리 : 1200\n영향범위 : 700\n쿨타임 : 30초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "建御雷神",
+                  "description": "在千鸟中融入六道之力，根据蓄力时间改变伤害与效果，蓄满3秒或再次激活后瞬间移动至敌人身前进行攻击，对敌人造成智力值*15的伤害和2秒眩晕，每蓄力0.5秒会额外造成智力值*3的伤害。\n　① :蓄力超过1秒后，在自身周围产生雷光，每0.1秒对周围的敌人造成智力值*1的伤害和0.1秒眩晕。\n　② :蓄力超过2秒后，在千鸟中融入加具土命，击中后使目标周围的敌人染上天照，每秒受到120点伤害，效果持续9秒。\n　③ :蓄力达到3秒时，将目标敌人瞬间移动至前方进行攻击，会额外消耗15％的瞳力。\n技能类型 : 单位目标\n伤害类型 : 真实伤害\n施法范围 : 1200\n影响范围 : 700\n冷却时间 : 30秒"
+                }
+              },
+              "iconAsset": "assets/icons/8e79dcd08923-BTNZZ-D.png"
+            },
+            {
+              "id": "A020",
+              "name": "화둔·호룡화의 술",
+              "description": "발동 후 0.5초후 전방으로 거대한 용을 뿜어냅니다. 화룡은 경로상에 있는 적을 최대거리까지 밀쳐내고 폭발합니다. 폭발할 때 주위의 적에게 지능x37의 데미지를 입히고 3초동안 이동 속도를 60% 감소시킵니다./“사륜안”과“윤회안”상태에서는 20%의 동력을 소모하여，화둔에 카구츠치를 더하여 폭발 후 주위의 적들을 1.5초동안 스턴을 줍니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n마법등급 : LV3\n사정거리 : 2400\n최대거리 : 2400\n영향범위 : 600\n쿨타임 : 31초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "火遁·豪龙火之术",
+                  "description": "蓄力0.5秒后向前方喷出巨大的火龙，火龙会将路径上的敌人击退至最大距离并产生爆炸，对周围的敌人造成智力值*37的伤害并减少60％的移动速度，减速效果持续3秒。/“三勾玉”或“六勾玉”状态下会消耗20％的瞳力，在火龙中融入加具土命，爆炸后使周围的敌人眩晕1.5秒。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n魔法等级 : LV3\n施法范围 : 2400\n最大距离 : 2400\n影响范围 : 600\n冷却时间 : 31秒"
+                }
+              },
+              "iconAsset": "assets/icons/f53d3df924ed-BTNZZ-F.png"
+            },
+            {
+              "id": "A01X",
+              "name": "뇌광검화",
+              "description": "수리검을 소환해 전방으로 날려 적에게 민첩x18의 데미지를 주고 1초의 스턴을 부여합니다./적을 명중시킨 후 2초이내에 다시 버튼을 누르면 뇌광검화를 가지고 맞은 대상의 주위를 맴돌며 공격하며 민첩x16의 데미지와 1.5초의 스턴을 부여합니다.\n기술타입 : 논타겟팅/즉시 발동형\n피해타입 : 물리피해\n물리등급 : LV1\n사정거리 : 1600\n최대거리 : 1600\n쿨타임 : 22초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "雷光剑化",
+                  "description": "召唤用苦无掷向前方，对敌人造成敏捷值*18的伤害和1秒眩晕。/击中敌人后3秒内若再次激活，将化作雷光穿梭在目标周围进行斩击，对敌人造成敏捷值*16的伤害和1.5秒眩晕。\n技能类型 : 地面目标/即时发动\n伤害类型 : 物理伤害\n物理等级 : LV1\n施法范围 : 1600\n最大距离 : 1600\n冷却时间 : 22秒"
+                }
+              },
+              "iconAsset": "assets/icons/fb5a613c03b7-BTNZZ-R.png"
+            },
+            {
+              "id": "A01U",
+              "name": "천수력",
+              "description": "동술로 목표를 정한 후 2초내로 다시 시동을 하면，25%의 동력을 소비하여 범위 내의 사람 또는 투사체의 위치와 맞바꿉니다. 그러나 양쪽과의 거리는 영향 범위를 초과할 수 없습니다./“윤회안”상태에서 만약 목표범위 내에 사람이나 투사체가 없다면 타겟으로 정한 사람을 목표 범위의 중심으로 이동시킵니다.\n기술타입 : 타겟팅/범위 지정형\n사정거리 : 1500\n영향범위 : 350/1500\n쿨타임 : 20초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "天手力",
+                  "description": "用瞳术锁定目标后，在2秒内再次发动，消耗25％的瞳力使被锁定者与目标范围内最近的1个单位或弹幕互换当前位置，但双方与自身的间距不能超过影响范围。/“六勾玉”状态下，若目标范围内没有单位或弹幕，将会使被锁定者移动至目标范围中心。\n技能类型 : 单位目标/范围目标\n施法范围 : 1500\n影响范围 : 350/1500\n冷却时间 : 20秒"
+                }
+              },
+              "iconAsset": "assets/icons/22df147be458-BTNZZ-E.png"
+            },
+            {
+              "id": "A01T",
+              "name": "신라천정",
+              "description": "발동시 10%의 동력을 소모하고 자기를 중심으로 척력이 발생한다. 주변 적을 800범위 밖으로 밀쳐내고 지능X18의 데미지와 1초의 스턴을 부여합니다./“사륜안”상태에서는 0.5초의 추가 스턴을 부여합니다.“윤회안”상태에서는 지능x7의 추가 데미지를 입힙니다. 또한 “사륜안”의 효과도 받습니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n방어등급 : LV3\n영향범위 : 450\n쿨타임 : 5초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "神罗天征",
+                  "description": "发动时会消耗10％的瞳力，以自身为中心产生斥力，将周围的敌人向外击退800码并造成智力值*18的伤害和1秒眩晕。/“三勾玉”状态下额外造成0.5秒眩晕。“六勾玉”状态下额外造成智力值*7的伤害并继承“三勾玉”的效果。\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n防御等级 : LV3\n影响范围 : 450\n冷却时间 : 5秒"
+                }
+              },
+              "iconAsset": "assets/icons/ec5c38c1065a-BTNZZ-W.png"
+            },
+            {
+              "id": "A01S",
+              "name": "만상천인",
+              "description": "발동시 15%의 동력을 소비하고 손바닥을 중심으로 인력이 발생한다. 주위의 적을 앞으로 끌어당겨 1초의 스턴을 부여합니다./“사륜안”상태에서는 150의 영향범위가 늘어납니다.“윤회안”상태에서는 1초의 추가 스턴을 부여합니다. 또한 \"사륜안\"의 효과도 받습니다.\n기술타입 : 즉시 발동형\n영향범위 : 550\n쿨타임 : 10초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "万象天引",
+                  "description": "发动时会消耗15％的瞳力，以掌心为中心产生引力，将周围敌人吸引至身前并造成1秒眩晕。/“三勾玉”状态下增加150码影响范围。“六勾玉”状态下额外造成1秒眩晕并继承“三勾玉”的效果。\n技能类型 : 无目标\n影响范围 : 550\n冷却时间 : 10秒"
+                }
+              },
+              "iconAsset": "assets/icons/c30702d83577-BTNZZ-Q.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "宇智波佐助",
+              "title": "来光真传",
+              "summonTip": "【转换】宇智波佐助(御雷者)",
+              "reviveTip": "召唤 宇智波佐助[来光真传]",
+              "awakenTip": "复活 宇智波佐助[来光真传]",
+              "description": "与鸣人和解后，佐助第一次坦然接受内心情感，决定去其他地方看一看自己错过的风景。他拒绝了小樱同行的请求，并约定会再回来。\n“我想知道，如今的我究竟如何看待这个世界……”"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I007",
+            "name": "쿠사나기의 검",
+            "description": "특수 제작한 닌자도. 뇌속성 차크라 전도성이 매우 뛰어나다.\n　①：음의 차크라（각성）：각성 획득：완성체 스사노오\n　②：치도리 검（패시브）：일반 공격이 추가로 지능X3의 데미지와 0.1초의 스턴을 부여합니다.\n　③：호노이카즈치（패시브）：“윤회안” 상태에서 “만상천인” 의 끌어당기는 적에게 지능X11의 절대피해를 줍니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNZZ-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "草薙剑",
+                "description": "特制的忍刀，具有良好的雷属性查克拉传导性。\n　①：阴之力(觉醒)：获得觉醒技能：完成体须佐能乎。\n　②：千鸟刃(被动)：普通攻击会额外造成智力值*3的真实伤害和0.1秒眩晕。\n　③：炎雷神(被动)：“六勾玉”状态下“万象天引”会对吸引的敌人造成智力值*11的魔法伤害。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A027",
+              "name": "【각성】완성체 스사노오",
+              "description": "만화경 윤회안의 동력을 극한으로 끌어올려 거대한 차크라를 가진 완전체 스사노오를 형성합니다. 18초동안 지속됩니다.\n　① : 변신할 때 주위의 적을 1800범위 밖으로 밀쳐낸다.\n　② : 자기자신에게 방어등급 2등급을 부여하고 40％의 피해량 감소를 얻습니다.\n　③ : \"지폭천성·천락\"/“신라천정”/“공간전송구”/“카구츠치의 검\"을 획득합니다.。\n　④ : 체력이 전부 다 닳으면 스사노오가 소유자를 지켜주어 피 1로 살아남습니다.\n기술타입 : 즉시 발동형\n방어등급 : LV2\n영향범위 : 600\n쿨타임 : 260초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNZZ-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【觉醒】完成体须佐能乎",
+                  "description": "将万花筒写轮眼的瞳力发挥到了极致且自身具备庞大查克拉的人才能后开启的须佐能乎终极形态，效果持续18秒。\n　① : 发动时会将周围的敌人向外击退1800码。\n　② : 自身无法被“奥义”指定并减少40％所受到的伤害。\n　③ :获得“地爆天星·天堕”/“神罗天征”/“空间传送口”/“加具土命·斩炎”技能。\n　④ : 须佐能乎死亡后，自身会保留1％的最大生命值。\n技能类型 : 无目标\n防御等级 : LV2\n影响范围 : 600\n冷却时间 : 260秒"
+                }
+              },
+              "iconAsset": "assets/icons/a0a469dff8e8-BTNZZ-G.png"
+            },
+            "iconAsset": "assets/icons/a71bfdaca6b9-BTNZZ-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E014",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/faae90d8233c-BTNZZ-PF1.png"
+        },
         {
           "id": "E05L",
           "name": "우치하 사스케 THE LAST",
@@ -4065,6 +4608,452 @@
           "relationSourceHeroId": "E01E",
           "relationSourceSkillId": "",
           "iconAsset": "assets/icons/95fc08ce3882-BTNGoldShiki_TX.png"
+        },
+        {
+          "id": "E048",
+          "name": "토오노 시키",
+          "title": "반전충동",
+          "hotkey": "E",
+          "icon": "ReplaceableTextures/CommandButtons/BTNYYPF-TX1.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNYYPF-TX1.blp",
+          "summonTip": "【변환】토오노 시키(반전충동)",
+          "reviveTip": "토오노 시키[반전충동]",
+          "awakenTip": "부활 토오노 시키[반전충동]",
+          "description": "토오노 시키의 의식은 반전 충동으로 인해 희박해졌다. 마안살만으로는 직사의 마안을 억제할 수가 없어서 두 눈을 붕대로 감을 수 밖에 없었다.\n“자……죽여볼까！”\n스킨변경：\n　①：인물 모델 교체。\n　②：특수 기능 교체。\n　③：일부 음성 교체。\n　④：도발 음성 첨부。",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10600",
+            "mana": "100",
+            "str": "87",
+            "agi": "96",
+            "int": "71",
+            "primary": "AGI",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "348",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "0.88"
+          },
+          "model": "war3mapImported/yyzg3111.mdl",
+          "abilities": [
+            {
+              "id": "A02S",
+              "name": "17·분할",
+              "description": "자기의 체감 시간이 한순간 느려지고 주위의 적의 이동속도를 1.5초 동안 80％ 감소시킵니다.이어 직사의 마안을 열고 칼을 들고 앞으로 뛰어오릅니다. 점프하는 동안에는 자신은 논타겟팅의 영향을 받지 않으며 적과 접촉하는 순간 적과 그 주변에 있는 적을 17분할로 베어 민첩X27의 데미지와 2초의 스턴을 부여합니다./“직사의 마안”이 지속되는 동안 최대 17개의 죽음의 선을 절단할 수 있습니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n사정거리 : 제한 없음\n최대거리 : 750\n영향범위 : 700/225\n쿨타임 : 35초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "十七·分割",
+                  "description": "将自身体感时间瞬间放缓，使周围的敌人减少80％的移动速度，减速效果持续1.5秒。随后开启魔眼后持刀跃向前方，跳跃期间自身无法被选中，并在接触敌人的瞬间将目标周围的敌人分割为17分，造成敏捷值*27的伤害和2秒眩晕。//“直死之魔眼”持续期间该技能最多会切割17条死线。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n施法范围 : 750\n最大距离 : 750\n影响范围 : 700/225\n冷却时间 : 35秒"
+                }
+              },
+              "iconAsset": "assets/icons/31310ed46ece-BTNYY-F.png"
+            },
+            {
+              "id": "A04F",
+              "name": "나나야 체술",
+              "description": "나나야 가문이 퇴마를 위해 습득한 기술로 벽과 천장을 이용하여 움직이는 독특한 공간이용술이다. ①/②순서 대로 먼저나가며 실패하면 쿨타임이 돌아간다.\n　① : 자신 주위에 공중에 뜬 적이 있다면 1명의 적에게 이동 적을 발로 내려찍으면서 적에게 민첩X11의 데미지와 1초의 스턴을 부여합니다.\n　② : 자신의 주변에 스턴에 걸려있는 적이 있다면 자신을 중심으로 가장 가까운 1명의 적 뒤로 이동하여 그리고 적을 공중으로 차 올려 0.8초의 스턴과 민첩X8의 데미지를 입힙니다.\n　③ : 이 기능이 성공할 때마다 20%의 퇴마충동을 얻습니다. 퇴마충동이 100%가 차면 “17·분할”이“섬초·팔준”으로 변경됩니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해\n영향범위 : 1000\n쿨타임 : 2.5초",
+              "hotkey": "T",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "七夜防身术",
+                  "description": "七夜家族为退魔而习得的技术，利用墙壁与天花板移动的独特的空间利用术。满足多种条件时按照①/②的顺序触发，且触发失败后会进入冷却。\n　① : 自身周围若拥有浮空的敌人，将瞬间移动到距离中心最近的1名敌人身边，并扭转另一只脚将其踢落，对敌人造成敏捷值*11的伤害和1秒眩晕。\n　② : 自身周围若拥有被眩晕的敌人，将瞬间移动到距离距离中心最近的1名敌人身后，并扭转身体将其击飞0.8秒，对敌人造成敏捷值*8的伤害。\n　③ : 该技能每次触发成功会增加20％退魔冲动，退魔冲动达到100％后“十七·分割”变更为“闪鞘·八隼”。\n技能类型 : 无目标\n伤害类型 : 物理伤害\n影响范围 : 1000\n冷却时间 : 2.5秒"
+                }
+              },
+              "iconAsset": "assets/icons/bd0aecdc0f81-BTNYY-T.png"
+            },
+            {
+              "id": "A04D",
+              "name": "섬초·팔준",
+              "description": "퇴마 충동을 100％를 소모하고 사용할 수 있다. 마안으로 눈을 연 후 거미처럼 공중으로 뛰어올라 땅의 죽음의 점을 향해 내려 찍습니다. 지속되는 동안에는 자신은 논타겟팅의 영향을 받지 않습니다. 죽음의 점을 뚫으면 지면이 1초 후에 무너집니다. 범위 안의 적들은 지도상에서 사라집니다. 그리고 5초 후 억지력에 의한 보정으로 무작위 3000범위 안으로 떨어집니다. 적에게 민첩X28의 데미지와 3초의 스턴을 부여합니다.\n기술타입 : 범위형\n피해타입 : 물리피해\n사정거리 : 900\n영향범위 : 400\n쿨타임 : 3초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-F2.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·八隼",
+                  "description": "发动时会消耗100％退魔冲动，开启魔眼后以蜘蛛步跃向高空向地面突刺，持续期间自身无法被选中，刺穿死点会使地面在1秒后崩落，范围内的单位都将快速坠落，并在5秒后随机落在周围3000码内，对敌人造成敏捷值*28的伤害和3秒眩晕。\n技能类型 : 范围型\n伤害类型 : 物理伤害\n施法范围 : 900\n影响范围 : 400\n冷却时间 : 3秒"
+                }
+              },
+              "iconAsset": "assets/icons/2f6ae3884dac-BTNYY-F2.png"
+            },
+            {
+              "id": "A02N",
+              "name": "섬주·육어",
+              "description": "한 발에 힘을 실어 무릎으로 적의 가슴을 차 올립니다. 적을 0.8초 동안 공중에 띄우고 힘X19의 데미지를 입힙니다./지정한 상대의 체력의 백분률이 자신보다 낮으면 “나나야 체술”의 쿨타임이 초기화 됩니다. 또한 발동에 성공했을 경우“퇴마충동”을 20% 회복합니다.\n기술타입 : 타겟팅\n피해타입 : 물리피해\n사정거리 : 200\n쿨타임 : 21초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·六鱼",
+                  "description": "单脚发力用膝盖重击敌人心房，将敌人击飞0.8秒并造成力量值*19的伤害。/若目标的血量百分比低于自身，将刷新“七夜防身术”的冷却时间。发动成功增加20%\"退魔冲动\"\n技能类型 : 单位目标\n伤害类型 : 物理伤害\n施法范围 : 200\n冷却时间 : 21秒"
+                }
+              },
+              "iconAsset": "assets/icons/2e6fa34e62e6-BTNYY-D.png"
+            },
+            {
+              "id": "A02P",
+              "name": "섬초·팔화경",
+              "description": "재빨리 칼을 꺼내어 적의 7개의 급소를 찌릅니다. 적을 찌를 때마다 전방의 적에게 민첩X1.5의 데미지와 1초의 스턴을 부여합니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해\n방어등급 : LV2\n영향범위 : 275\n쿨타임 : 9초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·八花镜",
+                  "description": "快速出刀斩击敌人7处要害，每次斩击会对前方的敌人造成敏捷值*1.5的伤害和1秒眩晕。\n技能类型 : 无目标\n伤害类型 : 物理伤害\n防御等级 : LV2\n影响范围 : 275\n冷却时间 : 9秒"
+                }
+              },
+              "iconAsset": "assets/icons/05d7eafb1ae0-BTNYY-W.png"
+            },
+            {
+              "id": "A02O",
+              "name": "섬주·육록",
+              "description": "전방을 향해 한쪽 발로 빠르게 찹니다. 적을 700범위 밖으로 밀어내고 민첩X20의 데미지와 2초의 스턴을 부여합니다./만약 맞은 상대의 민첩이 자신보다 낮다면 5초 후 다시 600의 데미지와 1초의 스턴을 받습니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 1200\n쿨타임 : 23초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·六鹿",
+                  "description": "突发性的向前方踢出一脚，将敌人击退700码并造成敏捷值*20的伤害和2秒眩晕。/目标英雄的敏捷值低于自身，将在5秒后再次受到600点伤害和1秒眩晕。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n施法范围 : 900\n最大距离 : 1200\n冷却时间 : 23秒"
+                }
+              },
+              "iconAsset": "assets/icons/f97b79a921fb-BTNYY-R.png"
+            },
+            {
+              "id": "A02J",
+              "name": "섬주·명월",
+              "description": "거미걸음의 기초자세다. 몸을 낮추어 지정한 대상을 향해 고속으로 돌진하고 그 대상에게 다가간 후에 멈춥니다./“섬주·명월”사용시에 사용하면 돌진하고 있던 상태가 중단되고 0.5초간 자세를 취합니다. 지속중에 200이상의 피해를 입었을 경우 피해를 입힌 적의 뒤로 이동하여 최대 민첩X15의 데미지와 1.5초 기절을 입힙니다. 만약 피해를 입지 않았을 경우 600거리 뒤로 후방점프합니다.\n기술타입 : 타겟팅/즉시 발동형\n피해타입 : 물리피해\n사정거리 : 3000\n쿨타임 : 25초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·名月",
+                  "description": "蛛行步起手式。压低身形向指定目标高速突进，抵达目标后急停。/在“闪走·名月”发动期间可取消突进，进入0.5秒反击：若期间受到≥200的伤害，则闪现至攻击者身后造成最高敏捷值×15伤害及1.5秒眩晕；若未受伤害则后跳600码\n技能类型 : 地面目标/无目标\n伤害类型 : 物理伤害\n施法范围 : 3000\n冷却时间 : 25秒"
+                }
+              },
+              "iconAsset": "assets/icons/039837acefa0-BTNYY-E.png"
+            },
+            {
+              "id": "A02M",
+              "name": "섬초·일풍",
+              "description": "앞을 향해 재빨리 칼을 휘둘러，적을 명중시키면 멈추고 민첩X16의 데미지와 1.5초의 스턴을 부여합니다./“섬주·명월”사용시에 사용하면 물리적 등급을 올리고 전방으로 빠르게 절단하고 지나가는 적에게 민첩X22의 데미지와 2초의 스턴을 준다. 절단 종료시 재활성화됩니다. 자신을 순간적으로 원래 위치로 되돌립니다.\n기술타입 : 논타겟팅/즉시 발동형\n피해타입 : 물리피해\n물리등급 : LV2/LV3\n사정거리 : 제한 없음\n최대거리 : 1000/1000\n쿨타임 : 12초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·疾风",
+                  "description": "快速冲向前方挥出一刀，击中敌人后停下并造成敏捷值*16的伤害和1.2秒眩晕。/“闪走·名月”冲刺期间发动，提升物理等级并向自身前方快速切割，对穿过的敌人造成敏捷值*22的伤害和2秒眩晕。斩击结束时可再次激活，使自身瞬间返回原位置。\n技能类型 : 地面目标/即时发动\n伤害类型 : 物理伤害\n冲锋等级 : LV2/LV3\n施法范围 : 700\n最大距离 : 700/1000\n冷却时间 : 12秒"
+                }
+              },
+              "iconAsset": "assets/icons/45c316988119-BTNYY-Q.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "远野志贵",
+              "title": "反转冲动",
+              "summonTip": "【皮肤】远野志贵(反转冲动)",
+              "reviveTip": "远野志贵[反转冲动]",
+              "awakenTip": "复活 远野志贵[反转冲动]",
+              "description": "远野志贵的意识因反转冲动而变得稀薄。仅靠魔眼杀已无法抑制直死魔眼，只能用绷带缠住双眼。\n“那么……来杀吧！”\n皮肤变更：\n　①：人物模型替换。\n　②：特殊功能替换。\n　③：部分语音替换。\n　④：附加挑衅语音。"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I009",
+            "name": "나나츠요루",
+            "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다。\n　①：죽음의 개념（각성）：각성 획득：직사의 마안\n　②：거미걸음（패시브）：자신의 이동속도를 522로 증가합니다.\n　③：일풍팔토（패시브）：“섬주·명월”로 적에게 접근할 시 적을 차버립니다. 적을 300만큼 밀어내고 민첩X14의 데미지와 1초의 스턴을 부여합니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "七夜退魔刀",
+                "description": "七夜一族所留下的短刀，刀柄上刻有“七夜”两字。\n　①：死之概念(觉醒)：获得觉醒技能：直死之魔眼。\n　②：蜘蛛步伐(被动)：自身移动速度提升至522点。\n　③：一风八兔(被动)：“闪走·名月”接近敌人后发出重踢，将敌人击退300码并造成敏捷值*14的物理伤害和1秒眩晕。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A02Q",
+              "name": "【각성】직사의 마안",
+              "description": "마안을 억제하는 안경을 벗고 25초동안 만물의 “죽음” 을 볼 수 있는 능력을 가진다. 하지만 끝나면 5초동안 시야가 300으로 줄어든다.\n　① : 자신이 정면에 있는 모든 투사체를 자동으로 베어냅니다.\n　② : “섬초·일풍”/“섬초·팔화경”/“섬주·명월” 들이 등급들을 무시하고 적 모든 투사체를 반격합니다.\n　③ : 일반공격과 모든 참격류 기술들은 참격을 하여 죽음의 선을 1개를 베어낼 때 마다 적에게 현재 생명력의 3%의 피해를 줄 수 있습니다.\n　④ : 적의 체력이 18％이하일 경우에는 적 영웅의 죽음의 점을 보여 이 죽음의 점을 일반공격으로 찔렀을 경우 적을 즉사시킵니다. 이 경우 어떠한 효과를 무시하고 적의 시체를 파괴합니다.\n기술타입 : 즉시 발동형\n피해타입 : 절대피해\n쿨타임 : 260초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【觉醒】直死之魔眼",
+                  "description": "摘下可抑制魔眼的眼镜，直视万物的“死”之概念，但在结束后自身会在5秒内视野缩减至300码，技能持续25秒。\n　① : 自身不处于控制状态时，会自动斩杀正前方的弹幕。\n　② : “闪鞘·疾风”/“闪鞘·八花镜”/“闪走·名月”会无视等级斩杀敌方弹幕与防御技能。\n　③ : 普通攻击与斩击类技能会切开死线，每切开1条死线会对敌人造成3％当前生命值的伤害。\n　④ : 血量≤18％的敌方英雄会显示出死点，普通攻击能够刺穿死点，无视任何效果将敌人直接斩杀并破坏尸体。\n技能类型 : 无目标\n伤害类型 : 真实伤害\n冷却时间 : 260秒"
+                }
+              },
+              "iconAsset": "assets/icons/4af52041356a-BTNYY-G.png"
+            },
+            "iconAsset": "assets/icons/46fa8a507ff9-BTNYY-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E01E",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/eb43ad2804cb-BTNYYPF-TX1.png"
+        },
+        {
+          "id": "E054",
+          "name": "토오노 시키",
+          "title": "사도 살해자",
+          "hotkey": "E",
+          "icon": "ReplaceableTextures/CommandButtons/BTNYYFY-TX.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNYYFY-TX.blp",
+          "summonTip": "【변환】토오노 시키(사도 살해자)",
+          "reviveTip": "부활 토오노 시키[사도 살해자]",
+          "awakenTip": "부활 토오노 시키[사도 살해자]",
+          "description": "푸른 숲，되살아나는 기억，반전충동，“공주”라는 소녀에 의해 깨진 일상，눈에 비친 것은 꿈이라는“이치”였다. 피로 물들어진 하늘의 달밤，떨어질대로 떨어진“나나야”는 천천히 검을 집어 든다.\n“이해했는가？이것이 사물을 죽인다는 것이다——”\n스킨변경 :\n　①：인물모델 교체.\n　②：일부 음성 교체.\n　③：도발 음성 첨부.\n　④：전용 오의 연출。[직사의 마안·결사의 일격]",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10600",
+            "mana": "100",
+            "str": "87",
+            "agi": "96",
+            "int": "71",
+            "primary": "AGI",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "348",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "0.88"
+          },
+          "model": "war3mapImported/shiki_ex_bande.mdl",
+          "abilities": [
+            {
+              "id": "A02S",
+              "name": "17·분할",
+              "description": "자기의 체감 시간이 한순간 느려지고 주위의 적의 이동속도를 1.5초 동안 80％ 감소시킵니다.이어 직사의 마안을 열고 칼을 들고 앞으로 뛰어오릅니다. 점프하는 동안에는 자신은 논타겟팅의 영향을 받지 않으며 적과 접촉하는 순간 적과 그 주변에 있는 적을 17분할로 베어 민첩X27의 데미지와 2초의 스턴을 부여합니다./“직사의 마안”이 지속되는 동안 최대 17개의 죽음의 선을 절단할 수 있습니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n사정거리 : 제한 없음\n최대거리 : 750\n영향범위 : 700/225\n쿨타임 : 35초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "十七·分割",
+                  "description": "将自身体感时间瞬间放缓，使周围的敌人减少80％的移动速度，减速效果持续1.5秒。随后开启魔眼后持刀跃向前方，跳跃期间自身无法被选中，并在接触敌人的瞬间将目标周围的敌人分割为17分，造成敏捷值*27的伤害和2秒眩晕。//“直死之魔眼”持续期间该技能最多会切割17条死线。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n施法范围 : 750\n最大距离 : 750\n影响范围 : 700/225\n冷却时间 : 35秒"
+                }
+              },
+              "iconAsset": "assets/icons/31310ed46ece-BTNYY-F.png"
+            },
+            {
+              "id": "A04F",
+              "name": "나나야 체술",
+              "description": "나나야 가문이 퇴마를 위해 습득한 기술로 벽과 천장을 이용하여 움직이는 독특한 공간이용술이다. ①/②순서 대로 먼저나가며 실패하면 쿨타임이 돌아간다.\n　① : 자신 주위에 공중에 뜬 적이 있다면 1명의 적에게 이동 적을 발로 내려찍으면서 적에게 민첩X11의 데미지와 1초의 스턴을 부여합니다.\n　② : 자신의 주변에 스턴에 걸려있는 적이 있다면 자신을 중심으로 가장 가까운 1명의 적 뒤로 이동하여 그리고 적을 공중으로 차 올려 0.8초의 스턴과 민첩X8의 데미지를 입힙니다.\n　③ : 이 기능이 성공할 때마다 20%의 퇴마충동을 얻습니다. 퇴마충동이 100%가 차면 “17·분할”이“섬초·팔준”으로 변경됩니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해\n영향범위 : 1000\n쿨타임 : 2.5초",
+              "hotkey": "T",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "七夜防身术",
+                  "description": "七夜家族为退魔而习得的技术，利用墙壁与天花板移动的独特的空间利用术。满足多种条件时按照①/②的顺序触发，且触发失败后会进入冷却。\n　① : 自身周围若拥有浮空的敌人，将瞬间移动到距离中心最近的1名敌人身边，并扭转另一只脚将其踢落，对敌人造成敏捷值*11的伤害和1秒眩晕。\n　② : 自身周围若拥有被眩晕的敌人，将瞬间移动到距离距离中心最近的1名敌人身后，并扭转身体将其击飞0.8秒，对敌人造成敏捷值*8的伤害。\n　③ : 该技能每次触发成功会增加20％退魔冲动，退魔冲动达到100％后“十七·分割”变更为“闪鞘·八隼”。\n技能类型 : 无目标\n伤害类型 : 物理伤害\n影响范围 : 1000\n冷却时间 : 2.5秒"
+                }
+              },
+              "iconAsset": "assets/icons/bd0aecdc0f81-BTNYY-T.png"
+            },
+            {
+              "id": "A04D",
+              "name": "섬초·팔준",
+              "description": "퇴마 충동을 100％를 소모하고 사용할 수 있다. 마안으로 눈을 연 후 거미처럼 공중으로 뛰어올라 땅의 죽음의 점을 향해 내려 찍습니다. 지속되는 동안에는 자신은 논타겟팅의 영향을 받지 않습니다. 죽음의 점을 뚫으면 지면이 1초 후에 무너집니다. 범위 안의 적들은 지도상에서 사라집니다. 그리고 5초 후 억지력에 의한 보정으로 무작위 3000범위 안으로 떨어집니다. 적에게 민첩X28의 데미지와 3초의 스턴을 부여합니다.\n기술타입 : 범위형\n피해타입 : 물리피해\n사정거리 : 900\n영향범위 : 400\n쿨타임 : 3초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-F2.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·八隼",
+                  "description": "发动时会消耗100％退魔冲动，开启魔眼后以蜘蛛步跃向高空向地面突刺，持续期间自身无法被选中，刺穿死点会使地面在1秒后崩落，范围内的单位都将快速坠落，并在5秒后随机落在周围3000码内，对敌人造成敏捷值*28的伤害和3秒眩晕。\n技能类型 : 范围型\n伤害类型 : 物理伤害\n施法范围 : 900\n影响范围 : 400\n冷却时间 : 3秒"
+                }
+              },
+              "iconAsset": "assets/icons/2f6ae3884dac-BTNYY-F2.png"
+            },
+            {
+              "id": "A02N",
+              "name": "섬주·육어",
+              "description": "한 발에 힘을 실어 무릎으로 적의 가슴을 차 올립니다. 적을 0.8초 동안 공중에 띄우고 힘X19의 데미지를 입힙니다./지정한 상대의 체력의 백분률이 자신보다 낮으면 “나나야 체술”의 쿨타임이 초기화 됩니다. 또한 발동에 성공했을 경우“퇴마충동”을 20% 회복합니다.\n기술타입 : 타겟팅\n피해타입 : 물리피해\n사정거리 : 200\n쿨타임 : 21초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·六鱼",
+                  "description": "单脚发力用膝盖重击敌人心房，将敌人击飞0.8秒并造成力量值*19的伤害。/若目标的血量百分比低于自身，将刷新“七夜防身术”的冷却时间。发动成功增加20%\"退魔冲动\"\n技能类型 : 单位目标\n伤害类型 : 物理伤害\n施法范围 : 200\n冷却时间 : 21秒"
+                }
+              },
+              "iconAsset": "assets/icons/2e6fa34e62e6-BTNYY-D.png"
+            },
+            {
+              "id": "A02P",
+              "name": "섬초·팔화경",
+              "description": "재빨리 칼을 꺼내어 적의 7개의 급소를 찌릅니다. 적을 찌를 때마다 전방의 적에게 민첩X1.5의 데미지와 1초의 스턴을 부여합니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해\n방어등급 : LV2\n영향범위 : 275\n쿨타임 : 9초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·八花镜",
+                  "description": "快速出刀斩击敌人7处要害，每次斩击会对前方的敌人造成敏捷值*1.5的伤害和1秒眩晕。\n技能类型 : 无目标\n伤害类型 : 物理伤害\n防御等级 : LV2\n影响范围 : 275\n冷却时间 : 9秒"
+                }
+              },
+              "iconAsset": "assets/icons/05d7eafb1ae0-BTNYY-W.png"
+            },
+            {
+              "id": "A02O",
+              "name": "섬주·육록",
+              "description": "전방을 향해 한쪽 발로 빠르게 찹니다. 적을 700범위 밖으로 밀어내고 민첩X20의 데미지와 2초의 스턴을 부여합니다./만약 맞은 상대의 민첩이 자신보다 낮다면 5초 후 다시 600의 데미지와 1초의 스턴을 받습니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 1200\n쿨타임 : 23초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·六鹿",
+                  "description": "突发性的向前方踢出一脚，将敌人击退700码并造成敏捷值*20的伤害和2秒眩晕。/目标英雄的敏捷值低于自身，将在5秒后再次受到600点伤害和1秒眩晕。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n施法范围 : 900\n最大距离 : 1200\n冷却时间 : 23秒"
+                }
+              },
+              "iconAsset": "assets/icons/f97b79a921fb-BTNYY-R.png"
+            },
+            {
+              "id": "A02J",
+              "name": "섬주·명월",
+              "description": "거미걸음의 기초자세다. 몸을 낮추어 지정한 대상을 향해 고속으로 돌진하고 그 대상에게 다가간 후에 멈춥니다./“섬주·명월”사용시에 사용하면 돌진하고 있던 상태가 중단되고 0.5초간 자세를 취합니다. 지속중에 200이상의 피해를 입었을 경우 피해를 입힌 적의 뒤로 이동하여 최대 민첩X15의 데미지와 1.5초 기절을 입힙니다. 만약 피해를 입지 않았을 경우 600거리 뒤로 후방점프합니다.\n기술타입 : 타겟팅/즉시 발동형\n피해타입 : 물리피해\n사정거리 : 3000\n쿨타임 : 25초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·名月",
+                  "description": "蛛行步起手式。压低身形向指定目标高速突进，抵达目标后急停。/在“闪走·名月”发动期间可取消突进，进入0.5秒反击：若期间受到≥200的伤害，则闪现至攻击者身后造成最高敏捷值×15伤害及1.5秒眩晕；若未受伤害则后跳600码\n技能类型 : 地面目标/无目标\n伤害类型 : 物理伤害\n施法范围 : 3000\n冷却时间 : 25秒"
+                }
+              },
+              "iconAsset": "assets/icons/039837acefa0-BTNYY-E.png"
+            },
+            {
+              "id": "A02M",
+              "name": "섬초·일풍",
+              "description": "앞을 향해 재빨리 칼을 휘둘러，적을 명중시키면 멈추고 민첩X16의 데미지와 1.5초의 스턴을 부여합니다./“섬주·명월”사용시에 사용하면 물리적 등급을 올리고 전방으로 빠르게 절단하고 지나가는 적에게 민첩X22의 데미지와 2초의 스턴을 준다. 절단 종료시 재활성화됩니다. 자신을 순간적으로 원래 위치로 되돌립니다.\n기술타입 : 논타겟팅/즉시 발동형\n피해타입 : 물리피해\n물리등급 : LV2/LV3\n사정거리 : 제한 없음\n최대거리 : 1000/1000\n쿨타임 : 12초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·疾风",
+                  "description": "快速冲向前方挥出一刀，击中敌人后停下并造成敏捷值*16的伤害和1.2秒眩晕。/“闪走·名月”冲刺期间发动，提升物理等级并向自身前方快速切割，对穿过的敌人造成敏捷值*22的伤害和2秒眩晕。斩击结束时可再次激活，使自身瞬间返回原位置。\n技能类型 : 地面目标/即时发动\n伤害类型 : 物理伤害\n冲锋等级 : LV2/LV3\n施法范围 : 700\n最大距离 : 700/1000\n冷却时间 : 12秒"
+                }
+              },
+              "iconAsset": "assets/icons/45c316988119-BTNYY-Q.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "远野志贵",
+              "title": "姬守的死神",
+              "summonTip": "【转换】远野志贵(死徒杀手)",
+              "reviveTip": "召唤 远野志贵[姬守的死神]",
+              "awakenTip": "复活 远野志贵[姬守的死神]",
+              "description": "蓝色森林、苏醒的记忆、反转冲动，被名为“公主”的少女打破的日常，眼中映出的，是名为梦的“理”。血染天空的月夜，堕落到底的“七夜”缓缓拾起刀。\n“明白了吗？这就是杀死事物——”\n皮肤变更 :\n　①：人物模型替换.\n　②：部分语音替换.\n　③：附加挑衅语音.\n　④：专属奥义演出。[直死之魔眼·决死一击]"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I009",
+            "name": "나나츠요루",
+            "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다。\n　①：죽음의 개념（각성）：각성 획득：직사의 마안\n　②：거미걸음（패시브）：자신의 이동속도를 522로 증가합니다.\n　③：일풍팔토（패시브）：“섬주·명월”로 적에게 접근할 시 적을 차버립니다. 적을 300만큼 밀어내고 민첩X14의 데미지와 1초의 스턴을 부여합니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "七夜退魔刀",
+                "description": "七夜一族所留下的短刀，刀柄上刻有“七夜”两字。\n　①：死之概念(觉醒)：获得觉醒技能：直死之魔眼。\n　②：蜘蛛步伐(被动)：自身移动速度提升至522点。\n　③：一风八兔(被动)：“闪走·名月”接近敌人后发出重踢，将敌人击退300码并造成敏捷值*14的物理伤害和1秒眩晕。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A02Q",
+              "name": "【각성】직사의 마안",
+              "description": "마안을 억제하는 안경을 벗고 25초동안 만물의 “죽음” 을 볼 수 있는 능력을 가진다. 하지만 끝나면 5초동안 시야가 300으로 줄어든다.\n　① : 자신이 정면에 있는 모든 투사체를 자동으로 베어냅니다.\n　② : “섬초·일풍”/“섬초·팔화경”/“섬주·명월” 들이 등급들을 무시하고 적 모든 투사체를 반격합니다.\n　③ : 일반공격과 모든 참격류 기술들은 참격을 하여 죽음의 선을 1개를 베어낼 때 마다 적에게 현재 생명력의 3%의 피해를 줄 수 있습니다.\n　④ : 적의 체력이 18％이하일 경우에는 적 영웅의 죽음의 점을 보여 이 죽음의 점을 일반공격으로 찔렀을 경우 적을 즉사시킵니다. 이 경우 어떠한 효과를 무시하고 적의 시체를 파괴합니다.\n기술타입 : 즉시 발동형\n피해타입 : 절대피해\n쿨타임 : 260초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【觉醒】直死之魔眼",
+                  "description": "摘下可抑制魔眼的眼镜，直视万物的“死”之概念，但在结束后自身会在5秒内视野缩减至300码，技能持续25秒。\n　① : 自身不处于控制状态时，会自动斩杀正前方的弹幕。\n　② : “闪鞘·疾风”/“闪鞘·八花镜”/“闪走·名月”会无视等级斩杀敌方弹幕与防御技能。\n　③ : 普通攻击与斩击类技能会切开死线，每切开1条死线会对敌人造成3％当前生命值的伤害。\n　④ : 血量≤18％的敌方英雄会显示出死点，普通攻击能够刺穿死点，无视任何效果将敌人直接斩杀并破坏尸体。\n技能类型 : 无目标\n伤害类型 : 真实伤害\n冷却时间 : 260秒"
+                }
+              },
+              "iconAsset": "assets/icons/4af52041356a-BTNYY-G.png"
+            },
+            "iconAsset": "assets/icons/46fa8a507ff9-BTNYY-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E01E",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/394fc5b2d568-BTNYYFY-TX.png"
         }
       ],
       "iconAsset": "assets/icons/77fcce4d9d35-BTNYY-TX.png"
@@ -4872,6 +5861,301 @@
           "relationSourceHeroId": "E01L",
           "relationSourceSkillId": "",
           "iconAsset": "assets/icons/d5800f04253a-BTNShadowNY.png"
+        },
+        {
+          "id": "E04M",
+          "name": "나나야 시키",
+          "title": "흑백의 그림자",
+          "hotkey": "R",
+          "icon": "ReplaceableTextures/CommandButtons/BTNQY-PF1-TX.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNQY-PF1-TX.blp",
+          "summonTip": "【변환】나나야 시키(흑백의 그림자)",
+          "reviveTip": "부활 나나야 시키[흑백의 그림자]",
+          "awakenTip": "부활 나나야 시키[흑백의 그림자]",
+          "description": "자신을“나나야 시키”라고 칭하는 또 다른 시키. 이중인격과 강한 살인충동을 가지고 있다. 검은 인격은 살인 욕구를 강하게 가지고 있고，하얀 인격은 암살술이 뛰어나다. 각자 전투에서 얻는 쾌감을 즐기기 위해 항상 전투에서 인격의 주도권을 다투게 된다.\n“참형에 처한다━━━그 육전 무용하다고 생각해라。”",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "6250",
+            "mana": "30",
+            "str": "40",
+            "agi": "81",
+            "int": "44",
+            "primary": "AGI",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "324",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "1.08"
+          },
+          "model": "war3mapImported/qiye1_hei.mdl",
+          "abilities": [
+            {
+              "id": "A0AN",
+              "name": "섬초·팔천",
+              "description": "스킬 사용 0.6초 후 단도를 던집니다. 적중 하면 신속하게 적의 머리 위로 이동한 뒤 적에게 민첩X5의 데미지와 1.5초의 스턴을 부여한 뒤 700만큼 적 뒤로 점프합니다.\n　[섬초·사십] : 연타 수가 15 이상 이면 추가로 민첩X6의 데미지와 1.5초의 스턴을 부여합니다.\n　[섬주·육토] : 연타 수가 20 이상 이면 추가로 민첩X8의 데미지와 1.5초의 스턴을 부여합니다.\n　[섬초·미옥사문] : 연타수가 25 이상 이면 추가로 민첩X12의 데미지와 2초의 스턴을 부여합니다.\n　[극사·나나야] : 연타 수가 30이면 적을 즉사 시키고 모든 연타 수를 초기화 합니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV1\n사정거리 : 1500\n최대거리 : 1500（단도）/850（섬초·미옥사문）\n쿨타임 : 10초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-RR.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·八穿",
+                  "description": "蓄力0.6秒后向前方掷出短刀，击中后迅速移动至敌人上空并反向跳跃700码，对敌人造成敏捷值*5的伤害和1.5秒眩晕。\n　[闪鞘·四辻]：当连击数达到15点后追加攻击，连续挥动短刀对敌人造成敏捷值*6的伤害和1.5秒眩晕。\n　[闪走·六兔]：当连击数达到20点后追加攻击，单脚发力踢飞敌人并造成敏捷值*8的伤害和1.5秒眩晕。\n　[闪鞘·迷狱沙门]：当连击数达到25点后追加攻击，配合残影持刀跃向前方，对触碰的敌人造成敏捷值*12的伤害和2秒眩晕，跳跃期间自身无法被选中。\n　[极死·七夜]：当连击数达到30点后改变效果，配合短刀瞬间拗断敌人的颈部并禁用“令咒”，将敌人直接斩杀并清空所有连击数。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV1\n施法范围 : 1500\n最大距离 : 1500（匕首）/850（闪鞘·迷狱沙门）\n冷却时间 : 10秒"
+                }
+              },
+              "iconAsset": "assets/icons/1c35e38d6646-BTNQY-RR.png"
+            },
+            {
+              "id": "A0AP",
+              "name": "섬초·팔점충",
+              "description": "재빨리 전방으로 돌진한 뒤 전방의 적을 베면서 적중한 적에게 민첩X8의 데미지와 1초의 스턴을 부여합니다. 적을 맞추거나 최대거리에 도달한 후에는 고속으로 단도를 휘두르면서 적을 밀쳐내며 민첩X10의 데미지와 1초의 스턴을 부여합니다./연타 수가 10 이상이 되면  이 스킬은 “거미걸음”으로 변경됩니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n방어등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 700\n쿨타임 : 12초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·八点冲",
+                  "description": "快速冲向前方进行斩击，对击中的敌人造成敏捷值*8的伤害和1秒眩晕。击中敌人或到达最大距离后高速挥动短刀，将前方的敌人持续击退并最多造成敏捷值*10的伤害和1秒眩晕。/连击数达到10以上时，此技能变更为“蜘蛛步”。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n防御等级 : LV2\n施法范围 : 700\n最大距离 : 700\n冷却时间 : 12秒"
+                }
+              },
+              "iconAsset": "assets/icons/05d7eafb1ae0-BTNYY-W.png"
+            },
+            {
+              "id": "A0AU",
+              "name": "섬초·미옥사문",
+              "description": "신속히 점프하고 체감 시간을 느리게 만듭니다. 목표 범위 내 적들의 이동속도를 1.5초 동안 80％감소시키고 이어서 잔상에 맞춰 칼을 휘두르면서 앞으로 뛰어 오릅니다. 점프하는 동안에는 논타겟팅의 영향을 받지 않으며 적과 접촉하는 순간 공격하며 적에게 민첩X18의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n사정거리 : 제한 없음\n최대거리 : 1000\n영향범위 : 700/400\n쿨타임 : 36초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·迷狱沙门",
+                  "description": "迅速后跳并减缓体感时间，使目标点周围的敌人减少80％的移动速度，减速效果持续1.5秒。随后配合残影持刀跃向前方，跳跃期间自身无法被选中，并在接触敌人的瞬间将其处刑，对敌人造成敏捷值*18的伤害和2秒眩晕。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n施法范围 : 无限制\n最大距离 : 1000\n影响范围 : 700/400\n冷却时间 : 36秒"
+                }
+              },
+              "iconAsset": "assets/icons/eba2ad593a38-BTNQY-F.png"
+            },
+            {
+              "id": "A0AT",
+              "name": "섬초·면영사",
+              "description": "단도를 연달아 휘두르면서 잔상에 맞춰 공격하며 민첩X16의 데미지와 1.5초의 스턴을 부여합니다./만약 연타 수가 25 이상이라면 이 스킬은“섬초·미옥사문”으로 변경됩니다.\n기술타입 : 타겟팅\n피해타입 : 물리피해\n방어등급 : LV2\n사정거리 : 150\n쿨타임 : 20초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-W2.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·面影糸",
+                  "description": "连续挥动短刀并配合残影进行压制，对敌人造成敏捷值*16的伤害和1.5秒眩晕。/当连击数达到25点后该技能变更为“闪鞘·迷狱沙门”。\n技能类型 : 单位目标\n伤害类型 : 物理伤害\n防御等级 : LV2\n施法范围 : 150\n冷却时间 : 20秒"
+                }
+              },
+              "iconAsset": "assets/icons/9c3ddee2547d-BTNQY-W2.png"
+            },
+            {
+              "id": "A0AO",
+              "name": "밤거리의 살인귀",
+              "description": "“토오노 시키”의 악몽에 의해 구현화된 존재.“토오노 시키”를 대표하는 또 다른 가능성.\n　① : 기술의 시전시간을 없애고 시체를 남기지 않습니다.\n　② : 적에게 피해를 주었을 때 0.05초 간격으로 연타수를 1 획득합니다. 5초 동안 적에게 피해를 주지 않으면 연타 수를 초기화 합니다.\n　③ : 밤에 자신의 민첩을 15올리고 이동속도가 200상승합니다. 또한 적을 쓰러트릴 때 마다 모든 스킬의 쿨타임을 초기화 합니다.\n기술타입 : 패시브",
+              "hotkey": "",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "杀人鬼夜行",
+                  "description": "由“远野志贵”的噩梦所具现化的存在，代表着“远野志贵”的另一种可能性。\n　① :取消自身施法前后摇，并且死亡后不会留下尸体。\n　② :自身对敌人造成伤害时会获得1点连击数，触发间隔0.05秒。若超过5秒没有对敌人造成伤害，将清空所有连击数。\n　③ :夜晚时，自身增加15点敏捷值与200点移动速度，并且每次击杀敌方英雄会刷新所有技能的冷却时间。\n技能类型 : 被动"
+                }
+              },
+              "iconAsset": "assets/icons/cb4fcfbba941-BTNQY-T.png"
+            },
+            {
+              "id": "A0AJ",
+              "name": "섬초·칠야",
+              "description": "적을 향해 재빨리 돌진하면서 절단하며 적에게 민첩X8의 데미지와 1초의 스턴을 부여합니다.\n　[나나야 암살술] : 연타 수가 20 이상이 되면 적에게 추가로 잃은 체력의 10%에 비례한 데미지를 줍니다.\n기술타입 : 타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n사정거리 : 750\n쿨타임 : 3.5초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·七夜",
+                  "description": "快速冲向敌人进行切割，对敌人造成敏捷值*8的伤害和1秒眩晕。\n　[七夜暗杀术]：连击数达到20点后追加强化。对敌人额外造成10％缺失生命值的伤害。\n技能类型 : 单位目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n施法范围 : 750\n冷却时间 : 3.5秒"
+                }
+              },
+              "iconAsset": "assets/icons/45c316988119-BTNYY-Q.png"
+            },
+            {
+              "id": "A0AS",
+              "name": "섬초·순옥",
+              "description": "신속하게 전방을 베어냅니다. 지나치는 적에게 민첩X14의 데미지와 2초의 스턴을 부여합니다. 공격이 끝난 후 다시 눌러 자신을 순간적으로 원래 위치로 되돌릴 수 있습니다./연타 수가 15 이상이라면 이 스킬은 “섬초·면영사”로 변경됩니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n돌진등급 : LV3\n사정거리 : 제한 없음\n최대거리 : 1400\n쿨타임 : 18초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-DW.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪鞘·瞬狱",
+                  "description": "迅速向前方进行斩击，对穿过的敌人造成敏捷值*14的伤害和2秒眩晕。斩击结束时可再次激活，使自身瞬间返回原位置。/当连击数达到15点后该技能变更为“闪鞘·面影糸”。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n冲锋等级 : LV3\n施法范围 : 1400\n最大距离 : 1400\n冷却时间 : 18秒"
+                }
+              },
+              "iconAsset": "assets/icons/01532fc7d0b8-BTNQY-DW.png"
+            },
+            {
+              "id": "A0AM",
+              "name": "섬주·명월",
+              "description": "귀신과 같은 발걸음으로 최대 750만큼 목표 위치로 돌진합니다. 그 뒤 Q스킬을 “섬초·칠야”로 변경하고 1.5초동안 은신합니다.\n　[나나야 암살술] : 연타 수가 20 이상이 되면 돌진할 때 논타겟팅의 영향을 받지 않습니다.\n기술타입 : 논타겟팅\n사정거리 : 제한 없음\n쿨타임 : 6.5초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·名月",
+                  "description": "以鬼魅的步伐最多移动750码，使Q技能变更为“闪鞘·七夜”并隐身1.5秒。\n [七夜暗杀术]：连击数达到20点后追加强化。冲刺期间自身无法被选中。\n技能类型 : 地面目标\n施法范围 : 无限制\n冷却时间 : 6.5秒"
+                }
+              },
+              "iconAsset": "assets/icons/039837acefa0-BTNYY-E.png"
+            },
+            {
+              "id": "A0AL",
+              "name": "섬주·수월",
+              "description": "빠르게 뒤로 800만큼 점프합니다. 그리고 Q스킬을 “섬주·일록”으로 변경한 뒤 “섬주·명월”의 쿨타임을 초기화 합니다. 뒤로 점프하는 동안에는 논타겟팅의 영향을 받지 않습니다.\n　[나나야 암살술] : 연타 수가 20 이상이 되면 뒤로 점프할 때 전방에 단도를 던집니다. 적을 명중 시킨 후 순식간에 몸을 돌려 적의 뒤로 이동하면서 적을 베어내면서 지나치는 적에게 민첩X15의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV1（단도）/LV2（참격）\n사정거리 : 제한 없음\n최대거리 : 1400（단도）/800（참격）\n쿨타임 : 9초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-Q2.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·水月",
+                  "description": "迅速后跳800码，使Q技能变更为“闪走·一鹿”并刷新“闪走·名月”的冷却时间，后跳期间自身无法被选中。\n　[七夜暗杀术]：连击数达到20点后追加强化。后跳时会向前方掷出短刀，击中敌人后会瞬间扭转身体，瞬间移动至敌人身后并反向斩击，对穿过的敌人造成敏捷值*15的伤害和1.5秒眩晕。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV1（短刀）/LV2（斩击）\n施法范围 : 无限制\n最大距离 : 1400（短刀）/800（斩击）\n冷却时间 : 9秒"
+                }
+              },
+              "iconAsset": "assets/icons/ea2d4668d74d-BTNQY-Q2.png"
+            },
+            {
+              "id": "A0AK",
+              "name": "섬주·일록",
+              "description": "한발로 앞으로 날아가 적을 걷어차서 뛰어올리고 다시 차서 떨어뜨리면서 민첩X12의 데미지와 2초의 스턴을 부여합니다.\n　[나나야 암살술] : 연타 수가 20 이상이 되면 순간적으로 최대 거리로 이동하여 반대방향으로 적을 발로 찹니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 1000\n쿨타임 : 9초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNYY-R.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "闪走·一鹿",
+                  "description": "单脚发力向前飞踢，将敌人踢起后再次踢落，对敌人造成敏捷值*12的伤害和2秒眩晕。\n　[七夜暗杀术]：连击数达到20点后追加强化。瞬间移动至最大距离处反向飞踢。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n施法范围 : 1000\n最大距离 : 1000\n冷却时间 : 9秒"
+                }
+              },
+              "iconAsset": "assets/icons/f97b79a921fb-BTNYY-R.png"
+            },
+            {
+              "id": "A0AQ",
+              "name": "거미걸음",
+              "description": "몸을 0.6초 동안 숨깁니다. 그 뒤 이동명령을 통해 최대 1회 900만큼 이동합니다./연타수가 20 이상이 되면 이 스킬은 “정안”으로 변경됩니다.\n기술타입 : 즉시 발동형\n쿨타임 : 8초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-R.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "蜘蛛步",
+                  "description": "身体下伏隐身0.6秒，期间可通过右键进行1次最多900码的瞬移。/当连击数达到20点后该技能变更为“净眼”。\n技能类型 : 无目标\n冷却时间 : 8秒"
+                }
+              },
+              "iconAsset": "assets/icons/1dee4ca37925-BTNQY-R.png"
+            },
+            {
+              "id": "A0AR",
+              "name": "정안",
+              "description": "나나야 가문에게 계승되어지는 특이한 눈. 상대방의 감정이나 심리를 연기나 색 등으로 볼 수 있다.\n　①：“섬초·팔천”의 추가타가 잔상이 대신 공격합니다.\n　② : 자신 주변의 은신 유닛을 감지하고 Q/W/E 스킬들을 강화합니다.\n　③ : 자신보다 체력 백분율이 낮은 적에게 30％의 추가 피해를 줍니다.\n　④：모든 기술 사용 후 0.5초 이내에 오른쪽 버튼으로 최대 350만큼 순간이동이 가능합니다.\n기술타입 : 패시브\n영향범위 : 1500",
+              "hotkey": "",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-D3.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "净眼",
+                  "description": "七夜家族所持有的魔眼，可将目视对方的情感和心理以烟雾或颜色具现出来。\n　①：“闪鞘·八穿”会制造残影进行追击。\n　② : 显示自身周围的隐形单位并强化Q/W/E技能。\n　③ : 对血量百分比低于自身的敌人会增加30％所造成的伤害。\n　④：发动任意技能后可在0.5秒内通过右键进行1次最多350码的瞬移。\n技能类型 : 被动\n影响范围 : 1500"
+                }
+              },
+              "iconAsset": "assets/icons/1c88e7b87f4f-BTNQY-D3.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "七夜志贵",
+              "title": "黑白之影",
+              "summonTip": "【转换】七夜志贵(黑白之影)",
+              "reviveTip": "召唤 七夜志贵[黑白之影]",
+              "awakenTip": "复活 七夜志贵[黑白之影]",
+              "description": "自称为\"杀人鬼\"的双重人格者。黑色人格沉溺杀戮快感，白色人格精于暗杀技艺。两人格常在战斗中争夺身体控制权，将生死对决视为愉悦的游乐场。手持七夜暗杀术传承的「七夜」，在月下舞动致命刀光。\n“处以斩刑--要知道冥河之旅费亦是无用。”"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I00C",
+            "name": "나나츠요루",
+            "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다\n　①：가월십야（오의）：오의 획득：극사·나나야\n　②：거미걸음（패시브）：자신의 이동속도가 15％ 상승합니다.\n　③：나나야 체술（패시브）：연타 수 만큼 민첩이 1 상승합니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "七夜退魔刀",
+                "description": "七夜一族所留下的短刀，刀柄上刻有“七夜”两字。\n　①：杀人冲动(奥义)：获得奥义技能：极死·七夜。\n　②：蜘蛛步伐(被动)：自身移动速度提高15%。\n　③：七夜体术(被动)：每1点连击数会增加1点敏捷值。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A0AW",
+              "name": "【오의】극사·나나야",
+              "description": "스킬 사용 후 1초 안에 한 번에 200데미지 이상을 받을 경우 뒤로 빠진 뒤 단도를 전력으로 던짐과 동시에 한쪽 손으로 어깨를 짖누르면서 빠른 몸놀림을 적의 목을 꺾으며 5000의 데미지와 2초의 스턴을 부여합니다. 맞은 대상의 체력이 60%이하라면 적을 즉사 시킵니다.\n기술타입 : 즉시 발동형\n쿨타임 : 200초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQY-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【奥义】极死·七夜",
+                  "description": "发动后0.5秒内若受到单次超过200点的伤害，后退半步单手压肩，全力掷出短刀的同时以灵活的身法拗断敌人的颈部，对其造成5000点伤害和2秒眩晕，如果目标的生命值低于60%，则将该敌人斩杀。并重置连击数。\n技能类型 : 无目标\n冷却时间 : 200秒"
+                }
+              },
+              "iconAsset": "assets/icons/7d0982077bc3-BTNQY-G.png"
+            },
+            "iconAsset": "assets/icons/46fa8a507ff9-BTNYY-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E01L",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/ef06dc969e86-BTNQY-PF1-TX.png"
         }
       ],
       "iconAsset": "assets/icons/26976e2dd0ba-BTNQY-TX.png"
@@ -5481,6 +6765,72 @@
           "relationSourceHeroId": "E01Q",
           "relationSourceSkillId": "",
           "iconAsset": "assets/icons/2f9ac2eba863-BTNBlackLen_TX.png"
+        },
+        {
+          "id": "E027",
+          "name": "시로 렌[고양이]",
+          "title": "꿈을 먹는 하얀 몽마",
+          "hotkey": "D",
+          "icon": "ReplaceableTextures/CommandButtons/BTNWL-TX.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtons/BTNWL-TX.blp",
+          "summonTip": "召唤恶魔猎手(D)",
+          "reviveTip": "부활 시로 렌[꿈을 먹는 하얀 몽마]",
+          "awakenTip": "부활 시로 렌[꿈을 먹는 하얀 몽마]",
+          "description": "一种灵活的英雄，能学习到献祭，闪避法力燃烧和变身这四项技能。\n能攻击地面单位。",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10630",
+            "mana": "100",
+            "str": "59",
+            "agi": "88",
+            "int": "97",
+            "primary": "INT",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "1",
+            "attackDice": "",
+            "range": "",
+            "cooldown": "3600"
+          },
+          "model": "war3mapImported/lencat.mdl",
+          "abilities": [
+            {
+              "id": "A05C",
+              "name": "고양이의 습격!",
+              "description": "전방으로 사람으로 변하면서 앞으로 몸통박치기를 합니다. 경로에 적이 있으면 멈추고 적중한 적에게 민첩X18의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV1\n사정거리 : 제한 없음\n최대거리 : 800\n쿨타임 : 10초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNWL-TQ.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "猫扑",
+                  "description": "瞬间变为人形扑向前方，对击中的敌人造成敏捷值*18的伤害和2秒眩晕。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV1\n施法范围 : 800\n最大距离 : 800\n冷却时间 : 10秒"
+                }
+              },
+              "iconAsset": "assets/icons/8544aa8b76e0-BTNWL-TQ.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "白莲[猫]",
+              "title": "食梦的白色梦魔",
+              "summonTip": "召唤恶魔猎手(D)",
+              "reviveTip": "召唤 白莲[食梦的白色梦魔]",
+              "awakenTip": "复活 白莲[食梦的白色梦魔]",
+              "description": "一种灵活的英雄，能学习到献祭，闪避法力燃烧和变身这四项技能。\n能攻击地面单位。"
+            }
+          },
+          "relationType": "summon",
+          "relationLabel": "召唤单位",
+          "relationSourceHeroId": "E01Q",
+          "relationSourceSkillId": "A05B",
+          "iconAsset": "assets/icons/090b69b71a6a-BTNWL-TX.png"
         }
       ],
       "iconAsset": "assets/icons/090b69b71a6a-BTNWL-TX.png"
@@ -6101,6 +7451,418 @@
         },
         "iconAsset": "assets/icons/08d0a5282675-BTNQJ-ZS.png"
       },
+      "relatedHeroes": [
+        {
+          "id": "E036",
+          "name": "키요히메",
+          "title": "사랑의 추적자",
+          "hotkey": "D",
+          "icon": "ReplaceableTextures/CommandButtons/BTNQJ-TX3.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNQJ-TX3.blp",
+          "summonTip": "【변환】키요히메(사랑의 추적자)",
+          "reviveTip": "부활 키요히메[사랑의 추적자]",
+          "awakenTip": "부활 키요히메[사랑의 추적자]",
+          "description": "사랑해서、사랑해서、사랑해서、사랑해서、배신당해서、슬퍼서、슬퍼서、슬퍼서슬퍼서슬퍼서、미워서미워서미워서미워서미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워미워━━━그래서 태워죽였습니다.\n“아아，안친님은 또 내게서 더 멀어졌구나……”\n스킨변경：\n　①：인물 모델 교체。\n　②：특수 기능 교체。\n　③：일부 음성 교체。",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10333",
+            "mana": "",
+            "str": "42",
+            "agi": "63",
+            "int": "75",
+            "primary": "INT",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "367",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "0.8"
+          },
+          "model": "war3mapImported/c_hei.mdl",
+          "abilities": [
+            {
+              "id": "A0A1",
+              "name": "뜨거운 입김",
+              "description": "부채를 흔들면서 앞쪽으로 뜨거운 불길을 일으킵니다. 닿은 적을 약간 밀쳐내고 지능X20의 데미지와 1초의 스턴을 부여합니다./화염이 지나간 경로에 불장판을 남깁니다. 8초동안 0.5초마다 범위 안의 적에게 200의 데미지를 줍니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n마법등급 : LV3\n사정거리 : 2500\n최대거리 : 2500\n쿨타임 : 25초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "灼热的拥抱",
+                  "description": "挥动折扇向前方扇出炽热的火焰，将穿过的敌人略微击退并造成智力值*20的伤害和1秒眩晕。/火焰扇出后会在路径上留下残焰，每0.5秒对范围内的敌人造成200点伤害，效果持续8秒。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n魔法等级 : LV3\n施法范围 : 2500\n最大距离 : 2500\n冷却时间 : 25秒"
+                }
+              },
+              "iconAsset": "assets/icons/db62fb6851d2-BTNQJ-D.png"
+            },
+            {
+              "id": "A09W",
+              "name": "분신화염",
+              "description": "손바닥을 적에게 부드럽게 댄 후 뜨거운 불길이 주변 적을 지속적으로 날려 지능X26의 데미지와 2초의 스턴을 부여합니다.\n　[공포의 러브레터] : “변화[화룡]” 상태일 때 목표 대상의“영주”사용을 금지하고 자신의 체력을 2000 회복한다.\n기술타입 : 타겟팅\n피해타입 : 마법피해\n방어등급 : LV3\n사정거리 : 200\n영향범위 : 350\n쿨타임 : 18초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "焚身之火",
+                  "description": "将掌心温柔的贴在敌人身上，爆发出炽热的火焰将周围的敌人持续击飞并造成智力值*26的伤害和2秒眩晕。\n　[恐怖情书]：“变化[火龙]”激活后，主目标禁用“令咒”并使自身恢复2000点生命值。\n技能类型 : 单位目标\n伤害类型 : 魔法伤害\n防御等级 : LV3\n施法范围 : 200\n影响范围 : 350\n冷却时间 : 18秒"
+                }
+              },
+              "iconAsset": "assets/icons/beb83214eb75-BTNQJ-W.png"
+            },
+            {
+              "id": "A0A2",
+              "name": "불꽃색의 입맞춤",
+              "description": "한 번 입술을 겹치면 온갖 방해를 떨쳐내고 슈퍼 키요히메 쨩이 된다고도 전해지나 근거는 없다.\n　① : 아군 영웅에게 키스한 후 마스터로 삼는다.\n　② : 마스터가 생존할 때 이 기술은 “스토킹” 으로 바뀝니다.\n　③ : 마스터가 사망하면 이 기술은 “변화[화룡]”으로 바뀝니다.\n기술타입 : 타겟팅\n사정거리 : 500\n쿨타임 : 0초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "焰色的接吻",
+                  "description": "|CffFFFF0一唇重合之后，化身为将所有障碍都轻松铲除的超级清姬酱也不是问题。\n　① :亲吻友方英雄后将其视为爱人。\n　② :爱人存活时该技能变更为“恋之追迹者”。\n　③ :爱人死亡后本回合内该技能变更为“变化[火龙]”。\n技能类型 : 单位目标\n施法范围 : 500\n冷却时间 : 0秒"
+                }
+              },
+              "iconAsset": "assets/icons/cd8672efa12d-BTNQJ-F.png"
+            },
+            {
+              "id": "A09X",
+              "name": "홍련의 부채",
+              "description": "손에 있는 접는 부채를 전방으로 던집니다. 부채는 최대거리에 도달하면 다시 손으로 되돌아 옵니다. 적에게 지나칠 때 마다 지능X9의 데미지와 1초의 스턴을 부여합니다./부채를 회수하기 전까지 “정열적인 사랑”을 사용할 수 있습니다.\n　[열정변화] : “변화[화룡]” 상태일 때 부채를 회수 후 3초 이내에 다시 추가로 “정열적인 사랑” 을 사용할 수 있습니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n마법등급 : LV2\n사정거리 : 1600\n최대거리 : 1600\n쿨타임 : 9초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "红莲之扇",
+                  "description": "将手中的折扇掷向前方，折扇到达最大距离后会返回手中，并且每次穿过敌人都会造成智力值*9的伤害和1秒眩晕。/折扇回收前可追加“情热之爱”。\n　[情热转变]：“变化[火龙]”激活后，回收折扇后可在3秒内再次追加“情热之爱”。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n魔法等级 : LV2\n施法范围 : 1600\n最大距离 : 1600\n冷却时间 : 9秒"
+                }
+              },
+              "iconAsset": "assets/icons/6fa0a9547c22-BTNQJ-E.png"
+            },
+            {
+              "id": "A09V",
+              "name": "질투하는 화염",
+              "description": "입에서 뜨거운 불길을 뿜어냅니다. 1.4초동안 전방의 적에게 지능X20의 데미지와 1.5초의 스턴을 부여합니다. 그리고 가까이 있는 적을 계속 밀어냅니다.\n　[작열하는 입김] : “변화[화룡]” 상태일 때，화염은 6초동안 총 1800의 데미지를 주면서 적을 태웁니다. 이 효과는 중첩되지 않습니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n방어등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 900\n쿨타임 : 15초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "嫉妒之炎",
+                  "description": "从口中喷出炽热的火焰，在1.4秒内对前方范围内的敌人造成智力值*20的伤害和1.5秒眩晕，并将靠近的敌人持续推开。\n [灼热吐息]：“变化[火龙]”激活后，火焰会使敌人持续燃烧，在6秒内受到1800点伤害，该效果无法叠加。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n防御等级 : LV2\n施法范围 : 900\n最大距离 : 900\n冷却时间 : 15秒"
+                }
+              },
+              "iconAsset": "assets/icons/dd7d21b1eae1-BTNQJ-Q.png"
+            },
+            {
+              "id": "A0A0",
+              "name": "염단화염행",
+              "description": "시전 0.5초 뒤 뜨거운 사랑의 화염을 15초동안 6개 두릅니다. 이 화염을 소모하여 공격하거나 회피가 가능합니다.\n　① : 자신이 적에게 피해를 줄 경우 같은 목표에게 2초당 한 번 1개의 화염을 소모하여 지능X5의 데미지와 0.7초의 스턴을 부여합니다.\n　② : 자신은 공격명령을 통해 2개의 화염을 소모하여 0.5초당 한 번 800만큼 이동할 수 있습니다. 그리고 제자리에 화염 잔상을 남깁니다. 그 잔상은 5초 후 주변 적들에게 지능X10의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n마법등급 : LV1\n영향범위 : 400\n쿨타임 : 50초",
+              "hotkey": "T",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "恋谈火焰行",
+                  "description": "蓄力0.5秒后将炽热的爱意转化为6团火焰，可通过操控火焰进行攻击或回避，技能持续15秒。\n　① :自身对敌人造成伤害时会飞出1团火焰并造成智力值*5的伤害和1秒眩晕，对同一目标触发间隔2秒。\n　② :自身可通过A键消耗2团火焰进行最多800码的瞬移，并在原位置留下火焰残像，残像会在5秒后对周围的敌人造成智力值*10的伤害和2秒眩晕，触发间隔0.5秒。\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n魔法等级 : LV1\n影响范围 : 400\n冷却时间 : 50秒"
+                }
+              },
+              "iconAsset": "assets/icons/75d969d117ac-BTNQJ-T.png"
+            },
+            {
+              "id": "A09Z",
+              "name": "사행교란",
+              "description": "집념은 결국 독사로 변하였다. 시전 1.5초 뒤 목표가 영향 범위 밖을 벗어나지 못한다면 뱀이 되어 적들을 감싼 뒤 1.6초 후 삼킵니다. 주변의 적에게 2000의 데미지와 2초의 스턴을 부여합니다. 그 뒤 자신은 원래 자리로 돌아갑니다.\n　[화염대사] : “변화[화룡]” 상태일 때 감겨지는 동안 적에게 지능X20의 데미지를 입힙니다.\n기술타입 : 타겟팅\n피해타입 : 마법피해\n사정거리 : 2100\n영향범위 : 700/400\n쿨타임 : 40초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "蛇行缠扰",
+                  "description": "执念最终化为毒蛇，蓄力1.5秒后若目标仍未离开影响范围，将化作毒蛇缠绕敌人1.6秒后进行吞噬，对周围的敌人造成2000点伤害和2秒眩晕，随后自身会返回原位置。\n　[火焰大蛇] : 处于“变化[火龙]”状态时，缠绕期间对敌人造成智力X20伤害，并阻止敌人使用“令咒”。\n技能类型 : 单位目标\n伤害类型 : 魔法伤害\n施法范围 : 2100\n影响范围 : 700/400\n冷却时间 : 40秒"
+                }
+              },
+              "iconAsset": "assets/icons/18ff5fe9854e-BTNQJ-R.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "清姬",
+              "title": "追逐思慕的恋人",
+              "summonTip": "【转换】清姬(爱的追踪者)",
+              "reviveTip": "召唤 清姬[追逐思慕的恋人]",
+              "awakenTip": "复活 清姬[追逐思慕的恋人]",
+              "description": "爱着、爱着、爱着、爱着、被背叛了、悲伤、悲伤、悲伤悲伤悲伤、憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨憎恨━━━所以烧死了。\n“啊啊，安珍大人又离我更远了呢……”\n皮肤变更：\n　①：人物模型替换。\n　②：特殊功能替换。\n　③：部分语音替换。"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I03A",
+            "name": "리본을 맨 키요히메",
+            "description": "아아，사랑해요，사랑해요，사랑해요！\n　①：용의환생（오의）：오의 획득：전신화생삼매\n　②：정열의 염하（패시브）：“분신화염”을 자신에게 사용가능.  이 경우“영주”사용을 막지 못합니다.\n　③：집념의 말로（패시브）：자신이 사망했을 때 자신을 쓰러트린 적에게“사행교란”을 사용합니다. 이 효과는“변화[화룡]”으로 강화될 수 있습니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNQJ-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "扎丝带的清姬",
+                "description": "啊啊，我爱你，我爱你，我爱你！\n　①：转生之龙(奥义)：获得奥义技能：转身火生三昧。\n　②：夏日之恋(被动)：“焚身之火”能够对自身发动，但不会触发禁用“令咒”的效果。\n　③：执着之念(被动)：自身死亡时，会依靠执念向伤害来源释放“蛇行缠扰”，该效果可被“变化[火龙]”强化。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A0A5",
+              "name": "【오의】전신화생삼매",
+              "description": "「——당신，거짓말 하셨네요」. 키요히메는 불꽃을 내뿜는 거대한 용으로 변했다. 목표 범위를 둘러싸고 감돌면서 사랑의 불꽃을 태운다. 범위 내의 적에게 지능X60의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 범위 지정형\n피해타입 : 마법피해\n사정거리: 1600\n영향범위 : 835\n쿨타임 : 200초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【奥义】转身火生三昧",
+                  "description": "——您，说谎了呢。清姬化身为喷吐火焰的巨龙，围绕着目标范围缠卷并释放出焚烧情爱的红莲之火，对范围内的敌人最多造成智力值*60的伤害和2秒眩晕。\n技能类型 : 范围指定\n伤害类型 : 魔法伤害\n施法范围: 1600\n影响范围 : 835\n冷却时间 : 200秒"
+                }
+              },
+              "iconAsset": "assets/icons/0a038ded8ed8-BTNQJ-G.png"
+            },
+            "iconAsset": "assets/icons/08d0a5282675-BTNQJ-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E020",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/0e9ad7325612-BTNQJ-TX3.png"
+        },
+        {
+          "id": "E037",
+          "name": "키요히메",
+          "title": "사랑에 빠진 소녀",
+          "hotkey": "D",
+          "icon": "ReplaceableTextures/CommandButtons/BTNQJ-TX2.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNQJ-TX2.blp",
+          "summonTip": "【변환】키요히메(사랑에 빠진 소녀)",
+          "reviveTip": "부활 키요히메[사랑에 빠진 소녀]",
+          "awakenTip": "부활 키요히메[사랑에 빠진 소녀]",
+          "description": "안친님━━━강한 인연이 맺어졌네요. 이것도 저와 마스터의 사랑 덕분…인거죠！다음은 그렇네요…반지…예물…웨딩드레스…후후…후후…후후후후…후후후후후!\n“그럼……지켜봐 주세요. 키요히메 갑니다~”\n스킨변경：\n　①：인물 모델 교체。\n　②：특수 기능 교체。\n　③：일부 음성 교체。",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10333",
+            "mana": "",
+            "str": "42",
+            "agi": "63",
+            "int": "75",
+            "primary": "INT",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "367",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "0.8"
+          },
+          "model": "war3mapImported/c_bai.mdl",
+          "abilities": [
+            {
+              "id": "A0A1",
+              "name": "뜨거운 입김",
+              "description": "부채를 흔들면서 앞쪽으로 뜨거운 불길을 일으킵니다. 닿은 적을 약간 밀쳐내고 지능X20의 데미지와 1초의 스턴을 부여합니다./화염이 지나간 경로에 불장판을 남깁니다. 8초동안 0.5초마다 범위 안의 적에게 200의 데미지를 줍니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n마법등급 : LV3\n사정거리 : 2500\n최대거리 : 2500\n쿨타임 : 25초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "灼热的拥抱",
+                  "description": "挥动折扇向前方扇出炽热的火焰，将穿过的敌人略微击退并造成智力值*20的伤害和1秒眩晕。/火焰扇出后会在路径上留下残焰，每0.5秒对范围内的敌人造成200点伤害，效果持续8秒。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n魔法等级 : LV3\n施法范围 : 2500\n最大距离 : 2500\n冷却时间 : 25秒"
+                }
+              },
+              "iconAsset": "assets/icons/db62fb6851d2-BTNQJ-D.png"
+            },
+            {
+              "id": "A09W",
+              "name": "분신화염",
+              "description": "손바닥을 적에게 부드럽게 댄 후 뜨거운 불길이 주변 적을 지속적으로 날려 지능X26의 데미지와 2초의 스턴을 부여합니다.\n　[공포의 러브레터] : “변화[화룡]” 상태일 때 목표 대상의“영주”사용을 금지하고 자신의 체력을 2000 회복한다.\n기술타입 : 타겟팅\n피해타입 : 마법피해\n방어등급 : LV3\n사정거리 : 200\n영향범위 : 350\n쿨타임 : 18초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "焚身之火",
+                  "description": "将掌心温柔的贴在敌人身上，爆发出炽热的火焰将周围的敌人持续击飞并造成智力值*26的伤害和2秒眩晕。\n　[恐怖情书]：“变化[火龙]”激活后，主目标禁用“令咒”并使自身恢复2000点生命值。\n技能类型 : 单位目标\n伤害类型 : 魔法伤害\n防御等级 : LV3\n施法范围 : 200\n影响范围 : 350\n冷却时间 : 18秒"
+                }
+              },
+              "iconAsset": "assets/icons/beb83214eb75-BTNQJ-W.png"
+            },
+            {
+              "id": "A0A2",
+              "name": "불꽃색의 입맞춤",
+              "description": "한 번 입술을 겹치면 온갖 방해를 떨쳐내고 슈퍼 키요히메 쨩이 된다고도 전해지나 근거는 없다.\n　① : 아군 영웅에게 키스한 후 마스터로 삼는다.\n　② : 마스터가 생존할 때 이 기술은 “스토킹” 으로 바뀝니다.\n　③ : 마스터가 사망하면 이 기술은 “변화[화룡]”으로 바뀝니다.\n기술타입 : 타겟팅\n사정거리 : 500\n쿨타임 : 0초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "焰色的接吻",
+                  "description": "|CffFFFF0一唇重合之后，化身为将所有障碍都轻松铲除的超级清姬酱也不是问题。\n　① :亲吻友方英雄后将其视为爱人。\n　② :爱人存活时该技能变更为“恋之追迹者”。\n　③ :爱人死亡后本回合内该技能变更为“变化[火龙]”。\n技能类型 : 单位目标\n施法范围 : 500\n冷却时间 : 0秒"
+                }
+              },
+              "iconAsset": "assets/icons/cd8672efa12d-BTNQJ-F.png"
+            },
+            {
+              "id": "A09X",
+              "name": "홍련의 부채",
+              "description": "손에 있는 접는 부채를 전방으로 던집니다. 부채는 최대거리에 도달하면 다시 손으로 되돌아 옵니다. 적에게 지나칠 때 마다 지능X9의 데미지와 1초의 스턴을 부여합니다./부채를 회수하기 전까지 “정열적인 사랑”을 사용할 수 있습니다.\n　[열정변화] : “변화[화룡]” 상태일 때 부채를 회수 후 3초 이내에 다시 추가로 “정열적인 사랑” 을 사용할 수 있습니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n마법등급 : LV2\n사정거리 : 1600\n최대거리 : 1600\n쿨타임 : 9초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "红莲之扇",
+                  "description": "将手中的折扇掷向前方，折扇到达最大距离后会返回手中，并且每次穿过敌人都会造成智力值*9的伤害和1秒眩晕。/折扇回收前可追加“情热之爱”。\n　[情热转变]：“变化[火龙]”激活后，回收折扇后可在3秒内再次追加“情热之爱”。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n魔法等级 : LV2\n施法范围 : 1600\n最大距离 : 1600\n冷却时间 : 9秒"
+                }
+              },
+              "iconAsset": "assets/icons/6fa0a9547c22-BTNQJ-E.png"
+            },
+            {
+              "id": "A09V",
+              "name": "질투하는 화염",
+              "description": "입에서 뜨거운 불길을 뿜어냅니다. 1.4초동안 전방의 적에게 지능X20의 데미지와 1.5초의 스턴을 부여합니다. 그리고 가까이 있는 적을 계속 밀어냅니다.\n　[작열하는 입김] : “변화[화룡]” 상태일 때，화염은 6초동안 총 1800의 데미지를 주면서 적을 태웁니다. 이 효과는 중첩되지 않습니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n방어등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 900\n쿨타임 : 15초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "嫉妒之炎",
+                  "description": "从口中喷出炽热的火焰，在1.4秒内对前方范围内的敌人造成智力值*20的伤害和1.5秒眩晕，并将靠近的敌人持续推开。\n [灼热吐息]：“变化[火龙]”激活后，火焰会使敌人持续燃烧，在6秒内受到1800点伤害，该效果无法叠加。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n防御等级 : LV2\n施法范围 : 900\n最大距离 : 900\n冷却时间 : 15秒"
+                }
+              },
+              "iconAsset": "assets/icons/dd7d21b1eae1-BTNQJ-Q.png"
+            },
+            {
+              "id": "A0A0",
+              "name": "염단화염행",
+              "description": "시전 0.5초 뒤 뜨거운 사랑의 화염을 15초동안 6개 두릅니다. 이 화염을 소모하여 공격하거나 회피가 가능합니다.\n　① : 자신이 적에게 피해를 줄 경우 같은 목표에게 2초당 한 번 1개의 화염을 소모하여 지능X5의 데미지와 0.7초의 스턴을 부여합니다.\n　② : 자신은 공격명령을 통해 2개의 화염을 소모하여 0.5초당 한 번 800만큼 이동할 수 있습니다. 그리고 제자리에 화염 잔상을 남깁니다. 그 잔상은 5초 후 주변 적들에게 지능X10의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n마법등급 : LV1\n영향범위 : 400\n쿨타임 : 50초",
+              "hotkey": "T",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "恋谈火焰行",
+                  "description": "蓄力0.5秒后将炽热的爱意转化为6团火焰，可通过操控火焰进行攻击或回避，技能持续15秒。\n　① :自身对敌人造成伤害时会飞出1团火焰并造成智力值*5的伤害和1秒眩晕，对同一目标触发间隔2秒。\n　② :自身可通过A键消耗2团火焰进行最多800码的瞬移，并在原位置留下火焰残像，残像会在5秒后对周围的敌人造成智力值*10的伤害和2秒眩晕，触发间隔0.5秒。\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n魔法等级 : LV1\n影响范围 : 400\n冷却时间 : 50秒"
+                }
+              },
+              "iconAsset": "assets/icons/75d969d117ac-BTNQJ-T.png"
+            },
+            {
+              "id": "A09Z",
+              "name": "사행교란",
+              "description": "집념은 결국 독사로 변하였다. 시전 1.5초 뒤 목표가 영향 범위 밖을 벗어나지 못한다면 뱀이 되어 적들을 감싼 뒤 1.6초 후 삼킵니다. 주변의 적에게 2000의 데미지와 2초의 스턴을 부여합니다. 그 뒤 자신은 원래 자리로 돌아갑니다.\n　[화염대사] : “변화[화룡]” 상태일 때 감겨지는 동안 적에게 지능X20의 데미지를 입힙니다.\n기술타입 : 타겟팅\n피해타입 : 마법피해\n사정거리 : 2100\n영향범위 : 700/400\n쿨타임 : 40초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "蛇行缠扰",
+                  "description": "执念最终化为毒蛇，蓄力1.5秒后若目标仍未离开影响范围，将化作毒蛇缠绕敌人1.6秒后进行吞噬，对周围的敌人造成2000点伤害和2秒眩晕，随后自身会返回原位置。\n　[火焰大蛇] : 处于“变化[火龙]”状态时，缠绕期间对敌人造成智力X20伤害，并阻止敌人使用“令咒”。\n技能类型 : 单位目标\n伤害类型 : 魔法伤害\n施法范围 : 2100\n影响范围 : 700/400\n冷却时间 : 40秒"
+                }
+              },
+              "iconAsset": "assets/icons/18ff5fe9854e-BTNQJ-R.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "清姬",
+              "title": "深陷爱恋的少女",
+              "summonTip": "【转换】清姬(恋爱中的少女)",
+              "reviveTip": "召唤 清姬[深陷爱恋的少女]",
+              "awakenTip": "复活 清姬[深陷爱恋的少女]",
+              "description": "安珍大人━━━结下了深厚的缘分呢。这也是托我和Master的爱的福…对吧！接下来嘛…戒指…彩礼…婚纱…呵呵…呵呵…呵呵呵呵…呵呵呵呵呵！\n“那么……请看好了。清姬要上了~”\n皮肤变更：\n　①：人物模型替换。\n　②：特殊功能替换。\n　③：部分语音替换。"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I03A",
+            "name": "리본을 맨 키요히메",
+            "description": "아아，사랑해요，사랑해요，사랑해요！\n　①：용의환생（오의）：오의 획득：전신화생삼매\n　②：정열의 염하（패시브）：“분신화염”을 자신에게 사용가능.  이 경우“영주”사용을 막지 못합니다.\n　③：집념의 말로（패시브）：자신이 사망했을 때 자신을 쓰러트린 적에게“사행교란”을 사용합니다. 이 효과는“변화[화룡]”으로 강화될 수 있습니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNQJ-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "扎丝带的清姬",
+                "description": "啊啊，我爱你，我爱你，我爱你！\n　①：转生之龙(奥义)：获得奥义技能：转身火生三昧。\n　②：夏日之恋(被动)：“焚身之火”能够对自身发动，但不会触发禁用“令咒”的效果。\n　③：执着之念(被动)：自身死亡时，会依靠执念向伤害来源释放“蛇行缠扰”，该效果可被“变化[火龙]”强化。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A0A5",
+              "name": "【오의】전신화생삼매",
+              "description": "「——당신，거짓말 하셨네요」. 키요히메는 불꽃을 내뿜는 거대한 용으로 변했다. 목표 범위를 둘러싸고 감돌면서 사랑의 불꽃을 태운다. 범위 내의 적에게 지능X60의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 범위 지정형\n피해타입 : 마법피해\n사정거리: 1600\n영향범위 : 835\n쿨타임 : 200초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNQJ-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【奥义】转身火生三昧",
+                  "description": "——您，说谎了呢。清姬化身为喷吐火焰的巨龙，围绕着目标范围缠卷并释放出焚烧情爱的红莲之火，对范围内的敌人最多造成智力值*60的伤害和2秒眩晕。\n技能类型 : 范围指定\n伤害类型 : 魔法伤害\n施法范围: 1600\n影响范围 : 835\n冷却时间 : 200秒"
+                }
+              },
+              "iconAsset": "assets/icons/0a038ded8ed8-BTNQJ-G.png"
+            },
+            "iconAsset": "assets/icons/08d0a5282675-BTNQJ-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E020",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/c9c703e6304d-BTNQJ-TX2.png"
+        }
+      ],
       "iconAsset": "assets/icons/910408a06606-BTNQJ-TX.png"
     },
     {
@@ -6568,7 +8330,7 @@
           "summonTip": "【소환】BLAU-AX(청염의 불꽃)",
           "reviveTip": "부활 BLAU-AX[청염의 불꽃]",
           "awakenTip": "부활 BLAU-AX[청염의 불꽃]",
-          "description": "공생학원의 천하오검 중 최연소이면서 “약환자현류” 의 계승인. 항상 검을 손에서 놓지 않고 있으며 약속을 매우 중요하게 생각한다.\n“실망이에요.”",
+          "description": "K의 클론으로서 청염과 푸른백염을 전투에 사용한다.\n“서로 시간 낭비하지 말자고.”",
           "requirements": [
             "etoa",
             "etoe"
@@ -6741,7 +8503,7 @@
               "summonTip": "【召唤】BLAU-AX(深蓝重燃)",
               "reviveTip": "召唤 BLAU-AX[深蓝重燃]",
               "awakenTip": "复活 BLAU-AX[深蓝重燃]",
-              "description": "共生学园的天华五剑中最年轻的一位，\"药幻紫电流\"的继承者。总是剑不离手，非常重视约定。\n“真是失望。”"
+              "description": "作为K的克隆体，在战斗中使用青炎与苍白炎。\n“别互相浪费时间了。”"
             }
           },
           "exclusiveWeapon": {
@@ -8027,6 +9789,249 @@
         },
         "iconAsset": "assets/icons/dae3a61030f9-BTNBSA-ZS.png"
       },
+      "relatedHeroes": [
+        {
+          "id": "E04Y",
+          "name": "야그윅",
+          "title": "심연의 군주",
+          "hotkey": "Q",
+          "icon": "ReplaceableTextures/CommandButtons/btnyakwick.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNyakwick.blp",
+          "summonTip": "【스킨】야그윅(심연의 군주)",
+          "reviveTip": "부활 야그윅[심연의 군주]",
+          "awakenTip": "부활 야그윅[심연의 군주]",
+          "description": "삼신기 중 하나인 “야사카니의 곡옥”을 지키는 야사카니 일족의 후예이다. 눈에 띄는 빨간색 머리와 독특한 헤어스타일 색다른 옷차림을 하고 있다. 상의의 뒤에는 야가미 가문을 대표하는 문장인 ‘초승달’이 그려져 있다. 보라색 불꽃을 조종할 수 있는 야사카니 가문의 고대 무술을 사용하고 있다.\n“내가 무서운거냐？”\n스킨변경：",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "11300",
+            "mana": "",
+            "str": "88",
+            "agi": "88",
+            "int": "82",
+            "primary": "AGI",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "367",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "1"
+          },
+          "model": "war3mapImported/bashenan_hei.mdl",
+          "abilities": [
+            {
+              "id": "A08T",
+              "name": "108식·어둠쫓기",
+              "description": "전방으로 명중하면 폭발하는 화염을 날립니다. 적에게 지능X18의 데미지와 1.5초의 스턴을 부여합니다.\n　[리 108식·팔주배] : 준비동작일 때 한번 더 누르면 0.9초동안 기를 모아 등급을 향상시키고 투사체의 속도를 50% 향상시킨 화염을 날립니다. 명중 시 주위의 적들에게 최대체력의 15%의 데미지를 입히고 맞은 적은 3초 동안 행동을 멈추고“영주”를 봉인합니다. 하지만 피해를 입으면 그 즉시 풀립니다.\n기술타입 : 논타겟팅\n피해타입 : 절대피해\n마법등급 : LV2（어둠쫓기）/LV3（팔주배）\n사정거리 : 제한 없음\n최대거리 : 1600/2000\n영향범위 : 325\n쿨타임 : 12초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "百八式·暗拂",
+                  "description": "向前方打出1道苍炎，击中敌人后会爆开，对敌人造成智力值*18的伤害和1.5秒眩晕。\n　[里百八式·八酒杯] :发动时可再次激活，蓄力0.9秒后改变苍炎形态，增加50％的飞行速度并提升魔法等级，击中后对周围的敌人造成15％最大生命值的伤害，使其在3秒内停止行动并禁用“令咒”，但受到伤害会立刻解除该效果。\n技能类型 : 地面目标\n伤害类型 : 真实伤害\n魔法等级 : LV2（暗拂）/LV3（八酒杯）\n施法范围 : 1600\n最大距离 : 1600/2000\n影响范围 : 325\n冷却时间 : 12秒"
+                }
+              },
+              "iconAsset": "assets/icons/703dc224bf3c-BTNBSA-R.png"
+            },
+            {
+              "id": "A08U",
+              "name": "127식·규화",
+              "description": "앞으로 이동하면서 어퍼컷을 두번 한 뒤 양손으로 주먹을 쥐고 머리를 세게 내려 쳐서 의식을 잃게 만듭니다. 앞의 두 번의 공격은 앞의 적을 약간 물리치고 힘X6의 피해와 1초의 스턴을 부여합니다. 3차 공격은 전방의 적에게 힘X10의 피해와 1.5초의 스턴을 부여합니다./2단 공격이 종료되기 전 추가공격을 할 수 있습니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n방어등급 : LV2\n영향범위 : 250\n쿨타임 : 15초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-E.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "百二十七式·葵花",
+                  "description": "向前方移动并击打敌人下颚，随后双手握拳用力重击头部使敌人失去意识。前2次攻击会将前方的敌人略微击退并造成力量值*6的伤害和1秒眩晕，第3次攻击会对前方的敌人造成力量值*10的伤害和1.5秒眩晕。/每次攻击结束时可再次激活追加攻击，该技能最多可追加2段攻击。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n防御等级 : LV2\n影响范围 : 250\n冷却时间 : 15秒"
+                }
+              },
+              "iconAsset": "assets/icons/0e547839a644-BTNBSA-E.png"
+            },
+            {
+              "id": "A08V",
+              "name": "212식·금월 음",
+              "description": "전방으로 빠르게 돌진합니다. 팔꿈치로 적의 복부를 공격한 뒤 적의 머리를 눌러 지면에 부딪히게 하면서 민첩X18의 데미지와 2초의 스턴을 부여합니다.\n　[100식·귀신태우기] : 적과 충돌한 뒤 사용가능합니다. 적의 머리를 잡고 불꽃을 뿜으면서 공중으로 점프합니다. 주변의 적들도 함께 끌고가면서 민첩X10의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해/마법피해\n물리등급 : LV2\n방어등급 : LV3\n사정거리 : 제한 없음\n최대거리 : 1400\n영향범위 : 300\n쿨타임 : 17초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-W.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "二百十二式·琴月阴",
+                  "description": "快速向前方冲刺，击中敌人后用手肘重击腹部，随后按住敌人的头部撞向地面，对敌人造成敏捷值*18的伤害和1.5秒眩晕。\n　[百式·鬼烧] :撞击结束时可再次激活，抓住敌人的头部伴随着苍炎回旋向上攻击，将周围的敌人向前击飞并造成敏捷值*10的伤害和2秒眩晕。\n技能类型 : 地面目标\n伤害类型 : 物理伤害/魔法伤害\n物理等级 : LV2\n防御等级 : LV3\n施法范围 : 1400\n最大距离 : 1400\n影响范围 : 300\n冷却时间 : 17秒"
+                }
+              },
+              "iconAsset": "assets/icons/7b74743b9e39-BTNBSA-W.png"
+            },
+            {
+              "id": "A08W",
+              "name": "금 77식·화풍",
+              "description": "0.5초 후 오로치의 힘을 몸속에서 해방시켜 1초동안 기절면역을 얻으며 다음 스킬들을 강화합니다. 이 기술은 캔슬 당하지 않습니다.\n　[212식·금월 음] : 추가로 민첩X24의 피해를 입힙니다.\n　[108식·어둠쫒기] : 최대거리가 800증가합니다. 매번 1개의 불꽃들을 맞은 적들은 최대체력의 20%의 데미지를 받으며 4초동안 행동을 멈추게 합니다. 하지만 피해를 받으면 그 즉시 해제됩니다.\n　[금 1211식·팔치녀] : 전방으로 뛰어오릅니다. 명중시키면 적의“영주”사용을 막고 적을 날려 1200의 데미지와 잃은 체력의 50%를 추가로 준 뒤 1.5초의 스턴을 부여합니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해/마법피해\n쿨타임 : 9초",
+              "hotkey": "T",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "禁七十七式·祸风",
+                  "description": "蓄力0.5秒后解放体内的大蛇之力，自身可在1秒内免疫眩晕效果并强化下1个技能。\n　[二百十二式·琴月阴] :对敌人造成敏捷值*24的伤害并自动进行追击，该效果无法被打断。\n　[里百八式·八酒杯] :“百八式·暗拂”自动进行追击并增加800码最大距离，每1道苍炎柱会对击中的敌人造成20％最大生命值的伤害，使其在4秒内停止行动并禁用“令咒”，但受到伤害会立刻解除该效果。\n　[禁千二百十一式·八稚女] :跃向前方进行抓取，击中后释放出苍炎进行焚烧，期间会禁用“令咒”，将敌人击飞并造成1200+50％缺失生命值的伤害和1.5秒眩晕，随后可追加后续攻击。\n技能类型 : 无目标\n伤害类型 : 物理伤害/魔法伤害\n冷却时间 : 9秒"
+                }
+              },
+              "iconAsset": "assets/icons/c264d7b29304-BTNBSA-T.png"
+            },
+            {
+              "id": "A08Z",
+              "name": "금 1218식·팔지오",
+              "description": "목표 범위 내에 허공에 뜬 적이 있다면 세 개의 커다란 궤적의 발톱으로 공중에 있는 적을 찢습니다. 적에게 민첩X25의 데미지와 2초의 스턴을 부여합니다.  적의 체력이 10%이하라면 적을 즉사시킵니다.\n기술타입 : 범위 지정형\n피해타입 : 물리피해\n사정거리 : 900\n영향 범위 : 300\n쿨타임 : 0초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-F3.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "禁千二百十八式·八咫乌",
+                  "description": "若目标范围内有浮空的敌人，以三道巨大轨迹的爪影将空中的敌人撕裂，对敌人造成敏捷值*25的伤害和2秒眩晕。 斩杀生命值≤10%的敌人.\n技能类型 : 范围目标\n伤害类型 : 物理伤害\n施法范围 : 900\n影响范围 : 300\n冷却时间 : 0秒"
+                }
+              },
+              "iconAsset": "assets/icons/05c046654d07-BTNBSA-F3.png"
+            },
+            {
+              "id": "A08X",
+              "name": "금 1211식·팔치녀",
+              "description": "충전 0.4초 후 빠른속도로 적에게 돌진합니다. 돌진하는 동안에는 선택받지 않습니다. 적이 맞으면 미칠듯이 적을 찢으면서 민첩X25의 데미지를 총 8번 줍니다. 그 뒤 상대의 머리를 잡아서 불꽃으로 폭발시켜 적을 날리면서 지능X14의 데미지와 1.5초의 스턴을 부여합니다./공격을 마친 후 1.5초동안 “리 316식·시화”를 사용할 수 있습니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해/마법피해\n최대거리 : 900\n쿨타임 : 25초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "禁千二百十一式·八稚女",
+                  "description": "蓄力0.4秒后快速冲向前方，冲刺期间自身无法被选中。击中后会疯狂撕裂敌人，前8次爪击会造成敏捷值*25的伤害。最后会抓住敌人头部引爆苍炎，将敌人击飞并造成智力值*14的伤害和1.5秒眩晕。/发动后可在1.5秒内追加“里三百十六式·豺华”。\n技能类型 : 无目标\n伤害类型 : 物理伤害/魔法伤害\n最大距离 : 900\n冷却时间 : 25秒"
+                }
+              },
+              "iconAsset": "assets/icons/752bc865c7ab-BTNBSA-F.png"
+            },
+            {
+              "id": "A092",
+              "name": "외식·뱀 피하기",
+              "description": "자신의 전방으로 신속하게 이동합니다. 이동하는 동안 논타겟 스킬의 영향을 받지 않습니다. /적에게 스치게 되면 1.5초동안 D스킬이 “401식·충월”로 변경됩니다.\n기술타입 : 즉시 발동형\n최대거리 : 450\n쿨타임 : 6초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "外式·蛇避",
+                  "description": "向自身前方快速进行移动，移动期间自身无法被选中。 /穿过敌人后1.5秒内D技能变更为“逆剥”。\n技能类型 : 无目标\n最大距离 : 450\n冷却时间 : 6秒"
+                }
+              },
+              "iconAsset": "assets/icons/7396aab504ea-BTNBSA-Q.png"
+            },
+            {
+              "id": "A090",
+              "name": "401식·충월",
+              "description": "손가락의 손톱으로 적의 몸에 찌른 후 위로 거꾸로 빼버립니다. 적에게 민첩X10의 데미지와 1.5초의 스턴을 부여합니다. 그리초 적에게 6초동안 최대 체력의 8% 체력이 닳는 출혈을 일으킵니다.\n기술타입 : 타겟팅\n피해타입 : 물리피해\n사정거리 : 150\n쿨타임 : 6초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-D3.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "逆剥",
+                  "description": "将手指以爪形插入敌人身体后正面反向抽出，对敌人造成敏捷值*10的伤害和1.5秒眩晕，并使敌人在6秒内受到8％最大生命值的伤害。\n技能类型 : 单位目标\n伤害类型 : 物理伤害\n施法范围 : 150\n冷却时间 : 6秒"
+                }
+              },
+              "iconAsset": "assets/icons/2ac3a5a80dde-BTNBSA-D3.png"
+            },
+            {
+              "id": "A091",
+              "name": "설풍",
+              "description": "적을 붙잡고 자신의 등 뒤로 넘기고 1.5초동안 스턴을 부여합니다.\n기술타입 : 타겟팅\n사정거리 : 150\n쿨타임 : 6초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "屑风",
+                  "description": "抓住敌人并将其甩向身后，使敌人背对自身并眩晕1秒。\n技能类型 : 单位目标\n施法范围 : 150\n冷却时间 : 6秒"
+                }
+              },
+              "iconAsset": "assets/icons/c0685cbd50bd-BTNBSA-D.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "八神庵",
+              "title": "终焉之炎",
+              "summonTip": "【皮肤】亚格维克(深渊之主)",
+              "reviveTip": "召唤 八神庵[终焉之炎]",
+              "awakenTip": "复活 八神庵[终焉之炎]",
+              "description": "八尺琼一族的后裔，守护三神器之一“八尺琼勾玉”。拥有醒目的红发与独特发型，穿着别具一格，上衣背后绘有代表八神家的纹章“新月”。使用能够操纵紫色火焰的八尺琼家古武术。\n“你是在害怕我吗？”\n皮肤变更："
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I033",
+            "name": "야사카니의 곡옥",
+            "description": "야가미 일족 대대로 전해 내려오는 신기.\n　①：푸른달의 전쟁무늬（오의）：오의 획득：삼신기의 이。\n　②：흉포한 본능（패시브）：자신의 체력이 35％이하일 때 “리 316식·시화” 가 “금 1218식·팔지오” 로 변경됩니다.\n　③：피의 계약（패시브）：자신이 적 영웅을 쓰러트리면 “금 1211식·팔치녀” 의 쿨타임이 초기화 됩니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNBSA-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "八尺琼勾玉",
+                "description": "八神一族代代相传的守护神器。\n　①：苍月战纹(奥义)：获得奥义技能：梦月之洗礼。\n　②：残忍暴虐(被动)：自身血量低于35％会使“里三百十六式·豺华”变更为“禁千二百十八式·八咫乌”。\n　③：血之契约(被动)：自身击杀敌方英雄后刷新“禁千二百十一式·八稚女”的冷却时间。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A096",
+              "name": "【오의】몽월의 세례",
+              "description": "팔꿈치로 적의 복부를 친 후 적의 머리를 누른 후 바닥으로 내리 꽃습니다. 그리고 적의 목을 조른 뒤 불기둥을 만들어 내 적을 태웁니다. 적에게 지능X40의 데미지와 2초의 스턴을 부여합니다./창염은 주변 적에게 최대 1800의 피해와 1초의 스턴을 일으킬 수 있습니다.\n기술타입 : 타겟팅\n피해타입 : 마법피해\n사정거리 : 150\n영향범위 : 450\n쿨타임 : 200초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNBSA-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【奥义】梦月之洗礼",
+                  "description": "手肘重击敌人腹部，并按住头部撞击地面，随后掐住敌人脖子将之提起，爆发出滔天的苍炎柱包裹自身，对敌人造成智力值*40的伤害和2秒眩晕。/苍炎会对周围的敌人最多造成1800点伤害和1秒眩晕。\n技能类型 : 单位目标\n伤害类型 : 魔法伤害\n施法范围 : 150\n影响范围 : 450\n冷却时间 : 200秒"
+                }
+              },
+              "iconAsset": "assets/icons/e6a9bdc5b03a-BTNBSA-G.png"
+            },
+            "iconAsset": "assets/icons/dae3a61030f9-BTNBSA-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E02W",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/306eb025b34d-btnyakwick.png"
+        }
+      ],
       "iconAsset": "assets/icons/ceaa225d5065-BTNBSA-TX.png"
     },
     {
@@ -8720,6 +10725,303 @@
         },
         "iconAsset": "assets/icons/acffc51b47f5-BTNJJYS-ZS.png"
       },
+      "relatedHeroes": [
+        {
+          "id": "E04K",
+          "name": "아서·펜드래곤",
+          "title": "별의 성검사",
+          "hotkey": "W",
+          "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-TX2.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtonsDisabled/DISBTNJJYS-TX2.blp",
+          "summonTip": "【변환】아서·펜드래곤(별의 성검사)",
+          "reviveTip": "부활 아서·펜드래곤[별의 성검사]",
+          "awakenTip": "부활 아서·펜드래곤[별의 성검사]",
+          "description": "이세계에서 온 기사왕. 브리튼을 지키는 붉은 용으로 불리며 많은 사악한 짐승，외적단，로마제국，그리고 검제“루키우스”와의 싸움에도 승리하였다.\n“자━━━가자，세계가 널 기다리고 있어。”\n스킨변경：\n　①：인물 모델 교체。\n　②：특수 기능 교체。\n　③：일부 음성 교체。",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10000",
+            "mana": "13",
+            "str": "89",
+            "agi": "92",
+            "int": "86",
+            "primary": "AGI",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "324",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "1.08"
+          },
+          "model": "war3mapImported/f029_YASE.mdl",
+          "abilities": [
+            {
+              "id": "A02Z",
+              "name": "사용 금지",
+              "description": "이 기술은 비활성화 되어있습니다.",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-JY.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "禁止使用",
+                  "description": "此技能已被禁用。"
+                }
+              },
+              "iconAsset": "assets/icons/5f2ec3d7d8f6-BTN-JY.png"
+            },
+            {
+              "id": "A0B7",
+              "name": "구속해방",
+              "description": "1초간 기를 모은 뒤“풍왕철퇴”의 쿨타임을 초기화 시킵니다. 일반공격이 전방의 적에게 700의 데미지와 0.3초의 스턴을 부여합니다. 이 기술은 라운드가 끝날 때 까지 지속되며 구속 해제 후 쿨타임이 돌아갑니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n영향범위 : 350\n쿨타임 : 40초",
+              "hotkey": "",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-F2.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "拘束解放",
+                  "description": "蓄力1秒后解放圣剑，刷新“风王铁锤”的冷却时间并使其升华。普通攻击会对前方的敌人造成700点伤害和0.3秒眩晕，该技能持续至回合结束。\n技能类型：无目标\n伤害类型：魔法伤害\n影响范围：350\n技能冷却：40s"
+                }
+              },
+              "iconAsset": "assets/icons/444be59d9527-BTNJJYS-F2.png"
+            },
+            {
+              "id": "A03O",
+              "name": "풍왕결계",
+              "description": "풍압을 모아 0.8초 동안 적을 끌어 당기고 마력돌풍을 일으켜 주위의 적을 띄워올리면서 지능X22의 데미지와 2초의 스턴을 부여합니다./스킬을 사용하면“구속해방”의 효과가 해제된다.\n기술타입 : 즉시발동형\n피해타입 : 마법피해\n방어등급 : LV3\n영향범위 : 700/450\n쿨타임 : 21초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "风王结界",
+                  "description": "聚集风压在0.8秒内吸引并压制周围的敌人，随后爆发出魔力旋风，将周围的敌人击飞并造成智力值*22的伤害和2秒眩晕。/发动后会解除“拘束解放”。\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n防御等级 : LV3\n影响范围 : 700/450\n冷却时间 : 21秒"
+                }
+              },
+              "iconAsset": "assets/icons/f0af5d421efb-BTNJJYS-R.png"
+            },
+            {
+              "id": "A04G",
+              "name": "풍왕철퇴",
+              "description": "힘을 0.8초 동안 모은 후 풍압을 방출하여 경로상의 적을 밀쳐내며 지능X18의 데미지와 2초의 스턴을 부여합니다./“구속해방”이 지속되는 동안이면 1.6초 동안 힘을 모은 뒤 전방으로 맹렬한 빛을 뿜어냅니다. 이 빛은 적을 밀쳐내면서 지능X24의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n마법등급 : LV3/LV4\n사정거리 : 3000\n최대거리 : 3000/7500\n쿨타임 : 33초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "风王铁锤",
+                  "description": "蓄力0.8秒后释放出风压，将路径上的敌人击退并造成智力值*18的伤害和2秒眩晕。/“拘束解放”持续期间，蓄力1.6秒后向前方斩出猛烈之光，将路径上的敌人击退并造成智力值*24的伤害和2秒眩晕。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n魔法等级 : LV3/LV4\n施法范围 : 3000\n最大距离 : 3000/7500\n冷却时间 : 33秒"
+                }
+              },
+              "iconAsset": "assets/icons/50154e26ff59-BTNJJYS-D.png"
+            },
+            {
+              "id": "A039",
+              "name": "빛나는 성검",
+              "description": "성검을 휘둘러서 연속공격합니다. 전방의 적을 밀쳐내면서 민첩X18의 데미지와 1.5초의 스턴을 부여합니다./스킬을 시전하면 이 스킬은“마술의 검집”으로 변경됩니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n방어등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 1200\n영향범위 : 300\n쿨타임 : 13초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-Q.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "光辉圣剑",
+                  "description": "挥动圣剑回旋连斩，将前方的敌人击退并造成敏捷值*18的伤害和1.5秒眩晕。/发动后该技能会切换为“魔术之鞘”。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n防御等级 : LV2\n施法范围 : 900\n最大距离 : 1200\n影响范围 : 300\n冷却时间 : 13秒"
+                }
+              },
+              "iconAsset": "assets/icons/707de2008dc0-BTNJJYS-Q.png"
+            },
+            {
+              "id": "A03L",
+              "name": "금빛의 검",
+              "description": "성검을 휘둘러 적을 공격하면 전방의 적에게 힘X8의 데미지와 2초의 스턴을 부여합니다. 그 뒤 몸을 돌려 가속하며 지나가는 적에게 민첩X10의 데미지와 1.5초의 스턴을 부여합니다./스킬을 시전하면 이 스킬은“거수사냥”으로 변경됩니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n방어등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 900/1400\n쿨타임 : 18초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-E2.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "黄金之刃",
+                  "description": "挥动圣剑全力劈斩，对前方的敌人造成力量值*8的伤害和2秒眩晕。随后扭转身体冲刺斩击，对穿过的敌人造成敏捷值*10的伤害和1.5秒眩晕。/发动后该技能会切换为“巨兽猎手”。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n防御等级 : LV2\n施法范围 : 900\n最大距离 : 900/1400\n冷却时间 : 18秒"
+                }
+              },
+              "iconAsset": "assets/icons/c8b63b95955f-BTNJJYS-E2.png"
+            },
+            {
+              "id": "A0B5",
+              "name": "구속해방",
+              "description": "1초간 기를 모은 뒤“풍왕철퇴”의 쿨타임을 초기화 시킵니다. 일반공격이 전방의 적에게 700의 데미지와 0.3초의 스턴을 부여합니다. 이 기술은 라운드가 끝날 때 까지 지속되며 구속 해제 후 쿨타임이 돌아갑니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n영향범위 : 350\n쿨타임 : 40초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "拘束解放",
+                  "description": "蓄力1秒后解放圣剑，刷新“风王铁锤”的冷却时间并使其升华。普通攻击会对前方的敌人造成700点伤害和0.3秒眩晕，该技能持续至回合结束。\n技能类型：无目标\n伤害类型：魔法伤害\n影响范围：350\n技能冷却：40s"
+                }
+              },
+              "iconAsset": "assets/icons/a8139c596cca-BTNJJYS-F.png"
+            },
+            {
+              "id": "A03H",
+              "name": "거수사냥",
+              "description": "전방으로 뛰어 오른 뒤 적을 베어내면서 적중한 적에게 현재 체력의 15％의 데미지 +(힘X12)의 데미지와 2초의 스턴을 부여합니다./스킬을 시전하면 이 스킬은“금빛의 검”으로 변경됩니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV3\n사정거리 : 제한 없음\n최대거리 : 1200\n쿨타임 : 14초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-E1.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "巨兽猎手",
+                  "description": "跃向前方全力劈斩，对击中的敌人造成15％当前生命值+（力量值*12）的伤害和2秒眩晕。/发动后该技能会切换为“黄金之剑”。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV3\n施法范围 : 1200\n最大距离 : 1200\n冷却时间 : 14秒"
+                }
+              },
+              "iconAsset": "assets/icons/f5ee1125a643-BTNJJYS-E1.png"
+            },
+            {
+              "id": "A03B",
+              "name": "마술의 검집",
+              "description": "검을 휘두르면서 수평으로 쳐냅니다. 전방 부채꼴을 500만큼 밀어내면서 지능X17의 데미지와 1.5초의 스턴을 부여합니다./스킬을 시전하면 이 스킬은“빛나는 성검”으로 변경됩니다.\n기술타입 : 논타겟팅\n피해타입 : 마법피해\n방어등급 : LV3\n사정거리 : 제한 없음\n영향범위 : 1000\n쿨타임 : 18초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-Q2.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "魔术之鞘",
+                  "description": "挥动圣剑释放出水平风压，将前方扇形内的敌人击退500码并造成智力值*17的伤害和1.5秒眩晕。/发动后该技能会切换为“光辉圣剑”。\n技能类型 : 地面目标\n伤害类型 : 魔法伤害\n防御等级 : LV3\n施法范围 : 无限制\n影响范围 : 1000\n冷却时间 : 18秒"
+                }
+              },
+              "iconAsset": "assets/icons/63c0e9341bf4-BTNJJYS-Q2.png"
+            },
+            {
+              "id": "A03D",
+              "name": "기사의 맹세",
+              "description": "적 영웅에게 결투를 일으킵니다. 상대의 상태이상을 해제하고 서로가 적에게 주는 피해를 5초간 40% 증가시키면서 “영주”의 사용을 3초간 금지합니다. 그 중 한명이 상대방을 쓰러트리면 최대 체력의 30％를 회복하고 영주를 1획 회복합니다./스킬을 시전하면 이 스킬은“원탁영역”으로 변경됩니다.\n기술타입 : 타겟팅\n사정거리 : 1250\n쿨타임 : 18초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-W2.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "骑士之誓",
+                  "description": "向敌方英雄发起决斗，解除目标的控制效果，使双方在5秒内互相增幅40％的伤害并在3秒内禁用“令咒”。若其中1方击杀决斗者，将恢复30％的最大生命值与1划令咒。/发动后该技能会切换为“圆桌领域”。\n技能类型 : 单位目标\n施法范围 : 1250\n冷却时间 : 18秒"
+                }
+              },
+              "iconAsset": "assets/icons/25fc0924c83a-BTNJJYS-W2.png"
+            },
+            {
+              "id": "A04E",
+              "name": "원탁의결",
+              "description": "기사왕과 그 휘하의 기사들은 성검에 대해 13개의 구속을 정했다. 구속을 1개 해제할 때마다 올스텟이 5올라가며 공격속도가 12％올라간다.\n　[아서] : “구속해방”이 활성화 중이라면，이 의결은 채택된다.\n　[가레스] : 자신의 체력이 35％ 이하면，이 의결은 채택된다.\n　[베디비어] : 적 승리수＞아군 승리수일 때，이 의결은 채택된다.\n　[랜슬롯] : 자신의 영주를 모두 소모했으면，이 의결은 채택된다.\n　[모드레드] : 살아남은 적 영웅의 수가 2명 이상이면，이 의결은 채택된다.\n　[갤러해드] : 자신의 팀들이 모두 전사했을 때，이 의결은 채택된다.\n기술타입 : 패시브",
+              "hotkey": "",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "圆桌决议",
+                  "description": "骑士王及其麾下的圆桌骑士对圣剑定下了十三道拘束，每解除1道拘束会使自身增加5点全属性与12％的攻击速度。\n　[亚瑟]：激活“拘束解放”时，该决议被通过。\n　[加雷斯]：自身血量≤35％时，该决议被通过。\n　[贝德维尔]：敌方胜利数＞己方胜利数时，该决议被通过。\n　[兰斯洛特]：自身令咒全部耗尽时，该决议被通过。\n　[莫德雷德]：存活的敌方英雄数量≥2时，该决议被通过。\n　[加拉哈德]：友方英雄全部阵亡时，该决议被通过。\n技能类型 : 被动"
+                }
+              },
+              "iconAsset": "assets/icons/38d451ffd23e-BTNJJYS-T.png"
+            },
+            {
+              "id": "A03C",
+              "name": "원탁영역",
+              "description": "자신의 주변을 12초동안 원탁영역으로 만듭니다. 매 1.2초 마다 영역 내의 아군 영웅의 체력을 100 회복합니다. 이 영역 내에서 아서는 받는 피해를 35％줄이고 1.2초마다 자신의 상태이상을 제거합니다./스킬을 시전하면 이 스킬은“기사의 맹세”로 변경됩니다.\n기술타입 : 즉시 발동형\n영향범위 : 700\n쿨타임 : 28초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-W1.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "圆桌领域",
+                  "description": "展开圆桌领域，每隔1.2秒使领域内的友方单位恢复100点生命值，自身在领域内会减少35％所受到的伤害并且每隔1.2秒解除自身的控制效果，技能持续12秒。/发动后该技能会切换为“骑士之誓”。\n技能类型 : 无目标\n影响范围 : 700\n冷却时间 : 28秒"
+                }
+              },
+              "iconAsset": "assets/icons/fba60ac42b29-BTNJJYS-W1.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "亚瑟·潘德拉贡",
+              "title": "星之圣剑使",
+              "summonTip": "【转换】亚瑟·潘德拉贡(星之圣剑士)",
+              "reviveTip": "召唤 亚瑟·潘德拉贡[星之圣剑使]",
+              "awakenTip": "复活 亚瑟·潘德拉贡[星之圣剑使]",
+              "description": "来自异世界的骑士王。被称为守护不列颠的赤龙，曾在与众多邪恶野兽、外敌团、罗马帝国，以及剑帝“卢基乌斯”的战斗中取胜。\n“来━━━出发吧，世界正等着你。”\n皮肤变更：\n　①：人物模型替换。\n　②：特殊功能替换。\n　③：部分语音替换。"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I03F",
+            "name": "약속된 승리의 검",
+            "description": "호수의 요정이 아서에게 준 별의 검。\n　①：십삼구속（오의）：오의 획득：약속된 승리의 검\n　②：눈부신 여정（패시브）：자신의 체력을 초당 50 회복한다.\n　③：아그라베인（패시브）：매 라운드 시작 30초 후，이 의결은 채택된다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "誓约胜利之剑",
+                "description": "由湖之贵妇人赠与亚瑟的星之圣剑。\n　①：十三拘束(奥义)：获得奥义技能：誓约胜利之剑。\n　②：耀眼旅程(被动)：自身每秒恢复50点生命值。\n　③：阿格规文(被动)：每回合开始30秒后，该决议被通过。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A0B6",
+              "name": "【오의】약속된 승리의 검",
+              "description": "이것은——세계를 구하기 위한 싸움이다. 별빛의 성검을 휘두릅니다. 주변 적들에게 지능X60의 데미지와 3초의 스턴을 부여합니다./만약“원탁의결”의 구속이 7개 이상 해제되면 별의 성검을 완전히 해방시킵니다. 외적을 멸하는 강력한 빛을 방출하여 이번 라운드를 승리하게 합니다. 이 효과가 발동되면 쿨타임이 300초로 변경됩니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n영향범위 : 650\n쿨타임 : 200초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【奥义】誓约胜利之剑",
+                  "description": "此为——拯救世界之战。挥动圣剑释放出星辰的光辉，将周围的敌人击飞并造成智力值*60的伤害和3秒眩晕。/若“圆桌决议”解除7道拘束以上，将完全解放星之圣剑，向星球外释放出灭绝强大之恶的猛烈之光，使己方获得该回合的胜利，触发该效果后冷却时间提升至300秒。\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n影响范围 : 650\n冷却时间 : 200秒"
+                }
+              },
+              "iconAsset": "assets/icons/d0537caff17c-BTNJJYS-G.png"
+            },
+            "iconAsset": "assets/icons/acffc51b47f5-BTNJJYS-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E04F",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/e862645554d0-BTNJJYS-TX2.png"
+        }
+      ],
       "iconAsset": "assets/icons/7704fbe382af-BTNYS-TX0.png"
     },
     {
@@ -10353,6 +12655,213 @@
         },
         "iconAsset": "assets/icons/badde9f39c26-BTN-ZQYC-ZS.png"
       },
+      "relatedHeroes": [
+        {
+          "id": "E05W",
+          "name": "스자쿠인 츠바키",
+          "title": "연가의 검무",
+          "hotkey": "W",
+          "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-TX2.blp",
+          "scoreIcon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-TX2.blp",
+          "summonTip": "【변환】스자쿠인 츠바키(연가의 검무)",
+          "reviveTip": "부활 스자쿠인 츠바키[검무와 사랑노래]",
+          "awakenTip": "부활 스자쿠인 츠바키[연가의 검무]",
+          "description": "도공「산죠우 토우키」와 학원 최강의 검사인 「스자쿠인 츠바키」는 같은 동료이자 연인 관계로 견고한 굴레를 세웠고，두 사람은 미래를 향해 새로운 발걸음을 내딛었다.\n“이 누나 성욕 조절을 못하는 남자애는 필요 없는데？”",
+          "requirements": [
+            "etoa",
+            "etoe"
+          ],
+          "stats": {
+            "hp": "10844",
+            "mana": "100",
+            "str": "69",
+            "agi": "84",
+            "int": "74",
+            "primary": "AGI",
+            "armor": "5",
+            "speed": "",
+            "attackBase": "376",
+            "attackDice": "1d1",
+            "range": "100",
+            "cooldown": "1"
+          },
+          "model": "FBT/Tsubaki_hj1.mdl",
+          "abilities": [
+            {
+              "id": "A0FE",
+              "name": "카구츠치",
+              "description": "“카구츠치”라고 불린 영검. 저주가 해방되면 모든 것을 불태울 화염을 일으킨다.\n　[패시브]：매 라운드마다 컨디션을 100％ 회복합니다. 적 영웅을 처치하거나 “비상하는 봉황”을 발동 시키면 20％의 컨디션을 회복합니다.\n　[액티브]：신속하게 칼을 꺼내어 체감시간을 늘려 주변의 적과 탄막의 이동속도를 60％ 감소시키고 1.5초 동안 2회 사용 가능한 독립적인 쿨타임을 가지고 있는 Q/W/E스킬을 추가합니다.\n기술타입 : 즉시 발동형\n영향범위 : 900\n쿨타임 : 10초",
+              "hotkey": "D",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-D.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "加具土命",
+                  "description": "被誉为“加具土命”的灵刀，解放天咒后能够将目视的火焰全部斩断。\n　[被动]：每回合开始时自身会恢复100％的精力，若击杀敌方英雄或触发“黄泉凤凰”将恢复20％的精力。\n　[主动]：迅速纳刀后撤，展开领域使周围的敌人与弹幕减少60％的移动速度，期间可追加独立冷却的Q/W/E技能，技能持续1.5秒。\n技能类型 : 无目标\n影响范围 : 900\n冷却时间 : 10秒"
+                }
+              },
+              "iconAsset": "assets/icons/d779fdd8c7cf-BTN-ZQYC-D.png"
+            },
+            {
+              "id": "A0FD",
+              "name": "온오신수·고리 끊기",
+              "description": "뒤로 빠진 뒤 재빨리 칼을 다시 뽑아 전방 부채꼴 내의 적에게 민첩X14의 데미지와 2초의 스턴을 부여합니다.\n　[비상하는 봉황]：표식이 있는 적이 맞았을 경우 추가로 베어내며 적에게 민첩X12의 데미지와 2초의 스턴을 부여합니다.\n　[카구츠치]：기술 사용 시 15％의 컨디션을 소모합니다. 신속히 전방에 있는 적을 베어 지나가면서 닿은 적에게 민첩X16의 데미지와 1.5초의 스턴을 부여합니다. 이 기술을 사용하는 도중에는 논타겟팅의 영향을 받지 않습니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n방어등급 : LV2\n사정거리 : 제한 없음\n최대거리 : 1200\n영향범위 : 500\n쿨타임 : 12초/18초",
+              "hotkey": "E",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-E1.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "蕴奥神髓·环断",
+                  "description": "纳刀的姿态神速拔刀，对前方扇形内的敌人造成敏捷值*14的伤害和2秒眩晕。\n　[黄泉凤凰]：若击中被标记者，将扭转身体再次拔刀，对周围的敌人造成敏捷值*12的伤害和2秒眩晕。\n　[加具土命]：发动时会消耗15％的精力。以神速斩向前方，使穿过的敌人受到敏捷值*16的伤害和2秒眩晕，期间自身无法被选中。\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n防御等级 : LV2\n施法范围 : 无限制\n最大距离 : 1200\n影响范围 : 500\n冷却时间 : 12秒/18秒"
+                }
+              },
+              "iconAsset": "assets/icons/438161dd15b6-BTN-ZQYC-E1.png"
+            },
+            {
+              "id": "A0FF",
+              "name": "비상하는 봉황",
+              "description": "영도의 저주를 해방시킨다. 0.6초 이내에 100이상의 데미지를 받았을 경우“마력 방출”을 발동합니다.이후 자신의 올스텟을 10 증가시키고 잃은 체력의 10%를 회복하며 자신에게 걸려있는 디버프를 해제합니다./발동 후 7초 동안 피해를 입힌 적을 표시하고，표식이 생긴 적을 공격 시 30％의 추가 피해를 입힙니다.\n기술타입 : 즉시 발동형\n쿨타임 : 18초",
+              "hotkey": "F",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-F.blp",
+              "buttonPos": {
+                "x": 2,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "黄泉凤凰",
+                  "description": "解放灵刀的天咒，在0.6秒内抵挡单次≥100点的伤害并触发“魔力放出”提升自身10点全属性。/触发后会标记伤害来源，自身对标记者增加30％所造成的伤害并强化部分技能，效果持续7秒。\n技能类型 : 无目标\n冷却时间 : 18秒"
+                }
+              },
+              "iconAsset": "assets/icons/a431bc6d3644-BTN-ZQYC-F.png"
+            },
+            {
+              "id": "A00F",
+              "name": "온오신수·지저귀는 봉황",
+              "description": "빠른 속도로 검을 뽑아 돌진합니다. 지나치는 적에게 민첩X18의 데미지와 1.5초의 스턴을 부여합니다.\n　[비상하는 봉황]：발동 한 위치 주위 600범위 안에 표식이 있는 영웅이 있으면 순간적으로 대상의 위치로 이동해 가장 가까운 표식이 있는 영웅에게 데미지를 부여합니다.\n　[카쿠츠치]：발동 시 10％의 컨디션을 소모합니다. 목표 위치의 공간을 절단하여 적에게 최대 민첩X10의 데미지를 입히고 75%의 감속을 부여한 뒤 돌진을 중단시킵니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n방어등급 : LV2（투사체 한정）\n사정거리 : 1200/제한 없음\n최대거리 : 1200/1400\n영향범위 : 450\n쿨타임 : 10초/1초",
+              "hotkey": "Q",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-Q1.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "蕴奥神髓·鸣凰",
+                  "description": "以神速拔出折纸，对穿过的敌人造成敏捷值*18的伤害和1.5秒眩晕。\n　[黄泉凤凰]：若目标点周围600码内存在被标记者，将瞬间移动至目标位置，锁定最近的被标记者神速突刺。\n　[加具土命]：发动时会消耗10％的精力。斩断目标位置的弹幕并最多造成敏捷值*10的伤害和75%的减速\n技能类型 : 地面目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n防御等级 : LV2（对弹幕）\n施法范围 : 1200/全图\n最大距离 : 1200/1400\n影响范围 : 450\n冷却时间 : 10秒/1秒"
+                }
+              },
+              "iconAsset": "assets/icons/47cfb7d71f68-BTN-ZQYC-Q1.png"
+            },
+            {
+              "id": "A0FG",
+              "name": "스자쿠인 연무제",
+              "description": "잠시 집중하여 주변의 공간을 감지합니다. 주변 적의 영웅과 투사체의 속도를 70％감소 시키고，2초 뒤에 눈에 보이지 않는 속도로 칼을 휘둘러 주변의 적에게 민첩X30의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해\n영향범위 : 1000\n쿨타임 : 80초",
+              "hotkey": "T",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-T.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "朱雀演武祭",
+                  "description": "凝聚心神感知周围的空间，使敌方英雄与敌方弹幕减少70％的移动速度，蓄力2秒后以不可目视的速度挥动折纸，对周围的敌人造成敏捷值*30的伤害和2秒眩晕。\n技能类型 : 无目标\n伤害类型 : 物理伤害\n影响范围 : 1000\n冷却时间 : 80秒"
+                }
+              },
+              "iconAsset": "assets/icons/0a2a354e9c89-BTN-ZQYC-T.png"
+            },
+            {
+              "id": "A0FC",
+              "name": "온오신수·붉은 겸자",
+              "description": "날카로운 자세를 취한 뒤 적을 베어버립니다. 적에게 민첩X16의 데미지와 1.5초의 스턴을 부여합니다. 이 기술은 논타겟팅 기술로 판정됩니다.\n　[비상하는 봉황]：만약 표식이 있는 적을 공격할 경우“영주”를 봉인하고 민첩X14의 데미지와 2초의 스턴을 추가로 부여합니다.\n　[카구츠치]：기술 사용 시 25％의 컨디션을 소모합니다. 순식간에 대상을 날려버리고 갈라진 공간이 주변의 적을 끌어당겨 최대 민첩X24의 데미지와 2초의 스턴을 부여합니다.\n기술타입 : 타겟팅\n피해타입 : 물리피해\n물리등급 : LV2\n사정거리 : 900\n영향범위 : 450\n쿨타임 : 11초/15초",
+              "hotkey": "W",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-W1.blp",
+              "buttonPos": {
+                "x": 1,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "蕴奥神髓·朱铗",
+                  "description": "以凌厉的姿态斩落首级，对敌人造成敏捷值*16的伤害和1.5秒眩晕。\n　[黄泉凤凰]：若击中被标记者会封印“令咒”，额外造成敏捷值*14的伤害和2秒眩晕。\n　[加具土命]：发动时会消耗25％的精力。瞬间将目标向前击飞，斩裂的空间会吸引周围的敌人并最多造成敏捷值*24的伤害和2秒眩晕。\n技能类型 : 单位目标\n伤害类型 : 物理伤害\n物理等级 : LV2\n施法范围 : 950/900\n影响范围 : 450\n冷却时间 : 11秒/15秒"
+                }
+              },
+              "iconAsset": "assets/icons/b6bd827a2eb7-BTN-ZQYC-W1.png"
+            },
+            {
+              "id": "A0FH",
+              "name": "칼날 영역",
+              "description": "집중력을 강화해 0.7초 동안 칼날 영역을 펼칩니다. 주변의 적 영웅이 스킬을 발동하면 순간적으로 칼을 뽑아 반격하여 적에게 민첩X10의 데미지와 1.5초의 스턴을 부여합니다./발동시 35％확률로 수호령이 빙의하여 잃은 체력의 10％에 달하는 피해를 추가로 입힙니다. 발동간격 8초.\n쿨타임 : 즉시 발동형\n피해타입 : 물리피해\n영향범위 : 600\n쿨타임 : 13초",
+              "hotkey": "R",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-R.blp",
+              "buttonPos": {
+                "x": 3,
+                "y": 2
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "刃道领域",
+                  "description": "集中心神在0.7秒内展开领域，若周围的敌方英雄发动技能将瞬间拔刀进行反击，对敌人造成敏捷值*10的伤害和1.5秒眩晕。/触发时有35％的几率苇名附体，额外造成10％缺失生命值的伤害，触发间隔8秒。\n技能类型 : 无目标\n伤害类型 : 物理伤害\n影响范围 : 600\n冷却时间 : 13秒"
+                }
+              },
+              "iconAsset": "assets/icons/4ddfecab4e52-BTN-ZQYC-R.png"
+            }
+          ],
+          "translations": {
+            "zhCN": {
+              "name": "朱雀院椿",
+              "title": "剑舞恋歌",
+              "summonTip": "【转换】朱雀院椿(恋歌剑舞)",
+              "reviveTip": "召唤 朱雀院椿[剑舞与恋歌]",
+              "awakenTip": "复活 朱雀院椿[剑舞恋歌]",
+              "description": "刀工「三条灯色」与学园最强剑士「朱雀院椿」既是伙伴也是恋人，结下了坚固的羁绊，两人朝着未来迈出了新的步伐。\n“姐姐我可不需要控制不住性欲的男孩子哦？”"
+            }
+          },
+          "exclusiveWeapon": {
+            "id": "I03W",
+            "name": "요쿠히토리",
+            "description": "산죠 토우키가 츠바키를 위해 만든 불꽃의 새.\n　①：최강의 이름（오의）：오의 획득：우라엔키.\n　②：천주의 영역（패시브）：“칼날 영역”발동 시 2회 사용 가능.\n　③：떨어지는 봉황（패시브）：“비상하는 봉황”발동 시 “카구츠치”의 쿨타임이 초기화 됩니다.",
+            "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-ZS.blp",
+            "translations": {
+              "zhCN": {
+                "name": "浴火鸟",
+                "description": "三城刀辉为椿所锻造的焰色折纸。\n　①：最强之名(奥义)：获得奥义技能：里炎姬。\n　②：天咒领域(被动)：“刃道领域”可连续触发2次。\n　③：浴火朱雀(被动)：“黄泉凤凰”触发后会刷新“加具土命”的冷却时间。"
+              }
+            },
+            "grantedSkill": {
+              "id": "A0FN",
+              "name": "【오의】우라엔키",
+              "description": "“우라엔키”를 쌍검으로 재현하여 의 불꽃으로 적의 영혼을 태웁니다. 적에게 민첩X20의 데미지와 2초의 스턴을 부여합니다.\n기술타입：타겟팅\n피해타입：물리피해\n사정거리：150\n쿨타임：200초",
+              "hotkey": "G",
+              "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-G.blp",
+              "buttonPos": {
+                "x": 0,
+                "y": 1
+              },
+              "translations": {
+                "zhCN": {
+                  "name": "【奥义】里炎姬",
+                  "description": "将“炎姬”改造为二刀流剑技，以朱雀的火焰焚烧灵魂，对敌人造成敏捷值*20的伤害和2秒眩晕。\n技能类型：目标单位\n伤害类型：物理伤害\n施法范围：150\n冷却时间：200秒"
+                }
+              },
+              "iconAsset": "assets/icons/c343ea430677-BTN-ZQYC-G.png"
+            },
+            "iconAsset": "assets/icons/badde9f39c26-BTN-ZQYC-ZS.png"
+          },
+          "relationType": "skin",
+          "relationLabel": "皮肤变体",
+          "relationSourceHeroId": "E05U",
+          "relationSourceSkillId": "",
+          "iconAsset": "assets/icons/79798ff65d55-BTN-ZQYC-TX2.png"
+        }
+      ],
       "iconAsset": "assets/icons/fa6de84673ea-BTN-ZQYC-TX1.png"
     },
     {
@@ -12257,8 +14766,8 @@
     }
   ],
   "iconBuild": {
-    "converted": 615,
-    "filteredAbilities": 320,
+    "converted": 737,
+    "filteredAbilities": 390,
     "filteredHeroes": 2,
     "missing": [
       "ReplaceableTextures/CommandButtons/BTNClawsOfAttack.blp",

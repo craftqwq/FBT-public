@@ -1608,32 +1608,39 @@ function renderDetail(hero) {
 
   els.detail.innerHTML = `
     <div class="${gridClasses.join(" ")}">
-      <div class="profileHeader">
-        ${renderIcon(activeHero.iconAsset, initials(name, activeHero.id), "heroIcon", name || activeHero.id)}
-        <div>
-          <h2 class="profileName">${escapeHtml(name)}</h2>
-          <div class="profileMeta">
-            <span class="pill">${escapeHtml(activeHero.id)}</span>
-            ${title ? `<span class="pill">${escapeHtml(title)}</span>` : ""}
-            ${activeHero.hotkey ? `<span class="pill">${escapeHtml(t("summonHotkey"))} ${escapeHtml(activeHero.hotkey)}</span>` : ""}
-            ${activeHero.relationLabel ? `<span class="pill">${escapeHtml(activeHero.relationLabel)}</span>` : ""}
-            ${activeHero.relationSourceSkillId ? `<span class="pill">${escapeHtml(t("source"))} ${escapeHtml(activeHero.relationSourceSkillId)}</span>` : ""}
+      <div class="profileMain">
+        <div class="profileHeader">
+          ${renderIcon(activeHero.iconAsset, initials(name, activeHero.id), "heroIcon", name || activeHero.id)}
+          <div>
+            <h2 class="profileName">${escapeHtml(name)}</h2>
+            <div class="profileMeta">
+              <span class="pill">${escapeHtml(activeHero.id)}</span>
+              ${title ? `<span class="pill">${escapeHtml(title)}</span>` : ""}
+              ${activeHero.hotkey ? `<span class="pill">${escapeHtml(t("summonHotkey"))} ${escapeHtml(activeHero.hotkey)}</span>` : ""}
+              ${activeHero.relationLabel ? `<span class="pill">${escapeHtml(activeHero.relationLabel)}</span>` : ""}
+              ${activeHero.relationSourceSkillId ? `<span class="pill">${escapeHtml(t("source"))} ${escapeHtml(activeHero.relationSourceSkillId)}</span>` : ""}
+            </div>
           </div>
         </div>
+
+        ${relatedSwitch}
+
+        ${
+          description
+            ? `<section class="panel descriptionPanel">
+                <h2>${escapeHtml(t("descriptionTitle"))}</h2>
+                <div class="panelBody">
+                  <div class="description">${escapeHtml(description)}</div>
+                </div>
+              </section>`
+            : ""
+        }
+
+        <section class="panel skillsPanel">
+          <h2>${escapeHtml(t("skillsTitle"))}</h2>
+          <div class="panelBody">${renderAbilities(activeHero)}</div>
+        </section>
       </div>
-
-      ${relatedSwitch}
-
-      ${
-        description
-          ? `<section class="panel descriptionPanel">
-              <h2>${escapeHtml(t("descriptionTitle"))}</h2>
-              <div class="panelBody">
-                <div class="description">${escapeHtml(description)}</div>
-              </div>
-            </section>`
-          : ""
-      }
 
       <section class="panel statsPanel">
         <h2>${escapeHtml(t("statsTitle"))}</h2>
@@ -1641,11 +1648,6 @@ function renderDetail(hero) {
           <div class="stats">${renderStats(activeHero)}</div>
           ${renderStandPanel(activeHero, activeHero.id === hero.id)}
         </div>
-      </section>
-
-      <section class="panel skillsPanel">
-        <h2>${escapeHtml(t("skillsTitle"))}</h2>
-        <div class="panelBody">${renderAbilities(activeHero)}</div>
       </section>
     </div>
   `;

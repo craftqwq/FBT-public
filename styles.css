@@ -300,7 +300,6 @@ input:focus {
 }
 
 .profileHeader {
-  grid-area: header;
   display: grid;
   grid-template-columns: 76px 1fr;
   gap: 18px;
@@ -339,37 +338,18 @@ input:focus {
 .contentGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
-  grid-template-areas:
-    "header stats"
-    "forms stats"
-    "description stats"
-    "skills stats";
-  gap: 24px;
+  gap: 16px 24px;
   align-items: start;
 }
 
-.contentGrid.noForms {
-  grid-template-areas:
-    "header stats"
-    "description stats"
-    "skills stats";
-}
-
-.contentGrid.noDescription {
-  grid-template-areas:
-    "header stats"
-    "forms stats"
-    "skills stats";
-}
-
-.contentGrid.noForms.noDescription {
-  grid-template-areas:
-    "header stats"
-    "skills stats";
+.profileMain {
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+  align-content: start;
 }
 
 .formSwitch {
-  grid-area: forms;
   min-width: 0;
   display: flex;
   flex-wrap: wrap;
@@ -442,18 +422,6 @@ input:focus {
 .formOptionMeta {
   color: var(--muted);
   font-size: 11px;
-}
-
-.descriptionPanel {
-  grid-area: description;
-}
-
-.skillsPanel {
-  grid-area: skills;
-}
-
-.statsPanel {
-  grid-area: stats;
 }
 
 .panel {
@@ -1427,35 +1395,11 @@ body.tierDragging .tierTooltip {
   }
 
   .contentGrid {
-    grid-template-areas:
-      "header"
-      "forms"
-      "stats"
-      "description"
-      "skills";
+    gap: 16px;
   }
 
-  .contentGrid.noForms {
-    grid-template-areas:
-      "header"
-      "stats"
-      "description"
-      "skills";
-  }
-
-  .contentGrid.noDescription {
-    grid-template-areas:
-      "header"
-      "forms"
-      "stats"
-      "skills";
-  }
-
-  .contentGrid.noForms.noDescription {
-    grid-template-areas:
-      "header"
-      "stats"
-      "skills";
+  .profileMain {
+    gap: 14px;
   }
 
   .sidebar {
