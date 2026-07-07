@@ -2,7 +2,8 @@
   "schema": {
     "id": "unique-share-id",
     "playerName": "\u73a9\u5bb6\u540d\u5b57",
-    "adminReview": "\u7ba1\u7406\u5458\u8bc4\u4ef7",
+    "description": "\u81ea\u5df1\u7684\u8bf4\u660e",
+    "adminReview": "\u7ba1\u7406\u5458\u8bc4\u4ef7\uff08\u7ba1\u7406\u5458\u586b\u5199\uff09",
     "score": "0-10",
     "rating": "\u7528\u6237\u5206\u4eab\u7684\u77ed\u914d\u7f6e\u6216\u65e7 base64 \u914d\u7f6e"
   },
@@ -10,6 +11,7 @@
     {
       "id": "jiu-ye-chang-an-2387",
       "playerName": "\u4e5d\u591c\u957f\u5b89#2387",
+      "description": "",
       "adminReview": "\u4e5d\u795e\u9996\u6392",
       "score": 10,
       "rating": ".WREA8K8ESZJQAPwLQZMQGQD6CogkGgD_BJCSxAbAvxQiScIB8K8FTVF0APwHIZMiHgD3YtCEAQHYV4MUSQjAeQASiQjAdBKWGQHYloA0QQHgj8KmgQH4l4MkSWQA2rMgKWYA_sMgaZscgH89TBKgB-A7DaIkPgDvcdAkOQLwzsM2QQIY1oAkCSAcABsqgH9FSJoCC-A7BJJEWwD9AggiAQPYTsE0QQOwFoEkbwDvgeCSkAS4V0EWxSfAvyQiaRML4J-AbRJbAPdESJtdAO9ITBtngHsZJFNIA_zHQBMl2ADvEUiUcQpY10SigArQz4SmkQr4z4G2aaYC_nUgSRGqAP9QTNJYBXxnIJOWAPhToSU"
@@ -17,14 +19,14 @@
     {
       "id": "feng-sao-awa-1345",
       "playerName": "\u75af\u9a9aawa#1345",
-      "adminReview": "\u6682\u5b9a",
+      "description": "\u6682\u5b9a",
       "score": 10,
       "rating": ".WREA8C8DTdNQAPBnQONkAJzrYJJoAPgHYBpnA4BYCMIBcK8EbaIOAOoQaDwA_lPAjRkQgOcBZJMQAHcpYBQRAPUYaDMC0K8BahoUgP4cMNPAAPxrQRo1MgD4WZBmBsBbDNImB-AfAASV6AHgD0K48QGwT4K0OQLwjsK2QQK4DgO1SQLYTgOnoQLQV8M2wQI4l8O02QJgVsAADCA4AoQGoCwCxRvANwI4RiQBrhcwjT4B_vUwSptYgP8EbJPIFkA9DtrsAuhLQIw4A9jnAeNIA5wLIqJgA_grYtvGKcB8A5pABZwHgtNIBfgLQJxmKuB-ApM0VAHWKpjGKuB6BJmWANIlEQI"
     },
     {
       "id": "lian-hua-xue-yue-7020",
       "playerName": "\u221a\u604b\u82b1\u2110\u96ea\u6708#7020",
-      "adminReview": "\u6682\u5b9a",
+      "description": "\u6682\u5b9a",
       "score": 10,
       "rating": ".WREAcC-DaRIKgPocIKMMAGgFiAaAvw4kTTYAroUQTTgA7JUgSToA6gUQkTwAnqWgSUAAjLWgCQHQF0O4EAFoTsE2IwD_Epg0DQpAfQy4EQzAvyQWbSMD0K0JTjIDcJ-HaZscgPsBEET0AHQHQuH4AExrYJojAO4gbIMEEJ2ETRLAdRQmDRVAdQQ0wQLIz4BI2gLozsM2IkAQPYFoFsHEeQP4VgVHjSTAtQqWzSfA_wIkaRQLcB-AbRpbgPU0KJxdgPUwMBRngO1EMBxpgH81aJIEG4A9ARo5BYgrAgIVMB0HiaQC7kPAbDMV8D-BRdJQBewLYtPGKmBYD0EC-JbDpgk"
     }

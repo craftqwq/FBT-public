@@ -96,7 +96,8 @@ const uiText = {
     communityHint: "관리자가 승인한 플레이어 설정입니다.",
     communityEmpty: "아직 승인된 공유 데이터가 없습니다.",
     communityPlayer: "플레이어",
-    communityReview: "관리자 평가",
+    communityDescription: "자기 설명",
+    communityAdminReview: "관리자 평가",
     communityApply: "적용",
     communityCopy: "복사",
     communityCount: "{count}개 공유",
@@ -112,7 +113,7 @@ const uiText = {
     communityShareCopied: "현재 설정을 복사했습니다. GitHub Issue 페이지로 이동합니다.",
     communityIssueTitle: "커뮤니티 공유: {name}",
     communityIssueBody:
-      "플레이어 이름:\n\n관리자 평가:\n\n공유 데이터:\n{rating}\n",
+      "플레이어 이름:\n\n자기 설명:\n\n공유 데이터:\n{rating}\n",
     export: "내보내기",
     import: "가져오기",
     heroCount: "{count}명",
@@ -205,7 +206,8 @@ const uiText = {
     communityHint: "这里展示管理员审核通过的玩家配置。",
     communityEmpty: "暂无已审核的社区分享。",
     communityPlayer: "玩家名字",
-    communityReview: "管理员评价",
+    communityDescription: "自己的说明",
+    communityAdminReview: "管理员评价",
     communityApply: "应用配置",
     communityCopy: "复制数据",
     communityCount: "{count} 个分享",
@@ -221,7 +223,7 @@ const uiText = {
     communityShareCopied: "已复制当前配置，即将跳转到 GitHub 新 Issue 页面。",
     communityIssueTitle: "社区分享：{name}",
     communityIssueBody:
-      "玩家名字：\n\n管理员评价：\n\n分享数据：\n{rating}\n",
+      "玩家名字：\n\n自己的说明：\n\n分享数据：\n{rating}\n",
     export: "导出",
     import: "导入",
     heroCount: "{count} 位角色",
@@ -1853,12 +1855,13 @@ function normalizeCommunityShares(data) {
         id: String(item.id || `share-${index + 1}`),
         sourceIndex: index,
         playerName: String(item.playerName || item.player || item.name || "").trim(),
-        adminReview: String(item.adminReview || item.review || item.comment || item.note || "").trim(),
+        description: String(item.description || item.playerDescription || item.selfDescription || item.review || item.comment || item.note || "").trim(),
+        adminReview: String(item.adminReview || item.adminComment || item.adminNote || "").trim(),
         score: normalizeCommunityScore(item.score ?? item.ratingScore ?? item.adminScore ?? 0),
         rating,
       };
     })
-    .filter((item) => item.rating || item.playerName || item.adminReview)
+    .filter((item) => item.rating || item.playerName || item.description || item.adminReview)
     .sort((left, right) => right.score - left.score || left.sourceIndex - right.sourceIndex);
 }
 
@@ -1914,7 +1917,8 @@ function communityShareStats(share) {
 function renderCommunityShareCard(share) {
   const name = communityShareName(share);
   const stats = communityShareStats(share);
-  const review = share.adminReview || t("missing");
+  const description = share.description || "";
+  const adminReview = share.adminReview || "";
   const canApply = stats.valid && share.rating;
 
   return `
@@ -1933,10 +1937,26 @@ function renderCommunityShareCard(share) {
           stats.valid ? t("communityRatingMeta", { count: stats.count, length: stats.length }) : stats.message,
         )}</span>
       </div>
-      <div class="shareReview">
-        <div class="shareLabel">${escapeHtml(t("communityReview"))}</div>
-        <p>${escapeHtml(review)}</p>
-      </div>
+      ${
+        description
+          ? `
+            <div class="shareReview">
+              <div class="shareLabel">${escapeHtml(t("communityDescription"))}</div>
+              <p>${escapeHtml(description)}</p>
+            </div>
+          `
+          : ""
+      }
+      ${
+        adminReview
+          ? `
+            <div class="shareReview adminReview">
+              <div class="shareLabel">${escapeHtml(t("communityAdminReview"))}</div>
+              <p>${escapeHtml(adminReview)}</p>
+            </div>
+          `
+          : ""
+      }
       <div class="shareActions">
         <span class="shareApplyText">${escapeHtml(stats.pending ? t("communityPending") : t("communityApply"))}</span>
         ${
