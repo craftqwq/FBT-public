@@ -212,7 +212,7 @@ const uiText = {
       burst: "爆发",
       control: "控制",
       pressure: "压灵",
-      toughness: "坦度",
+      toughness: "生存能力",
       aoe: "AOE",
     },
   },
@@ -222,7 +222,10 @@ const standGrades = ["", "E", "D", "C", "B", "A"];
 const tierLevels = [0, 1, 2, 3, 4, 5];
 const compactRatingVersion = 2;
 const compactRatingMagic = [70, 66, 84, 82];
+const shortRatingVersion = 1;
+const shortRatingPrefix = ".";
 const ratingIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const ratingShortIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const ratingUrlParamNames = ["rating", "ratings", "r", "fbt", "config"];
 const ratingStorageKey = "fbt.ratingOverrides.v2";
 const excludedHeroIds = new Set(["E09H", "E05Y"]);
@@ -604,6 +607,61 @@ function numberToHeroId(value) {
   return remaining === 0 ? chars.join("") : "";
 }
 
+function shortIdValue(text) {
+  let value = 0;
+  for (const char of text) {
+    const index = ratingShortIdAlphabet.indexOf(char);
+    if (index < 0) return null;
+    value = value * ratingShortIdAlphabet.length + index;
+  }
+  return value;
+}
+
+function shortIdText(value, length) {
+  if (!Number.isInteger(value) || value < 0) return "";
+  let remaining = value;
+  const chars = [];
+  for (let index = 0; index < length; index += 1) {
+    chars.unshift(ratingShortIdAlphabet[remaining % ratingShortIdAlphabet.length]);
+    remaining = Math.floor(remaining / ratingShortIdAlphabet.length);
+  }
+  return remaining === 0 ? chars.join("") : "";
+}
+
+function canEncodeShortHeroId(id) {
+  return /^E[0-9A-Z]{3}$/.test(id) || /^HH[0-9A-Z]{2}$/.test(id) || /^[0-9A-Z]{4}$/.test(id);
+}
+
+function writeShortHeroId(writer, id) {
+  if (/^E[0-9A-Z]{3}$/.test(id)) {
+    writer.write(0, 1);
+    writer.write(shortIdValue(id.slice(1)), 16);
+    return;
+  }
+
+  writer.write(1, 1);
+  if (/^HH[0-9A-Z]{2}$/.test(id)) {
+    writer.write(0, 1);
+    writer.write(shortIdValue(id.slice(2)), 11);
+    return;
+  }
+
+  writer.write(1, 1);
+  writer.write(shortIdValue(id), 21);
+}
+
+function readShortHeroId(reader) {
+  if (reader.read(1) === 0) {
+    return `E${shortIdText(reader.read(16), 3)}`;
+  }
+
+  if (reader.read(1) === 0) {
+    return `HH${shortIdText(reader.read(11), 2)}`;
+  }
+
+  return shortIdText(reader.read(21), 4);
+}
+
 function base64UrlFromBytes(bytes) {
   let binary = "";
   for (const byte of bytes) {
@@ -617,6 +675,56 @@ function bytesFromBase64Url(text) {
   const padded = normalized + "=".repeat((4 - (normalized.length % 4)) % 4);
   const binary = atob(padded);
   return Uint8Array.from(binary, (char) => char.charCodeAt(0));
+}
+
+class BitWriter {
+  constructor() {
+    this.bytes = [];
+    this.current = 0;
+    this.bitCount = 0;
+  }
+
+  write(value, bits) {
+    let remaining = Number(value) || 0;
+    for (let index = 0; index < bits; index += 1) {
+      this.current |= ((remaining >> index) & 1) << this.bitCount;
+      this.bitCount += 1;
+      if (this.bitCount === 8) {
+        this.bytes.push(this.current);
+        this.current = 0;
+        this.bitCount = 0;
+      }
+    }
+  }
+
+  toBytes() {
+    if (this.bitCount) {
+      this.bytes.push(this.current);
+      this.current = 0;
+      this.bitCount = 0;
+    }
+    return this.bytes;
+  }
+}
+
+class BitReader {
+  constructor(bytes) {
+    this.bytes = bytes;
+    this.bitIndex = 0;
+  }
+
+  read(bits) {
+    let value = 0;
+    for (let index = 0; index < bits; index += 1) {
+      if (this.bitIndex >= this.bytes.length * 8) {
+        throw new Error(t("incompleteConfig"));
+      }
+      const byte = this.bytes[Math.floor(this.bitIndex / 8)];
+      value |= ((byte >> (this.bitIndex % 8)) & 1) << index;
+      this.bitIndex += 1;
+    }
+    return value;
+  }
 }
 
 function pushUint24(bytes, value) {
@@ -715,11 +823,9 @@ function normalizedRatingOverrides(input) {
   return result;
 }
 
-function encodeRatingPayload() {
-  const bytes = [...compactRatingMagic, compactRatingVersion];
-  const normalizedOverrides = normalizedRatingOverrides(state.ratingOverrides);
+function ratingEntries() {
   const heroOrder = new Map(state.heroes.map((hero, index) => [hero.id, index]));
-  const entries = Object.entries(normalizedOverrides)
+  return Object.entries(normalizedRatingOverrides(state.ratingOverrides))
     .map(([id, value]) => ({
       id,
       idValue: heroIdToNumber(id),
@@ -727,8 +833,12 @@ function encodeRatingPayload() {
       order: normalizeOrder(value.order),
       scores: value.scores || {},
     }))
-    .filter((entry) => entry.idValue != null)
     .sort((a, b) => (heroOrder.get(a.id) ?? 9999) - (heroOrder.get(b.id) ?? 9999));
+}
+
+function encodeLegacyRatingPayload() {
+  const bytes = [...compactRatingMagic, compactRatingVersion];
+  const entries = ratingEntries().filter((entry) => entry.idValue != null);
 
   bytes.push((entries.length >> 8) & 255, entries.length & 255);
 
@@ -754,6 +864,48 @@ function encodeRatingPayload() {
   }
 
   return base64UrlFromBytes(bytes);
+}
+
+function encodeShortRatingPayload() {
+  const allEntries = ratingEntries();
+  const entries = allEntries.filter((entry) => canEncodeShortHeroId(entry.id));
+  if (entries.length > 255 || entries.length !== allEntries.length) return "";
+
+  const writer = new BitWriter();
+  writer.write(shortRatingVersion, 3);
+  writer.write(entries.length, 8);
+
+  for (const entry of entries) {
+    const hasTier = entry.tier != null;
+    const hasOrder = entry.order != null;
+    const scoreMask = scoreMaskFor(entry.scores);
+
+    writeShortHeroId(writer, entry.id);
+    writer.write(scoreMask, 6);
+    writer.write(hasTier ? 1 : 0, 1);
+    writer.write(hasOrder ? 1 : 0, 1);
+
+    if (hasTier) {
+      writer.write(normalizeTier(entry.tier), 3);
+    }
+    if (hasOrder) {
+      writer.write(Math.max(0, Math.min(255, Math.round(entry.order))), 8);
+    }
+
+    standAxes.forEach((axis, index) => {
+      if ((scoreMask & (1 << index)) !== 0) {
+        writer.write(normalizeScore(entry.scores[axis.key]) - 1, 3);
+      }
+    });
+  }
+
+  return `${shortRatingPrefix}${base64UrlFromBytes(writer.toBytes())}`;
+}
+
+function encodeRatingPayload() {
+  const legacy = encodeLegacyRatingPayload();
+  const short = encodeShortRatingPayload();
+  return short && short.length < legacy.length ? short : legacy;
 }
 
 function decodeCompactRatingPayload(text) {
@@ -807,6 +959,50 @@ function decodeCompactRatingPayload(text) {
   return result;
 }
 
+function decodeShortRatingPayload(text) {
+  const bytes = bytesFromBase64Url(text.slice(shortRatingPrefix.length));
+  const reader = new BitReader(bytes);
+  const version = reader.read(3);
+  if (version !== shortRatingVersion) {
+    throw new Error(t("unsupportedVersion", { version }));
+  }
+
+  const heroIds = new Set(state.heroes.map((hero) => hero.id));
+  const count = reader.read(8);
+  const result = {};
+
+  for (let index = 0; index < count; index += 1) {
+    const id = readShortHeroId(reader);
+    const scoreMask = reader.read(6);
+    const hasTier = Boolean(reader.read(1));
+    const hasOrder = Boolean(reader.read(1));
+    const entry = {};
+
+    if (hasTier) {
+      entry.tier = normalizeTier(reader.read(3));
+    }
+    if (hasOrder) {
+      entry.order = normalizeOrder(reader.read(8));
+    }
+
+    if (scoreMask) {
+      const scores = {};
+      standAxes.forEach((axis, axisIndex) => {
+        if ((scoreMask & (1 << axisIndex)) !== 0) {
+          scores[axis.key] = normalizeScore(reader.read(3) + 1);
+        }
+      });
+      entry.scores = scores;
+    }
+
+    if (heroIds.has(id) && Object.keys(entry).length) {
+      result[id] = entry;
+    }
+  }
+
+  return result;
+}
+
 function ratingTextFromUrl(value, options = {}) {
   const { allowHashPayload = true } = options;
   const trimmed = value.trim();
@@ -844,6 +1040,9 @@ function parseRatingImport(text) {
   if (!trimmed) return {};
   if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
     return normalizedRatingOverrides(JSON.parse(trimmed));
+  }
+  if (trimmed.startsWith(shortRatingPrefix)) {
+    return decodeShortRatingPayload(trimmed);
   }
   return decodeCompactRatingPayload(trimmed);
 }
