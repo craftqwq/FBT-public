@@ -1,0 +1,18 @@
+{
+  "schema": {
+    "id": "unique-share-id",
+    "playerName": "\u73a9\u5bb6\u540d\u5b57",
+    "adminReview": "\u7ba1\u7406\u5458\u8bc4\u4ef7",
+    "score": "0-10",
+    "rating": "\u7528\u6237\u5206\u4eab\u7684\u77ed\u914d\u7f6e\u6216\u65e7 base64 \u914d\u7f6e"
+  },
+  "shares": [
+    {
+      "id": "jiu-ye-chang-an-2387",
+      "playerName": "\u4e5d\u591c\u957f\u5b89#2387",
+      "adminReview": "\u4e5d\u795e\u9996\u6392",
+      "score": 10,
+      "rating": ".WREA8K8ESZJQAPwLQZMQGQD6CogkGgD_BJCSxAbAvxQiScIB8K8FTVF0APwHIZMiHgD3YtCEAQHYV4MUSQjAeQASiQjAdBKWGQHYloA0QQHgj8KmgQH4l4MkSWQA2rMgKWYA_sMgaZscgH89TBKgB-A7DaIkPgDvcdAkOQLwzsM2QQIY1oAkCSAcABsqgH9FSJoCC-A7BJJEWwD9AggiAQPYTsE0QQOwFoEkbwDvgeCSkAS4V0EWxSfAvyQiaRML4J-AbRJbAPdESJtdAO9ITBtngHsZJFNIA_zHQBMl2ADvEUiUcQpY10SigArQz4SmkQr4z4G2aaYC_nUgSRGqAP9QTNJYBXxnIJOWAPhToSU"
+    }
+  ]
+}

@@ -13,6 +13,8 @@ const state = {
   ratingOverrides: {},
   ratingMessage: "",
   exportedRatingText: "",
+  communityShares: [],
+  communityMessage: "",
   draggingHeroId: "",
   suppressNextTierClick: false,
   pointerDrag: null,
@@ -32,6 +34,7 @@ const els = {
 const views = [
   { id: "heroes", labelKey: "viewHeroes" },
   { id: "ranking", labelKey: "viewRanking" },
+  { id: "community", labelKey: "viewCommunity" },
 ];
 
 const standAxes = [
@@ -54,7 +57,9 @@ const uiText = {
     selectHero: "캐릭터를 선택하세요",
     viewHeroes: "캐릭터 자료",
     viewRanking: "T등급 랭킹",
+    viewCommunity: "커뮤니티 공유",
     unnamedHero: "이름 없는 캐릭터",
+    unknownPlayer: "알 수 없는 플레이어",
     noTitle: "칭호 없음",
     noMatchingHero: "일치하는 캐릭터가 없습니다",
     noAbilities: "스킬 그룹을 찾지 못했습니다.",
@@ -87,6 +92,26 @@ const uiText = {
     skillsTitle: "스킬",
     rankingTitle: "T등급 랭킹",
     rankingHint: "T등급과 육각형 점수는 직접 수정할 수 있습니다. 캐릭터에 마우스를 올리면 6개 항목이 표시됩니다.",
+    communityTitle: "커뮤니티 공유",
+    communityHint: "관리자가 승인한 플레이어 설정입니다.",
+    communityEmpty: "아직 승인된 공유 데이터가 없습니다.",
+    communityPlayer: "플레이어",
+    communityReview: "관리자 평가",
+    communityApply: "적용",
+    communityCopy: "복사",
+    communityCount: "{count}개 공유",
+    communityRatingMeta: "{count}명 설정 · {length}자",
+    communityApplied: "{name} 설정을 적용했습니다.",
+    communityCopied: "{name} 설정을 복사했습니다.",
+    communityInvalid: "공유 데이터 오류: {message}",
+    communityLoadFailed: "공유 데이터를 읽지 못했습니다: {message}",
+    communityScoreLabel: "관리자 점수 {score}/10",
+    communityShareMine: "나도 공유하기",
+    communityShareEmpty: "먼저 T등급이나 육각형 점수를 수정한 뒤 공유하세요.",
+    communityShareCopied: "현재 설정을 복사했습니다. GitHub Issue 페이지로 이동합니다.",
+    communityIssueTitle: "커뮤니티 공유: {name}",
+    communityIssueBody:
+      "플레이어 이름:\n\n관리자 평가:\n\n공유 데이터:\n{rating}\n",
     export: "내보내기",
     import: "가져오기",
     heroCount: "{count}명",
@@ -140,7 +165,9 @@ const uiText = {
     selectHero: "请选择一个角色",
     viewHeroes: "角色资料",
     viewRanking: "T度排行",
+    viewCommunity: "社区分享",
     unnamedHero: "未命名角色",
+    unknownPlayer: "未命名玩家",
     noTitle: "无称号",
     noMatchingHero: "没有匹配的角色",
     noAbilities: "没有解析到技能分组。",
@@ -173,6 +200,26 @@ const uiText = {
     skillsTitle: "技能",
     rankingTitle: "T度排行",
     rankingHint: "T度与六边形评分均可手动修改；悬停角色查看具体六项。",
+    communityTitle: "社区分享",
+    communityHint: "这里展示管理员审核通过的玩家配置。",
+    communityEmpty: "暂无已审核的社区分享。",
+    communityPlayer: "玩家名字",
+    communityReview: "管理员评价",
+    communityApply: "应用配置",
+    communityCopy: "复制数据",
+    communityCount: "{count} 个分享",
+    communityRatingMeta: "{count} 位角色配置 · {length} 字符",
+    communityApplied: "已应用 {name} 的分享配置。",
+    communityCopied: "已复制 {name} 的分享数据。",
+    communityInvalid: "分享数据错误：{message}",
+    communityLoadFailed: "读取社区分享失败：{message}",
+    communityScoreLabel: "管理员评分 {score}/10",
+    communityShareMine: "我要分享",
+    communityShareEmpty: "请先修改 T度或六边形评分后再分享。",
+    communityShareCopied: "已复制当前配置，即将跳转到 GitHub 新 Issue 页面。",
+    communityIssueTitle: "社区分享：{name}",
+    communityIssueBody:
+      "玩家名字：\n\n管理员评价：\n\n分享数据：\n{rating}\n",
     export: "导出",
     import: "导入",
     heroCount: "{count} 位角色",
@@ -228,6 +275,7 @@ const ratingIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqr
 const ratingShortIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const ratingUrlParamNames = ["rating", "ratings", "r", "fbt", "config"];
 const ratingStorageKey = "fbt.ratingOverrides.v2";
+const communityIssueUrl = "https://github.com/craftqwq/FBT-public/issues/new";
 const excludedHeroIds = new Set(["E09H", "E05Y"]);
 
 function escapeHtml(value) {
@@ -1693,6 +1741,125 @@ function renderTierRanking() {
   `;
 }
 
+function normalizeCommunityShares(data) {
+  const source = Array.isArray(data) ? data : Array.isArray(data?.shares) ? data.shares : [];
+  return source
+    .map((item, index) => {
+      const rating = String(item.rating || item.payload || item.data || "").trim();
+      return {
+        id: String(item.id || `share-${index + 1}`),
+        playerName: String(item.playerName || item.player || item.name || "").trim(),
+        adminReview: String(item.adminReview || item.review || item.comment || item.note || "").trim(),
+        score: normalizeCommunityScore(item.score ?? item.ratingScore ?? item.adminScore ?? 0),
+        rating,
+      };
+    })
+    .filter((item) => item.rating);
+}
+
+function normalizeCommunityScore(value) {
+  const score = Number.parseFloat(value);
+  return Number.isFinite(score) ? Math.max(0, Math.min(10, Math.round(score * 10) / 10)) : 0;
+}
+
+function communityShareName(share) {
+  return share?.playerName || t("unknownPlayer");
+}
+
+function renderShareStars(score) {
+  const normalizedScore = normalizeCommunityScore(score);
+  const percentage = `${normalizedScore * 10}%`;
+  return `
+    <span class="shareStars" aria-label="${escapeHtml(t("communityScoreLabel", { score: normalizedScore }))}">
+      <span class="shareStarsTrack" aria-hidden="true">★★★★★</span>
+      <span class="shareStarsFill" style="width: ${escapeHtml(percentage)}" aria-hidden="true">★★★★★</span>
+      <span class="shareScoreText">${escapeHtml(`${normalizedScore}/10`)}</span>
+    </span>
+  `;
+}
+
+function communityShareStats(share) {
+  try {
+    const parsed = parseRatingImport(share.rating);
+    return {
+      valid: true,
+      count: Object.keys(parsed).length,
+      length: share.rating.length,
+    };
+  } catch (error) {
+    return {
+      valid: false,
+      count: 0,
+      length: share.rating.length,
+      message: error.message,
+    };
+  }
+}
+
+function renderCommunityShareCard(share) {
+  const name = communityShareName(share);
+  const stats = communityShareStats(share);
+  const review = share.adminReview || t("missing");
+
+  return `
+    <article
+      class="shareCard ${stats.valid ? "" : "invalid"}"
+      role="button"
+      tabindex="0"
+      data-community-share-id="${escapeHtml(share.id)}"
+      aria-label="${escapeHtml(name)}"
+    >
+      <div class="shareCardHeader">
+        <div>
+          <div class="shareLabel">${escapeHtml(t("communityPlayer"))}</div>
+          <h3>${escapeHtml(name)}</h3>
+          ${renderShareStars(share.score)}
+        </div>
+        <span class="shareMeta">${escapeHtml(
+          stats.valid ? t("communityRatingMeta", { count: stats.count, length: stats.length }) : stats.message,
+        )}</span>
+      </div>
+      <div class="shareReview">
+        <div class="shareLabel">${escapeHtml(t("communityReview"))}</div>
+        <p>${escapeHtml(review)}</p>
+      </div>
+      <div class="shareActions">
+        <span class="shareApplyText">${escapeHtml(t("communityApply"))}</span>
+        <button
+          class="ratingToolButton shareCopyButton"
+          type="button"
+          data-community-copy-id="${escapeHtml(share.id)}"
+        >
+          ${escapeHtml(t("communityCopy"))}
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+function renderCommunityShares() {
+  els.detail.innerHTML = `
+    <div class="communityPage">
+      <div class="rankingHeader">
+        <div>
+          <h2>${escapeHtml(t("communityTitle"))}</h2>
+          <p>${escapeHtml(t("communityHint"))}</p>
+        </div>
+        <div class="ratingToolbar">
+          <button class="ratingToolButton" type="button" data-community-share-current="true">${escapeHtml(t("communityShareMine"))}</button>
+          <div class="rankingCount">${escapeHtml(t("communityCount", { count: state.communityShares.length }))}</div>
+        </div>
+      </div>
+      ${state.communityMessage ? `<div class="ratingMessage">${escapeHtml(state.communityMessage)}</div>` : ""}
+      ${
+        state.communityShares.length
+          ? `<div class="shareGrid">${state.communityShares.map((share) => renderCommunityShareCard(share)).join("")}</div>`
+          : `<div class="empty">${escapeHtml(t("communityEmpty"))}</div>`
+      }
+    </div>
+  `;
+}
+
 function selectedHero() {
   return state.heroes.find((hero) => hero.id === state.selectedId);
 }
@@ -1700,6 +1867,11 @@ function selectedHero() {
 function renderCurrentView() {
   if (state.view === "ranking") {
     renderTierRanking();
+    return;
+  }
+
+  if (state.view === "community") {
+    renderCommunityShares();
     return;
   }
 
@@ -1958,6 +2130,74 @@ async function handleRatingAction(action) {
   }
 }
 
+function communityShareById(id) {
+  return state.communityShares.find((share) => share.id === id);
+}
+
+function applyCommunityShare(id) {
+  const share = communityShareById(id);
+  if (!share) return;
+
+  try {
+    applyRatingImportText(share.rating);
+    state.view = "ranking";
+    state.ratingMessage = t("communityApplied", { name: communityShareName(share) });
+    state.communityMessage = "";
+    renderViewTabs();
+    renderList();
+    renderCurrentView();
+  } catch (error) {
+    state.communityMessage = t("communityInvalid", { message: error.message });
+    renderCurrentView();
+  }
+}
+
+async function copyCommunityShare(id) {
+  const share = communityShareById(id);
+  if (!share) return;
+
+  try {
+    await copyTextToClipboard(share.rating);
+    state.communityMessage = t("communityCopied", { name: communityShareName(share) });
+  } catch (error) {
+    state.communityMessage = t("communityInvalid", { message: error.message });
+  }
+  renderCurrentView();
+}
+
+async function shareCurrentRatingToIssue() {
+  const rating = currentRatingPayload();
+  if (!rating) {
+    state.communityMessage = t("communityShareEmpty");
+    renderCurrentView();
+    return;
+  }
+
+  try {
+    await copyTextToClipboard(rating);
+    state.communityMessage = t("communityShareCopied");
+    const params = new URLSearchParams({
+      title: t("communityIssueTitle", { name: t("unknownPlayer") }),
+      body: t("communityIssueBody", { rating }),
+    });
+    window.location.href = `${communityIssueUrl}?${params.toString()}`;
+  } catch (error) {
+    state.communityMessage = t("communityInvalid", { message: error.message });
+    renderCurrentView();
+  }
+}
+
+async function loadCommunityShares() {
+  try {
+    const response = await fetch("data/community-shares.json");
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+    state.communityShares = normalizeCommunityShares(await response.json());
+  } catch (error) {
+    state.communityShares = [];
+    state.communityMessage = t("communityLoadFailed", { message: error.message });
+  }
+}
+
 function setView(view) {
   state.view = views.some((item) => item.id === view) ? view : "heroes";
   state.expandedAbilityId = "";
@@ -1997,6 +2237,24 @@ els.heroList.addEventListener("click", (event) => {
 });
 
 els.detail.addEventListener("click", (event) => {
+  const communityShareCurrent = event.target.closest("[data-community-share-current]");
+  if (communityShareCurrent) {
+    shareCurrentRatingToIssue();
+    return;
+  }
+
+  const communityCopy = event.target.closest("[data-community-copy-id]");
+  if (communityCopy) {
+    copyCommunityShare(communityCopy.dataset.communityCopyId);
+    return;
+  }
+
+  const communityShare = event.target.closest("[data-community-share-id]");
+  if (communityShare) {
+    applyCommunityShare(communityShare.dataset.communityShareId);
+    return;
+  }
+
   const ratingAction = event.target.closest("[data-rating-action]");
   if (ratingAction) {
     handleRatingAction(ratingAction.dataset.ratingAction);
@@ -2028,6 +2286,17 @@ els.detail.addEventListener("click", (event) => {
 
   state.expandedAbilityId = state.expandedAbilityId === button.dataset.entryId ? "" : button.dataset.entryId;
   renderCurrentView();
+});
+
+els.detail.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  if (event.target.closest("button")) return;
+
+  const communityShare = event.target.closest("[data-community-share-id]");
+  if (!communityShare) return;
+
+  event.preventDefault();
+  applyCommunityShare(communityShare.dataset.communityShareId);
 });
 
 els.detail.addEventListener("dragstart", (event) => {
@@ -2133,7 +2402,7 @@ els.languageSwitch?.addEventListener("click", (event) => {
 
 fetch("data/heroes.json")
   .then((response) => response.json())
-  .then((data) => {
+  .then(async (data) => {
     state.heroes = playableHeroes(data.heroes || []);
     state.languages = Array.isArray(data.languages) && data.languages.length ? data.languages : [{ id: "source", label: "原文" }];
     state.language =
@@ -2147,6 +2416,7 @@ fetch("data/heroes.json")
     if (!hasRatingUrl && !importedRatingFromUrl && cachedRatingCount) {
       syncRatingUrl();
     }
+    await loadCommunityShares();
     renderViewTabs();
     renderLanguageSwitch();
     applyFilter();
