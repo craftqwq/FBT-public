@@ -224,6 +224,8 @@ const compactRatingVersion = 2;
 const compactRatingMagic = [70, 66, 84, 82];
 const ratingIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const ratingUrlParamNames = ["rating", "ratings", "r", "fbt", "config"];
+const ratingStorageKey = "fbt.ratingOverrides.v2";
+const excludedHeroIds = new Set(["E09H"]);
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -273,6 +275,15 @@ function renderStaticChrome() {
   if (els.viewTabs) els.viewTabs.setAttribute("aria-label", t("viewTabsLabel"));
   if (els.languageSwitch) els.languageSwitch.setAttribute("aria-label", t("languageSwitchLabel"));
   if (els.sidebarTitle) els.sidebarTitle.textContent = t("heroList");
+}
+
+function playableHeroes(heroes = []) {
+  return heroes
+    .filter((hero) => !excludedHeroIds.has(hero.id))
+    .map((hero) => ({
+      ...hero,
+      relatedHeroes: (hero.relatedHeroes || []).filter((relatedHero) => !excludedHeroIds.has(relatedHero.id)),
+    }));
 }
 
 function initials(name, id) {
@@ -796,7 +807,8 @@ function decodeCompactRatingPayload(text) {
   return result;
 }
 
-function ratingTextFromUrl(value) {
+function ratingTextFromUrl(value, options = {}) {
+  const { allowHashPayload = true } = options;
   const trimmed = value.trim();
   if (!trimmed) return "";
 
@@ -815,7 +827,7 @@ function ratingTextFromUrl(value) {
       if (fromHash) return fromHash.trim();
     }
 
-    if (!hashText || hashText.includes("=")) return "";
+    if (!allowHashPayload || !hashText || hashText.includes("=")) return "";
     return decodeURIComponent(hashText).trim();
   } catch {
     return "";
@@ -836,22 +848,56 @@ function parseRatingImport(text) {
   return decodeCompactRatingPayload(trimmed);
 }
 
-function applyRatingImportText(text) {
+function saveRatingCache() {
+  try {
+    const normalizedOverrides = normalizedRatingOverrides(state.ratingOverrides);
+    if (!Object.keys(normalizedOverrides).length) {
+      localStorage.removeItem(ratingStorageKey);
+      return;
+    }
+
+    localStorage.setItem(ratingStorageKey, encodeRatingPayload());
+  } catch (error) {
+    console.warn("Failed to save rating cache", error);
+  }
+}
+
+function loadRatingCache() {
+  try {
+    const text = localStorage.getItem(ratingStorageKey);
+    if (!text) return 0;
+
+    state.ratingOverrides = parseRatingImport(text);
+    return Object.keys(state.ratingOverrides).length;
+  } catch (error) {
+    console.warn("Failed to load rating cache", error);
+    return 0;
+  }
+}
+
+function applyRatingImportText(text, options = {}) {
+  const { persist = true } = options;
   const nextOverrides = parseRatingImport(text);
   state.ratingOverrides = nextOverrides;
   state.exportedRatingText = "";
+  if (persist) saveRatingCache();
   renderList();
   return Object.keys(nextOverrides).length;
 }
 
 function importRatingFromCurrentUrl() {
-  const importText = ratingTextFromUrl(window.location.href);
+  const importText = ratingTextFromUrl(window.location.href, { allowHashPayload: false });
   if (!importText) return false;
 
-  const importedCount = applyRatingImportText(importText);
-  state.view = "ranking";
-  state.ratingMessage = t("urlImportedRating", { count: importedCount });
-  return true;
+  try {
+    const importedCount = applyRatingImportText(importText, { persist: false });
+    state.view = "ranking";
+    state.ratingMessage = t("urlImportedRating", { count: importedCount });
+    return true;
+  } catch (error) {
+    state.ratingMessage = t("importExportFailed", { message: error.message });
+    return false;
+  }
 }
 
 function radarPoint(index, radius, center = 92) {
@@ -1464,6 +1510,7 @@ function moveHeroToTierPosition(id, tier, insertionIndex = null) {
 
   applyTierOrder(targetTier, targetIds);
   state.ratingMessage = "";
+  saveRatingCache();
 }
 
 function updateHeroTier(id, value) {
@@ -1479,6 +1526,7 @@ function updateHeroTier(id, value) {
     tier: normalizeTier(value),
   };
   state.ratingMessage = "";
+  saveRatingCache();
 }
 
 function updateHeroScore(id, axisKey, value) {
@@ -1493,6 +1541,7 @@ function updateHeroScore(id, axisKey, value) {
     },
   };
   state.ratingMessage = "";
+  saveRatingCache();
 }
 
 function clearTierDropTargets() {
@@ -1834,13 +1883,14 @@ els.languageSwitch?.addEventListener("click", (event) => {
 fetch("data/heroes.json")
   .then((response) => response.json())
   .then((data) => {
-    state.heroes = data.heroes || [];
+    state.heroes = playableHeroes(data.heroes || []);
     state.languages = Array.isArray(data.languages) && data.languages.length ? data.languages : [{ id: "source", label: "原文" }];
     state.language =
       data.defaultLanguage ||
       (state.languages.some((language) => language.id === "zhCN") ? "zhCN" : state.languages[0]?.id || "source");
     state.filtered = [...state.heroes];
     state.selectedId = state.heroes[0]?.id || "";
+    loadRatingCache();
     importRatingFromCurrentUrl();
     renderViewTabs();
     renderLanguageSwitch();
