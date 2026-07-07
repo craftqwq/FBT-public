@@ -123,7 +123,7 @@ const uiText = {
     },
     standAxes: {
       support: "지원",
-      burst: "폭발",
+      burst: "버스트",
       control: "제어",
       pressure: "영격 봉쇄",
       toughness: "탱킹",
@@ -225,7 +225,7 @@ const compactRatingMagic = [70, 66, 84, 82];
 const ratingIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const ratingUrlParamNames = ["rating", "ratings", "r", "fbt", "config"];
 const ratingStorageKey = "fbt.ratingOverrides.v2";
-const excludedHeroIds = new Set(["E09H"]);
+const excludedHeroIds = new Set(["E09H", "E05Y"]);
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -848,18 +848,69 @@ function parseRatingImport(text) {
   return decodeCompactRatingPayload(trimmed);
 }
 
-function saveRatingCache() {
+function currentRatingPayload() {
+  return Object.keys(normalizedRatingOverrides(state.ratingOverrides)).length ? encodeRatingPayload() : "";
+}
+
+function removeRatingParamsFromHash(url) {
+  const hashText = url.hash.startsWith("#") ? url.hash.slice(1) : url.hash;
+  if (!hashText || !hashText.includes("=")) return;
+
+  const queryIndex = hashText.indexOf("?");
+  const hashPrefix = queryIndex === -1 ? "" : hashText.slice(0, queryIndex);
+  const queryText = queryIndex === -1 ? hashText : hashText.slice(queryIndex + 1);
+  const params = new URLSearchParams(queryText);
+  let changed = false;
+
+  for (const name of ratingUrlParamNames) {
+    if (!params.has(name)) continue;
+    params.delete(name);
+    changed = true;
+  }
+
+  if (!changed) return;
+
+  const nextQuery = params.toString();
+  const nextHash = hashPrefix ? `${hashPrefix}${nextQuery ? `?${nextQuery}` : ""}` : nextQuery;
+  url.hash = nextHash ? `#${nextHash}` : "";
+}
+
+function syncRatingUrl(payload = currentRatingPayload()) {
   try {
-    const normalizedOverrides = normalizedRatingOverrides(state.ratingOverrides);
-    if (!Object.keys(normalizedOverrides).length) {
-      localStorage.removeItem(ratingStorageKey);
-      return;
+    if (!window.history?.replaceState) return;
+
+    const url = new URL(window.location.href);
+    for (const name of ratingUrlParamNames) {
+      url.searchParams.delete(name);
+    }
+    removeRatingParamsFromHash(url);
+
+    if (payload) {
+      url.searchParams.set(ratingUrlParamNames[0], payload);
     }
 
-    localStorage.setItem(ratingStorageKey, encodeRatingPayload());
+    window.history.replaceState(window.history.state, "", url);
+  } catch (error) {
+    console.warn("Failed to sync rating URL", error);
+  }
+}
+
+function saveRatingCache() {
+  let payload = "";
+  try {
+    payload = currentRatingPayload();
+    if (!payload) {
+      localStorage.removeItem(ratingStorageKey);
+    } else {
+      localStorage.setItem(ratingStorageKey, payload);
+    }
   } catch (error) {
     console.warn("Failed to save rating cache", error);
+    try {
+      payload = currentRatingPayload();
+    } catch {}
   }
+  syncRatingUrl(payload);
 }
 
 function loadRatingCache() {
@@ -891,6 +942,7 @@ function importRatingFromCurrentUrl() {
 
   try {
     const importedCount = applyRatingImportText(importText, { persist: false });
+    syncRatingUrl();
     state.view = "ranking";
     state.ratingMessage = t("urlImportedRating", { count: importedCount });
     return true;
@@ -1890,8 +1942,12 @@ fetch("data/heroes.json")
       (state.languages.some((language) => language.id === "zhCN") ? "zhCN" : state.languages[0]?.id || "source");
     state.filtered = [...state.heroes];
     state.selectedId = state.heroes[0]?.id || "";
-    loadRatingCache();
-    importRatingFromCurrentUrl();
+    const cachedRatingCount = loadRatingCache();
+    const hasRatingUrl = Boolean(ratingTextFromUrl(window.location.href, { allowHashPayload: false }));
+    const importedRatingFromUrl = importRatingFromCurrentUrl();
+    if (!hasRatingUrl && !importedRatingFromUrl && cachedRatingCount) {
+      syncRatingUrl();
+    }
     renderViewTabs();
     renderLanguageSwitch();
     applyFilter();
