@@ -1851,13 +1851,15 @@ function normalizeCommunityShares(data) {
       const rating = String(item.rating || item.payload || item.data || "").trim();
       return {
         id: String(item.id || `share-${index + 1}`),
+        sourceIndex: index,
         playerName: String(item.playerName || item.player || item.name || "").trim(),
         adminReview: String(item.adminReview || item.review || item.comment || item.note || "").trim(),
         score: normalizeCommunityScore(item.score ?? item.ratingScore ?? item.adminScore ?? 0),
         rating,
       };
     })
-    .filter((item) => item.rating || item.playerName || item.adminReview);
+    .filter((item) => item.rating || item.playerName || item.adminReview)
+    .sort((left, right) => right.score - left.score || left.sourceIndex - right.sourceIndex);
 }
 
 function normalizeCommunityScore(value) {
@@ -2316,6 +2318,24 @@ async function loadCommunityShares() {
   }
 }
 
+function applyHighestRatedCommunityShare() {
+  for (const share of state.communityShares) {
+    if (!share.rating) continue;
+
+    try {
+      const overrides = parseRatingImport(share.rating);
+      if (Object.keys(overrides).length) {
+        state.ratingOverrides = overrides;
+        return true;
+      }
+    } catch {
+      // Ignore invalid approved entries and keep looking for the next highest scored share.
+    }
+  }
+
+  return false;
+}
+
 function setView(view) {
   state.view = views.some((item) => item.id === view) ? view : "heroes";
   state.expandedAbilityId = "";
@@ -2535,6 +2555,9 @@ fetch("data/heroes.json")
       syncRatingUrl();
     }
     await loadCommunityShares();
+    if (!hasRatingUrl && !importedRatingFromUrl && !cachedRatingCount) {
+      applyHighestRatedCommunityShare();
+    }
     renderViewTabs();
     renderLanguageSwitch();
     applyFilter();

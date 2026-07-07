@@ -987,7 +987,6 @@ input:focus {
 .tierPyramid {
   display: grid;
   gap: 14px;
-  overflow-x: auto;
   padding-top: 4px;
   padding-bottom: 4px;
 }
@@ -1012,10 +1011,10 @@ input:focus {
 
 .tierHeroes {
   position: relative;
-  width: max-content;
+  width: 100%;
   min-height: 54px;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
   margin: 0 auto;
@@ -1458,7 +1457,7 @@ body.tierDragging .tierTooltip {
   }
 
   .tierHeroes {
-    width: max-content;
+    width: 100%;
     justify-content: center;
   }
 
