@@ -105,6 +105,7 @@ const uiText = {
     communityCopied: "{name} 설정을 복사했습니다.",
     communityInvalid: "공유 데이터 오류: {message}",
     communityLoadFailed: "공유 데이터를 읽지 못했습니다: {message}",
+    communityPending: "설정 데이터 대기 중",
     communityScoreLabel: "관리자 점수 {score}/10",
     communityShareMine: "나도 공유하기",
     communityShareEmpty: "먼저 T등급이나 육각형 점수를 수정한 뒤 공유하세요.",
@@ -213,6 +214,7 @@ const uiText = {
     communityCopied: "已复制 {name} 的分享数据。",
     communityInvalid: "分享数据错误：{message}",
     communityLoadFailed: "读取社区分享失败：{message}",
+    communityPending: "配置数据待补",
     communityScoreLabel: "管理员评分 {score}/10",
     communityShareMine: "我要分享",
     communityShareEmpty: "请先修改 T度或六边形评分后再分享。",
@@ -1855,7 +1857,7 @@ function normalizeCommunityShares(data) {
         rating,
       };
     })
-    .filter((item) => item.rating);
+    .filter((item) => item.rating || item.playerName || item.adminReview);
 }
 
 function normalizeCommunityScore(value) {
@@ -1880,6 +1882,16 @@ function renderShareStars(score) {
 }
 
 function communityShareStats(share) {
+  if (!share.rating) {
+    return {
+      valid: false,
+      pending: true,
+      count: 0,
+      length: 0,
+      message: t("communityPending"),
+    };
+  }
+
   try {
     const parsed = parseRatingImport(share.rating);
     return {
@@ -1901,13 +1913,12 @@ function renderCommunityShareCard(share) {
   const name = communityShareName(share);
   const stats = communityShareStats(share);
   const review = share.adminReview || t("missing");
+  const canApply = stats.valid && share.rating;
 
   return `
     <article
-      class="shareCard ${stats.valid ? "" : "invalid"}"
-      role="button"
-      tabindex="0"
-      data-community-share-id="${escapeHtml(share.id)}"
+      class="shareCard ${stats.valid ? "" : "invalid"} ${stats.pending ? "pending" : ""}"
+      ${canApply ? `role="button" tabindex="0" data-community-share-id="${escapeHtml(share.id)}"` : `aria-disabled="true"`}
       aria-label="${escapeHtml(name)}"
     >
       <div class="shareCardHeader">
@@ -1925,14 +1936,20 @@ function renderCommunityShareCard(share) {
         <p>${escapeHtml(review)}</p>
       </div>
       <div class="shareActions">
-        <span class="shareApplyText">${escapeHtml(t("communityApply"))}</span>
-        <button
-          class="ratingToolButton shareCopyButton"
-          type="button"
-          data-community-copy-id="${escapeHtml(share.id)}"
-        >
-          ${escapeHtml(t("communityCopy"))}
-        </button>
+        <span class="shareApplyText">${escapeHtml(stats.pending ? t("communityPending") : t("communityApply"))}</span>
+        ${
+          canApply
+            ? `
+              <button
+                class="ratingToolButton shareCopyButton"
+                type="button"
+                data-community-copy-id="${escapeHtml(share.id)}"
+              >
+                ${escapeHtml(t("communityCopy"))}
+              </button>
+            `
+            : ""
+        }
       </div>
     </article>
   `;
