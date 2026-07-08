@@ -1238,6 +1238,69 @@ body.tierDragging .tierTooltip {
   gap: 10px;
 }
 
+.temporaryPanelRail {
+  --temporary-slot-size: 64px;
+  --temporary-slot-gap: 8px;
+  --temporary-rail-height: 248px;
+  width: fit-content;
+  max-width: 100%;
+  height: var(--temporary-rail-height);
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+
+.temporaryPanel {
+  flex: 0 0 auto;
+  display: grid;
+  gap: 6px;
+  width: max-content;
+  max-width: 222px;
+  padding: 7px;
+  border: 1px solid #2a3f43;
+  border-radius: 6px;
+  background: #11171b;
+}
+
+.temporaryPanelTitle {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.temporaryPanelTitle span {
+  flex: 0 0 auto;
+  color: var(--accent-2);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.temporaryPanelTitle strong {
+  min-width: 0;
+  max-width: 164px;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.temporaryPanelButtons {
+  display: grid;
+  grid-template-columns: repeat(var(--temporary-columns, 3), var(--temporary-slot-size));
+  grid-auto-rows: 76px;
+  gap: var(--temporary-slot-gap);
+  max-width: 208px;
+}
+
 .abilitySlot {
   min-width: 0;
   min-height: 0;
@@ -1308,9 +1371,17 @@ body.tierDragging .tierTooltip {
   border-color: rgba(244, 189, 80, 0.7);
 }
 
+.abilityButton.temporarySkill {
+  border-color: rgba(103, 212, 197, 0.72);
+}
+
 .abilityButton.exclusiveItem span,
 .abilityButton.exclusiveSkill span {
   color: var(--accent);
+}
+
+.abilityButton.temporarySkill span {
+  color: var(--accent-2);
 }
 
 .abilityButton span {

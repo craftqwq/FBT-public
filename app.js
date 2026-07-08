@@ -20,6 +20,8 @@ const state = {
   pointerDrag: null,
 };
 
+const assetVersion = "20260708-temporary-wrap";
+
 const els = {
   heading: document.querySelector(".topbar h1"),
   summary: document.querySelector("#summary"),
@@ -77,6 +79,8 @@ const uiText = {
     exclusiveItem: "전용 아이템",
     exclusiveButton: "전용",
     exclusiveSkill: "전용 스킬",
+    temporarySkill: "\ucd94\uac00 \uc2a4\ud0ac",
+    temporaryPanelTitle: "\ucd94\uac00",
     baseForm: "기본",
     formFallback: "형태",
     formSwitchAria: "캐릭터 형태",
@@ -187,6 +191,8 @@ const uiText = {
     exclusiveItem: "专属物品",
     exclusiveButton: "专属",
     exclusiveSkill: "专属技能",
+    temporarySkill: "\u8ffd\u52a0\u6280\u80fd",
+    temporaryPanelTitle: "\u8ffd\u52a0",
     baseForm: "基础",
     formFallback: "形态",
     formSwitchAria: "角色形态",
@@ -383,6 +389,11 @@ function exclusiveGrantedSkills(weapon) {
 function localizedHero(hero, language = state.language) {
   const result = localizedEntity(hero, language);
   result.abilities = (hero.abilities || []).map((ability) => localizedEntity(ability, language));
+  result.temporaryAbilityPanels = (hero.temporaryAbilityPanels || []).map((panel) => {
+    const localizedPanel = localizedEntity(panel, language);
+    localizedPanel.abilities = (panel.abilities || []).map((ability) => localizedEntity(ability, language));
+    return localizedPanel;
+  });
   result.relatedHeroes = (hero.relatedHeroes || []).map((relatedHero) => localizedHero(relatedHero, language));
   if (hero.exclusiveWeapon) {
     result.exclusiveWeapon = localizedEntity(hero.exclusiveWeapon, language);
@@ -405,6 +416,18 @@ function heroTextForSearch(hero) {
   const grantedSkillText = exclusiveGrantedSkills(hero.exclusiveWeapon)
     .map((skill) => `${skill.name || ""} ${skill.description || ""} ${translationText(skill)}`)
     .join(" ");
+  const temporaryAbilityText = (hero.temporaryAbilityPanels || [])
+    .map((panel) =>
+      [
+        panel.sourceAbilityId,
+        panel.sourceAbilityName,
+        panel.sourceAbilityHotkey,
+        translationText(panel),
+        (panel.abilities || []).map((ability) => `${ability.name || ""} ${ability.description || ""}`).join(" "),
+        (panel.abilities || []).map((ability) => translationText(ability)).join(" "),
+      ].join(" "),
+    )
+    .join(" ");
 
   return [
     hero.id,
@@ -415,6 +438,7 @@ function heroTextForSearch(hero) {
     translationText(hero),
     (hero.abilities || []).map((ability) => `${ability.name} ${ability.description}`).join(" "),
     (hero.abilities || []).map((ability) => translationText(ability)).join(" "),
+    temporaryAbilityText,
     hero.exclusiveWeapon
       ? `${hero.exclusiveWeapon.name} ${hero.exclusiveWeapon.description} ${translationText(hero.exclusiveWeapon)} ${grantedSkillText}`
       : "",
@@ -1523,6 +1547,36 @@ function exclusiveWeaponEntries(hero) {
   return entries;
 }
 
+function temporaryAbilityPanelsForHero(hero) {
+  return (hero.temporaryAbilityPanels || [])
+    .map((panel, panelIndex) => {
+      const sourceAbilityId = panel.sourceAbilityId || `panel${panelIndex}`;
+      const sourceAbilityName = panel.sourceAbilityName || panel.sourceAbilityId || "";
+      const abilities = (panel.abilities || []).map((ability, abilityIndex) => ({
+        ...ability,
+        kind: "temporarySkill",
+        categoryKey: "temporarySkill",
+        buttonLabel: ability.hotkey || ability.buttonLabel || ability.id,
+        entryKey: `temporary:${sourceAbilityId}:${ability.id || abilityIndex}:${abilityIndex}`,
+        sourceAbilityId,
+        sourceAbilityName,
+        sourceAbilityHotkey: panel.sourceAbilityHotkey || "",
+      }));
+
+      return {
+        ...panel,
+        sourceAbilityId,
+        sourceAbilityName,
+        abilities,
+      };
+    })
+    .filter((panel) => panel.abilities.length);
+}
+
+function temporaryAbilityPanelEntries(hero) {
+  return temporaryAbilityPanelsForHero(hero).flatMap((panel) => panel.abilities);
+}
+
 function layoutEntriesForHero(hero) {
   const entries = [...(hero.abilities || [])];
 
@@ -1535,6 +1589,8 @@ function layoutEntriesForHero(hero) {
     }
   }
 
+  entries.push(...temporaryAbilityPanelEntries(hero));
+
   return entries;
 }
 
@@ -1542,11 +1598,12 @@ function renderAbilityButton(ability) {
   const kindClass = ability.kind ? ` ${ability.kind}` : "";
   const name = localized(ability, "name") || ability.id;
   const buttonLabel = ability.buttonLabelKey ? t(ability.buttonLabelKey) : ability.buttonLabel || ability.hotkey || ability.id;
+  const entryKey = ability.entryKey || ability.id;
 
   return `
     <button
-      class="abilityButton${kindClass} ${ability.id === state.expandedAbilityId ? "active" : ""}"
-      data-entry-id="${escapeHtml(ability.id)}"
+      class="abilityButton${kindClass} ${entryKey === state.expandedAbilityId ? "active" : ""}"
+      data-entry-id="${escapeHtml(entryKey)}"
       title="${escapeHtml(name)}"
     >
       ${renderIcon(ability.iconAsset, ability.hotkey || ability.id.slice(-1), "abilityIcon", name)}
@@ -1602,15 +1659,34 @@ function renderRelatedHeroSwitch(hero, activeHero) {
   `;
 }
 
+function renderTemporaryAbilityPanel(panel) {
+  const sourceLabel = panel.sourceAbilityName || panel.sourceAbilityId || t("temporarySkill");
+  const columnCount = Math.max(1, Math.min(3, panel.abilities.length));
+
+  return `
+    <section class="temporaryPanel" style="--temporary-columns: ${columnCount}">
+      <div class="temporaryPanelTitle">
+        <span>${escapeHtml(t("temporaryPanelTitle"))}</span>
+        <strong title="${escapeHtml(sourceLabel)}">${escapeHtml(sourceLabel)}</strong>
+      </div>
+      <div class="temporaryPanelButtons">
+        ${panel.abilities.map((ability) => renderAbilityButton(ability)).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function renderAbilities(hero) {
-  const allEntries = layoutEntriesForHero(localizedHero(hero));
+  const displayHero = localizedHero(hero);
+  const temporaryPanels = temporaryAbilityPanelsForHero(displayHero);
+  const allEntries = layoutEntriesForHero(displayHero);
   if (!allEntries.length) {
     return `<div class="muted">${escapeHtml(t("noAbilities"))}</div>`;
   }
 
   const sideEntries = allEntries.filter((ability) => ability.kind === "exclusiveItem");
-  const entries = allEntries.filter((ability) => ability.kind !== "exclusiveItem");
-  const expanded = allEntries.find((ability) => ability.id === state.expandedAbilityId);
+  const entries = allEntries.filter((ability) => ability.kind !== "exclusiveItem" && ability.kind !== "temporarySkill");
+  const expanded = allEntries.find((ability) => (ability.entryKey || ability.id) === state.expandedAbilityId);
   const { slots, loose } = groupAbilitiesByPosition(entries);
 
   return `
@@ -1626,6 +1702,15 @@ function renderAbilities(hero) {
           )
           .join("")}
       </div>
+      ${
+        temporaryPanels.length
+          ? `
+            <div class="temporaryPanelRail" aria-label="${escapeHtml(t("temporarySkill"))}">
+              ${temporaryPanels.map((panel) => renderTemporaryAbilityPanel(panel)).join("")}
+            </div>
+          `
+          : ""
+      }
       ${
         sideEntries.length
           ? `
@@ -1659,6 +1744,7 @@ function renderAbilities(hero) {
                   ${expanded.hotkey ? `<span class="pill">${escapeHtml(t("hotkey"))} ${escapeHtml(expanded.hotkey)}</span>` : ""}
                   ${expanded.buttonPos ? `<span class="pill">${escapeHtml(t("position"))} ${escapeHtml(`${expanded.buttonPos.x},${expanded.buttonPos.y}`)}</span>` : ""}
                   ${expanded.sourceWeapon ? `<span class="pill">${escapeHtml(t("from"))} ${escapeHtml(expanded.sourceWeapon)}</span>` : ""}
+                  ${expanded.sourceAbilityName ? `<span class="pill">${escapeHtml(t("from"))} ${escapeHtml(expanded.sourceAbilityName)}</span>` : ""}
                   ${expanded.inheritedFrom ? `<span class="pill">${escapeHtml(t("inheritedFrom"))} ${escapeHtml(expanded.inheritedFrom)}</span>` : ""}
                 </div>
               </div>
@@ -2558,7 +2644,7 @@ els.languageSwitch?.addEventListener("click", (event) => {
   applyFilter();
 });
 
-fetch("data/heroes.json")
+fetch(`data/heroes.json?v=${assetVersion}`, { cache: "no-store" })
   .then((response) => response.json())
   .then(async (data) => {
     state.heroes = playableHeroes(data.heroes || []);
