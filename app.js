@@ -1,7 +1,10 @@
 const state = {
   heroes: [],
   filtered: [],
+  items: [],
+  filteredItems: [],
   selectedId: "",
+  selectedItemId: "",
   selectedRelatedId: "",
   expandedAbilityId: "",
   view: "heroes",
@@ -20,7 +23,7 @@ const state = {
   pointerDrag: null,
 };
 
-const assetVersion = "20260708-temporary-wrap";
+const assetVersion = "20260712-items";
 
 const els = {
   heading: document.querySelector(".topbar h1"),
@@ -35,6 +38,7 @@ const els = {
 
 const views = [
   { id: "heroes", labelKey: "viewHeroes" },
+  { id: "items", labelKey: "viewItems" },
   { id: "ranking", labelKey: "viewRanking" },
   { id: "community", labelKey: "viewCommunity" },
 ];
@@ -54,16 +58,19 @@ const uiText = {
     loading: "지도 데이터를 읽는 중...",
     viewTabsLabel: "페이지 전환",
     languageSwitchLabel: "언어 전환",
-    searchPlaceholder: "캐릭터, 칭호, 스킬, 설명 검색",
+    searchPlaceholder: "캐릭터, 아이템, 스킬, 설명 검색",
     heroList: "캐릭터 목록",
+    itemList: "아이템 목록",
     selectHero: "캐릭터를 선택하세요",
     viewHeroes: "캐릭터 자료",
+    viewItems: "아이템 자료",
     viewRanking: "T등급 랭킹",
     viewCommunity: "커뮤니티 공유",
     unnamedHero: "이름 없는 캐릭터",
     unknownPlayer: "알 수 없는 플레이어",
     noTitle: "칭호 없음",
     noMatchingHero: "일치하는 캐릭터가 없습니다",
+    noMatchingItem: "일치하는 아이템이 없습니다",
     noAbilities: "스킬 그룹을 찾지 못했습니다.",
     radarAriaLabel: "능력치 레이더 차트",
     tierRank: "T등급",
@@ -94,6 +101,18 @@ const uiText = {
     descriptionTitle: "캐릭터 설명",
     statsTitle: "기본 데이터",
     skillsTitle: "스킬",
+    itemDescriptionTitle: "아이템 설명",
+    itemDataTitle: "아이템 데이터",
+    itemTip: "표시 문구",
+    itemClass: "분류",
+    itemLevel: "레벨",
+    itemCost: "가격",
+    itemStock: "상점",
+    itemCooldown: "쿨다운",
+    itemAbilities: "능력",
+    itemModel: "모델",
+    itemIconPath: "아이콘",
+    itemNoDescription: "설명이 없습니다",
     rankingTitle: "T등급 랭킹",
     rankingHint: "T등급과 육각형 점수는 직접 수정할 수 있습니다. 캐릭터에 마우스를 올리면 6개 항목이 표시됩니다.",
     communityTitle: "커뮤니티 공유",
@@ -121,9 +140,11 @@ const uiText = {
     export: "내보내기",
     import: "가져오기",
     heroCount: "{count}명",
+    itemCount: "{count}개 아이템",
     dragTierAria: "{name} 드래그해 T등급 수정",
     emptyTier: "없음",
     summary: "총 {total}명, 현재 {shown}명 표시",
+    itemSummary: "총 {total}개 아이템, 현재 {shown}개 표시",
     copyPrompt: "아래 설정을 복사하세요",
     pastePrompt: "점수 설정을 붙여넣으세요",
     exportedRating: "base64 설정을 클립보드에 내보냈습니다. 길이 {length}.",
@@ -166,16 +187,19 @@ const uiText = {
     loading: "正在读取地图数据...",
     viewTabsLabel: "页面切换",
     languageSwitchLabel: "语言切换",
-    searchPlaceholder: "搜索角色、称号、技能、说明",
+    searchPlaceholder: "搜索角色、物品、技能、说明",
     heroList: "角色列表",
+    itemList: "物品列表",
     selectHero: "请选择一个角色",
     viewHeroes: "角色资料",
+    viewItems: "物品资料",
     viewRanking: "T度排行",
     viewCommunity: "社区分享",
     unnamedHero: "未命名角色",
     unknownPlayer: "未命名玩家",
     noTitle: "无称号",
     noMatchingHero: "没有匹配的角色",
+    noMatchingItem: "没有匹配的物品",
     noAbilities: "没有解析到技能分组。",
     radarAriaLabel: "能力参数雷达图",
     tierRank: "T度",
@@ -206,6 +230,18 @@ const uiText = {
     descriptionTitle: "角色说明",
     statsTitle: "基础数据",
     skillsTitle: "技能",
+    itemDescriptionTitle: "物品说明",
+    itemDataTitle: "物品数据",
+    itemTip: "提示文本",
+    itemClass: "分类",
+    itemLevel: "等级",
+    itemCost: "价格",
+    itemStock: "商店",
+    itemCooldown: "冷却",
+    itemAbilities: "技能",
+    itemModel: "模型",
+    itemIconPath: "图标",
+    itemNoDescription: "暂无说明",
     rankingTitle: "T度排行",
     rankingHint: "T度与六边形评分均可手动修改；悬停角色查看具体六项。",
     communityTitle: "社区分享",
@@ -233,9 +269,11 @@ const uiText = {
     export: "导出",
     import: "导入",
     heroCount: "{count} 位角色",
+    itemCount: "{count} 个物品",
     dragTierAria: "拖动 {name} 修改T度",
     emptyTier: "暂无",
     summary: "共 {total} 个角色，当前显示 {shown} 个",
+    itemSummary: "共 {total} 个物品，当前显示 {shown} 个",
     copyPrompt: "复制以下配置",
     pastePrompt: "粘贴评分配置",
     exportedRating: "已导出 base64 配置到剪贴板，长度 {length}。",
@@ -335,7 +373,7 @@ function renderStaticChrome() {
   if (els.search) els.search.placeholder = t("searchPlaceholder");
   if (els.viewTabs) els.viewTabs.setAttribute("aria-label", t("viewTabsLabel"));
   if (els.languageSwitch) els.languageSwitch.setAttribute("aria-label", t("languageSwitchLabel"));
-  if (els.sidebarTitle) els.sidebarTitle.textContent = t("heroList");
+  if (els.sidebarTitle) els.sidebarTitle.textContent = state.view === "items" ? t("itemList") : t("heroList");
 }
 
 function playableHeroes(heroes = []) {
@@ -345,6 +383,10 @@ function playableHeroes(heroes = []) {
       ...hero,
       relatedHeroes: (hero.relatedHeroes || []).filter((relatedHero) => !excludedHeroIds.has(relatedHero.id)),
     }));
+}
+
+function playableItems(items = []) {
+  return items.filter((item) => item?.id);
 }
 
 function initials(name, id) {
@@ -406,6 +448,10 @@ function localizedHero(hero, language = state.language) {
   return result;
 }
 
+function localizedItem(item, language = state.language) {
+  return localizedEntity(item, language);
+}
+
 function translationText(entity) {
   return Object.values(entity?.translations || {})
     .map((translation) => Object.values(translation).join(" "))
@@ -457,7 +503,30 @@ function searchable(hero) {
     .toLowerCase();
 }
 
-function renderList() {
+function itemTextForSearch(item) {
+  return [
+    item.id,
+    item.name,
+    item.tip,
+    item.description,
+    item.class,
+    item.level,
+    item.goldCost,
+    item.lumberCost,
+    item.cooldownId,
+    item.model,
+    item.icon,
+    (item.abilityIds || []).join(" "),
+    translationText(item),
+  ].join(" ");
+}
+
+function searchableItem(item) {
+  const localizedSearchItem = localizedItem(item);
+  return [itemTextForSearch(item), itemTextForSearch(localizedSearchItem)].join(" ").toLowerCase();
+}
+
+function renderHeroList() {
   els.heroList.innerHTML = state.filtered
     .map((hero) => {
       const displayHero = localizedHero(hero);
@@ -475,6 +544,36 @@ function renderList() {
       `;
     })
     .join("");
+}
+
+function renderItemList() {
+  els.heroList.innerHTML = state.filteredItems
+    .map((item) => {
+      const displayItem = localizedItem(item);
+      const name = displayItem.name || item.id;
+      const title = displayItem.tip || displayItem.class || "";
+      return `
+        <button class="heroButton itemButton ${item.id === state.selectedItemId ? "active" : ""}" data-item-id="${escapeHtml(item.id)}">
+          ${renderIcon(item.iconAsset, initials(name, item.id), "heroIcon", name || item.id)}
+          <div>
+            <div class="heroName">${escapeHtml(name)}</div>
+            <div class="heroTitle">${escapeHtml(title || t("missing"))}</div>
+          </div>
+          <div class="heroId">${escapeHtml(item.id)}</div>
+        </button>
+      `;
+    })
+    .join("");
+}
+
+function renderList() {
+  renderStaticChrome();
+  if (state.view === "items") {
+    renderItemList();
+    return;
+  }
+
+  renderHeroList();
 }
 
 function renderViewTabs() {
@@ -1842,6 +1941,101 @@ function renderDetail(hero) {
   `;
 }
 
+function itemCostText(item) {
+  const parts = [];
+  if (item.goldCost) parts.push(`${item.goldCost} G`);
+  if (item.lumberCost) parts.push(`${item.lumberCost} L`);
+  return parts.join(" / ");
+}
+
+function itemStockText(item) {
+  const parts = [];
+  if (item.stockMax) parts.push(item.stockMax);
+  if (item.stockRegen) parts.push(`${item.stockRegen}s`);
+  return parts.join(" / ");
+}
+
+function renderItemDataRow(label, value, className = "") {
+  return `
+    <div class="itemDataRow ${className}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value || t("missing"))}</strong>
+    </div>
+  `;
+}
+
+function renderItemDetail(item) {
+  if (!item) {
+    els.detail.innerHTML = `<div class="empty">${escapeHtml(t("noMatchingItem"))}</div>`;
+    return;
+  }
+
+  const displayItem = localizedItem(item);
+  const name = displayItem.name || item.id;
+  const tip = (displayItem.tip || "").trim();
+  const description = (displayItem.description || "").trim();
+  const costText = itemCostText(item);
+  const stockText = itemStockText(item);
+  const abilityText = (item.abilityIds || []).join(", ");
+
+  els.detail.innerHTML = `
+    <div class="itemPage">
+      <div class="rankingHeader">
+        <div>
+          <h2>${escapeHtml(t("viewItems"))}</h2>
+        </div>
+        <div class="rankingCount">${escapeHtml(t("itemCount", { count: state.filteredItems.length }))}</div>
+      </div>
+
+      <section class="itemProfile">
+        <div class="profileHeader">
+          ${renderIcon(item.iconAsset, initials(name, item.id), "heroIcon", name || item.id)}
+          <div>
+            <h2 class="profileName">${escapeHtml(name)}</h2>
+            <div class="profileMeta">
+              <span class="pill">${escapeHtml(item.id)}</span>
+              ${item.class ? `<span class="pill">${escapeHtml(item.class)}</span>` : ""}
+              ${item.level ? `<span class="pill">${escapeHtml(`${t("itemLevel")} ${item.level}`)}</span>` : ""}
+              ${costText ? `<span class="pill">${escapeHtml(costText)}</span>` : ""}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="itemContentGrid">
+        <section class="panel">
+          <h2>${escapeHtml(t("itemDescriptionTitle"))}</h2>
+          <div class="panelBody">
+            ${
+              tip
+                ? `<div class="itemTip">
+                    <span>${escapeHtml(t("itemTip"))}</span>
+                    <strong>${escapeHtml(tip)}</strong>
+                  </div>`
+                : ""
+            }
+            <div class="description">${escapeHtml(description || t("itemNoDescription"))}</div>
+          </div>
+        </section>
+
+        <section class="panel itemDataPanel">
+          <h2>${escapeHtml(t("itemDataTitle"))}</h2>
+          <div class="panelBody itemDataGrid">
+            ${renderItemDataRow(t("itemClass"), item.class)}
+            ${renderItemDataRow(t("itemLevel"), item.level)}
+            ${renderItemDataRow(t("itemCost"), costText)}
+            ${renderItemDataRow(t("itemStock"), stockText)}
+            ${renderItemDataRow(t("itemCooldown"), item.cooldownId)}
+            ${renderItemDataRow(t("itemAbilities"), abilityText, "wide")}
+            ${renderItemDataRow(t("itemModel"), item.model, "wide path")}
+            ${renderItemDataRow(t("itemIconPath"), item.icon, "wide path")}
+          </div>
+        </section>
+      </div>
+    </div>
+  `;
+}
+
 function renderTierRanking() {
   const rows = rankedHeroes(state.filtered);
 
@@ -2090,7 +2284,16 @@ function selectedHero() {
   return state.heroes.find((hero) => hero.id === state.selectedId);
 }
 
+function selectedItem() {
+  return state.items.find((item) => item.id === state.selectedItemId);
+}
+
 function renderCurrentView() {
+  if (state.view === "items") {
+    renderItemDetail(selectedItem());
+    return;
+  }
+
   if (state.view === "ranking") {
     renderTierRanking();
     return;
@@ -2105,6 +2308,11 @@ function renderCurrentView() {
 }
 
 function renderSummary() {
+  if (state.view === "items") {
+    els.summary.textContent = t("itemSummary", { total: state.items.length, shown: state.filteredItems.length });
+    return;
+  }
+
   els.summary.textContent = t("summary", { total: state.heroes.length, shown: state.filtered.length });
 }
 
@@ -2445,9 +2653,17 @@ function applyHighestRatedCommunityShare() {
 function setView(view) {
   state.view = views.some((item) => item.id === view) ? view : "heroes";
   state.expandedAbilityId = "";
+  if (state.view === "items" && !state.filteredItems.some((item) => item.id === state.selectedItemId)) {
+    state.selectedItemId = state.filteredItems[0]?.id || "";
+  }
+  if (state.view !== "items" && !state.filtered.some((hero) => hero.id === state.selectedId)) {
+    state.selectedId = state.filtered[0]?.id || "";
+    state.selectedRelatedId = "";
+  }
   renderViewTabs();
   renderList();
   renderCurrentView();
+  renderSummary();
 }
 
 function selectHero(id) {
@@ -2460,11 +2676,26 @@ function selectHero(id) {
   renderCurrentView();
 }
 
+function selectItem(id) {
+  state.selectedItemId = id;
+  state.expandedAbilityId = "";
+  state.view = "items";
+  renderViewTabs();
+  renderList();
+  renderCurrentView();
+  renderSummary();
+}
+
 function applyFilter() {
   const query = els.search.value.trim().toLowerCase();
   state.filtered = query ? state.heroes.filter((hero) => searchable(hero).includes(query)) : [...state.heroes];
+  state.filteredItems = query ? state.items.filter((item) => searchableItem(item).includes(query)) : [...state.items];
 
-  if (!state.filtered.some((hero) => hero.id === state.selectedId)) {
+  if (state.view === "items") {
+    if (!state.filteredItems.some((item) => item.id === state.selectedItemId)) {
+      state.selectedItemId = state.filteredItems[0]?.id || "";
+    }
+  } else if (!state.filtered.some((hero) => hero.id === state.selectedId)) {
     state.selectedId = state.filtered[0]?.id || "";
     state.selectedRelatedId = "";
     state.expandedAbilityId = "";
@@ -2476,6 +2707,12 @@ function applyFilter() {
 }
 
 els.heroList.addEventListener("click", (event) => {
+  const itemButton = event.target.closest(".itemButton[data-item-id]");
+  if (itemButton) {
+    selectItem(itemButton.dataset.itemId);
+    return;
+  }
+
   const button = event.target.closest(".heroButton");
   if (button) selectHero(button.dataset.id);
 });
@@ -2648,12 +2885,15 @@ fetch(`data/heroes.json?v=${assetVersion}`, { cache: "no-store" })
   .then((response) => response.json())
   .then(async (data) => {
     state.heroes = playableHeroes(data.heroes || []);
+    state.items = playableItems(data.items || []);
     state.languages = Array.isArray(data.languages) && data.languages.length ? data.languages : [{ id: "source", label: "原文" }];
     state.language =
       data.defaultLanguage ||
       (state.languages.some((language) => language.id === "zhCN") ? "zhCN" : state.languages[0]?.id || "source");
     state.filtered = [...state.heroes];
+    state.filteredItems = [...state.items];
     state.selectedId = state.heroes[0]?.id || "";
+    state.selectedItemId = state.items[0]?.id || "";
     const cachedRatingCount = loadRatingCache();
     const hasRatingUrl = Boolean(ratingTextFromUrl(window.location.href, { allowHashPayload: false }));
     const importedRatingFromUrl = importRatingFromCurrentUrl();

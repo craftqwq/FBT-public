@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-07-08T11:52:56.536Z",
+  "generatedAt": "2026-07-12T10:35:30.697Z",
   "source": {
     "unitStrings": "Mpq/Units/CampaignUnitStrings.txt",
     "abilityStrings": "Mpq/Units/CampaignAbilityStrings.txt",
     "itemStrings": "Mpq/Units/ItemStrings.txt",
+    "itemData": "Mpq/Units/ItemData.slk",
     "war3map": "Mpq/war3map.j",
     "translations": {
       "zhCN": {
@@ -214,8 +215,18 @@
       "exclusiveWeapon": {
         "id": "I000",
         "name": "쿠지카네사다",
+        "tip": "",
         "description": "「병투에 임하는 자는 모두 진열 앞에 있으라」표면에 글자가 새겨진 옛 칼\n　①：직사의 마안（오의）：오의 획득：유식.직사의 마안\n　②：칠경종락（패시브）：“직사의 마안”의 나이프 처형 조건이 13%로 증가합니다.\n　③：이중인격（패시브）：적을 죽이면“쌍의 종루”와“호락적”의 쿨타임이 초기화됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTN214-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "九字兼定",
@@ -605,8 +616,18 @@
       "exclusiveWeapon": {
         "id": "I005",
         "name": "키쿠이치몬지 노리무네",
+        "tip": "",
         "description": "오키타 소지가 생전에 사용했던 타도.\n　①：사상포화（오의）：오의 획득：무명 삼단 찌르기\n　②：보법의 극（패시브）：축지의 최대치가 1증가합니다.\n　③：신속의 검（패시브）：“급운검”의 발동 시 1개의 축지를 얻습니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNCT-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "菊一文字则宗",
@@ -875,8 +896,18 @@
           "exclusiveWeapon": {
             "id": "I005",
             "name": "키쿠이치몬지 노리무네",
+            "tip": "",
             "description": "오키타 소지가 생전에 사용했던 타도.\n　①：사상포화（오의）：오의 획득：무명 삼단 찌르기\n　②：보법의 극（패시브）：축지의 최대치가 1증가합니다.\n　③：신속의 검（패시브）：“급운검”의 발동 시 1개의 축지를 얻습니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNCT-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "菊一文字则宗",
@@ -1176,8 +1207,18 @@
       "exclusiveWeapon": {
         "id": "I044",
         "name": "퓨전 용사",
+        "tip": "",
         "description": "손오공과 베지터의 퓨전으로 탄생한 최강의 전사.\n　①：최강의 퓨전（패시브）：오의 획득：메테오 익스플로전.\n　②：기합（패시브）：Q，W，E，F스킬의 기 증가량이 10으로 증가합니다.\n　③：차원강화（패시브）：“갓 퍼니셔/스타더스트 브레이커”의 최대 거리가 300 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNGogetaBlue_TX.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "融合战士",
@@ -1477,8 +1518,18 @@
       "exclusiveWeapon": {
         "id": "I046",
         "name": "일루시데이터",
+        "tip": "",
         "description": "SAO 최상급 흑색 한손검.\n　①：이도류（패시브）：오의 획득：디 이클립스.\n　②：다크 리펄서（패시브）：“엑스트라 소드스킬”의 지속 시간동안 올스텟이 15만큼 증가합니다.\n　③：생츄어리（패시브）：“스타버스트 스트림”의 마지막 타격이 범위 공격으로 변경됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNTR_TX.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "阐释者",
@@ -1770,8 +1821,18 @@
       "exclusiveWeapon": {
         "id": "I048",
         "name": "쿠사나기의 검",
+        "tip": "",
         "description": "삼종의 신기중 하나.\n　①：화염불탁（패시브）：오의 획득：최종결전비오의·십권.\n　②：전승자（패시브）：“108식·어둠쫓기”의 마법등급이 LV3으로 상승합니다.\n　③：쿠사나기류 고무술（패시브）：“R.E.D. KicK”의 쿨타임이 2초로 감소합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTN_KYO_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "草薙剑",
@@ -2027,8 +2088,18 @@
       "exclusiveWeapon": {
         "id": "I050",
         "name": "신염왕검",
+        "tip": "",
         "description": "히메코가 사용했던 신운검·수르트에 율자 코어를 연결시켜 키아나가 만들어낸 대검.\n　①：진홍의 불꽃（패시브）：오의 획득：신염왕검의 개선.\n　②：홍염（패시브）：“화륜차의 봉화”의“율자 형태”진입 지속 시간이 8초로 증가합니다.\n　③：불꽃의 힘（패시브）：“율자 형태”지속시간 동안 이동속도가 최대치로 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNKiana-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "薪炎王剑",
@@ -2284,8 +2355,18 @@
       "exclusiveWeapon": {
         "id": "I052",
         "name": "야타의 거울",
+        "tip": "",
         "description": "이타치가 소유하고 있는 절대방어의 영기.\n　①：아카츠키（패시브）：오의 획득：전율의 아카츠키.\n　②：공방일체（패시브）：“스사노오”의 피해 감소가 30%로 증가하고 소·아마테라스에 3초동안 150의 피해를 주는 화상 효과가 추가됩니다.\n　③：야사카의 곡옥（패시브）：“스사노오”사용 3초 후“야사카의 곡옥”이 추가됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNItachi_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "八咫镜",
@@ -2573,8 +2654,18 @@
       "exclusiveWeapon": {
         "id": "I054",
         "name": "사랑의 시",
+        "tip": "",
         "description": "엘리시아가 가장 좋아하는 활.\n　①：무결의 돔（패시브）：오의 획득：운명을 정하는 찬란한 영원.\n　②：꽃의 노래（패시브）：강화 공격 적중 시 “꽃과 새의 화살”의 쿨타임이 2초 감소합니다.\n　③：달의 맹세（패시브）：“밤이슬의 화살”의 피해량이 지능X11로 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNElysia_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "爱之诗",
@@ -2898,8 +2989,18 @@
       "exclusiveWeapon": {
         "id": "I059",
         "name": "일륜도",
+        "tip": "",
         "description": "젠이츠가 사용하는 검.\n　①：전력개방（패시브）：오의 획득：완전 개방.\n　②：전집중 호흡（패시브）：“뇌명의 표식”의 피로도 누적량이 5로 감소하고 1초동안 다음 기본 공격 속도가 70% 증가합니다.\n　③：번개의 호흡（패시브）：적을 처치했을 경우 피로도가 20 감소합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNZenitsu_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "日轮刀",
@@ -3151,8 +3252,18 @@
       "exclusiveWeapon": {
         "id": "I061",
         "name": "브라흐마스트라",
+        "tip": "",
         "description": "흑토끼에게 대여받은 의사신격 범석창입니다.\n　①：진심（패시브）：오의 획득：헥토파스칼 킥.\n　②：태양주권（패시브）：“무차별 공격”의 이동속도가 20% 증가합니다.\n　③：기프트 무효화（패시브）：“코드 언노운”의 회복량이 10% 증가하고 받는 피해 감소량이 5% 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNIzayoi_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "模拟神格·梵释枪",
@@ -3554,8 +3665,18 @@
       "exclusiveWeapon": {
         "id": "I063",
         "name": "선글라스",
+        "tip": "",
         "description": "육안으로 인한 피로 때문에 항상 선글라스나 눈가리개를 착용하고 다닌다.\n　①：영역 전개（패시브）：오의 획득：영역 전개『무량공처』.\n　②：상전술식（패시브）：“허식『자』” 등급이 LV4로 증가합니다.\n　③：무하한（패시브）：“무하한 주술”의 추가타 발동 시 자신의 주변에 지능X10의 데미지와 1.5초의 스턴을 부여하는 효과가 추가됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNGoJo_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "太阳镜",
@@ -3926,8 +4047,18 @@
           "exclusiveWeapon": {
             "id": "I081",
             "name": "世界的终焉",
+            "tip": "",
             "description": "跨越终焉、蜕变为全新姿态的赎罪象征。\n　①：领域展开（被动）：奥义获得：领域展开『无量空处』.\n　②：反转术式（被动）：“虚式『茈』” 等级提升至 LV4.\n　③：无下限（被动）：“无下限术式”触发追加攻击时，会在自身周围造成智力X10的伤害，并附带1.5秒的眩晕效果。",
             "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "世界的终焉",
@@ -4216,8 +4347,18 @@
       "exclusiveWeapon": {
         "id": "I065",
         "name": "초콜릿 쿨 불릿",
+        "tip": "",
         "description": "총알 형태의 아이스 초코로 알트리아가 기념일을 위해 만들었다.\n　①：시퀀스 모르간（패시브）：오의 획득：하트 브레이크·모르간.\n　②：리로디드（패시브）：“리로디드 연사”의 등급이 LV2로 증가합니다.\n　③：강습 튜닝（패시브）：“『꺾이지 않고 타오르는 승리의 검』” 적중 후 1회 기절 보호막을 획득하며 보호막이 파괴되면 체력을 1000회복합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNAltria_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "薄荷巧克力清凉子弹",
@@ -4505,8 +4646,18 @@
       "exclusiveWeapon": {
         "id": "I007",
         "name": "쿠사나기의 검",
+        "tip": "",
         "description": "특수 제작한 닌자도. 뇌속성 차크라 전도성이 매우 뛰어나다.\n　①：음의 차크라（각성）：각성 획득：완성체 스사노오\n　②：치도리 검（패시브）：일반 공격이 추가로 지능X3의 데미지와 0.1초의 스턴을 부여합니다.\n　③：호노이카즈치（패시브）：“윤회안” 상태에서 “만상천인” 의 끌어당기는 적에게 지능X11의 절대피해를 줍니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNZZ-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "草薙剑",
@@ -4793,8 +4944,18 @@
           "exclusiveWeapon": {
             "id": "I007",
             "name": "쿠사나기의 검",
+            "tip": "",
             "description": "특수 제작한 닌자도. 뇌속성 차크라 전도성이 매우 뛰어나다.\n　①：음의 차크라（각성）：각성 획득：완성체 스사노오\n　②：치도리 검（패시브）：일반 공격이 추가로 지능X3의 데미지와 0.1초의 스턴을 부여합니다.\n　③：호노이카즈치（패시브）：“윤회안” 상태에서 “만상천인” 의 끌어당기는 적에게 지능X11의 절대피해를 줍니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNZZ-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "草薙剑",
@@ -5086,8 +5247,18 @@
           "exclusiveWeapon": {
             "id": "I007",
             "name": "쿠사나기의 검",
+            "tip": "",
             "description": "특수 제작한 닌자도. 뇌속성 차크라 전도성이 매우 뛰어나다.\n　①：음의 차크라（각성）：각성 획득：완성체 스사노오\n　②：치도리 검（패시브）：일반 공격이 추가로 지능X3의 데미지와 0.1초의 스턴을 부여합니다.\n　③：호노이카즈치（패시브）：“윤회안” 상태에서 “만상천인” 의 끌어당기는 적에게 지능X11의 절대피해를 줍니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNZZ-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "草薙剑",
@@ -5484,8 +5655,18 @@
       "exclusiveWeapon": {
         "id": "I069",
         "name": "참월",
+        "tip": "",
         "description": "이치고의 참백도.\n　①：최후의 월아천충（각성）：오의 획득：무월.\n　②：초월자（패시브）：“각성”중 피해를 무시하며 체력을 1000회복하고 각성 후 기절과 침묵을 해제합니다.\n　③：영압（패시브）：“파사참”과“영압방출”쿨타임이 20초로 감소하며“연격참을 제외한 중단”시 쿨타임 20%를 반환합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNIchigo_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "斩月",
@@ -5857,8 +6038,18 @@
       "exclusiveWeapon": {
         "id": "I009",
         "name": "나나츠요루",
+        "tip": "",
         "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다。\n　①：죽음의 개념（각성）：각성 획득：직사의 마안\n　②：거미걸음（패시브）：자신의 이동속도를 522로 증가합니다.\n　③：일풍팔토（패시브）：“섬주·명월”로 적에게 접근할 시 적을 차버립니다. 적을 300만큼 밀어내고 민첩X14의 데미지와 1초의 스턴을 부여합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "七夜退魔刀",
@@ -6229,8 +6420,18 @@
           "exclusiveWeapon": {
             "id": "I009",
             "name": "나나츠요루",
+            "tip": "",
             "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다。\n　①：죽음의 개념（각성）：각성 획득：직사의 마안\n　②：거미걸음（패시브）：자신의 이동속도를 522로 증가합니다.\n　③：일풍팔토（패시브）：“섬주·명월”로 적에게 접근할 시 적을 차버립니다. 적을 300만큼 밀어내고 민첩X14의 데미지와 1초의 스턴을 부여합니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "七夜退魔刀",
@@ -6606,8 +6807,18 @@
           "exclusiveWeapon": {
             "id": "I009",
             "name": "나나츠요루",
+            "tip": "",
             "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다。\n　①：죽음의 개념（각성）：각성 획득：직사의 마안\n　②：거미걸음（패시브）：자신의 이동속도를 522로 증가합니다.\n　③：일풍팔토（패시브）：“섬주·명월”로 적에게 접근할 시 적을 차버립니다. 적을 300만큼 밀어내고 민첩X14의 데미지와 1초의 스턴을 부여합니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "七夜退魔刀",
@@ -6983,8 +7194,18 @@
           "exclusiveWeapon": {
             "id": "I009",
             "name": "나나츠요루",
+            "tip": "",
             "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다。\n　①：죽음의 개념（각성）：각성 획득：직사의 마안\n　②：거미걸음（패시브）：자신의 이동속도를 522로 증가합니다.\n　③：일풍팔토（패시브）：“섬주·명월”로 적에게 접근할 시 적을 차버립니다. 적을 300만큼 밀어내고 민첩X14의 데미지와 1초의 스턴을 부여합니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "七夜退魔刀",
@@ -7327,8 +7548,18 @@
       "exclusiveWeapon": {
         "id": "I074",
         "name": "얼음 결정",
+        "tip": "",
         "description": "에밀리아가 만들어낸 것으로 무기를 만들때에도 쓰인다.\n　①：대마법（오의）：오의 획득：앱솔루트 제로.\n　②：빙결（패시브）：“아이스 허리케인”사용 성공 시 이동 명령을 사용 해 500거리를 이동할 수 있습니다.\n　③：정령교감（패시브）：“아이스 애로우”의 등급이 LV2로 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNEmilia_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "冰之结晶",
@@ -7670,8 +7901,18 @@
       "exclusiveWeapon": {
         "id": "I00C",
         "name": "나나츠요루",
+        "tip": "",
         "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다\n　①：가월십야（오의）：오의 획득：극사·나나야\n　②：거미걸음（패시브）：자신의 이동속도가 15％ 상승합니다.\n　③：나나야 체술（패시브）：연타 수 만큼 민첩이 1 상승합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "七夜退魔刀",
@@ -8096,8 +8337,18 @@
           "exclusiveWeapon": {
             "id": "I00C",
             "name": "나나츠요루",
+            "tip": "",
             "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다\n　①：가월십야（오의）：오의 획득：극사·나나야\n　②：거미걸음（패시브）：자신의 이동속도가 15％ 상승합니다.\n　③：나나야 체술（패시브）：연타 수 만큼 민첩이 1 상승합니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "七夜退魔刀",
@@ -8527,8 +8778,18 @@
           "exclusiveWeapon": {
             "id": "I00C",
             "name": "나나츠요루",
+            "tip": "",
             "description": "나나야 가문이 남긴 단도. 칼자루에 “칠야” 라는 두 글자가 적혀있다\n　①：가월십야（오의）：오의 획득：극사·나나야\n　②：거미걸음（패시브）：자신의 이동속도가 15％ 상승합니다.\n　③：나나야 체술（패시브）：연타 수 만큼 민첩이 1 상승합니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNYY-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "七夜退魔刀",
@@ -8871,8 +9132,18 @@
       "exclusiveWeapon": {
         "id": "I00A",
         "name": "미카츠키 무네치카",
+        "tip": "",
         "description": "천하오검중 하나 엄청난 날카로움과 살상력을 보유하고 있다.\n　①：일순참형（오의）：오의 획득：운요【순광】\n　②：공포의 날（패시브）：“심역” 사용중 민첩이 20 증가합니다.\n　③：맹목적인 마음（패시브）：“홀「발도」”의 물리등급이 2로 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNYE-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "三日月宗进",
@@ -9128,8 +9399,18 @@
       "exclusiveWeapon": {
         "id": "I00E",
         "name": "겨울 선물",
+        "tip": "",
         "description": "성 위에서 춤을 추는 시리우스.\n　①：끝없는 설원（각성）：각성 획득：한여름의 설원\n　②：환상포용（패시브）：적 영웅을 처치하면 모든 기본스킬의 쿨타임이 5초 감소합니다.\n　③：끝의 세계（패시브）：“호접지몽”의 피해량이 각각 민첩X8로 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNWL-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "冬日礼物",
@@ -9402,8 +9683,18 @@
           "exclusiveWeapon": {
             "id": "I00E",
             "name": "겨울 선물",
+            "tip": "",
             "description": "성 위에서 춤을 추는 시리우스.\n　①：끝없는 설원（각성）：각성 획득：한여름의 설원\n　②：환상포용（패시브）：적 영웅을 처치하면 모든 기본스킬의 쿨타임이 5초 감소합니다.\n　③：끝의 세계（패시브）：“호접지몽”의 피해량이 각각 민첩X8로 증가합니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNWL-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "冬日礼物",
@@ -9930,8 +10221,18 @@
       "exclusiveWeapon": {
         "id": "I067",
         "name": "군바이",
+        "tip": "",
         "description": "마다라가 들고다니던 큰 부채.\n　①：스사노오（각성）：오의 획득：완성체 스사노오.\n　②：하시라마 세포（패시브）：“목둔 분신”의 피해량이 70%로 증가합니다.\n　③：사륜안（패시브）：“우치하 되돌리기”발동 실패 시 쿨타임의 40%를 반환받고 성공 시 20%를 반환받습니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNMadara_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "焰团扇",
@@ -10187,8 +10488,18 @@
       "exclusiveWeapon": {
         "id": "I03A",
         "name": "리본을 맨 키요히메",
+        "tip": "",
         "description": "아아，사랑해요，사랑해요，사랑해요！\n　①：용의환생（오의）：오의 획득：전신화생삼매\n　②：정열의 염하（패시브）：“분신화염”을 자신에게 사용가능.  이 경우“영주”사용을 막지 못합니다.\n　③：집념의 말로（패시브）：자신이 사망했을 때 자신을 쓰러트린 적에게“사행교란”을 사용합니다. 이 효과는“변화[화룡]”으로 강화될 수 있습니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNQJ-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "扎丝带的清姬",
@@ -10443,8 +10754,18 @@
           "exclusiveWeapon": {
             "id": "I03A",
             "name": "리본을 맨 키요히메",
+            "tip": "",
             "description": "아아，사랑해요，사랑해요，사랑해요！\n　①：용의환생（오의）：오의 획득：전신화생삼매\n　②：정열의 염하（패시브）：“분신화염”을 자신에게 사용가능.  이 경우“영주”사용을 막지 못합니다.\n　③：집념의 말로（패시브）：자신이 사망했을 때 자신을 쓰러트린 적에게“사행교란”을 사용합니다. 이 효과는“변화[화룡]”으로 강화될 수 있습니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNQJ-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "扎丝带的清姬",
@@ -10704,8 +11025,18 @@
           "exclusiveWeapon": {
             "id": "I03A",
             "name": "리본을 맨 키요히메",
+            "tip": "",
             "description": "아아，사랑해요，사랑해요，사랑해요！\n　①：용의환생（오의）：오의 획득：전신화생삼매\n　②：정열의 염하（패시브）：“분신화염”을 자신에게 사용가능.  이 경우“영주”사용을 막지 못합니다.\n　③：집념의 말로（패시브）：자신이 사망했을 때 자신을 쓰러트린 적에게“사행교란”을 사용합니다. 이 효과는“변화[화룡]”으로 강화될 수 있습니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNQJ-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "扎丝带的清姬",
@@ -10968,8 +11299,18 @@
       "exclusiveWeapon": {
         "id": "I03M",
         "name": "게임센터 코인",
+        "tip": "",
         "description": "미사카 미코토가 애용하는 게임센터의 코인.\n　①：찌릿찌릿（오의）：오의 획득：진정한 뇌격\n　②：긴급회피（패시브）：“영자이동”의 쿨타임을 25초로 낮춥니다.\n　③：번개의활（패시브）：“전자기동”의 지속 시간이 2초 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNYBMQ-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "游戏代币",
@@ -11335,8 +11676,18 @@
       "exclusiveWeapon": {
         "id": "I00L",
         "name": "백은의 죄",
+        "tip": "",
         "description": "흑염을 억누르고 몸속에 숨기는 특수한 장갑.\n　①：칠흑의 화염（오의）：오의 획득：이븐 스타 로드\n　②：연쇄억제（패시브）：“블랙 아웃” 의 표식 시간을 5초로 변경합니다.\n　③：고속이동（패시브）：“블랙아웃” 이 \"영주\"를 봉인하고 체력이 15% 이하인 적을 즉사시킵니다. 이 효과는 캔슬할 수 없습니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNHBK-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "白银之罪",
@@ -11671,8 +12022,18 @@
           "exclusiveWeapon": {
             "id": "I00L",
             "name": "백은의 죄",
+            "tip": "",
             "description": "흑염을 억누르고 몸속에 숨기는 특수한 장갑.\n　①：칠흑의 화염（오의）：오의 획득：이븐 스타 로드\n　②：연쇄억제（패시브）：“블랙 아웃” 의 표식 시간을 5초로 변경합니다.\n　③：고속이동（패시브）：“블랙아웃” 이 \"영주\"를 봉인하고 체력이 15% 이하인 적을 즉사시킵니다. 이 효과는 캔슬할 수 없습니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNHBK-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "白银之罪",
@@ -11961,8 +12322,18 @@
       "exclusiveWeapon": {
         "id": "I00O",
         "name": "도려내 뚫는 몰살의 창",
+        "tip": "",
         "description": "붉은 색과 검은 색이 섞인 마창. 불길한 기운을 풍기고 있다.\n　①：성배흡수（오의）：오의 획득：씹어 으깨는 죽음의 어금니 짐승。\n　②：육체재생（패시브）：“룬 각인” 발동 성공 시 기절에 걸려있지 않으면 체력1000을 회복합니다.\n　③：저주의 창（패시브）：평타 패시브의 데미지가 힘X15로 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNHG-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "突穿死棘之枪",
@@ -12340,8 +12711,18 @@
       "exclusiveWeapon": {
         "id": "I00P",
         "name": "음철",
+        "tip": "",
         "description": "도신이 까마귀 일색의 칠흑의 일본도.\n　①：사념가속（오의）：오의 획득：마지막 비검·추영\n　②：한계돌파（패시브）：“일도수라” 지속시간 중 “일도나찰” 를 사용할 수 있게 되고 영구적으로 공격력을 150 상승합니다.\n　③：천의무봉（패시브）：“제 3비검·원”/“누벼걷기-후퇴”의 방어레벨이 LV3으로 상승하고 모든 범위를 방어합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNHT-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "阴铁",
@@ -12718,8 +13099,18 @@
           "exclusiveWeapon": {
             "id": "I00P",
             "name": "음철",
+            "tip": "",
             "description": "도신이 까마귀 일색의 칠흑의 일본도.\n　①：사념가속（오의）：오의 획득：마지막 비검·추영\n　②：한계돌파（패시브）：“일도수라” 지속시간 중 “일도나찰” 를 사용할 수 있게 되고 영구적으로 공격력을 150 상승합니다.\n　③：천의무봉（패시브）：“제 3비검·원”/“누벼걷기-후퇴”의 방어레벨이 LV3으로 상승하고 모든 범위를 방어합니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNHT-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "阴铁",
@@ -13014,8 +13405,18 @@
       "exclusiveWeapon": {
         "id": "I00R",
         "name": "미즈카게 삿갓",
+        "tip": "",
         "description": "물의 나라를 대표하는 푸른 삿갓.\n　①：용갑의술（오의）：오의 획득：용둔·용해폭산\n　②：삼연수룡（패시브）：“수둔·수룡탄” 이 3마리의 수룡을 만들어지지만 양 옆의 수룡은 30％의 피해만 입힙니다.\n　③：가용성 마그마（패시브）：“용둔·용괴의 술” 이 0.2초마다 범위 내 적에게 추가로 0.6％의 최대 생명력의 데미지를 줍니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNZMM-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "水影斗笠",
@@ -13271,8 +13672,18 @@
       "exclusiveWeapon": {
         "id": "I033",
         "name": "야사카니의 곡옥",
+        "tip": "",
         "description": "야가미 일족 대대로 전해 내려오는 신기.\n　①：푸른달의 전쟁무늬（오의）：오의 획득：삼신기의 이。\n　②：흉포한 본능（패시브）：자신의 체력이 35％이하일 때 “리 316식·시화” 가 “금 1218식·팔지오” 로 변경됩니다.\n　③：피의 계약（패시브）：자신이 적 영웅을 쓰러트리면 “금 1211식·팔치녀” 의 쿨타임이 초기화 됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNBSA-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "八尺琼勾玉",
@@ -13637,8 +14048,18 @@
           "exclusiveWeapon": {
             "id": "I033",
             "name": "야사카니의 곡옥",
+            "tip": "",
             "description": "야가미 일족 대대로 전해 내려오는 신기.\n　①：푸른달의 전쟁무늬（오의）：오의 획득：삼신기의 이。\n　②：흉포한 본능（패시브）：자신의 체력이 35％이하일 때 “리 316식·시화” 가 “금 1218식·팔지오” 로 변경됩니다.\n　③：피의 계약（패시브）：자신이 적 영웅을 쓰러트리면 “금 1211식·팔치녀” 의 쿨타임이 초기화 됩니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNBSA-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "八尺琼勾玉",
@@ -14029,8 +14450,18 @@
       "exclusiveWeapon": {
         "id": "I036",
         "name": "비뢰신 쿠나이",
+        "tip": "",
         "description": "비뢰신의 표식이 새겨진 쿠나이。\n　①：구미 모드（각성）：각성 획득：구미 차크라 모드。\n　②：자연 차크라（패시브）：“선인모드” 의 지속시간을 12초로 상승시킵니다.\n　③：시공간결계（패시브）：“비뢰신 도뢰” 의 형성된 결계 내에서 “비뢰신의 술” 의 이동 명령을 비뢰신 도뢰 어느 곳을 클릭해도 이동합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTN4D-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "飞雷神苦无",
@@ -14268,8 +14699,18 @@
       "exclusiveWeapon": {
         "id": "I03C",
         "name": "21식 바라늄 의안",
+        "tip": "",
         "description": "의안은 그의 사고를 가속화시킬 수 있다.\n　①：한계치 초과（오의）：오의 획득：은선·곡정「전탄발사」\n　②：의안 해방（패시브）：“백제무궁의자세”가 주변의 적과 투사체의 이동속도를 1초동안 80％ 감소시킵니다.\n　③：삼단폭격（패시브）：\"백제무궁의자세\"의 영향범위가 700으로 증가합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNLTL-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "二一式黑膂石义眼",
@@ -14773,8 +15214,18 @@
       "exclusiveWeapon": {
         "id": "I03F",
         "name": "약속된 승리의 검",
+        "tip": "",
         "description": "호수의 요정이 아서에게 준 별의 검。\n　①：십삼구속（오의）：오의 획득：약속된 승리의 검\n　②：눈부신 여정（패시브）：자신의 체력을 초당 50 회복한다.\n　③：아그라베인（패시브）：매 라운드 시작 30초 후，이 의결은 채택된다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "誓约胜利之剑",
@@ -15083,8 +15534,18 @@
           "exclusiveWeapon": {
             "id": "I03F",
             "name": "약속된 승리의 검",
+            "tip": "",
             "description": "호수의 요정이 아서에게 준 별의 검。\n　①：십삼구속（오의）：오의 획득：약속된 승리의 검\n　②：눈부신 여정（패시브）：자신의 체력을 초당 50 회복한다.\n　③：아그라베인（패시브）：매 라운드 시작 30초 후，이 의결은 채택된다.",
             "icon": "ReplaceableTextures/CommandButtons/BTNJJYS-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "誓约胜利之剑",
@@ -15437,8 +15898,18 @@
       "exclusiveWeapon": {
         "id": "I03K",
         "name": "샤마시의 심판",
+        "tip": "",
         "description": "제7 율자코어로 제작된 “신의 열쇠”.\n　①：겁멸형태（각성）：오의 획득：천화발검\n　②：파멸의 힘（패시브）：모든 탄환이 경로상의 적을 뚫고 지나가고“추켜올린 천화”의 총알 LV이 2로 증가합니다.\n　③：얼음폭풍（패시브）：“얼음 감옥”으로 형성된 얼음 벽은 범위 내 적의 이동속도를 70％ 감소시킵니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNKW3-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "天火圣裁",
@@ -15658,8 +16129,18 @@
       "exclusiveWeapon": {
         "id": "I024",
         "name": "무명·부검",
+        "tip": "",
         "description": "신전의 초석으로 만들어진 거대한 돌도끼모양의 검\n　①：파괴충동（오의）：오의 획득：황폐한 연대기\n　②：야성광폭（패시브）：“마력방출”이“격노의 포효”의 액티브 효과를 발동시킵니다.\n　③：신화초월（패시브）：“열두 번의 시련”이 30초 생존할 때마다 1개의 시련을 회복하도록 변경합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNBerserker-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "无铭·斧剑",
@@ -16097,8 +16578,18 @@
       "exclusiveWeapon": {
         "id": "I02X",
         "name": "레바테인",
+        "tip": "",
         "description": "플랑도르가 소유한 불꽃의 마검\n　①：광기의달（오의）：오의 획득：금기「금지된 장난」.\n　②：붉은 마검（패시브）：자신에게 25％의 흡혈 효과를 부여.\n　③：악마의 질주（패시브） : “금기「크란베리트랩」”이 적중시 자신의 이동속도 200증가。",
         "icon": "ReplaceableTextures/CommandButtons/BTN-FLDL-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "莱瓦汀",
@@ -16386,8 +16877,18 @@
       "exclusiveWeapon": {
         "id": "I03U",
         "name": "조커의 카드",
+        "tip": "",
         "description": "뒷면에 광대가 그려져 있는 포커 카드\n　①：어두운 밤（오의）：오의 획득：심연\n　②：축복의 카드（패시브）：“King”의 은신효과를 없애고 반격에 성공하면 데미지의 70%를 돌려주면서 민첩X5의 데미지와 2초의 스턴을 부여합니다.\n　③：비통한 외침（패시브）：“King”이 15% 이하의 적에게 명중 시 적을 즉사 시키며 기술의 쿨타임을 10초 감소시킵니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTN_Rozwel_ZS1.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "鬼牌",
@@ -16782,8 +17283,18 @@
           "exclusiveWeapon": {
             "id": "I03U",
             "name": "조커의 카드",
+            "tip": "",
             "description": "뒷면에 광대가 그려져 있는 포커 카드\n　①：어두운 밤（오의）：오의 획득：심연\n　②：축복의 카드（패시브）：“King”의 은신효과를 없애고 반격에 성공하면 데미지의 70%를 돌려주면서 민첩X5의 데미지와 2초의 스턴을 부여합니다.\n　③：비통한 외침（패시브）：“King”이 15% 이하의 적에게 명중 시 적을 즉사 시키며 기술의 쿨타임을 10초 감소시킵니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTN_Rozwel_ZS1.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "鬼牌",
@@ -17183,8 +17694,18 @@
           "exclusiveWeapon": {
             "id": "I03U",
             "name": "조커의 카드",
+            "tip": "",
             "description": "뒷면에 광대가 그려져 있는 포커 카드\n　①：어두운 밤（오의）：오의 획득：심연\n　②：축복의 카드（패시브）：“King”의 은신효과를 없애고 반격에 성공하면 데미지의 70%를 돌려주면서 민첩X5의 데미지와 2초의 스턴을 부여합니다.\n　③：비통한 외침（패시브）：“King”이 15% 이하의 적에게 명중 시 적을 즉사 시키며 기술의 쿨타임을 10초 감소시킵니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTN_Rozwel_ZS1.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "鬼牌",
@@ -17551,8 +18072,18 @@
       "exclusiveWeapon": {
         "id": "I03W",
         "name": "요쿠히토리",
+        "tip": "",
         "description": "산죠 토우키가 츠바키를 위해 만든 불꽃의 새.\n　①：최강의 이름（오의）：오의 획득：우라엔키.\n　②：천주의 영역（패시브）：“칼날 영역”발동 시 2회 사용 가능.\n　③：떨어지는 봉황（패시브）：“비상하는 봉황”발동 시 “카구츠치”의 쿨타임이 초기화 됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "浴火鸟",
@@ -17839,8 +18370,18 @@
           "exclusiveWeapon": {
             "id": "I03W",
             "name": "요쿠히토리",
+            "tip": "",
             "description": "산죠 토우키가 츠바키를 위해 만든 불꽃의 새.\n　①：최강의 이름（오의）：오의 획득：우라엔키.\n　②：천주의 영역（패시브）：“칼날 영역”발동 시 2회 사용 가능.\n　③：떨어지는 봉황（패시브）：“비상하는 봉황”발동 시 “카구츠치”의 쿨타임이 초기화 됩니다.",
             "icon": "ReplaceableTextures/CommandButtons/BTN-ZQYC-ZS.blp",
+            "class": "",
+            "level": "",
+            "goldCost": "",
+            "lumberCost": "",
+            "stockMax": "",
+            "stockRegen": "",
+            "cooldownId": "",
+            "abilityIds": [],
+            "model": "",
             "translations": {
               "zhCN": {
                 "name": "浴火鸟",
@@ -18153,8 +18694,18 @@
       "exclusiveWeapon": {
         "id": "I03Z",
         "name": "운철의 풀무",
+        "tip": "",
         "description": "검신에「천국과 지옥」이라고 적혀있는 대검.\n　①：로마 대화재（패시브）：오의 획득：별이 달리는 종막의 장미\n　②：황제특권（패시브）：극장안에서 모든 스탯이 15 상승하고 받는 피해가 15% 감소합니다.\n　③：석양맞이（패시브）：“세 번 낙일을 맞이하더라도”가 실패했을 경우 쿨타임을 5초로 변경합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTN-YX-NL-ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "陨铁之鞴",
@@ -18442,8 +18993,18 @@
       "exclusiveWeapon": {
         "id": "I077",
         "name": "퓨전",
+        "tip": "",
         "description": "손오공과 베지터가 퓨전으로 탄생한 전사 오지터이다.\n　①：에너지 파（오의）：오의 획득：100배 빅뱅 에네르기 파.\n　②：어시스트（패시브）：“순간이동”으로 아군에게 도달 시 자신 및 아군의 체력을 1000회복합니다.\n　③：잔상（패시브）：“블러프 에네르기파”연계 시 분신이 타격을 대신합니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNGogetaR_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "融合",
@@ -18827,8 +19388,18 @@
       "exclusiveWeapon": {
         "id": "I080",
         "name": "경화수월",
+        "tip": "",
         "description": "완전최면의 능력을 가진 참백도로 상대의 오감을 지배한다.\n　①：경화수월（오의）：오의 획득：영창파기 파도 90·흑관.\n　②：귀도（패시브）：“파도 4·백뢰”에 0.1초 스턴이 추가됩니다.\n　③：오감지배（패시브）：“경화수월·최면”의 잔상이 1000범위 내 적을 추격하게 됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNAizen_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "镜花水月",
@@ -19084,8 +19655,18 @@
       "exclusiveWeapon": {
         "id": "I082",
         "name": "불완전·삼신기",
+        "tip": "",
         "description": "클론으로서 불완전한 삼신기를 소유하고 있다.\n　①：신진화멸（오의）：오의 획득：리 108식·대사치.\n　②：오버클록（패시브）：이동속도가 최대치가 됩니다.\n　③：MAX모드（패시브）：“427식·역철”의 쿨타임이 2초 감소하며“212식·금월 양”이 적중했을 경우 쿨타임을 25% 반환 받습니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNEXKYO_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "不完全·三神器",
@@ -19373,8 +19954,18 @@
       "exclusiveWeapon": {
         "id": "I084",
         "name": "술단지",
+        "tip": "",
         "description": "비소가 시와 술을 즐기기 때문에 상시로 들고 다니는 술단지.\n　①：극지평정（오의）：오의 획득：천격 해방.\n　②：해형（패시브）：“섬렬”의 탄환에 관통 효과가 추가됩니다.\n　③：통천（패시브）：“섬전”의 검격이 적에게 적중하지 못했을 경우 쿨타임을 50% 반환 받습니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNFeixiao_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "酒坛子",
@@ -19644,8 +20235,18 @@
       "exclusiveWeapon": {
         "id": "I086",
         "name": "대홍련빙륜환",
+        "tip": "",
         "description": "빙설계 최강의 참백도.\n　①：기상조종（오의）：오의 획득：빙천백화장.\n　②：빙결（패시브）：“빙룡파도”에 1초간“빙결”시키는 효과가 추가됩니다.\n　③：영압방출（패시브）：“영압 감지”가 발동됐을 때 적에게 명중하면 해당 적을 1.5초간“빙결”시키는 효과가 추가됩니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNToshiro_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "大紅蓮冰輪丸",
@@ -19901,8 +20502,18 @@
       "exclusiveWeapon": {
         "id": "I088",
         "name": "돌가면",
+        "tip": "",
         "description": "사용자를 각성시켜 흡혈귀로 변하게 하는 물건.\n　①：로드롤러（오의）：오의 획득：The World\n　②：매우 HIGH한 기분이다!（패시브）：적을 처치했을 경우“스탠드 파워”가 활성화되며 10초간 올스텟이 15만큼 증가합니다.\n　③：육신의 싹（패시브）：“흡혈”에 적중된 대상에게 적중 후 3초간 치유불가 패널티를 입힙니다.",
         "icon": "ReplaceableTextures/CommandButtons/BTNDIO_ZS.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "石假面",
@@ -20172,8 +20783,18 @@
       "exclusiveWeapon": {
         "id": "HI04",
         "name": "누관검·백루검",
+        "tip": "",
         "description": "요우무가 사용하는 이도류. 너무 길어서 일반인은 쓸 수 없다.\n　①：라스트 워드（오의）：오의 획득：서행춘풍참\n　②：검술을 다루는 정도의 능력（패시브）：스펠 카드 지속중 적 영웅을 처치시 현세참의 쿨타임을 초기화 합니다\n　③：이도류의 달인（패시브）：현세참의 거리를 100 증가 시킵니다",
         "icon": "ReplaceableTextures/CommandButtons/BTNyoumu_zs.blp",
+        "class": "",
+        "level": "",
+        "goldCost": "",
+        "lumberCost": "",
+        "stockMax": "",
+        "stockRegen": "",
+        "cooldownId": "",
+        "abilityIds": [],
+        "model": "",
         "translations": {
           "zhCN": {
             "name": "楼观剑·白楼剑",
@@ -20223,8 +20844,732 @@
       "iconAsset": "assets/icons/f21a96c6472d-btnyoumu_tx.png"
     }
   ],
+  "items": [
+    {
+      "id": "I002",
+      "name": "삼성 갤럭시노트7",
+      "tip": "【도구】삼성 갤럭시노트7(Q)",
+      "description": "폭발을 일으킬 수 있는 휴대폰을 전방에 던집니다. 명중시 600의 데미지와 1초의 스턴을 부여합니다./이 아이템은 한 번에 5개가 구매됩니다.\n기술타입 : 논타겟팅\n피해타입 : 물리피해\n물리레벨 : LV1\n사정거리 : 1200\n최대거리 : 1200\n쿨타임 : 15초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNDJ-1.blp",
+      "class": "Charged",
+      "level": "4",
+      "goldCost": "500",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A010",
+      "abilityIds": [
+        "A010"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "三星note7",
+          "tip": "【道具】三星note7(Q)",
+          "description": "将能够引发爆炸的手机向前投掷。命中时造成600点伤害和1秒的眩晕。/此物品一次性可购买5个。\n技能类型:地面目标\n伤害类型:物理伤害\n物理等级:LV1\n使用范围:1200\n最大距离:1200\n冷却时间:15秒"
+        }
+      },
+      "iconAsset": "assets/icons/077102655434-BTNDJ-1.png"
+    },
+    {
+      "id": "I00F",
+      "name": "金币置换",
+      "tip": "【구매】성정석 교환(Z)",
+      "description": "호부를 1000 성정석으로 교환합니다.",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-QHM.blp",
+      "class": "Artifact",
+      "level": "3",
+      "goldCost": "",
+      "lumberCost": "1",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "AIat",
+      "abilityIds": [
+        "A04L"
+      ],
+      "model": "Objects/InventoryItems/PotofGold/PotofGold.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "金币置换",
+          "tip": "【购买】金币置换(Z)",
+          "description": "将呼符转换为1000枚金币。"
+        }
+      },
+      "iconAsset": "assets/icons/1922f3154090-BTN-QHM.png"
+    },
+    {
+      "id": "I00G",
+      "name": "呼符置换",
+      "tip": "【구매】호부 교환(X)",
+      "description": "성정석을 호부 1개로 교환합니다.",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-MHQ.blp",
+      "class": "Artifact",
+      "level": "3",
+      "goldCost": "1000",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "AIat",
+      "abilityIds": [
+        "A04N"
+      ],
+      "model": "Objects/InventoryItems/BundleofLumber/BundleofLumber.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "呼符置换",
+          "tip": "【购买】呼符置换(X)",
+          "description": "将金币转换为1张呼符。"
+        }
+      },
+      "iconAsset": "assets/icons/b42da1f56f12-BTN-MHQ.png"
+    },
+    {
+      "id": "I00T",
+      "name": "허영의 먼지",
+      "tip": "【도구】허영의 먼지(E)",
+      "description": "마력을 지닌 먼지를 뿌립니다. 2초 동안 자신 주변의 은신된 유닛을 감지합니다./이 아이템은 한 번에 2개가 구매됩니다.\n기술타입 : 즉시 발동형\n영향범위 : 900\n쿨타임 : 20초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNDJ-3.blp",
+      "class": "Charged",
+      "level": "4",
+      "goldCost": "700",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "AItb",
+      "abilityIds": [
+        "AItb"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "虚影之尘",
+          "tip": "【道具】虚影之尘(E)",
+          "description": "撒出具有魔力的尘土，在2秒内显示自身周围的隐形单位。/一次性购买两个.\n技能类型 : 无目标\n影响范围 : 900\n冷却时间 : 20秒"
+        }
+      },
+      "iconAsset": "assets/icons/c8ee7ca2868a-BTNDJ-3.png"
+    },
+    {
+      "id": "I00U",
+      "name": "봉황의 깃털",
+      "tip": "【도구】봉황의 깃털(W)",
+      "description": "치유의 마력을 발산하여 3초 동안 체력을 1500 회복하며 올스텟이 3만큼 증가합니다./이 아이템은 한번에 1개가 구매됩니다.\n기술타입 : 즉시 발동형\n쿨타임 : 30초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNDJ-2.blp",
+      "class": "Charged",
+      "level": "4",
+      "goldCost": "700",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "AIhe",
+      "abilityIds": [
+        "A07D"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "凤凰之羽",
+          "tip": "【道具】凤凰之羽(W)",
+          "description": "释放治愈魔力，在3秒内恢复1500点生命值，并提升全属性3点。/该道具每次可购买1个。\n技能类型 : 无目标\n冷却时间 : 30秒"
+        }
+      },
+      "iconAsset": "assets/icons/bb83fe940061-BTNDJ-2.png"
+    },
+    {
+      "id": "I00V",
+      "name": "우자의 사슬",
+      "tip": "【도구】우자의 사슬(R)",
+      "description": "마력을 지닌 쇠사슬을 방출하여 1.5초동안 목표 적을 속박하고 침묵시킵니다./이 아이템은 한 번에 1개가 구매됩니다.\n기술타입 : 타겟팅\n사정거리 : 150\n쿨타임 : 35초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNDJ-4.blp",
+      "class": "Charged",
+      "level": "4",
+      "goldCost": "1000",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "Ashs",
+      "abilityIds": [
+        "A07C"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "愚者之锁",
+          "tip": "【道具】愚者之锁(R)",
+          "description": "放出具有魔力的锁链，在1.5秒内束缚并沉默目标敌人。/该道具可使用1次。\n技能类型 : 目标单位\n使用范围 : 150\n冷却时间 : 35秒"
+        }
+      },
+      "iconAsset": "assets/icons/b6b4f2a783fc-BTNDJ-4.png"
+    },
+    {
+      "id": "I00W",
+      "name": "응급 처치",
+      "tip": "【마술】응급 처치(A)",
+      "description": "치유의 마술을 사용해 체력을 1000 회복합니다.\n기술타입 : 즉시 발동형\n쿨타임 : 30초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNMS-1.blp",
+      "class": "PowerUp",
+      "level": "",
+      "goldCost": "500",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "30",
+      "cooldownId": "AIra",
+      "abilityIds": [
+        "A07F"
+      ],
+      "model": "Objects/InventoryItems/runicobject/runicobject.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "应急处理",
+          "tip": "【魔术】应急处理(A)",
+          "description": "释放治愈魔术，使自身恢复1000点生命值。\n技能类型 : 无目标\n冷却时间 : 30秒"
+        }
+      },
+      "iconAsset": "assets/icons/bd0e7e31f0ff-BTNMS-1.png"
+    },
+    {
+      "id": "I00X",
+      "name": "순간 강화",
+      "tip": "【마술】순간 강화(S)",
+      "description": "강화 마술을 사용해 60초 동안 자신의 주 스텟을 5 증가시킵니다.\n기술타입 : 즉시 발동형\n쿨타임 : 40초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNMS-2.blp",
+      "class": "PowerUp",
+      "level": "",
+      "goldCost": "750",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "40",
+      "cooldownId": "AIrv",
+      "abilityIds": [
+        "A07G"
+      ],
+      "model": "Objects/InventoryItems/runicobject/runicobject.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "瞬间强化",
+          "tip": "【魔术】瞬间强化(S)",
+          "description": "释放强化魔术，使自身增加5点主属性，效果持续60秒。\n技能类型 : 无目标\n冷却时间 : 40秒"
+        }
+      },
+      "iconAsset": "assets/icons/e9553fc53c3f-BTNMS-2.png"
+    },
+    {
+      "id": "I00Y",
+      "name": "긴급 회피r",
+      "tip": "【마술】긴급 회피(D)",
+      "description": "강화 마술을 사용해 45초 동안 자신의 이동속도를 최대치로 증가시킵니다.\n기술타입 : 즉시 발동형\n쿨타임 : 0초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNMS-3.blp",
+      "class": "PowerUp",
+      "level": "",
+      "goldCost": "300",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A07H",
+      "abilityIds": [
+        "A07H"
+      ],
+      "model": "Objects/InventoryItems/runicobject/runicobject.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "紧急回避r",
+          "tip": "【魔术】紧急回避(D)",
+          "description": "释放强化魔术，使自身移动速度提升至最大值，效果持续45秒。\n技能类型 : 无目标\n冷却时间 : 0秒"
+        }
+      },
+      "iconAsset": "assets/icons/990ce2b47190-BTNMS-3.png"
+    },
+    {
+      "id": "I00Z",
+      "name": "灵子让渡",
+      "tip": "【마술】영자 양도(F)",
+      "description": "주문 각인을 전하여 자신의 영주를 1획 회복합니다.\n기술타입 : 즉시 발동형\n쿨타임 : 60초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNMS-4.blp",
+      "class": "PowerUp",
+      "level": "",
+      "goldCost": "600",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "60",
+      "cooldownId": "AIim",
+      "abilityIds": [
+        "A07I"
+      ],
+      "model": "Objects/InventoryItems/runicobject/runicobject.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "灵子让渡",
+          "tip": "【魔术】灵子让渡(F)",
+          "description": "移令咒刻印，使自身恢复1划令咒。\n技能类型 : 无目标\n冷却时间 : 60秒"
+        }
+      },
+      "iconAsset": "assets/icons/e50f15760de0-BTNMS-4.png"
+    },
+    {
+      "id": "I01N",
+      "name": "[Sys]영기변환",
+      "tip": "【구매】영기변환(Q)",
+      "description": "영령의 현제 체력이 90％이상이고 이번 라운드 내에 스킬/도구를 사용하지 않았을 경우에 현재 조종 중인 영령을 재선택 가능하게 해줍니다.",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-F2TX2.blp",
+      "class": "PowerUp",
+      "level": "3",
+      "goldCost": "1000",
+      "lumberCost": "5",
+      "stockMax": "1",
+      "stockRegen": "1",
+      "cooldownId": "A07H",
+      "abilityIds": [],
+      "model": "Objects/InventoryItems/runicobject/runicobject.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "[Sys]更换英灵",
+          "tip": "【购买】更换英灵(Q)",
+          "description": "当前英灵血量≥90％并且在本回合内没有释放过技能/道具，可重新选择当前所操控的英灵。"
+        }
+      },
+      "iconAsset": "assets/icons/61487ce737ad-BTN-F2TX2.png"
+    },
+    {
+      "id": "I01P",
+      "name": "봉황의 깃털",
+      "tip": "【도구】봉황의 깃털(W)",
+      "description": "치유의 마력을 발산하여 3초 동안 체력을 1500 회복하며 올스텟이 3만큼 증가합니다./이 아이템은 한번에 1개가 구매됩니다.\n기술타입 : 즉시 발동형\n쿨타임 : 30초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNDJ-2.blp",
+      "class": "Charged",
+      "level": "4",
+      "goldCost": "700",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "AIhe",
+      "abilityIds": [],
+      "model": "",
+      "translations": {
+        "zhCN": {
+          "name": "凤凰之羽",
+          "tip": "【道具】凤凰之羽(W)",
+          "description": "释放治愈魔力，在3秒内恢复1500点生命值，并提升全属性3点。/该道具可使用1次。\n技能类型：无目标\n技能冷却：30s"
+        }
+      },
+      "iconAsset": "assets/icons/bb83fe940061-BTNDJ-2.png"
+    },
+    {
+      "id": "I02U",
+      "name": "파멸 버섯",
+      "tip": "【예복】파멸 버섯",
+      "description": "자신이 죽으면 파멸버섯이 소환되어 3초 후 엄청난 폭발을 일으킵니다. 주변 적에게 2000~500의 피해와 스턴을 부여합니다. 중앙에 가까워질 수록 데미지가 강해집니다. 중앙의 영웅에게는 2초 스턴을 부여하고 외각의 영웅에게는 1초의 스턴을 부여합니다. 60초에 한 번 발동 됩니다.\n기술타입 : 패시브\n피해타입 : 마법피해\n영향범위 : 1100",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-LZ9.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0DT",
+      "abilityIds": [
+        "A0DT"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "毁灭菇",
+          "tip": "【礼装】毁灭菇",
+          "description": "死亡时召唤毁灭菇，3秒后引发大爆炸，对周围敌人造成2000至500点伤害（中心伤害最高）并附加眩晕：中心英雄眩晕2秒，外围英雄眩晕1秒。每60秒只能触发一次。\n技能类型 : 被动\n伤害类型 : 魔法伤害\n影响范围 : 1100"
+        }
+      },
+      "iconAsset": "assets/icons/9d97288c81dd-BTN-LZ9.png"
+    },
+    {
+      "id": "I02V",
+      "name": "히메지 박쥐",
+      "tip": "【예복】히메지 박쥐",
+      "description": "사용 후 1초 안에 200이상의 데미지를 받으면 데미지를 무시하고 기절과 빙결을 해제한 뒤 순식간에 적의 뒤로 이동합니다./이 효과는“우아하라”와“황혼의 왕성”의 쿨타임을 공유합니다.\n기술타입 : 즉시 발동형\n쿨타임 : 25초",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-LZ10.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CO",
+      "abilityIds": [
+        "A0DW"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "姬路蝙蝠",
+          "tip": "【礼装】姬路蝙蝠",
+          "description": "使用后1秒内受到≥200点伤害，则无视该伤害并解除眩晕与冻结，瞬间闪现至攻击者身后。/该效果与「秉持优雅」「黄昏王城」共享冷却\n技能类型 : 无目标\n冷却时间 : 25秒"
+        }
+      },
+      "iconAsset": "assets/icons/d9f809c9cd37-BTN-LZ10.png"
+    },
+    {
+      "id": "I02Y",
+      "name": "파란 줄무늬 팬티",
+      "tip": "【예복】파란 줄무늬 팬티",
+      "description": "적에게 마음속에 간직한 보물을 던집니다. 적에게 1.5초간 총 800의 데미지를 주고 1.5초동안 침묵시킵니다./이 효과는“황금과 태양의 승부사”와 쿨타임을 공유합니다.\n기술타입 : 타겟팅\n피해타입 : 물리피해\n물리등급 : LV1\n사정거리 : 1200\n최대거리 : 1200\n쿨타임 : 30초",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-LZ05.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CL",
+      "abilityIds": [
+        "A0CL"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "蓝白胖次",
+          "tip": "【礼装】蓝白胖次",
+          "description": "向敌人投掷心中珍藏的宝物，造成1.5秒内总计800点伤害，并沉默目标1.5秒。/与“黄金与太阳的赌徒”共享冷却时间。\n技能类型 : 目标单位\n伤害类型 : 物理伤害\n物理等级 : LV1\n使用范围 : 1200\n最大距离 : 1200\n冷却时间 : 30秒"
+        }
+      },
+      "iconAsset": "assets/icons/5c55d68d6fc7-BTN-LZ05.png"
+    },
+    {
+      "id": "I02Z",
+      "name": "컬라이도스코프",
+      "tip": "【예복】컬라이도스코프",
+      "description": "마법의 힘을 빌어 현재 위치를 기록합니다. 발동 후 3초후 자신이 기록된 위치로 되돌아가 스턴을 해제합니다.\n기술타입 : 즉시 발동형\n쿨타임 : 70초",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-LZ04.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CM",
+      "abilityIds": [
+        "A0CM"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "万华镜",
+          "tip": "【礼装】万华镜",
+          "description": "借助魔力记录当前位置，发动3秒后回到记录点并解除眩晕状态。\n技能类型 : 无目标\n冷却时间 : 70秒"
+        }
+      },
+      "iconAsset": "assets/icons/c7ce9b775e40-BTN-LZ04.png"
+    },
+    {
+      "id": "I030",
+      "name": "프리즈마 코스모스",
+      "tip": "【예복】프리즈마 코스모스",
+      "description": "성배의 신비한 힘을 빌립니다. 자신을 사라지게 한 뒤 2.5초 뒤에 목표 위치로 이동합니다./이 효과는“사랑의 주문”과 쿨타임을 공유합니다.\n기술타입 : 논타겟팅\n사정거리 : 1500\n쿨타임 : 40초",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-LZ03.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0DZ",
+      "abilityIds": [
+        "A0DZ"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "宇宙棱镜",
+          "tip": "【礼装】宇宙棱镜",
+          "description": "借用圣杯的神秘力量，使自身消失后于2.5秒传送至目标位置。/该效果与「爱之咒语」共享冷却.\n技能类型 : 地面目标\n使用范围 : 1500\n冷却时间 : 40秒"
+        }
+      },
+      "iconAsset": "assets/icons/9aab8775b2b4-BTN-LZ03.png"
+    },
+    {
+      "id": "I031",
+      "name": "우아하라",
+      "tip": "【예복】우아하라",
+      "description": "사용 후 1초 안에 400이상의 데미지를 받으면 기절과 빙결을 해제하고 주변 적에게 1000의 데미지와 1초의 스턴을 부여합니다./이 효과는“히메지 박쥐”와“황혼의 왕성”쿨타임을 공유합니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n영향범위 : 400\n쿨타임 : 30초",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-LZ02.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CO",
+      "abilityIds": [
+        "A0CO"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "秉持优雅",
+          "tip": "【礼装】秉持优雅",
+          "description": "使用后1秒内受到≥400点伤害，将释放魔力弹击退周围敌人并解除冰冻，造成1000点伤害及1秒眩晕。/该效果与「姬路蝙蝠」「黄昏王城」共享冷却\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n影响范围 : 400\n冷却时间 : 30秒"
+        }
+      },
+      "iconAsset": "assets/icons/6a5c261f10a7-BTN-LZ02.png"
+    },
+    {
+      "id": "I03N",
+      "name": "강철의 단련",
+      "tip": "【예복】강철의 단련",
+      "description": "강한 신앙으로 자신을 보호합니다. 3초동안 방어등급을 얻습니다.\n기술타입 : 즉시 발동형\n방어등급 : LV1\n쿨타임 : 40초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNLZ-GZDL.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CP",
+      "abilityIds": [
+        "A0CP"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "钢之锻炼",
+          "tip": "【礼装】钢之锻炼",
+          "description": "以强烈的信仰使自身在3秒内获得防御等级。\n技能类型：无目标\n防御等级：LV1\n技能冷却：40s"
+        }
+      },
+      "iconAsset": "assets/icons/972ec0c88630-BTNLZ-GZDL.png"
+    },
+    {
+      "id": "I03O",
+      "name": "골든 스모",
+      "tip": "【예복】골든 스모",
+      "description": "금강역사의 정면대결. 주위 적을 짓밟아 200의 데미지와 0.75초의 스턴을 부여합니다. 그리고 3초 후 다시 800의 데미지와 1.5초의 스턴을 부여합니다.\n기술타입 : 즉시 발동형\n피해타입 : 물리피해\n영향범위 : 250/450\n쿨타임 : 20초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNLZ-HJXP.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CQ",
+      "abilityIds": [
+        "A0CQ"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "黄金相扑",
+          "tip": "【礼装】黄金相扑",
+          "description": "金刚力士的正面对决，践踏地面对周围的敌人造成200点伤害和0.75秒眩晕，延迟3秒后再次造成800点伤害和1.5秒眩晕。\n技能类型 : 无目标\n伤害类型 : 物理伤害\n影响范围 : 250/450\n冷却时间 : 20秒"
+        }
+      },
+      "iconAsset": "assets/icons/41c892c8b7e7-BTNLZ-HJXP.png"
+    },
+    {
+      "id": "I03P",
+      "name": "신록의 파음",
+      "tip": "【예복】신록의 파음",
+      "description": "대기 중의 마력을 조절하여 결계를 생성합니다. 결계 내의 아군 영웅이 5초동안 초당 3.5％의 최대 생명력을 회복합니다. 이효과는 중첩되지 않습니다.\n기술타입 : 즉시 발동형\n영향범위 : 700\n쿨타임 : 50초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNLZ-LZPY.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CR",
+      "abilityIds": [
+        "A0CR"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "绿之破音",
+          "tip": "【礼装】绿之破音",
+          "description": "操控大气中的魔力设置结界，使结界内的友方单位每秒恢复3.5％的最大生命值，该效果无法叠加，结界持续5秒。\n技能类型 : 无目标\n影响范围 : 700\n冷却时间 : 50秒"
+        }
+      },
+      "iconAsset": "assets/icons/41a1b336a559-BTNLZ-LZPY.png"
+    },
+    {
+      "id": "I03Q",
+      "name": "잭 오 랜턴",
+      "tip": "【예복】잭 오 랜턴",
+      "description": "체이터 성 인근 성시를 물들인 랜턴 장식. 시전시 주변의 은신이 해제되고 1초 동안 자신의 주변의 스텔스 영웅이 표시됩니다.\n기술타입 : 즉시 발동형\n영향범위 : 2000/900\n쿨타임 : 15초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNLZ-JKNGD.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "AItb",
+      "abilityIds": [
+        "A0CS"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "杰克南瓜灯",
+          "tip": "【礼装】杰克南瓜灯",
+          "description": "赛依特城下的街道被彩灯点缀，发动时会解除周围的隐形状态，并使自身附近的潜行英雄现形1秒。\n技能类型 : 无目标\n影响范围 : 2000/900\n冷却时间 : 15秒"
+        }
+      },
+      "iconAsset": "assets/icons/4f1f9116b0bc-BTNLZ-JKNGD.png"
+    },
+    {
+      "id": "I03R",
+      "name": "예복 재구축",
+      "tip": "【구매】예복 재구축(C)",
+      "description": "기존 상점의 예복들을 4개의 예복으로 재구조화합니다.",
+      "icon": "ReplaceableTextures/CommandButtons/BTN-LZ01.blp",
+      "class": "Permanent",
+      "level": "3",
+      "goldCost": "2000",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "1.5",
+      "cooldownId": "AImr",
+      "abilityIds": [],
+      "model": "Objects/InventoryItems/runicobject/runicobject.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "礼装重构",
+          "tip": "【购买】礼装重构(C)",
+          "description": "重新构造出4个礼装。"
+        }
+      },
+      "iconAsset": "assets/icons/a2805493885a-BTN-LZ01.png"
+    },
+    {
+      "id": "I041",
+      "name": "세뱃돈",
+      "tip": "【도구】세뱃돈(E)",
+      "description": "빨간 봉투 안에 든 세뱃돈입니다./사용 시 750의 체력을 회복하고 골드를 랜덤하게 획득합니다.\n기술타입 : 즉시 발동형\n쿨타임：35초",
+      "icon": "ReplaceableTextures/CommandButtons/BTN_XNHB.blp",
+      "class": "Charged",
+      "level": "4",
+      "goldCost": "800",
+      "lumberCost": "",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "AIhe",
+      "abilityIds": [
+        "A0G2"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "新年红包",
+          "tip": "【道具】新年红包(E)",
+          "description": "装在红包中的压岁钱。/使用时恢复750点生命值，并随机获得金币。\n技能类型 : 无目标\n冷却时间：35秒"
+        }
+      },
+      "iconAsset": "assets/icons/f423677d8080-BTN_XNHB.png"
+    },
+    {
+      "id": "I042",
+      "name": "灵子让渡",
+      "tip": "【마술】초영자 양도(Z)",
+      "description": "이번 라운드 내에 스킬/도구를 사용하지 않았을 경우 구매할 수 있습니다. 주문 각인을 전하여 자신의 영주를 3획 모두 회복하고 영주의 쿨타임을 초기화합니다.\n기술타입 : 즉시 발동형\n쿨타임 : 3초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNMS-4.blp",
+      "class": "PowerUp",
+      "level": "",
+      "goldCost": "",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "3",
+      "cooldownId": "AIim",
+      "abilityIds": [
+        "A07I"
+      ],
+      "model": "Objects/InventoryItems/runicobject/runicobject.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "灵子让渡",
+          "tip": "【购买】灵子让渡(Z)",
+          "description": "如果在本回合内没有使用技能或道具，则可以购买。恢复3点令咒并重置所有令咒的冷却时间。\n技能类型 : 无目标\n冷却时间 : 3秒"
+        }
+      },
+      "iconAsset": "assets/icons/e50f15760de0-BTNMS-4.png"
+    },
+    {
+      "id": "I055",
+      "name": "황혼의 왕성",
+      "tip": "【예복】황혼의 왕성",
+      "description": "사용 후 1초 안에 200이상의 데미지를 받으면 소용돌이로 해당 데미지를 무시하고 체력을 700 회복한 후 기절과 빙결을 해제합니다./이 효과는“우아하라”와“히메지 박쥐”하고 쿨타임을 공유합니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n영향범위 : 400\n쿨타임 : 25초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNHW01.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CO",
+      "abilityIds": [
+        "A0O8"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "黄昏王城",
+          "tip": "【礼装】黄昏王城",
+          "description": "使用后1秒内受到≥200点伤害，将化作漩涡无视该伤害，恢复700点生命值并解除眩晕与冻结状态。/该效果与“秉持优雅”“姬路蝙蝠”共享冷却\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n影响范围 : 400\n冷却时间 : 25秒"
+        }
+      },
+      "iconAsset": "assets/icons/b9963413f3b9-BTNHW01.png"
+    },
+    {
+      "id": "I056",
+      "name": "사랑의 주문",
+      "tip": "【예복】사랑의 주문",
+      "description": "사용 후 2.5초간 제자리에서 피해를 막습니다. 이후 기절 외의 디버프를 해제하며 침묵이 아닐 경우 기절 해제 및 주변에 1초 스턴을 줍니다./“프리즈마 코스모스”와 쿨타임을 공유합니다.\n기술타입 : 즉시 발동형\n피해타입 : 마법피해\n영향범위 : 400\n쿨타임 : 70초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNSJ01.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0DZ",
+      "abilityIds": [
+        "A0O9"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "爱之魔咒",
+          "tip": "【礼装】爱之魔咒",
+          "description": "使用后2.5秒内在原地格挡伤害，随后解除眩晕外的负面状态，若未处于沉默状态则额外解除眩晕并对周围造成1秒眩晕。/该礼装与“宇宙棱镜”共享冷却.\n技能类型 : 无目标\n伤害类型 : 魔法伤害\n影响范围 : 400\n冷却时间 : 70秒"
+        }
+      },
+      "iconAsset": "assets/icons/65b1dd96511f-BTNSJ01.png"
+    },
+    {
+      "id": "I089",
+      "name": "황금과 태양의 승부사",
+      "tip": "【예복】황금과 태양의 승부사",
+      "description": "지정한 대상에게 하늘의 쇠사슬을 걸어 적의 위치를 2초간 고정시키고 침묵시킵니다./이 효과는“파란 줄무늬 팬티”와 쿨타임을 공유합니다.\n기술타입 : 타겟팅\n사정거리 : 200\n쿨타임 : 40초",
+      "icon": "ReplaceableTextures/CommandButtons/BTNGilgaArt.blp",
+      "class": "Permanent",
+      "level": "5",
+      "goldCost": "2000",
+      "lumberCost": "3",
+      "stockMax": "1",
+      "stockRegen": "",
+      "cooldownId": "A0CL",
+      "abilityIds": [
+        "HF04"
+      ],
+      "model": "Objects/InventoryItems/TreasureChest/treasurechest.mdl",
+      "translations": {
+        "zhCN": {
+          "name": "黄金与太阳的赌徒",
+          "tip": "【礼装】黄金与太阳的赌徒",
+          "description": "对指定目标挂上天之锁，将敌人的位置固定2秒并沉默。/与“蓝白胖次”共享冷却时间。\n技能类型 : 目标单位\n施法距离 : 200\n冷却时间 : 40秒"
+        }
+      },
+      "iconAsset": "assets/icons/f228f0ea0962-BTNGilgaArt.png"
+    }
+  ],
   "iconBuild": {
-    "converted": 975,
+    "converted": 1003,
     "filteredAbilities": 386,
     "filteredHeroes": 2,
     "missing": [
