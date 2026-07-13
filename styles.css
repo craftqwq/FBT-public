@@ -313,6 +313,16 @@ input:focus {
   border-color: var(--line);
 }
 
+.changelogEntryButton {
+  margin-bottom: 8px;
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: #10131a;
+}
+
+.changelogEntryButton .heroIcon {
+  border-color: color-mix(in srgb, var(--accent) 44%, var(--line));
+}
+
 .heroIcon,
 .abilityIcon {
   width: 42px;
@@ -1073,6 +1083,47 @@ input:focus {
   color: var(--muted);
   font-size: 12px;
   font-weight: 900;
+}
+
+.changelogEntries {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.changelogEntry {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.changelogEntry:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.changelogIndex {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.changelogText {
+  color: #d8dee8;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .itemProfile {

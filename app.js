@@ -6,6 +6,7 @@ const state = {
   selectedId: "",
   selectedItemId: "",
   selectedRelatedId: "",
+  selectedChangelog: false,
   expandedAbilityId: "",
   view: "heroes",
   diffMode: false,
@@ -34,8 +35,6 @@ const state = {
   suppressNextTierClick: false,
   pointerDrag: null,
 };
-
-const assetVersion = "20260713-source-diff-added";
 
 const els = {
   heading: document.querySelector(".topbar h1"),
@@ -380,7 +379,6 @@ const ratingShortIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const ratingUrlParamNames = ["rating", "ratings", "r", "fbt", "config"];
 const versionManifestPath = "data/versions.json";
 const versionUrlParamNames = ["version", "mapVersion"];
-const versionStorageKey = "fbt.dataVersion";
 const fallbackVersions = [{ id: "KR47fix5", label: "KR47fix5", file: "data/heroes.json" }];
 const legacyRatingStorageKey = "fbt.ratingOverrides.v2";
 const ratingStorageKeyPrefix = "fbt.ratingOverrides.v2";
@@ -436,6 +434,55 @@ function currentVersion() {
   return state.versions.find((version) => version.id === state.currentVersionId) || state.versions[0] || null;
 }
 
+function normalizeChangelogTranslation(value) {
+  if (typeof value === "string") return value.trim();
+  if (!value || typeof value !== "object") return "";
+  return String(value.text || value.title || "").trim();
+}
+
+function normalizeChangelogEntry(entry, index) {
+  const rawEntry = typeof entry === "string" ? { text: entry } : entry || {};
+  const text = String(rawEntry.text || rawEntry.source || rawEntry.description || "").trim();
+  if (!text) return null;
+
+  return {
+    id: String(rawEntry.id || `entry-${index + 1}`).trim(),
+    text,
+    translations: rawEntry.translations || {},
+  };
+}
+
+function normalizeChangelogSection(section, index) {
+  const rawSection = typeof section === "string" ? { title: "", entries: [section] } : section || {};
+  const entries = (Array.isArray(rawSection.entries) ? rawSection.entries : rawSection.items || [])
+    .map((entry, entryIndex) => normalizeChangelogEntry(entry, entryIndex))
+    .filter(Boolean);
+  if (!entries.length) return null;
+
+  const title = String(rawSection.title || rawSection.name || "").trim();
+  return {
+    id: String(rawSection.id || `section-${index + 1}`).trim(),
+    title,
+    translations: rawSection.translations || {},
+    entries,
+  };
+}
+
+function normalizeChangelog(changelog) {
+  if (!changelog) return [];
+  const sections = Array.isArray(changelog)
+    ? changelog
+    : Array.isArray(changelog.sections)
+      ? changelog.sections
+      : Array.isArray(changelog.entries) || Array.isArray(changelog.items)
+        ? [{ title: "", entries: changelog.entries || changelog.items }]
+        : [];
+
+  return sections
+    .map((section, index) => normalizeChangelogSection(section, index))
+    .filter(Boolean);
+}
+
 function normalizeVersionEntry(entry, index) {
   const rawId = String(entry?.id || entry?.version || entry?.name || "").trim();
   if (!rawId) return null;
@@ -444,6 +491,7 @@ function normalizeVersionEntry(entry, index) {
     id: rawId,
     label: String(entry?.label || rawId).trim(),
     file: String(entry?.file || entry?.path || `data/heroes.${rawId}.json`).trim(),
+    changelog: normalizeChangelog(entry?.changelog),
     sourceIndex: index,
   };
 }
@@ -485,30 +533,13 @@ function versionIdFromCurrentUrl() {
   return "";
 }
 
-function storedVersionId() {
-  try {
-    return localStorage.getItem(versionStorageKey) || "";
-  } catch {
-    return "";
-  }
-}
-
-function saveVersionChoice(versionId) {
-  try {
-    localStorage.setItem(versionStorageKey, versionId);
-  } catch (error) {
-    console.warn("Failed to save version choice", error);
-  }
-}
-
 function validVersionId(versionId) {
   return state.versions.some((version) => version.id === versionId) ? versionId : "";
 }
 
-function initialVersionId(manifestCurrent = "") {
+function initialVersionId(manifestCurrent = "", requestedVersionId = versionIdFromCurrentUrl()) {
   return (
-    validVersionId(versionIdFromCurrentUrl()) ||
-    validVersionId(storedVersionId()) ||
+    validVersionId(requestedVersionId) ||
     validVersionId(manifestCurrent) ||
     state.versions[0]?.id ||
     ""
@@ -528,6 +559,27 @@ function syncVersionUrl(versionId = state.currentVersionId) {
   } catch (error) {
     console.warn("Failed to sync version URL", error);
   }
+}
+
+function changelogTitle() {
+  return state.language === "zhCN" ? "更新日志" : "업데이트 로그";
+}
+
+function changelogEntryCount(count) {
+  return state.language === "zhCN" ? `${count} 条更新` : `${count}개 항목`;
+}
+
+function changelogEmptyText() {
+  return state.language === "zhCN" ? "没有更新日志" : "업데이트 로그가 없습니다";
+}
+
+function currentChangelogSections() {
+  const version = currentVersion();
+  return Array.isArray(version?.changelog) ? version.changelog : [];
+}
+
+function hasCurrentChangelog() {
+  return currentChangelogSections().length > 0;
 }
 
 function renderStaticChrome() {
@@ -762,7 +814,7 @@ function comparisonVersionForCurrent() {
 }
 
 async function loadVersionDataForDiff(version) {
-  const response = await fetch(`${version.file}?v=${assetVersion}`, { cache: "no-store" });
+  const response = await fetch(version.file);
   if (!response.ok) {
     throw new Error(t("versionFetchFailed", { version: versionLabel(version) || version.id }));
   }
@@ -1100,6 +1152,22 @@ function searchableItemDiffRow(row) {
     .toLowerCase();
 }
 
+function changelogTranslationText(entity) {
+  return normalizeChangelogTranslation(entity?.translations?.[state.language]) || entity?.text || entity?.title || "";
+}
+
+function changelogSectionTitle(section) {
+  return changelogTranslationText(section) || section?.id || "";
+}
+
+function changelogEntryText(entry) {
+  return changelogTranslationText(entry);
+}
+
+function changelogEntryTotal(sections = currentChangelogSections()) {
+  return sections.reduce((total, section) => total + (section.entries?.length || 0), 0);
+}
+
 function resetDiffState() {
   state.diffCompareVersionId = "";
   state.diffCompareVersionLabel = "";
@@ -1119,6 +1187,7 @@ async function refreshDiffMode() {
   }
 
   const data = await loadVersionDataForDiff(compareVersion);
+  const version = currentVersion();
   state.diffCompareVersionId = compareVersion.id;
   state.diffCompareVersionLabel = versionLabel(compareVersion);
   state.diffCompareHeroes = playableHeroes(data.heroes || []);
@@ -1127,8 +1196,26 @@ async function refreshDiffMode() {
   state.diffItemRows = buildItemDiffRows(state.items, state.diffCompareItems);
 }
 
+function renderChangelogEntry() {
+  if (!hasCurrentChangelog()) return "";
+
+  const active = state.view === "heroes" && state.selectedChangelog;
+  const title = changelogTitle();
+  const versionLabelText = state.currentVersionLabel || state.currentVersionId || t("versionLabel");
+  return `
+    <button class="heroButton changelogEntryButton ${active ? "active" : ""}" data-changelog-entry="true">
+      ${renderIcon("", "LOG", "heroIcon", title)}
+      <div>
+        <div class="heroName">${escapeHtml(title)}</div>
+        <div class="heroTitle">${escapeHtml(versionLabelText)}</div>
+      </div>
+      <div class="heroId">${escapeHtml(changelogEntryCount(changelogEntryTotal(currentChangelogSections())))}</div>
+    </button>
+  `;
+}
+
 function renderHeroList() {
-  els.heroList.innerHTML = state.filtered
+  const rows = state.filtered
     .map((hero) => {
       const displayHero = localizedHero(hero);
       const name = displayHero.name || t("unnamedHero");
@@ -1145,6 +1232,8 @@ function renderHeroList() {
       `;
     })
     .join("");
+
+  els.heroList.innerHTML = `${renderChangelogEntry()}${rows}`;
 }
 
 function renderItemList() {
@@ -1172,7 +1261,7 @@ function renderDiffBadge(type) {
 }
 
 function renderHeroDiffList() {
-  els.heroList.innerHTML = state.diffFilteredHeroRows
+  const rows = state.diffFilteredHeroRows
     .map((row) => {
       const hero = diffHeroEntity(row);
       const displayHero = localizedHero(hero);
@@ -1192,10 +1281,12 @@ function renderHeroDiffList() {
       `;
     })
     .join("");
+
+  els.heroList.innerHTML = `${renderChangelogEntry()}${rows}`;
 }
 
 function renderItemDiffList() {
-  els.heroList.innerHTML = state.diffFilteredItemRows
+  const rows = state.diffFilteredItemRows
     .map((row) => {
       const item = diffItemEntity(row);
       const displayItem = localizedItem(item);
@@ -1215,6 +1306,8 @@ function renderItemDiffList() {
       `;
     })
     .join("");
+
+  els.heroList.innerHTML = rows;
 }
 
 function renderList() {
@@ -2908,6 +3001,59 @@ function renderItemDiffDetail(row) {
   `;
 }
 
+function renderChangelogDetail() {
+  const sections = currentChangelogSections();
+  if (!sections.length) {
+    els.detail.innerHTML = `
+      <div class="diffPage">
+        <div class="rankingHeader">
+          <div>
+            <h2>${escapeHtml(changelogTitle())}</h2>
+            <p>${escapeHtml(state.currentVersionLabel || state.currentVersionId || t("versionLabel"))}</p>
+          </div>
+        </div>
+        ${renderDiffEmpty()}
+      </div>
+    `;
+    return;
+  }
+
+  const content = sections
+    .map((section) => {
+      const title = changelogSectionTitle(section);
+      const entries = (section.entries || [])
+        .map(
+          (entry, index) => `
+            <li class="changelogEntry">
+              <span class="changelogIndex">${escapeHtml(String(index + 1))}</span>
+              <div class="changelogText">${escapeHtml(changelogEntryText(entry))}</div>
+            </li>
+          `,
+        )
+        .join("");
+
+      return renderDiffSection(
+        title,
+        entries ? `<ol class="changelogEntries">${entries}</ol>` : `<div class="empty">${escapeHtml(changelogEmptyText())}</div>`,
+      );
+    })
+    .join("");
+
+  els.detail.innerHTML = `
+    <div class="diffPage changelogPage">
+      <div class="rankingHeader">
+        <div>
+          <h2>${escapeHtml(changelogTitle())}</h2>
+          <p>${escapeHtml(state.currentVersionLabel || state.currentVersionId || t("versionLabel"))}</p>
+        </div>
+        <span class="diffBadge changed">${escapeHtml(changelogEntryCount(changelogEntryTotal(sections)))}</span>
+      </div>
+
+      ${content || renderDiffEmpty()}
+    </div>
+  `;
+}
+
 function renderTierRanking() {
   const rows = rankedHeroes(state.filtered);
 
@@ -3169,6 +3315,11 @@ function selectedItemDiffRow() {
 }
 
 function renderCurrentView() {
+  if (state.view === "heroes" && state.selectedChangelog) {
+    renderChangelogDetail();
+    return;
+  }
+
   if (state.view === "items") {
     if (state.diffMode) {
       renderItemDiffDetail(selectedItemDiffRow());
@@ -3198,6 +3349,11 @@ function renderCurrentView() {
 }
 
 function renderSummary() {
+  if (state.view === "heroes" && state.selectedChangelog) {
+    els.summary.textContent = `${state.currentVersionLabel || state.currentVersionId || t("versionLabel")} · ${changelogEntryCount(changelogEntryTotal(currentChangelogSections()))}`;
+    return;
+  }
+
   if (state.diffMode && state.view === "items") {
     els.summary.textContent = `${diffCompareText()} · ${state.diffFilteredItemRows.length}/${state.diffItemRows.length}`;
     return;
@@ -3552,12 +3708,27 @@ function applyHighestRatedCommunityShare() {
 
 function setView(view) {
   state.view = views.some((item) => item.id === view) ? view : "heroes";
+  state.selectedChangelog = false;
   state.expandedAbilityId = "";
   renderViewTabs();
   applyFilter();
 }
 
+function selectChangelog() {
+  if (!hasCurrentChangelog()) return;
+
+  state.selectedChangelog = true;
+  state.selectedRelatedId = "";
+  state.expandedAbilityId = "";
+  state.view = "heroes";
+  renderViewTabs();
+  renderList();
+  renderCurrentView();
+  renderSummary();
+}
+
 function selectHero(id) {
+  state.selectedChangelog = false;
   state.selectedId = id;
   state.selectedRelatedId = "";
   state.expandedAbilityId = "";
@@ -3569,6 +3740,7 @@ function selectHero(id) {
 }
 
 function selectItem(id) {
+  state.selectedChangelog = false;
   state.selectedItemId = id;
   state.expandedAbilityId = "";
   state.view = "items";
@@ -3582,6 +3754,7 @@ function applyFilter() {
   const query = els.search.value.trim().toLowerCase();
   state.filtered = query ? state.heroes.filter((hero) => searchable(hero).includes(query)) : [...state.heroes];
   state.filteredItems = query ? state.items.filter((item) => searchableItem(item).includes(query)) : [...state.items];
+
   state.diffFilteredHeroRows = state.diffMode
     ? query
       ? state.diffHeroRows.filter((row) => searchableHeroDiffRow(row).includes(query))
@@ -3632,6 +3805,7 @@ function applyHeroData(data, version) {
   const previousSelectedId = state.selectedId;
   const previousSelectedItemId = state.selectedItemId;
   const previousRelatedId = state.selectedRelatedId;
+  const previousSelectedChangelog = state.selectedChangelog;
 
   state.currentVersionId = version.id;
   state.currentVersionLabel = versionLabel(version);
@@ -3646,6 +3820,7 @@ function applyHeroData(data, version) {
   state.filteredItems = [...state.items];
   state.selectedId = state.heroes.some((hero) => hero.id === previousSelectedId) ? previousSelectedId : state.heroes[0]?.id || "";
   state.selectedItemId = state.items.some((item) => item.id === previousSelectedItemId) ? previousSelectedItemId : state.items[0]?.id || "";
+  state.selectedChangelog = previousSelectedChangelog && Array.isArray(version.changelog) && version.changelog.length > 0;
   state.selectedRelatedId = hasRelatedHeroId(selectedHero(), previousRelatedId) ? previousRelatedId : "";
   state.expandedAbilityId = "";
   state.draggingHeroId = "";
@@ -3658,7 +3833,7 @@ function applyHeroData(data, version) {
 
 async function loadVersionManifest() {
   try {
-    const response = await fetch(`${versionManifestPath}?v=${assetVersion}`, { cache: "no-store" });
+    const response = await fetch(versionManifestPath);
     if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
 
     const manifest = normalizeVersionManifest(await response.json());
@@ -3676,13 +3851,12 @@ async function loadHeroVersion(versionId, options = {}) {
   const version = state.versions.find((item) => item.id === versionId) || state.versions[0] || fallbackVersions[0];
   const label = versionLabel(version);
 
-  const response = await fetch(`${version.file}?v=${assetVersion}`, { cache: "no-store" });
+  const response = await fetch(version.file);
   if (!response.ok) {
     throw new Error(t("versionFetchFailed", { version: label || versionId }));
   }
 
   applyHeroData(await response.json(), version);
-  saveVersionChoice(version.id);
   if (syncUrl) syncVersionUrl(version.id);
 }
 
@@ -3723,7 +3897,7 @@ async function toggleDiffMode() {
 
   state.diffMode = true;
   state.expandedAbilityId = "";
-  if (state.view !== "items") state.view = "heroes";
+  state.view = "heroes";
   renderStaticChrome();
   renderViewTabs();
   if (els.summary) els.summary.textContent = t("loading");
@@ -3763,7 +3937,10 @@ async function switchVersion(versionId) {
 async function boot() {
   try {
     const manifestCurrent = await loadVersionManifest();
-    await loadHeroVersion(initialVersionId(manifestCurrent));
+    const requestedVersionId = versionIdFromCurrentUrl();
+    await loadHeroVersion(initialVersionId(manifestCurrent, requestedVersionId), {
+      syncUrl: Boolean(requestedVersionId),
+    });
     await loadCommunityShares();
     hydrateRatingsForCurrentVersion({ allowRatingUrl: true });
     renderLoadedData();
@@ -3775,6 +3952,12 @@ async function boot() {
 }
 
 els.heroList.addEventListener("click", (event) => {
+  const changelogButton = event.target.closest("[data-changelog-entry]");
+  if (changelogButton) {
+    selectChangelog();
+    return;
+  }
+
   const itemButton = event.target.closest(".itemButton[data-item-id]");
   if (itemButton) {
     selectItem(itemButton.dataset.itemId);
