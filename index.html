@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FBT 角色资料</title>
-    <link rel="stylesheet" href="styles.css?v=20260708-temporary-wrap" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css?v=20260713-source-diff-added" />
   </head>
   <body>
     <header class="topbar">
@@ -14,6 +15,11 @@
       </div>
       <div class="topbarTools">
         <div id="viewTabs" class="viewTabs" aria-label="页面切换"></div>
+        <div class="versionSwitch">
+          <span id="versionSwitchLabel">版本</span>
+          <select id="versionSelect" aria-labelledby="versionSwitchLabel"></select>
+          <button id="diffToggle" class="diffToggle" type="button" aria-pressed="false">版本差异</button>
+        </div>
         <div id="languageSwitch" class="languageSwitch" aria-label="语言切换"></div>
         <div class="searchBox">
           <input id="search" type="search" placeholder="搜索角色、称号、技能、说明" autocomplete="off" />
@@ -32,6 +38,6 @@
       </section>
     </main>
 
-    <script src="app.js?v=20260708-temporary-wrap"></script>
+    <script src="app.js?v=20260713-source-diff-added"></script>
   </body>
 </html>

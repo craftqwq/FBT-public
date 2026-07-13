@@ -8,6 +8,18 @@ const state = {
   selectedRelatedId: "",
   expandedAbilityId: "",
   view: "heroes",
+  diffMode: false,
+  diffCompareVersionId: "",
+  diffCompareVersionLabel: "",
+  diffCompareHeroes: [],
+  diffCompareItems: [],
+  diffHeroRows: [],
+  diffFilteredHeroRows: [],
+  diffItemRows: [],
+  diffFilteredItemRows: [],
+  versions: [],
+  currentVersionId: "",
+  currentVersionLabel: "",
   language: "zhCN",
   languages: [
     { id: "source", label: "原文" },
@@ -23,13 +35,16 @@ const state = {
   pointerDrag: null,
 };
 
-const assetVersion = "20260712-items";
+const assetVersion = "20260713-source-diff-added";
 
 const els = {
   heading: document.querySelector(".topbar h1"),
   summary: document.querySelector("#summary"),
   search: document.querySelector("#search"),
   viewTabs: document.querySelector("#viewTabs"),
+  versionSwitchLabel: document.querySelector("#versionSwitchLabel"),
+  versionSelect: document.querySelector("#versionSelect"),
+  diffToggle: document.querySelector("#diffToggle"),
   languageSwitch: document.querySelector("#languageSwitch"),
   sidebarTitle: document.querySelector(".sectionTitle"),
   heroList: document.querySelector("#heroList"),
@@ -58,6 +73,23 @@ const uiText = {
     loading: "지도 데이터를 읽는 중...",
     viewTabsLabel: "페이지 전환",
     languageSwitchLabel: "언어 전환",
+    versionSwitchLabel: "버전 전환",
+    versionLabel: "버전",
+    diffToggle: "버전 차이",
+    diffToggleLabel: "버전 차이",
+    diffCompare: "{current} / {compare}",
+    diffNoChanges: "차이가 없습니다",
+    diffAdded: "추가",
+    diffRemoved: "삭제",
+    diffChanged: "변경",
+    diffOld: "이전",
+    diffNew: "현재",
+    diffBasic: "기본 정보",
+    diffStats: "기본 데이터",
+    diffSkills: "스킬",
+    diffForms: "형태 / 소환",
+    diffFields: "변경 항목",
+    diffItemFields: "아이템 데이터",
     searchPlaceholder: "캐릭터, 아이템, 스킬, 설명 검색",
     heroList: "캐릭터 목록",
     itemList: "아이템 목록",
@@ -151,7 +183,8 @@ const uiText = {
     importedRating: "{count}명의 T등급과 점수를 가져왔습니다.",
     urlImportedRating: "URL에서 {count}명의 T등급과 점수를 가져왔습니다.",
     importExportFailed: "가져오기/내보내기 실패: {message}",
-    fetchFailed: "data/heroes.json을 읽지 못했습니다",
+    fetchFailed: "캐릭터 데이터를 읽지 못했습니다",
+    versionFetchFailed: "{version} 데이터를 읽지 못했습니다",
     invalidBase64: "유효한 base64 점수 설정이 아닙니다",
     unsupportedVersion: "지원하지 않는 설정 버전 {version}",
     incompleteConfig: "base64 설정이 완전하지 않습니다",
@@ -187,6 +220,23 @@ const uiText = {
     loading: "正在读取地图数据...",
     viewTabsLabel: "页面切换",
     languageSwitchLabel: "语言切换",
+    versionSwitchLabel: "版本切换",
+    versionLabel: "版本",
+    diffToggle: "版本差异",
+    diffToggleLabel: "版本差异",
+    diffCompare: "{current} / {compare}",
+    diffNoChanges: "没有差异",
+    diffAdded: "新增",
+    diffRemoved: "移除",
+    diffChanged: "变更",
+    diffOld: "旧版",
+    diffNew: "当前",
+    diffBasic: "基础信息",
+    diffStats: "基础数据",
+    diffSkills: "技能",
+    diffForms: "形态 / 召唤",
+    diffFields: "变更字段",
+    diffItemFields: "物品数据",
     searchPlaceholder: "搜索角色、物品、技能、说明",
     heroList: "角色列表",
     itemList: "物品列表",
@@ -280,7 +330,8 @@ const uiText = {
     importedRating: "已导入 {count} 位角色的 T度与评分。",
     urlImportedRating: "已从 URL 导入 {count} 位角色的 T度与评分。",
     importExportFailed: "导入/导出失败：{message}",
-    fetchFailed: "读取 data/heroes.json 失败",
+    fetchFailed: "读取角色数据失败",
+    versionFetchFailed: "读取 {version} 数据失败",
     invalidBase64: "不是有效的 base64 评分配置",
     unsupportedVersion: "不支持的配置版本 {version}",
     incompleteConfig: "base64 配置不完整",
@@ -313,16 +364,26 @@ const uiText = {
   },
 };
 
-const standGrades = ["", "E", "D", "C", "B", "A"];
+const defaultStandScore = 0;
+const defaultTier = 0;
+const standGrades = ["0", "E", "D", "C", "B", "A"];
+const scoreLevels = [0, 1, 2, 3, 4, 5];
 const tierLevels = [0, 1, 2, 3, 4, 5];
-const compactRatingVersion = 2;
+const legacyCompactRatingVersion = 2;
+const compactRatingVersion = 3;
 const compactRatingMagic = [70, 66, 84, 82];
-const shortRatingVersion = 1;
+const legacyShortRatingVersion = 1;
+const shortRatingVersion = 2;
 const shortRatingPrefix = ".";
 const ratingIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const ratingShortIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const ratingUrlParamNames = ["rating", "ratings", "r", "fbt", "config"];
-const ratingStorageKey = "fbt.ratingOverrides.v2";
+const versionManifestPath = "data/versions.json";
+const versionUrlParamNames = ["version", "mapVersion"];
+const versionStorageKey = "fbt.dataVersion";
+const fallbackVersions = [{ id: "KR47fix5", label: "KR47fix5", file: "data/heroes.json" }];
+const legacyRatingStorageKey = "fbt.ratingOverrides.v2";
+const ratingStorageKeyPrefix = "fbt.ratingOverrides.v2";
 const communityIssueUrl = "https://github.com/craftqwq/FBT-public/issues/new";
 const excludedHeroIds = new Set(["E09H", "E05Y"]);
 
@@ -367,11 +428,122 @@ function languageFlagClass(languageId) {
   );
 }
 
+function versionLabel(version) {
+  return version?.label || version?.id || "";
+}
+
+function currentVersion() {
+  return state.versions.find((version) => version.id === state.currentVersionId) || state.versions[0] || null;
+}
+
+function normalizeVersionEntry(entry, index) {
+  const rawId = String(entry?.id || entry?.version || entry?.name || "").trim();
+  if (!rawId) return null;
+
+  return {
+    id: rawId,
+    label: String(entry?.label || rawId).trim(),
+    file: String(entry?.file || entry?.path || `data/heroes.${rawId}.json`).trim(),
+    sourceIndex: index,
+  };
+}
+
+function normalizeVersionManifest(data) {
+  const source = Array.isArray(data) ? data : Array.isArray(data?.versions) ? data.versions : [];
+  const seen = new Set();
+  const versions = source
+    .map((entry, index) => normalizeVersionEntry(entry, index))
+    .filter((entry) => {
+      if (!entry || seen.has(entry.id)) return false;
+      seen.add(entry.id);
+      return true;
+    });
+
+  const current = String(data?.current || data?.defaultVersion || versions[0]?.id || "").trim();
+  return {
+    versions: versions.length ? versions : fallbackVersions,
+    current,
+  };
+}
+
+function versionIdFromCurrentUrl() {
+  try {
+    const url = new URL(window.location.href);
+    const hashText = url.hash.startsWith("#") ? url.hash.slice(1) : url.hash;
+    const hashQueryText = hashText.includes("?") ? hashText.slice(hashText.indexOf("?") + 1) : hashText;
+    const hashParams = new URLSearchParams(hashQueryText);
+
+    for (const name of versionUrlParamNames) {
+      const fromSearch = url.searchParams.get(name);
+      if (fromSearch) return fromSearch.trim();
+
+      const fromHash = hashParams.get(name);
+      if (fromHash) return fromHash.trim();
+    }
+  } catch {}
+
+  return "";
+}
+
+function storedVersionId() {
+  try {
+    return localStorage.getItem(versionStorageKey) || "";
+  } catch {
+    return "";
+  }
+}
+
+function saveVersionChoice(versionId) {
+  try {
+    localStorage.setItem(versionStorageKey, versionId);
+  } catch (error) {
+    console.warn("Failed to save version choice", error);
+  }
+}
+
+function validVersionId(versionId) {
+  return state.versions.some((version) => version.id === versionId) ? versionId : "";
+}
+
+function initialVersionId(manifestCurrent = "") {
+  return (
+    validVersionId(versionIdFromCurrentUrl()) ||
+    validVersionId(storedVersionId()) ||
+    validVersionId(manifestCurrent) ||
+    state.versions[0]?.id ||
+    ""
+  );
+}
+
+function syncVersionUrl(versionId = state.currentVersionId) {
+  try {
+    if (!window.history?.replaceState || !versionId) return;
+
+    const url = new URL(window.location.href);
+    for (const name of versionUrlParamNames) {
+      url.searchParams.delete(name);
+    }
+    url.searchParams.set(versionUrlParamNames[0], versionId);
+    window.history.replaceState(window.history.state, "", url);
+  } catch (error) {
+    console.warn("Failed to sync version URL", error);
+  }
+}
+
 function renderStaticChrome() {
   document.title = t("pageTitle");
   if (els.heading) els.heading.textContent = t("pageTitle");
   if (els.search) els.search.placeholder = t("searchPlaceholder");
   if (els.viewTabs) els.viewTabs.setAttribute("aria-label", t("viewTabsLabel"));
+  if (els.versionSwitchLabel) els.versionSwitchLabel.textContent = t("versionLabel");
+  if (els.versionSelect) els.versionSelect.setAttribute("aria-label", t("versionSwitchLabel"));
+  if (els.diffToggle) {
+    els.diffToggle.textContent = t("diffToggle");
+    els.diffToggle.title = t("diffToggleLabel");
+    els.diffToggle.setAttribute("aria-pressed", state.diffMode ? "true" : "false");
+    els.diffToggle.classList.toggle("active", state.diffMode);
+    els.diffToggle.disabled = state.versions.length <= 1;
+  }
   if (els.languageSwitch) els.languageSwitch.setAttribute("aria-label", t("languageSwitchLabel"));
   if (els.sidebarTitle) els.sidebarTitle.textContent = state.view === "items" ? t("itemList") : t("heroList");
 }
@@ -526,6 +698,435 @@ function searchableItem(item) {
   return [itemTextForSearch(item), itemTextForSearch(localizedSearchItem)].join(" ").toLowerCase();
 }
 
+const heroBasicDiffFields = [
+  "hotkey",
+  "requirements",
+  "model",
+  "icon",
+  "scoreIcon",
+];
+const heroLocalizedDiffFields = ["name", "title", "summonTip", "reviveTip", "awakenTip", "description"];
+const heroStatDiffFields = ["primary", "str", "agi", "int", "hp", "mana", "attackBase", "cooldown", "range"];
+const abilityDiffFields = [
+  "hotkey",
+  "icon",
+  "buttonPos",
+  "kind",
+  "categoryKey",
+  "buttonLabelKey",
+  "sourceAbilityId",
+  "sourceAbilityHotkey",
+  "inheritedFrom",
+];
+const abilityDisplayDiffFields = ["categoryLabel", "buttonLabel", "sourceWeapon", "sourceAbilityName"];
+const abilityLocalizedDiffFields = ["name", "description"];
+const itemDiffFields = [
+  "icon",
+  "level",
+  "goldCost",
+  "lumberCost",
+  "stockMax",
+  "stockRegen",
+  "cooldownId",
+  "abilityIds",
+  "model",
+];
+const itemLocalizedDiffFields = ["name", "tip", "description", "class"];
+
+function diffStatusLabel(type) {
+  return (
+    {
+      added: t("diffAdded"),
+      removed: t("diffRemoved"),
+      changed: t("diffChanged"),
+    }[type] || type
+  );
+}
+
+function diffCompareText() {
+  return t("diffCompare", {
+    current: state.currentVersionLabel || state.currentVersionId || t("versionLabel"),
+    compare: state.diffCompareVersionLabel || state.diffCompareVersionId || t("missing"),
+  });
+}
+
+function comparisonVersionForCurrent() {
+  if (state.versions.length <= 1) return null;
+
+  const currentIndex = Math.max(
+    0,
+    state.versions.findIndex((version) => version.id === state.currentVersionId),
+  );
+  const compareIndex = currentIndex === 0 ? 1 : currentIndex - 1;
+  return state.versions[compareIndex] || null;
+}
+
+async function loadVersionDataForDiff(version) {
+  const response = await fetch(`${version.file}?v=${assetVersion}`, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(t("versionFetchFailed", { version: versionLabel(version) || version.id }));
+  }
+  return response.json();
+}
+
+function normalizeComparable(value) {
+  if (value == null) return "";
+  if (Array.isArray(value)) return value.map((item) => normalizeComparable(item));
+  if (typeof value === "object") {
+    return Object.keys(value)
+      .sort()
+      .reduce((result, key) => {
+        const normalized = normalizeComparable(value[key]);
+        if (normalized !== "" && !(Array.isArray(normalized) && !normalized.length)) {
+          result[key] = normalized;
+        }
+        return result;
+      }, {});
+  }
+  return value;
+}
+
+function comparableText(value) {
+  return JSON.stringify(normalizeComparable(value));
+}
+
+function valuesDifferent(currentValue, previousValue) {
+  return comparableText(currentValue) !== comparableText(previousValue);
+}
+
+function hasDiffValue(value) {
+  const normalized = normalizeComparable(value);
+  if (normalized === "") return false;
+  if (Array.isArray(normalized)) return normalized.length > 0;
+  if (typeof normalized === "object") return Object.keys(normalized).length > 0;
+  return true;
+}
+
+function formatDiffValue(value) {
+  const normalized = normalizeComparable(value);
+  if (!hasDiffValue(normalized)) return t("missing");
+  if (Array.isArray(normalized)) {
+    return normalized
+      .map((item) => (typeof item === "object" ? JSON.stringify(item) : String(item)))
+      .join(", ");
+  }
+  if (typeof normalized === "object") return JSON.stringify(normalized, null, 2);
+  return String(normalized);
+}
+
+function collectFieldDiffs(currentEntity, previousEntity, fields) {
+  return fields
+    .map((field) => {
+      const currentValue = readPath(currentEntity || {}, field);
+      const previousValue = readPath(previousEntity || {}, field);
+      if (!currentEntity && !hasDiffValue(previousValue)) return null;
+      if (!previousEntity && !hasDiffValue(currentValue)) return null;
+      if (!valuesDifferent(currentValue, previousValue)) return null;
+      return { label: field, oldValue: previousValue, newValue: currentValue };
+    })
+    .filter(Boolean);
+}
+
+function collectDisplayedFieldDiffs(currentEntity, previousEntity, displayCurrentEntity, displayPreviousEntity, fields) {
+  return fields
+    .map((field) => {
+      const currentSourceValue = readPath(currentEntity || {}, field);
+      const previousSourceValue = readPath(previousEntity || {}, field);
+      if (!currentEntity && !hasDiffValue(previousSourceValue)) return null;
+      if (!previousEntity && !hasDiffValue(currentSourceValue)) return null;
+      if (!valuesDifferent(currentSourceValue, previousSourceValue)) return null;
+      return {
+        label: field,
+        oldValue: readPath(displayPreviousEntity || {}, field),
+        newValue: readPath(displayCurrentEntity || {}, field),
+      };
+    })
+    .filter(Boolean);
+}
+
+function collectSourceTextDiffs(currentEntity, previousEntity, fields, displayCurrentEntity = currentEntity, displayPreviousEntity = previousEntity) {
+  return fields
+    .map((field) => {
+      const currentSourceValue = currentEntity ? localized(currentEntity, field, "source") : "";
+      const previousSourceValue = previousEntity ? localized(previousEntity, field, "source") : "";
+      if (!currentEntity && !hasDiffValue(previousSourceValue)) return null;
+      if (!previousEntity && !hasDiffValue(currentSourceValue)) return null;
+      if (!valuesDifferent(currentSourceValue, previousSourceValue)) return null;
+      return {
+        label: field,
+        oldValue: displayPreviousEntity ? localized(displayPreviousEntity, field, state.language) : "",
+        newValue: displayCurrentEntity ? localized(displayCurrentEntity, field, state.language) : "",
+      };
+    })
+    .filter(Boolean);
+}
+
+function diffRowType(currentEntity, previousEntity) {
+  if (currentEntity && !previousEntity) return "added";
+  if (!currentEntity && previousEntity) return "removed";
+  return "changed";
+}
+
+function orderedDiffIds(currentList, previousList, idForItem = (item) => item.id) {
+  const seen = new Set();
+  const ids = [];
+  for (const item of currentList || []) {
+    const id = idForItem(item);
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+  }
+  for (const item of previousList || []) {
+    const id = idForItem(item);
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+  }
+  return ids;
+}
+
+function mapById(list = []) {
+  return new Map(list.filter((item) => item?.id).map((item) => [item.id, item]));
+}
+
+function isSkinVariant(hero) {
+  return hero?.relationType === "skin";
+}
+
+function diffHasChanges(diff) {
+  return Object.values(diff || {}).some((value) => Array.isArray(value) && value.length > 0);
+}
+
+function abilityDiffKey(ability, index, seen) {
+  const base = ability.entryKey || ability.id || `entry:${index}`;
+  const count = seen.get(base) || 0;
+  seen.set(base, count + 1);
+  return count ? `${base}#${count}` : base;
+}
+
+function mapAbilitiesForDiff(abilities = []) {
+  const seen = new Map();
+  return new Map(abilities.map((ability, index) => [abilityDiffKey(ability, index, seen), ability]));
+}
+
+function orderedDiffKeys(currentMap, previousMap) {
+  const seen = new Set();
+  const keys = [];
+  for (const key of currentMap.keys()) {
+    if (seen.has(key)) continue;
+    seen.add(key);
+    keys.push(key);
+  }
+  for (const key of previousMap.keys()) {
+    if (seen.has(key)) continue;
+    seen.add(key);
+    keys.push(key);
+  }
+  return keys;
+}
+
+function buildAbilityDiff(currentAbility, previousAbility, displayCurrentAbility = currentAbility, displayPreviousAbility = previousAbility) {
+  return [
+    ...collectFieldDiffs(currentAbility, previousAbility, abilityDiffFields),
+    ...collectDisplayedFieldDiffs(
+      currentAbility,
+      previousAbility,
+      displayCurrentAbility,
+      displayPreviousAbility,
+      abilityDisplayDiffFields,
+    ),
+    ...collectSourceTextDiffs(
+      currentAbility,
+      previousAbility,
+      abilityLocalizedDiffFields,
+      displayCurrentAbility,
+      displayPreviousAbility,
+    ),
+  ];
+}
+
+function diffAbilityEntries(currentHero, previousHero) {
+  const currentEntries = currentHero ? layoutEntriesForHero(currentHero) : [];
+  const previousEntries = previousHero ? layoutEntriesForHero(previousHero) : [];
+  const currentDisplayEntries = currentHero ? layoutEntriesForHero(localizedHero(currentHero)) : [];
+  const previousDisplayEntries = previousHero ? layoutEntriesForHero(localizedHero(previousHero)) : [];
+  const currentMap = mapAbilitiesForDiff(currentEntries);
+  const previousMap = mapAbilitiesForDiff(previousEntries);
+  const currentDisplayMap = mapAbilitiesForDiff(currentDisplayEntries);
+  const previousDisplayMap = mapAbilitiesForDiff(previousDisplayEntries);
+
+  return orderedDiffKeys(currentMap, previousMap)
+    .map((key) => {
+      const ability = currentMap.get(key);
+      const previousAbility = previousMap.get(key);
+      const displayAbility = currentDisplayMap.get(key) || ability;
+      const displayPreviousAbility = previousDisplayMap.get(key) || previousAbility;
+      const fields = buildAbilityDiff(ability, previousAbility, displayAbility, displayPreviousAbility);
+      if (!fields.length) return null;
+      return {
+        id: key,
+        type: diffRowType(ability, previousAbility),
+        ability: displayAbility,
+        previousAbility: displayPreviousAbility,
+        fields,
+      };
+    })
+    .filter(Boolean);
+}
+
+function buildRelatedHeroDiff(currentHero, previousHero) {
+  return {
+    basic: [
+      ...collectFieldDiffs(currentHero, previousHero, heroBasicDiffFields),
+      ...collectSourceTextDiffs(currentHero, previousHero, heroLocalizedDiffFields),
+    ],
+    stats: collectFieldDiffs(currentHero?.stats, previousHero?.stats, heroStatDiffFields),
+    skills: diffAbilityEntries(currentHero, previousHero),
+  };
+}
+
+function relatedHeroDiffHasChanges(diff) {
+  return Boolean(diff.basic.length || diff.stats.length || diff.skills.length);
+}
+
+function diffRelatedHeroes(currentHero, previousHero) {
+  const currentRelated = (currentHero?.relatedHeroes || []).filter((hero) => !isSkinVariant(hero));
+  const previousRelated = (previousHero?.relatedHeroes || []).filter((hero) => !isSkinVariant(hero));
+  const currentMap = mapById(currentRelated);
+  const previousMap = mapById(previousRelated);
+
+  return orderedDiffIds(currentRelated, previousRelated)
+    .map((id) => {
+      const hero = currentMap.get(id);
+      const previous = previousMap.get(id);
+      const diff = buildRelatedHeroDiff(hero, previous);
+      if (!relatedHeroDiffHasChanges(diff)) return null;
+      return {
+        id,
+        type: diffRowType(hero, previous),
+        hero,
+        previousHero: previous,
+        diff,
+      };
+    })
+    .filter(Boolean);
+}
+
+function buildHeroDiff(hero, previousHero) {
+  return {
+    basic: [
+      ...collectFieldDiffs(hero, previousHero, heroBasicDiffFields),
+      ...collectSourceTextDiffs(hero, previousHero, heroLocalizedDiffFields),
+    ],
+    stats: collectFieldDiffs(hero?.stats, previousHero?.stats, heroStatDiffFields),
+    forms: diffRelatedHeroes(hero, previousHero),
+    skills: diffAbilityEntries(hero, previousHero),
+  };
+}
+
+function buildItemDiff(item, previousItem) {
+  return {
+    fields: [
+      ...collectFieldDiffs(item, previousItem, itemDiffFields),
+      ...collectSourceTextDiffs(item, previousItem, itemLocalizedDiffFields),
+    ],
+  };
+}
+
+function buildHeroDiffRows(currentHeroes, previousHeroes) {
+  const currentMap = mapById(currentHeroes);
+  const previousMap = mapById(previousHeroes);
+
+  return orderedDiffIds(currentHeroes, previousHeroes)
+    .map((id) => {
+      const hero = currentMap.get(id);
+      const previousHero = previousMap.get(id);
+      const diff = buildHeroDiff(hero, previousHero);
+      if (!diffHasChanges(diff)) return null;
+      return {
+        id,
+        type: diffRowType(hero, previousHero),
+        hero,
+        previousHero,
+        diff,
+      };
+    })
+    .filter(Boolean);
+}
+
+function buildItemDiffRows(currentItems, previousItems) {
+  const currentMap = mapById(currentItems);
+  const previousMap = mapById(previousItems);
+
+  return orderedDiffIds(currentItems, previousItems)
+    .map((id) => {
+      const item = currentMap.get(id);
+      const previousItem = previousMap.get(id);
+      const diff = buildItemDiff(item, previousItem);
+      if (!diffHasChanges(diff)) return null;
+      return {
+        id,
+        type: diffRowType(item, previousItem),
+        item,
+        previousItem,
+        diff,
+      };
+    })
+    .filter(Boolean);
+}
+
+function diffHeroEntity(row) {
+  return row?.hero || row?.previousHero || null;
+}
+
+function diffItemEntity(row) {
+  return row?.item || row?.previousItem || null;
+}
+
+function searchableHeroDiffRow(row) {
+  return [row.id, row.type, row.hero ? searchable(row.hero) : "", row.previousHero ? searchable(row.previousHero) : ""]
+    .join(" ")
+    .toLowerCase();
+}
+
+function searchableItemDiffRow(row) {
+  return [
+    row.id,
+    row.type,
+    row.item ? searchableItem(row.item) : "",
+    row.previousItem ? searchableItem(row.previousItem) : "",
+  ]
+    .join(" ")
+    .toLowerCase();
+}
+
+function resetDiffState() {
+  state.diffCompareVersionId = "";
+  state.diffCompareVersionLabel = "";
+  state.diffCompareHeroes = [];
+  state.diffCompareItems = [];
+  state.diffHeroRows = [];
+  state.diffFilteredHeroRows = [];
+  state.diffItemRows = [];
+  state.diffFilteredItemRows = [];
+}
+
+async function refreshDiffMode() {
+  const compareVersion = comparisonVersionForCurrent();
+  if (!compareVersion) {
+    resetDiffState();
+    return;
+  }
+
+  const data = await loadVersionDataForDiff(compareVersion);
+  state.diffCompareVersionId = compareVersion.id;
+  state.diffCompareVersionLabel = versionLabel(compareVersion);
+  state.diffCompareHeroes = playableHeroes(data.heroes || []);
+  state.diffCompareItems = playableItems(data.items || []);
+  state.diffHeroRows = buildHeroDiffRows(state.heroes, state.diffCompareHeroes);
+  state.diffItemRows = buildItemDiffRows(state.items, state.diffCompareItems);
+}
+
 function renderHeroList() {
   els.heroList.innerHTML = state.filtered
     .map((hero) => {
@@ -566,8 +1167,68 @@ function renderItemList() {
     .join("");
 }
 
+function renderDiffBadge(type) {
+  return `<span class="diffBadge ${escapeHtml(type)}">${escapeHtml(diffStatusLabel(type))}</span>`;
+}
+
+function renderHeroDiffList() {
+  els.heroList.innerHTML = state.diffFilteredHeroRows
+    .map((row) => {
+      const hero = diffHeroEntity(row);
+      const displayHero = localizedHero(hero);
+      const name = displayHero.name || t("unnamedHero");
+      const title = displayHero.title || t("noTitle");
+      return `
+        <button class="heroButton diffHeroButton ${row.id === state.selectedId ? "active" : ""}" data-id="${escapeHtml(row.id)}">
+          ${renderIcon(hero.iconAsset, initials(name, ""), "heroIcon", name)}
+          <div>
+            <div class="heroName">${escapeHtml(name)}</div>
+            <div class="heroTitle">${escapeHtml(title)}</div>
+          </div>
+          <div class="heroDiffMeta">
+            ${renderDiffBadge(row.type)}
+          </div>
+        </button>
+      `;
+    })
+    .join("");
+}
+
+function renderItemDiffList() {
+  els.heroList.innerHTML = state.diffFilteredItemRows
+    .map((row) => {
+      const item = diffItemEntity(row);
+      const displayItem = localizedItem(item);
+      const name = displayItem.name || t("missing");
+      const title = displayItem.tip || displayItem.class || "";
+      return `
+        <button class="heroButton itemButton diffHeroButton ${row.id === state.selectedItemId ? "active" : ""}" data-item-id="${escapeHtml(row.id)}">
+          ${renderIcon(item.iconAsset, initials(name, ""), "heroIcon", name)}
+          <div>
+            <div class="heroName">${escapeHtml(name)}</div>
+            <div class="heroTitle">${escapeHtml(title || t("missing"))}</div>
+          </div>
+          <div class="heroDiffMeta">
+            ${renderDiffBadge(row.type)}
+          </div>
+        </button>
+      `;
+    })
+    .join("");
+}
+
 function renderList() {
   renderStaticChrome();
+  if (state.diffMode && state.view === "items") {
+    renderItemDiffList();
+    return;
+  }
+
+  if (state.diffMode && state.view === "heroes") {
+    renderHeroDiffList();
+    return;
+  }
+
   if (state.view === "items") {
     renderItemList();
     return;
@@ -593,6 +1254,23 @@ function renderViewTabs() {
       `,
     )
     .join("");
+}
+
+function renderVersionSwitch() {
+  if (!els.versionSelect) return;
+
+  els.versionSelect.innerHTML = state.versions
+    .map((version) => {
+      const label = versionLabel(version);
+      return `
+        <option value="${escapeHtml(version.id)}" ${version.id === state.currentVersionId ? "selected" : ""}>
+          ${escapeHtml(label)}
+        </option>
+      `;
+    })
+    .join("");
+  els.versionSelect.disabled = state.versions.length <= 1;
+  renderStaticChrome();
 }
 
 function renderLanguageSwitch() {
@@ -644,16 +1322,17 @@ function multiplierScore(text) {
 }
 
 function gradeScore(value) {
-  return Math.max(1, Math.min(5, Math.round(value)));
+  const score = Number.parseFloat(value);
+  return Number.isFinite(score) ? Math.max(0, Math.min(5, Math.round(score))) : defaultStandScore;
 }
 
 function normalizeTier(value) {
   const tier = Number.parseInt(value, 10);
-  return Number.isFinite(tier) ? Math.max(0, Math.min(5, tier)) : 3;
+  return Number.isFinite(tier) ? Math.max(0, Math.min(5, tier)) : defaultTier;
 }
 
 function normalizeScore(value) {
-  return gradeScore(Number.parseFloat(value));
+  return gradeScore(value);
 }
 
 function normalizeOrder(value) {
@@ -662,12 +1341,7 @@ function normalizeOrder(value) {
 }
 
 function defaultTierFromScore(score) {
-  if (score >= 29) return 0;
-  if (score >= 26) return 1;
-  if (score >= 23) return 2;
-  if (score >= 20) return 3;
-  if (score >= 17) return 4;
-  return 5;
+  return defaultTier;
 }
 
 function heroOverride(id) {
@@ -723,76 +1397,12 @@ function ratingTargetOrderMap() {
 }
 
 function baseStandStats(hero) {
-  const stats = hero.stats || {};
-  const scoringLanguage = hero.translations?.zhCN ? "zhCN" : state.language;
-  const displayHero = localizedHero(hero, scoringLanguage);
-  const text = [
-    displayHero.description,
-    ...layoutEntriesForHero(displayHero).map((entry) => `${entry.name || ""} ${entry.description || ""}`),
-  ].join("\n");
-  const hp = numericStat(stats, "hp");
-  const str = numericStat(stats, "str");
-  const attackBase = numericStat(stats, "attackBase");
-  const range = numericStat(stats, "range");
-  const armor = numericStat(stats, "armor");
-
-  const rawScores = {
-    support:
-      1 +
-      weightedCount(text, [
-        [/治疗|回复|恢复|回血|生命恢复|再生/g, 0.8, 1.8],
-        [/友军|队友|盟友|全体友方|周围友军|召唤物/g, 0.7, 1.4],
-        [/护盾|吸收伤害|净化|驱散|解除|清除.*负面|免疫.*控制/g, 0.55, 1.4],
-        [/加速|移动速度|冷却.*减少|强化|增益|充能|刷新/g, 0.35, 1.0],
-      ]),
-    burst:
-      1 +
-      multiplierScore(text) +
-      weightedCount(text, [
-        [/爆炸|爆发|终式|斩杀|秒杀|暴击|巨额|蓄力|追加.*伤害/g, 0.45, 1.4],
-        [/造成/g, 0.12, 0.8],
-      ]) +
-      (attackBase >= 450 ? 0.7 : attackBase >= 350 ? 0.35 : 0),
-    control:
-      1 +
-      weightedCount(text, [
-        [/眩晕|昏迷|定身|禁锢|束缚|沉默|禁魔|缴械|无法.*使用/g, 0.45, 2.2],
-        [/击退|击飞|浮空|拉向|牵引|减速|恐惧|嘲讽/g, 0.35, 1.6],
-        [/无法选中|无法打断|打断|清除.*投射物/g, 0.25, 0.9],
-      ]),
-    pressure:
-      1 +
-      weightedCount(text, [
-        [/灵压|压制|破防|降低.*防御|减少.*护甲|无视.*防御|无视.*护甲/g, 0.65, 1.8],
-        [/魔法等级|物理等级|防御等级|LV[3-9]/g, 0.3, 1.2],
-        [/无限制|刷新|重置|持续|标记|穿透|追踪/g, 0.35, 1.4],
-        [/每秒|持续.*伤害|灼烧|中毒|流血/g, 0.35, 1.0],
-      ]) +
-      (stats.primary === "INT" ? 0.25 : 0),
-    toughness:
-      1 +
-      weightedCount(text, [
-        [/无敌|免疫|无法选中|护盾|吸收伤害|减伤|防御|护甲/g, 0.55, 1.8],
-        [/恢复|回复|治疗|回血|复活|生命/g, 0.35, 1.2],
-        [/清除.*投射物|期间仅可移动|无法打断/g, 0.25, 0.8],
-      ]) +
-      (hp >= 12000 ? 0.45 : hp >= 10000 ? 0.25 : 0) +
-      (str >= 90 ? 0.45 : str >= 75 ? 0.25 : 0) +
-      (armor >= 5 ? 0.2 : 0),
-    aoe:
-      1 +
-      weightedCount(text, [
-        [/范围|影响范围|周围|区域|圆形|扇形|路径|爆炸|扩散/g, 0.45, 2.3],
-        [/所有敌人|敌人们|范围内敌人|范围内的敌人|群体/g, 0.45, 1.4],
-        [/弹射|分裂|冲击波|风暴|领域/g, 0.45, 1.2],
-      ]) +
-      (range >= 800 ? 0.45 : range >= 500 ? 0.25 : 0),
-  };
-
-  return standAxes.map((axis) => {
-    const score = gradeScore(rawScores[axis.key]);
-    return { ...axis, label: axisLabel(axis), score, grade: standGrades[score] };
-  });
+  return standAxes.map((axis) => ({
+    ...axis,
+    label: axisLabel(axis),
+    score: defaultStandScore,
+    grade: standGrades[defaultStandScore],
+  }));
 }
 
 function calculateStandStats(hero) {
@@ -987,7 +1597,7 @@ function compactScoreBytes(scores = {}, scoreMask = 0) {
   standAxes.forEach((axis, index) => {
     if ((scoreMask & (1 << index)) === 0) return;
 
-    bits |= (normalizeScore(scores[axis.key]) - 1) << bitCount;
+    bits |= normalizeScore(scores[axis.key]) << bitCount;
     bitCount += 3;
     while (bitCount >= 8) {
       bytes.push(bits & 255);
@@ -1003,7 +1613,7 @@ function compactScoreBytes(scores = {}, scoreMask = 0) {
   return bytes;
 }
 
-function readCompactScores(bytes, offset, scoreMask = 0) {
+function readCompactScores(bytes, offset, scoreMask = 0, version = compactRatingVersion) {
   const scores = {};
   let cursor = offset;
   let bits = 0;
@@ -1019,7 +1629,8 @@ function readCompactScores(bytes, offset, scoreMask = 0) {
       bitCount += 8;
     }
 
-    scores[axis.key] = normalizeScore((bits & 7) + 1);
+    const encodedScore = bits & 7;
+    scores[axis.key] = normalizeScore(version === legacyCompactRatingVersion ? encodedScore + 1 : encodedScore);
     bits >>= 3;
     bitCount -= 3;
   });
@@ -1134,7 +1745,7 @@ function encodeShortRatingPayload() {
 
     standAxes.forEach((axis, index) => {
       if ((scoreMask & (1 << index)) !== 0) {
-        writer.write(normalizeScore(entry.scores[axis.key]) - 1, 3);
+        writer.write(normalizeScore(entry.scores[axis.key]), 3);
       }
     });
   }
@@ -1153,7 +1764,7 @@ function decodeCompactRatingPayload(text) {
   if (bytes.length < 7 || compactRatingMagic.some((byte, index) => bytes[index] !== byte)) {
     throw new Error(t("invalidBase64"));
   }
-  if (bytes[4] !== compactRatingVersion) {
+  if (![legacyCompactRatingVersion, compactRatingVersion].includes(bytes[4])) {
     throw new Error(t("unsupportedVersion", { version: bytes[4] }));
   }
 
@@ -1185,7 +1796,7 @@ function decodeCompactRatingPayload(text) {
     }
 
     if (scoreMask) {
-      const decoded = readCompactScores(bytes, offset, scoreMask);
+      const decoded = readCompactScores(bytes, offset, scoreMask, bytes[4]);
       entry.scores = decoded.scores;
       offset = decoded.offset;
     }
@@ -1202,7 +1813,7 @@ function decodeShortRatingPayload(text) {
   const bytes = bytesFromBase64Url(text.slice(shortRatingPrefix.length));
   const reader = new BitReader(bytes);
   const version = reader.read(3);
-  if (version !== shortRatingVersion) {
+  if (![legacyShortRatingVersion, shortRatingVersion].includes(version)) {
     throw new Error(t("unsupportedVersion", { version }));
   }
 
@@ -1227,7 +1838,8 @@ function decodeShortRatingPayload(text) {
       const scores = {};
       standAxes.forEach((axis, axisIndex) => {
         if ((scoreMask & (1 << axisIndex)) !== 0) {
-          scores[axis.key] = normalizeScore(reader.read(3) + 1);
+          const encodedScore = reader.read(3);
+          scores[axis.key] = normalizeScore(version === legacyShortRatingVersion ? encodedScore + 1 : encodedScore);
         }
       });
       entry.scores = scores;
@@ -1285,8 +1897,53 @@ function parseRatingImport(text) {
   return decodeCompactRatingPayload(trimmed);
 }
 
+function completeRatingSnapshotOverrides() {
+  const sourceOverrides = normalizedRatingOverrides(state.ratingOverrides);
+  const result = {};
+
+  for (const row of rankedHeroes(state.heroes)) {
+    const sourceOverride = sourceOverrides[row.hero.id] || {};
+    const sourceScores = sourceOverride.scores || {};
+    const tier = tierForHero(row.hero);
+    const order = normalizeOrder(sourceOverride.order);
+    const ratings = calculateStandStats(row.hero);
+    const hasScoreOverride = Object.keys(sourceScores).length > 0;
+    const hasNonDefaultScore = ratings.some((axis) => axis.score !== defaultStandScore);
+    const hasNonDefaultTier = tier !== defaultTier;
+    const scores = {};
+    const entry = {};
+
+    if (hasNonDefaultTier) {
+      entry.tier = tier;
+    }
+    if (order != null) {
+      entry.order = order;
+    }
+    if (hasScoreOverride && hasNonDefaultScore) {
+      for (const axis of ratings) {
+        scores[axis.key] = axis.score;
+      }
+      entry.scores = scores;
+    }
+
+    if (Object.keys(entry).length) {
+      result[row.hero.id] = entry;
+    }
+  }
+
+  return result;
+}
+
 function currentRatingPayload() {
-  return Object.keys(normalizedRatingOverrides(state.ratingOverrides)).length ? encodeRatingPayload() : "";
+  if (!Object.keys(normalizedRatingOverrides(state.ratingOverrides)).length) return "";
+
+  const previousOverrides = state.ratingOverrides;
+  state.ratingOverrides = completeRatingSnapshotOverrides();
+  try {
+    return Object.keys(state.ratingOverrides).length ? encodeRatingPayload() : "";
+  } finally {
+    state.ratingOverrides = previousOverrides;
+  }
 }
 
 function removeRatingParamsFromHash(url) {
@@ -1332,14 +1989,19 @@ function syncRatingUrl(payload = currentRatingPayload()) {
   }
 }
 
+function ratingStorageKey() {
+  return `${ratingStorageKeyPrefix}.${state.currentVersionId || "default"}`;
+}
+
 function saveRatingCache() {
   let payload = "";
   try {
     payload = currentRatingPayload();
+    const storageKey = ratingStorageKey();
     if (!payload) {
-      localStorage.removeItem(ratingStorageKey);
+      localStorage.removeItem(storageKey);
     } else {
-      localStorage.setItem(ratingStorageKey, payload);
+      localStorage.setItem(storageKey, payload);
     }
   } catch (error) {
     console.warn("Failed to save rating cache", error);
@@ -1352,10 +2014,16 @@ function saveRatingCache() {
 
 function loadRatingCache() {
   try {
-    const text = localStorage.getItem(ratingStorageKey);
+    const storageKey = ratingStorageKey();
+    const text =
+      localStorage.getItem(storageKey) ||
+      (state.currentVersionId === "KR47fix4" ? localStorage.getItem(legacyRatingStorageKey) : "");
     if (!text) return 0;
 
     state.ratingOverrides = parseRatingImport(text);
+    if (storageKey !== legacyRatingStorageKey) {
+      localStorage.setItem(storageKey, text);
+    }
     return Object.keys(state.ratingOverrides).length;
   } catch (error) {
     console.warn("Failed to load rating cache", error);
@@ -1462,10 +2130,10 @@ function renderScoreSelect(hero, axis) {
       data-axis-key="${escapeHtml(axis.key)}"
       aria-label="${escapeHtml(t("scoreLabel", { axis: axisLabel(axis) }))}"
     >
-      ${[1, 2, 3, 4, 5]
+      ${scoreLevels
         .map(
           (score) => `
-            <option value="${score}" ${score === axis.score ? "selected" : ""}>${standGrades[score]} ${score}</option>
+            <option value="${score}" ${score === axis.score ? "selected" : ""}>${score ? `${standGrades[score]} ${score}` : "0"}</option>
           `,
         )
         .join("")}
@@ -2036,6 +2704,210 @@ function renderItemDetail(item) {
   `;
 }
 
+function renderDiffEmpty() {
+  return `<div class="empty">${escapeHtml(t("diffNoChanges"))}</div>`;
+}
+
+function renderDiffValue(label, value, className) {
+  return `
+    <div class="diffValue ${className}">
+      <div class="diffValueLabel">${escapeHtml(label)}</div>
+      <div class="diffValueText">${escapeHtml(formatDiffValue(value))}</div>
+    </div>
+  `;
+}
+
+const addedHiddenDiffFields = new Set(["hotkey", "icon", "buttonPos"]);
+
+function visibleDiffChanges(changes = [], type = "") {
+  if (type !== "added") return changes;
+  return changes.filter((change) => !addedHiddenDiffFields.has(change.label));
+}
+
+function renderDiffChange(change, type = "") {
+  const isAdded = type === "added";
+  return `
+    <div class="diffField">
+      <div class="diffFieldLabel">${escapeHtml(change.label)}</div>
+      <div class="diffValueGrid ${isAdded ? "single" : ""}">
+        ${isAdded ? "" : renderDiffValue(t("diffOld"), change.oldValue, "old")}
+        ${renderDiffValue(t("diffNew"), change.newValue, "new")}
+      </div>
+    </div>
+  `;
+}
+
+function renderDiffChanges(changes = [], type = "") {
+  const visibleChanges = visibleDiffChanges(changes, type);
+  if (!visibleChanges.length) return "";
+  return `<div class="diffFieldList">${visibleChanges.map((change) => renderDiffChange(change, type)).join("")}</div>`;
+}
+
+function renderDiffSection(title, content) {
+  if (!content) return "";
+  return `
+    <section class="panel diffSection">
+      <h2>${escapeHtml(title)}</h2>
+      <div class="panelBody">${content}</div>
+    </section>
+  `;
+}
+
+function diffAbilityName(ability) {
+  const displayAbility = localizedEntity(ability);
+  return displayAbility.name || ability?.name || "";
+}
+
+function renderAbilityDiffs(rows = []) {
+  if (!rows.length) return "";
+
+  return `
+    <div class="diffEntryList">
+      ${rows
+        .map((row) => {
+          const ability = row.ability || row.previousAbility;
+          const name = diffAbilityName(ability) || t("missing");
+          return `
+            <article class="diffEntry ${escapeHtml(row.type)}">
+              <div class="diffEntryHeader">
+                ${renderIcon(ability?.iconAsset, ability?.hotkey || initials(name, ""), "abilityIcon", name)}
+                <div>
+                  <div class="abilityName">${escapeHtml(name)}</div>
+                  <div class="profileMeta">
+                    ${renderDiffBadge(row.type)}
+                  </div>
+                </div>
+              </div>
+              ${renderDiffChanges(row.fields, row.type)}
+            </article>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
+function renderRelatedHeroDiffs(rows = []) {
+  if (!rows.length) return "";
+
+  return `
+    <div class="diffEntryList">
+      ${rows
+        .map((row) => {
+          const hero = row.hero || row.previousHero;
+          const displayHero = localizedHero(hero);
+          const name = displayHero.name || t("unnamedHero");
+          const title = displayHero.title || "";
+          const basic = renderDiffChanges(row.diff.basic, row.type);
+          const stats = renderDiffChanges(row.diff.stats, row.type);
+          const skills = renderAbilityDiffs(row.diff.skills);
+          return `
+            <article class="diffEntry ${escapeHtml(row.type)}">
+              <div class="diffEntryHeader">
+                ${renderIcon(hero?.iconAsset, initials(name, ""), "heroIcon", name)}
+                <div>
+                  <div class="abilityName">${escapeHtml(name)}</div>
+                  <div class="profileMeta">
+                    ${title ? `<span class="pill">${escapeHtml(title)}</span>` : ""}
+                    ${renderDiffBadge(row.type)}
+                  </div>
+                </div>
+              </div>
+              ${basic ? `<div class="diffSubsection"><h3>${escapeHtml(t("diffBasic"))}</h3>${basic}</div>` : ""}
+              ${stats ? `<div class="diffSubsection"><h3>${escapeHtml(t("diffStats"))}</h3>${stats}</div>` : ""}
+              ${skills ? `<div class="diffSubsection"><h3>${escapeHtml(t("diffSkills"))}</h3>${skills}</div>` : ""}
+            </article>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
+function renderHeroDiffDetail(row) {
+  if (!row) {
+    els.detail.innerHTML = renderDiffEmpty();
+    return;
+  }
+
+  const hero = diffHeroEntity(row);
+  const displayHero = localizedHero(hero);
+  const name = displayHero.name || t("unnamedHero");
+  const title = displayHero.title || "";
+  const sections = [
+    renderDiffSection(t("diffBasic"), renderDiffChanges(row.diff.basic, row.type)),
+    renderDiffSection(t("diffStats"), renderDiffChanges(row.diff.stats, row.type)),
+    renderDiffSection(t("diffForms"), renderRelatedHeroDiffs(row.diff.forms)),
+    renderDiffSection(t("diffSkills"), renderAbilityDiffs(row.diff.skills)),
+  ].join("");
+
+  els.detail.innerHTML = `
+    <div class="diffPage">
+      <div class="rankingHeader">
+        <div>
+          <h2>${escapeHtml(t("diffToggleLabel"))}</h2>
+          <p>${escapeHtml(diffCompareText())}</p>
+        </div>
+        ${renderDiffBadge(row.type)}
+      </div>
+
+      <section class="itemProfile">
+        <div class="profileHeader">
+          ${renderIcon(hero.iconAsset, initials(name, ""), "heroIcon", name)}
+          <div>
+            <h2 class="profileName">${escapeHtml(name)}</h2>
+            <div class="profileMeta">
+              ${title ? `<span class="pill">${escapeHtml(title)}</span>` : ""}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      ${sections || renderDiffEmpty()}
+    </div>
+  `;
+}
+
+function renderItemDiffDetail(row) {
+  if (!row) {
+    els.detail.innerHTML = renderDiffEmpty();
+    return;
+  }
+
+  const item = diffItemEntity(row);
+  const displayItem = localizedItem(item);
+  const name = displayItem.name || t("missing");
+  const tip = (displayItem.tip || "").trim();
+  const fields = renderDiffChanges(row.diff.fields, row.type);
+
+  els.detail.innerHTML = `
+    <div class="itemPage diffPage">
+      <div class="rankingHeader">
+        <div>
+          <h2>${escapeHtml(t("diffToggleLabel"))}</h2>
+          <p>${escapeHtml(diffCompareText())}</p>
+        </div>
+        ${renderDiffBadge(row.type)}
+      </div>
+
+      <section class="itemProfile">
+        <div class="profileHeader">
+          ${renderIcon(item.iconAsset, initials(name, ""), "heroIcon", name)}
+          <div>
+            <h2 class="profileName">${escapeHtml(name)}</h2>
+            <div class="profileMeta">
+              ${tip ? `<span class="pill">${escapeHtml(tip)}</span>` : ""}
+              ${item.class ? `<span class="pill">${escapeHtml(item.class)}</span>` : ""}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      ${renderDiffSection(t("diffItemFields"), fields) || renderDiffEmpty()}
+    </div>
+  `;
+}
+
 function renderTierRanking() {
   const rows = rankedHeroes(state.filtered);
 
@@ -2288,8 +3160,21 @@ function selectedItem() {
   return state.items.find((item) => item.id === state.selectedItemId);
 }
 
+function selectedHeroDiffRow() {
+  return state.diffFilteredHeroRows.find((row) => row.id === state.selectedId);
+}
+
+function selectedItemDiffRow() {
+  return state.diffFilteredItemRows.find((row) => row.id === state.selectedItemId);
+}
+
 function renderCurrentView() {
   if (state.view === "items") {
+    if (state.diffMode) {
+      renderItemDiffDetail(selectedItemDiffRow());
+      return;
+    }
+
     renderItemDetail(selectedItem());
     return;
   }
@@ -2304,10 +3189,25 @@ function renderCurrentView() {
     return;
   }
 
+  if (state.diffMode && state.view === "heroes") {
+    renderHeroDiffDetail(selectedHeroDiffRow());
+    return;
+  }
+
   renderDetail(selectedHero());
 }
 
 function renderSummary() {
+  if (state.diffMode && state.view === "items") {
+    els.summary.textContent = `${diffCompareText()} · ${state.diffFilteredItemRows.length}/${state.diffItemRows.length}`;
+    return;
+  }
+
+  if (state.diffMode && state.view === "heroes") {
+    els.summary.textContent = `${diffCompareText()} · ${state.diffFilteredHeroRows.length}/${state.diffHeroRows.length}`;
+    return;
+  }
+
   if (state.view === "items") {
     els.summary.textContent = t("itemSummary", { total: state.items.length, shown: state.filteredItems.length });
     return;
@@ -2653,17 +3553,8 @@ function applyHighestRatedCommunityShare() {
 function setView(view) {
   state.view = views.some((item) => item.id === view) ? view : "heroes";
   state.expandedAbilityId = "";
-  if (state.view === "items" && !state.filteredItems.some((item) => item.id === state.selectedItemId)) {
-    state.selectedItemId = state.filteredItems[0]?.id || "";
-  }
-  if (state.view !== "items" && !state.filtered.some((hero) => hero.id === state.selectedId)) {
-    state.selectedId = state.filtered[0]?.id || "";
-    state.selectedRelatedId = "";
-  }
   renderViewTabs();
-  renderList();
-  renderCurrentView();
-  renderSummary();
+  applyFilter();
 }
 
 function selectHero(id) {
@@ -2674,6 +3565,7 @@ function selectHero(id) {
   renderViewTabs();
   renderList();
   renderCurrentView();
+  renderSummary();
 }
 
 function selectItem(id) {
@@ -2690,12 +3582,32 @@ function applyFilter() {
   const query = els.search.value.trim().toLowerCase();
   state.filtered = query ? state.heroes.filter((hero) => searchable(hero).includes(query)) : [...state.heroes];
   state.filteredItems = query ? state.items.filter((item) => searchableItem(item).includes(query)) : [...state.items];
+  state.diffFilteredHeroRows = state.diffMode
+    ? query
+      ? state.diffHeroRows.filter((row) => searchableHeroDiffRow(row).includes(query))
+      : [...state.diffHeroRows]
+    : [];
+  state.diffFilteredItemRows = state.diffMode
+    ? query
+      ? state.diffItemRows.filter((row) => searchableItemDiffRow(row).includes(query))
+      : [...state.diffItemRows]
+    : [];
 
-  if (state.view === "items") {
+  if (state.diffMode && state.view === "items") {
+    if (!state.diffFilteredItemRows.some((row) => row.id === state.selectedItemId)) {
+      state.selectedItemId = state.diffFilteredItemRows[0]?.id || "";
+    }
+  } else if (state.diffMode && state.view === "heroes") {
+    if (!state.diffFilteredHeroRows.some((row) => row.id === state.selectedId)) {
+      state.selectedId = state.diffFilteredHeroRows[0]?.id || "";
+      state.selectedRelatedId = "";
+      state.expandedAbilityId = "";
+    }
+  } else if (state.view === "items") {
     if (!state.filteredItems.some((item) => item.id === state.selectedItemId)) {
       state.selectedItemId = state.filteredItems[0]?.id || "";
     }
-  } else if (!state.filtered.some((hero) => hero.id === state.selectedId)) {
+  } else if (state.view === "heroes" && !state.filtered.some((hero) => hero.id === state.selectedId)) {
     state.selectedId = state.filtered[0]?.id || "";
     state.selectedRelatedId = "";
     state.expandedAbilityId = "";
@@ -2704,6 +3616,162 @@ function applyFilter() {
   renderList();
   renderCurrentView();
   renderSummary();
+}
+
+function hasRelatedHeroId(hero, id) {
+  if (!hero || !id) return false;
+  let found = false;
+  visitRelatedHeroes(hero, (relatedHero) => {
+    if (relatedHero.id === id) found = true;
+  });
+  return found;
+}
+
+function applyHeroData(data, version) {
+  const previousLanguage = state.language;
+  const previousSelectedId = state.selectedId;
+  const previousSelectedItemId = state.selectedItemId;
+  const previousRelatedId = state.selectedRelatedId;
+
+  state.currentVersionId = version.id;
+  state.currentVersionLabel = versionLabel(version);
+  state.heroes = playableHeroes(data.heroes || []);
+  state.items = playableItems(data.items || []);
+  state.languages = Array.isArray(data.languages) && data.languages.length ? data.languages : [{ id: "source", label: "原文" }];
+  state.language = state.languages.some((language) => language.id === previousLanguage)
+    ? previousLanguage
+    : data.defaultLanguage ||
+      (state.languages.some((language) => language.id === "zhCN") ? "zhCN" : state.languages[0]?.id || "source");
+  state.filtered = [...state.heroes];
+  state.filteredItems = [...state.items];
+  state.selectedId = state.heroes.some((hero) => hero.id === previousSelectedId) ? previousSelectedId : state.heroes[0]?.id || "";
+  state.selectedItemId = state.items.some((item) => item.id === previousSelectedItemId) ? previousSelectedItemId : state.items[0]?.id || "";
+  state.selectedRelatedId = hasRelatedHeroId(selectedHero(), previousRelatedId) ? previousRelatedId : "";
+  state.expandedAbilityId = "";
+  state.draggingHeroId = "";
+  state.pointerDrag = null;
+  state.ratingOverrides = {};
+  state.ratingMessage = "";
+  state.exportedRatingText = "";
+  state.communityMessage = "";
+}
+
+async function loadVersionManifest() {
+  try {
+    const response = await fetch(`${versionManifestPath}?v=${assetVersion}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+
+    const manifest = normalizeVersionManifest(await response.json());
+    state.versions = manifest.versions;
+    return manifest.current;
+  } catch (error) {
+    console.warn("Failed to load version manifest", error);
+    state.versions = fallbackVersions;
+    return fallbackVersions[0]?.id || "";
+  }
+}
+
+async function loadHeroVersion(versionId, options = {}) {
+  const { syncUrl = true } = options;
+  const version = state.versions.find((item) => item.id === versionId) || state.versions[0] || fallbackVersions[0];
+  const label = versionLabel(version);
+
+  const response = await fetch(`${version.file}?v=${assetVersion}`, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(t("versionFetchFailed", { version: label || versionId }));
+  }
+
+  applyHeroData(await response.json(), version);
+  saveVersionChoice(version.id);
+  if (syncUrl) syncVersionUrl(version.id);
+}
+
+function hydrateRatingsForCurrentVersion(options = {}) {
+  const { allowRatingUrl = true } = options;
+  state.ratingOverrides = {};
+
+  const cachedRatingCount = loadRatingCache();
+  const hasRatingUrl = allowRatingUrl && Boolean(ratingTextFromUrl(window.location.href, { allowHashPayload: false }));
+  const importedRatingFromUrl = allowRatingUrl ? importRatingFromCurrentUrl() : false;
+  if (!hasRatingUrl && !importedRatingFromUrl && cachedRatingCount) {
+    syncRatingUrl();
+  }
+  if (!hasRatingUrl && !importedRatingFromUrl && !cachedRatingCount) {
+    syncRatingUrl("");
+    applyHighestRatedCommunityShare();
+  }
+}
+
+function renderLoadedData() {
+  renderViewTabs();
+  renderVersionSwitch();
+  renderLanguageSwitch();
+  applyFilter();
+}
+
+async function toggleDiffMode() {
+  if (state.diffMode) {
+    state.diffMode = false;
+    resetDiffState();
+    renderStaticChrome();
+    applyFilter();
+    return;
+  }
+
+  const compareVersion = comparisonVersionForCurrent();
+  if (!compareVersion) return;
+
+  state.diffMode = true;
+  state.expandedAbilityId = "";
+  if (state.view !== "items") state.view = "heroes";
+  renderStaticChrome();
+  renderViewTabs();
+  if (els.summary) els.summary.textContent = t("loading");
+
+  try {
+    await refreshDiffMode();
+    applyFilter();
+  } catch (error) {
+    console.error(error);
+    state.diffMode = false;
+    resetDiffState();
+    renderStaticChrome();
+    renderSummary();
+    if (els.detail) els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+async function switchVersion(versionId) {
+  if (!versionId || versionId === state.currentVersionId) return;
+
+  if (els.versionSelect) els.versionSelect.disabled = true;
+  if (els.summary) els.summary.textContent = t("loading");
+
+  try {
+    await loadHeroVersion(versionId);
+    hydrateRatingsForCurrentVersion({ allowRatingUrl: false });
+    if (state.diffMode) await refreshDiffMode();
+    renderLoadedData();
+  } catch (error) {
+    console.error(error);
+    renderVersionSwitch();
+    if (els.summary) els.summary.textContent = t("versionFetchFailed", { version: versionId });
+    if (els.detail) els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+async function boot() {
+  try {
+    const manifestCurrent = await loadVersionManifest();
+    await loadHeroVersion(initialVersionId(manifestCurrent));
+    await loadCommunityShares();
+    hydrateRatingsForCurrentVersion({ allowRatingUrl: true });
+    renderLoadedData();
+  } catch (error) {
+    console.error(error);
+    els.summary.textContent = t("fetchFailed");
+    els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+  }
 }
 
 els.heroList.addEventListener("click", (event) => {
@@ -2871,44 +3939,33 @@ els.viewTabs?.addEventListener("click", (event) => {
   setView(button.dataset.view);
 });
 
-els.languageSwitch?.addEventListener("click", (event) => {
+els.versionSelect?.addEventListener("change", (event) => {
+  switchVersion(event.target.value);
+});
+
+els.diffToggle?.addEventListener("click", () => {
+  toggleDiffMode();
+});
+
+els.languageSwitch?.addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-language]");
   if (!button || button.dataset.language === state.language) return;
 
   state.language = button.dataset.language;
   renderViewTabs();
   renderLanguageSwitch();
+  if (state.diffMode) {
+    if (els.summary) els.summary.textContent = t("loading");
+    try {
+      await refreshDiffMode();
+    } catch (error) {
+      console.error(error);
+      state.diffMode = false;
+      resetDiffState();
+      if (els.detail) els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+    }
+  }
   applyFilter();
 });
 
-fetch(`data/heroes.json?v=${assetVersion}`, { cache: "no-store" })
-  .then((response) => response.json())
-  .then(async (data) => {
-    state.heroes = playableHeroes(data.heroes || []);
-    state.items = playableItems(data.items || []);
-    state.languages = Array.isArray(data.languages) && data.languages.length ? data.languages : [{ id: "source", label: "原文" }];
-    state.language =
-      data.defaultLanguage ||
-      (state.languages.some((language) => language.id === "zhCN") ? "zhCN" : state.languages[0]?.id || "source");
-    state.filtered = [...state.heroes];
-    state.filteredItems = [...state.items];
-    state.selectedId = state.heroes[0]?.id || "";
-    state.selectedItemId = state.items[0]?.id || "";
-    const cachedRatingCount = loadRatingCache();
-    const hasRatingUrl = Boolean(ratingTextFromUrl(window.location.href, { allowHashPayload: false }));
-    const importedRatingFromUrl = importRatingFromCurrentUrl();
-    if (!hasRatingUrl && !importedRatingFromUrl && cachedRatingCount) {
-      syncRatingUrl();
-    }
-    await loadCommunityShares();
-    if (!hasRatingUrl && !importedRatingFromUrl && !cachedRatingCount) {
-      applyHighestRatedCommunityShare();
-    }
-    renderViewTabs();
-    renderLanguageSwitch();
-    applyFilter();
-  })
-  .catch((error) => {
-    els.summary.textContent = t("fetchFailed");
-    els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
-  });
+boot();

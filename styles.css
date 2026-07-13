@@ -83,6 +83,75 @@ h1 {
   background: #0f1117;
 }
 
+.versionSwitch {
+  flex: 0 0 auto;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0f1117;
+  padding: 0 10px;
+}
+
+.versionSwitch span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.versionSwitch select {
+  min-width: 118px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+  outline: none;
+}
+
+.versionSwitch select:focus {
+  color: var(--accent);
+}
+
+.versionSwitch option {
+  background: #0f1117;
+  color: var(--text);
+}
+
+.diffToggle {
+  flex: 0 0 auto;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0f1117;
+  color: var(--muted);
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.diffToggle:hover,
+.diffToggle.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--panel-2);
+}
+
+.diffToggle:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.versionSwitch .diffToggle {
+  height: 30px;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+
 .viewTabs button,
 .languageSwitch button {
   min-width: 54px;
@@ -287,6 +356,41 @@ input:focus {
 .heroId {
   font-size: 12px;
   font-family: Consolas, monospace;
+}
+
+.heroDiffMeta {
+  min-width: 74px;
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+}
+
+.diffBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 24px;
+  border: 1px solid rgba(244, 189, 80, 0.45);
+  border-radius: 999px;
+  background: rgba(244, 189, 80, 0.1);
+  color: var(--accent);
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.diffBadge.added {
+  border-color: rgba(103, 212, 197, 0.48);
+  background: rgba(103, 212, 197, 0.1);
+  color: var(--accent-2);
+}
+
+.diffBadge.removed {
+  border-color: rgba(239, 111, 108, 0.52);
+  background: rgba(239, 111, 108, 0.1);
+  color: var(--danger);
 }
 
 .detail {
@@ -850,6 +954,125 @@ input:focus {
 .itemPage {
   display: grid;
   gap: 16px;
+}
+
+.diffPage {
+  display: grid;
+  gap: 16px;
+}
+
+.diffSection .panelBody {
+  display: grid;
+  gap: 12px;
+}
+
+.diffFieldList {
+  display: grid;
+  gap: 12px;
+}
+
+.diffField {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.diffField:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.diffFieldLabel {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  font-family: Consolas, "SFMono-Regular", monospace;
+}
+
+.diffValueGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.diffValueGrid.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.diffValue {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.diffValueLabel {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.diffValueText {
+  min-height: 34px;
+  border-left: 2px solid var(--line);
+  color: #d8dee8;
+  padding: 3px 0 3px 9px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.diffValue.old .diffValueText {
+  border-left-color: var(--danger);
+}
+
+.diffValue.new .diffValueText {
+  border-left-color: var(--accent-2);
+}
+
+.diffEntryList {
+  display: grid;
+  gap: 14px;
+}
+
+.diffEntry {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.diffEntry:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.diffEntryHeader {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.diffEntryHeader .heroIcon,
+.diffEntryHeader .abilityIcon {
+  width: 54px;
+  height: 54px;
+}
+
+.diffSubsection {
+  display: grid;
+  gap: 9px;
+}
+
+.diffSubsection h3 {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .itemProfile {
@@ -1537,6 +1760,8 @@ body.tierDragging .tierTooltip {
   }
 
   .viewTabs,
+  .versionSwitch,
+  .diffToggle,
   .languageSwitch {
     align-self: flex-start;
   }
@@ -1577,6 +1802,10 @@ body.tierDragging .tierTooltip {
 
   .ratingToolbar {
     justify-content: flex-start;
+  }
+
+  .diffValueGrid {
+    grid-template-columns: 1fr;
   }
 
   .shareGrid {

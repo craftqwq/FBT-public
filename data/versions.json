@@ -1,0 +1,15 @@
+{
+  "current": "KR47fix5",
+  "versions": [
+    {
+      "id": "KR47fix5",
+      "label": "KR47fix5",
+      "file": "data/heroes.KR47fix5.json"
+    },
+    {
+      "id": "KR47fix4",
+      "label": "KR47fix4",
+      "file": "data/heroes.KR47fix4.json"
+    }
+  ]
+}
