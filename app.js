@@ -36,6 +36,8 @@ const state = {
   pointerDrag: null,
 };
 
+const versionDataCache = new Map();
+
 const els = {
   heading: document.querySelector(".topbar h1"),
   summary: document.querySelector("#summary"),
@@ -813,12 +815,26 @@ function comparisonVersionForCurrent() {
   return state.versions[compareIndex] || null;
 }
 
-async function loadVersionDataForDiff(version) {
+function versionDataCacheKey(version) {
+  return `${version?.id || ""}:${version?.file || ""}`;
+}
+
+async function loadVersionData(version) {
+  const key = versionDataCacheKey(version);
+  if (versionDataCache.has(key)) return versionDataCache.get(key);
+
   const response = await fetch(version.file);
   if (!response.ok) {
     throw new Error(t("versionFetchFailed", { version: versionLabel(version) || version.id }));
   }
-  return response.json();
+
+  const data = await response.json();
+  versionDataCache.set(key, data);
+  return data;
+}
+
+async function loadVersionDataForDiff(version) {
+  return loadVersionData(version);
 }
 
 function normalizeComparable(value) {
@@ -3750,7 +3766,8 @@ function selectItem(id) {
   renderSummary();
 }
 
-function applyFilter() {
+function applyFilter(options = {}) {
+  const { deferDetail = false } = options;
   const query = els.search.value.trim().toLowerCase();
   state.filtered = query ? state.heroes.filter((hero) => searchable(hero).includes(query)) : [...state.heroes];
   state.filteredItems = query ? state.items.filter((item) => searchableItem(item).includes(query)) : [...state.items];
@@ -3787,8 +3804,12 @@ function applyFilter() {
   }
 
   renderList();
-  renderCurrentView();
   renderSummary();
+  if (deferDetail && window.requestAnimationFrame) {
+    window.requestAnimationFrame(() => renderCurrentView());
+  } else {
+    renderCurrentView();
+  }
 }
 
 function hasRelatedHeroId(hero, id) {
@@ -3849,15 +3870,28 @@ async function loadVersionManifest() {
 async function loadHeroVersion(versionId, options = {}) {
   const { syncUrl = true } = options;
   const version = state.versions.find((item) => item.id === versionId) || state.versions[0] || fallbackVersions[0];
-  const label = versionLabel(version);
 
-  const response = await fetch(version.file);
-  if (!response.ok) {
-    throw new Error(t("versionFetchFailed", { version: label || versionId }));
-  }
-
-  applyHeroData(await response.json(), version);
+  applyHeroData(await loadVersionData(version), version);
   if (syncUrl) syncVersionUrl(version.id);
+}
+
+function warmVersionDataCache() {
+  const versions = state.versions.filter((version) => version.id !== state.currentVersionId);
+  if (!versions.length) return;
+
+  const warm = () => {
+    versions.forEach((version) => {
+      loadVersionData(version).catch((error) => {
+        console.warn("Failed to warm version data", versionLabel(version) || version.id, error);
+      });
+    });
+  };
+
+  if (window.requestIdleCallback) {
+    window.requestIdleCallback(warm, { timeout: 2500 });
+  } else {
+    window.setTimeout(warm, 250);
+  }
 }
 
 function hydrateRatingsForCurrentVersion(options = {}) {
@@ -3876,11 +3910,11 @@ function hydrateRatingsForCurrentVersion(options = {}) {
   }
 }
 
-function renderLoadedData() {
+function renderLoadedData(options = {}) {
   renderViewTabs();
   renderVersionSwitch();
   renderLanguageSwitch();
-  applyFilter();
+  applyFilter(options);
 }
 
 async function toggleDiffMode() {
@@ -3925,7 +3959,8 @@ async function switchVersion(versionId) {
     await loadHeroVersion(versionId);
     hydrateRatingsForCurrentVersion({ allowRatingUrl: false });
     if (state.diffMode) await refreshDiffMode();
-    renderLoadedData();
+    renderLoadedData({ deferDetail: true });
+    warmVersionDataCache();
   } catch (error) {
     console.error(error);
     renderVersionSwitch();
@@ -3944,6 +3979,7 @@ async function boot() {
     await loadCommunityShares();
     hydrateRatingsForCurrentVersion({ allowRatingUrl: true });
     renderLoadedData();
+    warmVersionDataCache();
   } catch (error) {
     console.error(error);
     els.summary.textContent = t("fetchFailed");
