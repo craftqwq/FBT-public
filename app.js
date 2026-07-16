@@ -154,6 +154,8 @@ const uiText = {
     communityPlayer: "플레이어",
     communityDescription: "자기 설명",
     communityAdminReview: "관리자 평가",
+    communityVersion: "버전",
+    communityUnknownVersion: "버전 미지정",
     communityApply: "적용",
     communityCopy: "복사",
     communityCount: "{count}개 공유",
@@ -169,7 +171,7 @@ const uiText = {
     communityShareCopied: "현재 설정을 복사했습니다. GitHub Issue 페이지로 이동합니다.",
     communityIssueTitle: "커뮤니티 공유: {name}",
     communityIssueBody:
-      "플레이어 이름:\n\n자기 설명:\n\n공유 데이터:\n{rating}\n",
+      "버전:\n{version}\n\n플레이어 이름:\n\n자기 설명:\n\n공유 데이터:\n{rating}\n",
     export: "내보내기",
     import: "가져오기",
     heroCount: "{count}명",
@@ -301,6 +303,8 @@ const uiText = {
     communityPlayer: "玩家名字",
     communityDescription: "自己的说明",
     communityAdminReview: "管理员评价",
+    communityVersion: "版本",
+    communityUnknownVersion: "未标记版本",
     communityApply: "应用配置",
     communityCopy: "复制数据",
     communityCount: "{count} 个分享",
@@ -316,7 +320,7 @@ const uiText = {
     communityShareCopied: "已复制当前配置，即将跳转到 GitHub 新 Issue 页面。",
     communityIssueTitle: "社区分享：{name}",
     communityIssueBody:
-      "玩家名字：\n\n自己的说明：\n\n分享数据：\n{rating}\n",
+      "版本：\n{version}\n\n玩家名字：\n\n自己的说明：\n\n分享数据：\n{rating}\n",
     export: "导出",
     import: "导入",
     heroCount: "{count} 位角色",
@@ -385,6 +389,7 @@ const fallbackVersions = [{ id: "KR47fix5", label: "KR47fix5", file: "data/heroe
 const legacyRatingStorageKey = "fbt.ratingOverrides.v2";
 const ratingStorageKeyPrefix = "fbt.ratingOverrides.v2";
 const communityIssueUrl = "https://github.com/craftqwq/FBT-public/issues/new";
+const legacyCommunityShareVersion = "KR44fix";
 const excludedHeroIds = new Set(["E09H", "E05Y"]);
 
 function escapeHtml(value) {
@@ -3160,6 +3165,59 @@ function renderTierRanking() {
   `;
 }
 
+function normalizeCommunityShareVersion(value) {
+  return String(value || "").trim() || legacyCommunityShareVersion;
+}
+
+function currentCommunityShareVersion() {
+  return state.currentVersionId || currentVersion()?.id || fallbackVersions[0]?.id || "";
+}
+
+function communityVersionRank(version) {
+  const text = normalizeCommunityShareVersion(version);
+  const match = text.match(/kr\s*(\d+)(?:\s*fix\s*(\d+)?)?/i);
+  if (!match) {
+    return { major: -1, fix: -1, text };
+  }
+
+  return {
+    major: Number.parseInt(match[1], 10),
+    fix: match[2] ? Number.parseInt(match[2], 10) : 0,
+    text,
+  };
+}
+
+function compareCommunityVersions(leftVersion, rightVersion) {
+  const left = communityVersionRank(leftVersion);
+  const right = communityVersionRank(rightVersion);
+  return right.major - left.major || right.fix - left.fix || right.text.localeCompare(left.text);
+}
+
+function compareCommunityShares(left, right) {
+  return (
+    compareCommunityVersions(left.version, right.version) ||
+    right.score - left.score ||
+    left.sourceIndex - right.sourceIndex
+  );
+}
+
+function groupedCommunityShares() {
+  const groups = [];
+  const byVersion = new Map();
+
+  for (const share of state.communityShares) {
+    const version = normalizeCommunityShareVersion(share.version);
+    if (!byVersion.has(version)) {
+      const group = { version, shares: [] };
+      byVersion.set(version, group);
+      groups.push(group);
+    }
+    byVersion.get(version).shares.push(share);
+  }
+
+  return groups.sort((left, right) => compareCommunityVersions(left.version, right.version));
+}
+
 function normalizeCommunityShares(data) {
   const source = Array.isArray(data) ? data : Array.isArray(data?.shares) ? data.shares : [];
   return source
@@ -3169,6 +3227,7 @@ function normalizeCommunityShares(data) {
         id: String(item.id || `share-${index + 1}`),
         sourceIndex: index,
         playerName: String(item.playerName || item.player || item.name || "").trim(),
+        version: normalizeCommunityShareVersion(item.version || item.mapVersion || item.gameVersion || item.dataVersion),
         description: String(item.description || item.playerDescription || item.selfDescription || item.review || item.comment || item.note || "").trim(),
         adminReview: String(item.adminReview || item.adminComment || item.adminNote || "").trim(),
         score: normalizeCommunityScore(item.score ?? item.ratingScore ?? item.adminScore ?? 0),
@@ -3176,7 +3235,7 @@ function normalizeCommunityShares(data) {
       };
     })
     .filter((item) => item.rating || item.playerName || item.description || item.adminReview)
-    .sort((left, right) => right.score - left.score || left.sourceIndex - right.sourceIndex);
+    .sort(compareCommunityShares);
 }
 
 function normalizeCommunityScore(value) {
@@ -3291,7 +3350,24 @@ function renderCommunityShareCard(share) {
   `;
 }
 
+function renderCommunityShareGroup(group) {
+  return `
+    <section class="shareVersionGroup">
+      <div class="shareVersionHeader">
+        <div>
+          <div class="shareLabel">${escapeHtml(t("communityVersion"))}</div>
+          <h3>${escapeHtml(group.version || t("communityUnknownVersion"))}</h3>
+        </div>
+        <span>${escapeHtml(t("communityCount", { count: group.shares.length }))}</span>
+      </div>
+      <div class="shareGrid">${group.shares.map((share) => renderCommunityShareCard(share)).join("")}</div>
+    </section>
+  `;
+}
+
 function renderCommunityShares() {
+  const groups = groupedCommunityShares();
+
   els.detail.innerHTML = `
     <div class="communityPage">
       <div class="rankingHeader">
@@ -3306,8 +3382,8 @@ function renderCommunityShares() {
       </div>
       ${state.communityMessage ? `<div class="ratingMessage">${escapeHtml(state.communityMessage)}</div>` : ""}
       ${
-        state.communityShares.length
-          ? `<div class="shareGrid">${state.communityShares.map((share) => renderCommunityShareCard(share)).join("")}</div>`
+        groups.length
+          ? `<div class="shareVersionGroups">${groups.map((group) => renderCommunityShareGroup(group)).join("")}</div>`
           : `<div class="empty">${escapeHtml(t("communityEmpty"))}</div>`
       }
     </div>
@@ -3684,7 +3760,7 @@ async function shareCurrentRatingToIssue() {
     state.communityMessage = t("communityShareCopied");
     const params = new URLSearchParams({
       title: t("communityIssueTitle", { name: t("unknownPlayer") }),
-      body: t("communityIssueBody", { rating }),
+      body: t("communityIssueBody", { rating, version: currentCommunityShareVersion() }),
     });
     window.location.href = `${communityIssueUrl}?${params.toString()}`;
   } catch (error) {
@@ -3705,7 +3781,9 @@ async function loadCommunityShares() {
 }
 
 function applyHighestRatedCommunityShare() {
+  const version = currentCommunityShareVersion();
   for (const share of state.communityShares) {
+    if (normalizeCommunityShareVersion(share.version) !== version) continue;
     if (!share.rating) continue;
 
     try {
@@ -3846,7 +3924,6 @@ function applyHeroData(data, version) {
   state.expandedAbilityId = "";
   state.draggingHeroId = "";
   state.pointerDrag = null;
-  state.ratingOverrides = {};
   state.ratingMessage = "";
   state.exportedRatingText = "";
   state.communityMessage = "";
@@ -3957,7 +4034,6 @@ async function switchVersion(versionId) {
 
   try {
     await loadHeroVersion(versionId);
-    hydrateRatingsForCurrentVersion({ allowRatingUrl: false });
     if (state.diffMode) await refreshDiffMode();
     renderLoadedData({ deferDetail: true });
     warmVersionDataCache();
