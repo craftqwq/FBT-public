@@ -244,6 +244,54 @@ h1 {
   color: var(--accent);
 }
 
+.viewTabs button[data-view="tools"] {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background:
+    linear-gradient(#151821, #151821) padding-box,
+    linear-gradient(110deg, #ff5f6d, #ffc371, #5eead4, #60a5fa, #c084fc, #ff5f6d) border-box;
+  border: 1px solid transparent;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 18px rgba(103, 212, 197, 0.28),
+    0 0 22px rgba(244, 189, 80, 0.2);
+}
+
+.viewTabs button[data-view="tools"]::before {
+  content: "";
+  position: absolute;
+  inset: -80% -30%;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.34), transparent 65%);
+  transform: translateX(-70%);
+  animation: rainbowSweep 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.viewTabs button[data-view="tools"]:hover,
+.viewTabs button[data-view="tools"].active {
+  color: #fff;
+  background:
+    linear-gradient(#1d222c, #1d222c) padding-box,
+    linear-gradient(110deg, #ff5f6d, #ffc371, #5eead4, #60a5fa, #c084fc, #ff5f6d) border-box;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 24px rgba(96, 165, 250, 0.32),
+    0 0 28px rgba(192, 132, 252, 0.28);
+}
+
+@keyframes rainbowSweep {
+  0%,
+  46% {
+    transform: translateX(-70%);
+  }
+
+  72%,
+  100% {
+    transform: translateX(70%);
+  }
+}
+
 input {
   width: 100%;
   height: 42px;
@@ -875,6 +923,11 @@ input:focus {
   gap: 16px;
 }
 
+.toolsPage {
+  display: grid;
+  gap: 16px;
+}
+
 .rankingHeader {
   display: flex;
   align-items: flex-end;
@@ -909,6 +962,170 @@ input:focus {
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.toolActions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.toolRandomButton {
+  position: relative;
+  min-width: 96px;
+  height: 40px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background:
+    linear-gradient(#151821, #151821) padding-box,
+    linear-gradient(110deg, #ff5f6d, #ffc371, #5eead4, #60a5fa, #c084fc, #ff5f6d) border-box;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 0 12px;
+  cursor: pointer;
+  box-shadow:
+    0 0 20px rgba(96, 165, 250, 0.24),
+    0 0 24px rgba(244, 189, 80, 0.2);
+}
+
+.toolRandomButton::before {
+  content: "";
+  position: absolute;
+  inset: -80% -30%;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.38), transparent 65%);
+  transform: translateX(-70%);
+  animation: rainbowSweep 2.7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.toolRandomButton:hover,
+.toolRandomButton:focus-visible {
+  background:
+    linear-gradient(#1e2430, #1e2430) padding-box,
+    linear-gradient(110deg, #ff5f6d, #ffc371, #5eead4, #60a5fa, #c084fc, #ff5f6d) border-box;
+  outline: none;
+  box-shadow:
+    0 0 24px rgba(96, 165, 250, 0.34),
+    0 0 30px rgba(192, 132, 252, 0.25);
+}
+
+.toolRandomButton:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
+.toolRoulettePanel {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 16px;
+}
+
+.toolRoulettePanel h3 {
+  margin-top: 4px;
+  font-size: 24px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.toolRoulettePanel p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.toolRouletteIcon {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 204px;
+}
+
+.toolRouletteIcon .heroIcon {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(244, 189, 80, 0.58);
+  box-shadow: 0 0 22px rgba(244, 189, 80, 0.2);
+}
+
+.toolRouletteIcon.team .heroIcon {
+  width: 58px;
+  height: 58px;
+}
+
+.toolRouletteIcon.spinning .heroIcon {
+  animation: roulettePulse 360ms ease-in-out infinite alternate;
+}
+
+@keyframes roulettePulse {
+  from {
+    transform: scale(0.94);
+    box-shadow: 0 0 14px rgba(96, 165, 250, 0.24);
+  }
+
+  to {
+    transform: scale(1.04);
+    box-shadow: 0 0 28px rgba(244, 189, 80, 0.35);
+  }
+}
+
+.toolIconPanel {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 10px;
+}
+
+.toolHeroRows {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.toolHeroRow {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: #11151d;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.toolHeroRow:hover,
+.toolHeroRow:focus-visible,
+.toolHeroRow.active {
+  border-color: rgba(244, 189, 80, 0.68);
+  background: #20242d;
+  outline: none;
+}
+
+.toolHeroRow.active {
+  box-shadow:
+    0 0 0 1px rgba(244, 189, 80, 0.24),
+    0 0 18px rgba(244, 189, 80, 0.2);
+}
+
+.toolHeroRow .heroIcon {
+  width: 46px;
+  height: 46px;
 }
 
 .ratingToolButton {
@@ -1889,6 +2106,18 @@ body.tierDragging .tierTooltip {
     justify-content: flex-start;
   }
 
+  .toolRandomButton {
+    width: min(100%, 260px);
+  }
+
+  .toolRoulettePanel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toolRouletteIcon {
+    justify-self: start;
+  }
+
   .diffValueGrid {
     grid-template-columns: 1fr;
   }
@@ -1951,4 +2180,12 @@ body.tierDragging .tierTooltip {
     transform: translate(0, 0);
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewTabs button[data-view="tools"]::before,
+  .toolRandomButton::before,
+  .toolRouletteIcon.spinning .heroIcon {
+    animation: none;
+  }
 }

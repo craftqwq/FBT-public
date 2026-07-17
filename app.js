@@ -34,6 +34,11 @@ const state = {
   draggingHeroId: "",
   suppressNextTierClick: false,
   pointerDrag: null,
+  toolRouletteHeroId: "",
+  toolRouletteHeroIds: [],
+  toolRouletteMode: "single",
+  toolRouletteSpinning: false,
+  toolRouletteTimer: null,
 };
 
 const versionDataCache = new Map();
@@ -56,6 +61,7 @@ const views = [
   { id: "heroes", labelKey: "viewHeroes" },
   { id: "items", labelKey: "viewItems" },
   { id: "ranking", labelKey: "viewRanking" },
+  { id: "tools", labelKey: "viewTools" },
   { id: "community", labelKey: "viewCommunity" },
 ];
 
@@ -98,7 +104,21 @@ const uiText = {
     viewHeroes: "캐릭터 자료",
     viewItems: "아이템 자료",
     viewRanking: "T등급 랭킹",
+    viewTools: "미니 도구",
     viewCommunity: "커뮤니티 공유",
+    toolsTitle: "미니 도구",
+    toolsSummary: "{count}명 후보",
+    toolRouletteTitle: "캐릭터 룰렛",
+    toolRandom: "무지개 룰렛",
+    toolTeamRandom: "3인 랜덤",
+    toolMetaRandom: "빡겜 랜덤",
+    toolRolling: "룰렛 회전 중",
+    toolTeamRolling: "조합 중",
+    toolMetaRolling: "최강 조합 계산 중",
+    toolResult: "선택 결과",
+    toolTeamResult: "3인 조합 결과",
+    toolMetaResult: "최강 보완 조합",
+    toolPending: "대기 중",
     unnamedHero: "이름 없는 캐릭터",
     unknownPlayer: "알 수 없는 플레이어",
     noTitle: "칭호 없음",
@@ -247,7 +267,21 @@ const uiText = {
     viewHeroes: "角色资料",
     viewItems: "物品资料",
     viewRanking: "T度排行",
+    viewTools: "小工具",
     viewCommunity: "社区分享",
+    toolsTitle: "小工具",
+    toolsSummary: "{count} 个角色可供随机",
+    toolRouletteTitle: "角色轮盘",
+    toolRandom: "随机",
+    toolTeamRandom: "3人随机",
+    toolMetaRandom: "分奴随机",
+    toolRolling: "轮盘转动中",
+    toolTeamRolling: "组队随机中",
+    toolMetaRolling: "计算最强组合中",
+    toolResult: "本次选择",
+    toolTeamResult: "3人互补组合",
+    toolMetaResult: "最强互补组合",
+    toolPending: "等待随机",
     unnamedHero: "未命名角色",
     unknownPlayer: "未命名玩家",
     noTitle: "无称号",
@@ -3165,6 +3199,300 @@ function renderTierRanking() {
   `;
 }
 
+function selectedToolHeroes() {
+  const ids = state.toolRouletteHeroIds.length
+    ? state.toolRouletteHeroIds
+    : state.toolRouletteHeroId
+      ? [state.toolRouletteHeroId]
+      : [];
+  const heroMap = new Map(state.heroes.map((hero) => [hero.id, hero]));
+  return ids.map((id) => heroMap.get(id)).filter(Boolean);
+}
+
+function toolHeroRows() {
+  return [...state.heroes].sort((left, right) => {
+    const leftName = localizedHero(left).name || left.id;
+    const rightName = localizedHero(right).name || right.id;
+    return leftName.localeCompare(rightName, state.language === "zhCN" ? "zh-Hans-CN" : "ko-KR");
+  });
+}
+
+function renderToolHeroRow(hero, selectedIds) {
+  const displayHero = localizedHero(hero);
+  const name = displayHero.name || t("unnamedHero");
+  const title = displayHero.title ? `${name} - ${displayHero.title}` : name;
+  const active = selectedIds.has(hero.id);
+
+  return `
+    <button
+      class="toolHeroRow ${active ? "active" : ""}"
+      type="button"
+      data-tool-hero-id="${escapeHtml(hero.id)}"
+      aria-label="${escapeHtml(title)}"
+      title="${escapeHtml(title)}"
+    >
+      ${renderIcon(hero.iconAsset, initials(name, hero.id), "heroIcon", name || hero.id)}
+    </button>
+  `;
+}
+
+function renderToolsPage() {
+  const rows = toolHeroRows();
+  const selectedHeroes = selectedToolHeroes();
+  const selectedIds = new Set(selectedHeroes.map((hero) => hero.id));
+  const displaySelectedHeroes = selectedHeroes.map((hero) => localizedHero(hero));
+  const selectedNames = displaySelectedHeroes.map((hero, index) => hero.name || selectedHeroes[index].id);
+  const selectedName = selectedNames.length ? selectedNames.join(" / ") : t("toolPending");
+  const selectedTitle =
+    selectedHeroes.length > 1
+      ? state.toolRouletteMode === "meta"
+        ? t("toolMetaResult")
+        : t("toolTeamResult")
+      : displaySelectedHeroes[0]?.title || selectedHeroes[0]?.id || t("toolResult");
+
+  els.detail.innerHTML = `
+    <div class="toolsPage">
+      <div class="rankingHeader">
+        <div>
+          <h2>${escapeHtml(t("toolsTitle"))}</h2>
+          <p>${escapeHtml(t("toolsSummary", { count: rows.length }))}</p>
+        </div>
+        <div class="toolActions">
+          <button
+            class="toolRandomButton"
+            type="button"
+            data-tool-random="single"
+            ${state.toolRouletteSpinning || !rows.length ? "disabled" : ""}
+          >
+            ${escapeHtml(state.toolRouletteSpinning && state.toolRouletteMode === "single" ? t("toolRolling") : t("toolRandom"))}
+          </button>
+          <button
+            class="toolRandomButton"
+            type="button"
+            data-tool-random="team"
+            ${state.toolRouletteSpinning || rows.length < 3 ? "disabled" : ""}
+          >
+            ${escapeHtml(state.toolRouletteSpinning && state.toolRouletteMode === "team" ? t("toolTeamRolling") : t("toolTeamRandom"))}
+          </button>
+          <button
+            class="toolRandomButton"
+            type="button"
+            data-tool-random="meta"
+            ${state.toolRouletteSpinning || rows.length < 3 ? "disabled" : ""}
+          >
+            ${escapeHtml(state.toolRouletteSpinning && state.toolRouletteMode === "meta" ? t("toolMetaRolling") : t("toolMetaRandom"))}
+          </button>
+        </div>
+      </div>
+
+      <section class="toolRoulettePanel">
+        <div>
+          <div class="shareLabel">${escapeHtml(t("toolRouletteTitle"))}</div>
+          <h3>${escapeHtml(selectedName)}</h3>
+          <p>${escapeHtml(selectedHeroes.length ? selectedTitle : t("toolResult"))}</p>
+        </div>
+        <div class="toolRouletteIcon ${selectedHeroes.length > 1 ? "team" : ""} ${state.toolRouletteSpinning ? "spinning" : ""}">
+          ${
+            selectedHeroes.length
+              ? selectedHeroes
+                  .map((hero, index) => {
+                    const name = selectedNames[index] || hero.id;
+                    return renderIcon(hero.iconAsset, initials(name, hero.id), "heroIcon", name || hero.id);
+                  })
+                  .join("")
+              : renderIcon("", "?", "heroIcon", t("toolPending"))
+          }
+        </div>
+      </section>
+
+      <section class="toolIconPanel">
+        <div class="toolHeroRows">
+          ${rows.map((hero) => renderToolHeroRow(hero, selectedIds)).join("")}
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+function clearToolRoulette() {
+  if (state.toolRouletteTimer) {
+    window.clearInterval(state.toolRouletteTimer);
+    state.toolRouletteTimer = null;
+  }
+  state.toolRouletteSpinning = false;
+}
+
+function scrollToolSelectionIntoView() {
+  if (state.view !== "tools" || !state.toolRouletteHeroId) return;
+  const row = els.detail.querySelector(`.toolHeroRow[data-tool-hero-id="${CSS.escape(state.toolRouletteHeroId)}"]`);
+  row?.scrollIntoView({ block: "nearest" });
+}
+
+function updateToolSelection(heroes) {
+  const ids = heroes.map((hero) => hero.id).filter(Boolean);
+  state.toolRouletteHeroIds = ids;
+  state.toolRouletteHeroId = ids[0] || "";
+}
+
+function shuffledToolHeroes(heroes) {
+  const result = [...heroes];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const target = Math.floor(Math.random() * (index + 1));
+    [result[index], result[target]] = [result[target], result[index]];
+  }
+  return result;
+}
+
+function randomToolHeroes(heroes, count) {
+  return shuffledToolHeroes(heroes).slice(0, Math.min(count, heroes.length));
+}
+
+function toolHeroScoreVector(hero) {
+  return calculateStandStats(hero).map((axis) => axis.score);
+}
+
+function toolTeamComplementScore(heroes) {
+  const axisTotals = standAxes.map((_, axisIndex) =>
+    heroes.reduce((sum, hero) => sum + toolHeroScoreVector(hero)[axisIndex], 0),
+  );
+  const total = axisTotals.reduce((sum, value) => sum + value, 0);
+  const minimum = Math.min(...axisTotals);
+  const maximum = Math.max(...axisTotals);
+  const average = total / axisTotals.length;
+  const variance = axisTotals.reduce((sum, value) => sum + (value - average) ** 2, 0) / axisTotals.length;
+
+  return minimum * 100 + total * 5 - (maximum - minimum) * 12 - variance * 4;
+}
+
+function complementaryToolTeam(heroes) {
+  if (heroes.length <= 3) return randomToolHeroes(heroes, 3);
+
+  const combinations = [];
+  for (let firstIndex = 0; firstIndex < heroes.length - 2; firstIndex += 1) {
+    for (let secondIndex = firstIndex + 1; secondIndex < heroes.length - 1; secondIndex += 1) {
+      for (let thirdIndex = secondIndex + 1; thirdIndex < heroes.length; thirdIndex += 1) {
+        const team = [heroes[firstIndex], heroes[secondIndex], heroes[thirdIndex]];
+        combinations.push({
+          team,
+          score: toolTeamComplementScore(team),
+          random: Math.random(),
+        });
+      }
+    }
+  }
+
+  combinations.sort((left, right) => right.score - left.score || left.random - right.random);
+  const topCount = Math.max(12, Math.ceil(combinations.length * 0.08));
+  const topScore = combinations[Math.min(topCount - 1, combinations.length - 1)]?.score ?? combinations[0]?.score ?? 0;
+  const topTeams = combinations.filter((item) => item.score >= topScore);
+  return topTeams[Math.floor(Math.random() * topTeams.length)]?.team || randomToolHeroes(heroes, 3);
+}
+
+function toolCompetitiveRankMap(heroes) {
+  const ranked = rankedHeroes(heroes);
+  return new Map(
+    ranked.map((row, index) => [
+      row.hero.id,
+      {
+        ...row,
+        index,
+        total: ranked.length,
+      },
+    ]),
+  );
+}
+
+function toolHeroCompetitiveScore(hero, rankMap) {
+  const row = rankMap.get(hero.id);
+  if (!row) return 0;
+
+  return (5 - row.tier) * 240 + (row.total - row.index) * 8 + row.score * 10;
+}
+
+function toolTeamCompetitiveScore(heroes, rankMap) {
+  const individualScore = heroes.reduce((sum, hero) => sum + toolHeroCompetitiveScore(hero, rankMap), 0);
+  return individualScore + toolTeamComplementScore(heroes);
+}
+
+function strongestToolTeam(heroes) {
+  if (heroes.length <= 3) {
+    return rankedHeroes(heroes)
+      .map((row) => row.hero)
+      .slice(0, 3);
+  }
+
+  const rankMap = toolCompetitiveRankMap(heroes);
+  const combinations = [];
+
+  for (let firstIndex = 0; firstIndex < heroes.length - 2; firstIndex += 1) {
+    for (let secondIndex = firstIndex + 1; secondIndex < heroes.length - 1; secondIndex += 1) {
+      for (let thirdIndex = secondIndex + 1; thirdIndex < heroes.length; thirdIndex += 1) {
+        const team = [heroes[firstIndex], heroes[secondIndex], heroes[thirdIndex]];
+        const score = toolTeamCompetitiveScore(team, rankMap);
+        const rankIndexSum = team.reduce((sum, hero) => sum + (rankMap.get(hero.id)?.index ?? Number.MAX_SAFE_INTEGER), 0);
+        const idText = team.map((hero) => hero.id).sort().join(",");
+        combinations.push({ team, score, rankIndexSum, idText });
+      }
+    }
+  }
+
+  combinations.sort(
+    (left, right) =>
+      right.score - left.score ||
+      left.rankIndexSum - right.rankIndexSum ||
+      left.idText.localeCompare(right.idText),
+  );
+
+  const topCount = Math.max(8, Math.ceil(combinations.length * 0.04));
+  const topScore = combinations[Math.min(topCount - 1, combinations.length - 1)]?.score ?? combinations[0]?.score ?? 0;
+  const topTeams = combinations.filter((item) => item.score >= topScore);
+  const selected = topTeams[Math.floor(Math.random() * topTeams.length)] || combinations[0];
+
+  return selected
+    ? [...selected.team].sort(
+        (left, right) =>
+          (rankMap.get(left.id)?.index ?? Number.MAX_SAFE_INTEGER) - (rankMap.get(right.id)?.index ?? Number.MAX_SAFE_INTEGER),
+      )
+    : complementaryToolTeam(heroes);
+}
+
+function startToolRoulette(mode = "single") {
+  if (!state.heroes.length || state.toolRouletteSpinning) return;
+
+  clearToolRoulette();
+  state.toolRouletteMode = ["single", "team", "meta"].includes(mode) ? mode : "single";
+  state.toolRouletteSpinning = true;
+
+  const candidates = toolHeroRows();
+  const finalHeroes =
+    state.toolRouletteMode === "meta"
+      ? strongestToolTeam(candidates)
+      : state.toolRouletteMode === "team"
+      ? complementaryToolTeam(candidates)
+      : [candidates[Math.floor(Math.random() * candidates.length)]];
+  let tick = 0;
+  const totalTicks = (state.toolRouletteMode === "single" ? 24 : 30) + Math.floor(Math.random() * 10);
+
+  state.toolRouletteTimer = window.setInterval(() => {
+    tick += 1;
+    const isFinal = tick >= totalTicks;
+    const heroes =
+      isFinal
+        ? finalHeroes
+        : state.toolRouletteMode === "team" || state.toolRouletteMode === "meta"
+          ? randomToolHeroes(candidates, 3)
+          : [candidates[Math.floor(Math.random() * candidates.length)]];
+    updateToolSelection(heroes);
+
+    if (isFinal) {
+      clearToolRoulette();
+    }
+
+    renderCurrentView();
+    scrollToolSelectionIntoView();
+  }, 58);
+}
+
 function normalizeCommunityShareVersion(value) {
   return String(value || "").trim() || legacyCommunityShareVersion;
 }
@@ -3432,6 +3760,11 @@ function renderCurrentView() {
     return;
   }
 
+  if (state.view === "tools") {
+    renderToolsPage();
+    return;
+  }
+
   if (state.diffMode && state.view === "heroes") {
     renderHeroDiffDetail(selectedHeroDiffRow());
     return;
@@ -3443,6 +3776,11 @@ function renderCurrentView() {
 function renderSummary() {
   if (state.view === "heroes" && state.selectedChangelog) {
     els.summary.textContent = `${state.currentVersionLabel || state.currentVersionId || t("versionLabel")} · ${changelogEntryCount(changelogEntryTotal(currentChangelogSections()))}`;
+    return;
+  }
+
+  if (state.view === "tools") {
+    els.summary.textContent = t("toolsSummary", { count: state.heroes.length });
     return;
   }
 
@@ -3802,6 +4140,7 @@ function applyHighestRatedCommunityShare() {
 
 function setView(view) {
   state.view = views.some((item) => item.id === view) ? view : "heroes";
+  if (state.view !== "tools") clearToolRoulette();
   state.selectedChangelog = false;
   state.expandedAbilityId = "";
   renderViewTabs();
@@ -3811,6 +4150,7 @@ function setView(view) {
 function selectChangelog() {
   if (!hasCurrentChangelog()) return;
 
+  clearToolRoulette();
   state.selectedChangelog = true;
   state.selectedRelatedId = "";
   state.expandedAbilityId = "";
@@ -3822,6 +4162,7 @@ function selectChangelog() {
 }
 
 function selectHero(id) {
+  clearToolRoulette();
   state.selectedChangelog = false;
   state.selectedId = id;
   state.selectedRelatedId = "";
@@ -3834,6 +4175,7 @@ function selectHero(id) {
 }
 
 function selectItem(id) {
+  clearToolRoulette();
   state.selectedChangelog = false;
   state.selectedItemId = id;
   state.expandedAbilityId = "";
@@ -3920,6 +4262,8 @@ function applyHeroData(data, version) {
   state.selectedId = state.heroes.some((hero) => hero.id === previousSelectedId) ? previousSelectedId : state.heroes[0]?.id || "";
   state.selectedItemId = state.items.some((item) => item.id === previousSelectedItemId) ? previousSelectedItemId : state.items[0]?.id || "";
   state.selectedChangelog = previousSelectedChangelog && Array.isArray(version.changelog) && version.changelog.length > 0;
+  state.toolRouletteHeroIds = state.toolRouletteHeroIds.filter((id) => state.heroes.some((hero) => hero.id === id));
+  state.toolRouletteHeroId = state.toolRouletteHeroIds[0] || (state.heroes.some((hero) => hero.id === state.toolRouletteHeroId) ? state.toolRouletteHeroId : "");
   state.selectedRelatedId = hasRelatedHeroId(selectedHero(), previousRelatedId) ? previousRelatedId : "";
   state.expandedAbilityId = "";
   state.draggingHeroId = "";
@@ -4029,6 +4373,7 @@ async function toggleDiffMode() {
 async function switchVersion(versionId) {
   if (!versionId || versionId === state.currentVersionId) return;
 
+  clearToolRoulette();
   if (els.versionSelect) els.versionSelect.disabled = true;
   if (els.summary) els.summary.textContent = t("loading");
 
@@ -4081,6 +4426,18 @@ els.heroList.addEventListener("click", (event) => {
 });
 
 els.detail.addEventListener("click", (event) => {
+  const toolRandom = event.target.closest("[data-tool-random]");
+  if (toolRandom) {
+    startToolRoulette(toolRandom.dataset.toolRandom);
+    return;
+  }
+
+  const toolHero = event.target.closest("[data-tool-hero-id]");
+  if (toolHero) {
+    selectHero(toolHero.dataset.toolHeroId);
+    return;
+  }
+
   const communityShareCurrent = event.target.closest("[data-community-share-current]");
   if (communityShareCurrent) {
     shareCurrentRatingToIssue();
