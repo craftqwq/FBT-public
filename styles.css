@@ -1,14 +1,18 @@
 :root {
   color-scheme: dark;
-  --bg: #101116;
-  --panel: #191b22;
-  --panel-2: #20242d;
-  --line: #323846;
-  --text: #f2f4f8;
-  --muted: #aab2c0;
-  --accent: #f4bd50;
-  --accent-2: #67d4c5;
-  --danger: #ef6f6c;
+  --bg: #0d0f13;
+  --panel: #171a21;
+  --panel-2: #222733;
+  --panel-3: #10141b;
+  --line: #2d3442;
+  --line-soft: rgba(255, 255, 255, 0.065);
+  --text: #f5f7fb;
+  --muted: #a6afbf;
+  --accent: #f5bf4e;
+  --accent-2: #5fd0c2;
+  --danger: #ee716f;
+  --shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -18,7 +22,9 @@
 body {
   margin: 0;
   height: 100vh;
-  background: var(--bg);
+  background:
+    linear-gradient(130deg, rgba(245, 191, 78, 0.055), transparent 28%),
+    linear-gradient(180deg, #12151b 0%, var(--bg) 48%, #090b0f 100%);
   color: var(--text);
   display: flex;
   flex-direction: column;
@@ -26,6 +32,51 @@ body {
   font-family:
     Inter, "Segoe UI", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
   letter-spacing: 0;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #485266 #11141b;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #10131a;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid #10131a;
+  border-radius: 999px;
+  background: #485266;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5c667a;
+}
+
+::selection {
+  background: rgba(245, 191, 78, 0.28);
+  color: var(--text);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  letter-spacing: 0;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(245, 191, 78, 0.42);
+  outline-offset: 2px;
 }
 
 body.tierDragging {
@@ -39,8 +90,12 @@ body.tierDragging {
   justify-content: space-between;
   gap: 24px;
   padding: 18px 28px;
-  border-bottom: 1px solid var(--line);
-  background: #151820;
+  border-bottom: 1px solid var(--line-soft);
+  background:
+    linear-gradient(180deg, rgba(24, 28, 37, 0.96), rgba(16, 19, 26, 0.96)),
+    #151820;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+  z-index: 5;
 }
 
 h1,
@@ -53,6 +108,8 @@ p {
 h1 {
   font-size: 24px;
   font-weight: 800;
+  line-height: 1.15;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);
 }
 
 #summary {
@@ -80,7 +137,8 @@ h1 {
   padding: 3px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #0f1117;
+  background: rgba(11, 13, 18, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
 .versionSwitch {
@@ -91,8 +149,9 @@ h1 {
   gap: 8px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #0f1117;
+  background: rgba(11, 13, 18, 0.72);
   padding: 0 10px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
 .versionSwitch span {
@@ -126,7 +185,7 @@ h1 {
   height: 42px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #0f1117;
+  background: rgba(11, 13, 18, 0.72);
   color: var(--muted);
   padding: 0 14px;
   font-size: 13px;
@@ -163,6 +222,10 @@ h1 {
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .languageSwitch button {
@@ -240,8 +303,9 @@ h1 {
 .viewTabs button.active,
 .languageSwitch button:hover,
 .languageSwitch button.active {
-  background: var(--panel-2);
+  background: linear-gradient(180deg, #252a35, #1c2029);
   color: var(--accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .viewTabs button[data-view="tools"] {
@@ -297,15 +361,28 @@ input {
   height: 42px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #0f1117;
+  background: rgba(11, 13, 18, 0.8);
   color: var(--text);
   padding: 0 14px;
   font-size: 15px;
   outline: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
 }
 
 input:focus {
   border-color: var(--accent);
+  background: #11141b;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 3px rgba(245, 191, 78, 0.09);
+}
+
+input::placeholder {
+  color: #727d8f;
 }
 
 .layout {
@@ -314,12 +391,15 @@ input:focus {
   display: grid;
   grid-template-columns: 340px 1fr;
   overflow: hidden;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent 34%);
 }
 
 .sidebar {
   min-height: 0;
-  border-right: 1px solid var(--line);
-  background: #14171e;
+  border-right: 1px solid var(--line-soft);
+  background:
+    linear-gradient(180deg, rgba(19, 23, 31, 0.96), rgba(13, 16, 22, 0.96)),
+    #14171e;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -329,7 +409,9 @@ input:focus {
   padding: 14px 16px;
   color: var(--muted);
   font-size: 13px;
-  border-bottom: 1px solid var(--line);
+  font-weight: 800;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.012);
 }
 
 .heroList {
@@ -340,6 +422,7 @@ input:focus {
 }
 
 .heroButton {
+  position: relative;
   width: 100%;
   min-height: 64px;
   display: grid;
@@ -353,12 +436,48 @@ input:focus {
   text-align: left;
   padding: 8px;
   cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.heroButton::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 999px 999px 0;
+  background: var(--accent);
+  opacity: 0;
+  transform: scaleY(0.5);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
 }
 
 .heroButton:hover,
 .heroButton.active {
-  background: var(--panel);
+  background: linear-gradient(180deg, #1a1e27, #151923);
   border-color: var(--line);
+}
+
+.heroButton:hover {
+  transform: translateX(1px);
+}
+
+.heroButton.active {
+  border-color: rgba(245, 191, 78, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(245, 191, 78, 0.08);
+}
+
+.heroButton.active::before {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .changelogEntryButton {
@@ -377,12 +496,15 @@ input:focus {
   height: 42px;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #0c0e12;
+  background: linear-gradient(180deg, #151923, #0c0e12);
   display: grid;
   place-items: center;
   color: var(--accent);
   font-weight: 800;
   overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 8px 16px rgba(0, 0, 0, 0.22);
 }
 
 .heroIcon img,
@@ -455,6 +577,9 @@ input:focus {
   min-height: 0;
   overflow: auto;
   padding: 26px 30px 36px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 190px),
+    transparent;
 }
 
 .empty {
@@ -491,10 +616,10 @@ input:focus {
 }
 
 .pill {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(245, 191, 78, 0.22);
   border-radius: 999px;
   padding: 4px 9px;
-  background: #13161d;
+  background: rgba(245, 191, 78, 0.055);
 }
 
 .contentGrid {
@@ -528,17 +653,24 @@ input:focus {
   gap: 9px;
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #141820;
+  background: linear-gradient(180deg, #171b24, #12161e);
   color: var(--text);
   padding: 7px;
   text-align: left;
   cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
 }
 
 .formOption:hover,
 .formOption.active {
   border-color: rgba(244, 189, 80, 0.7);
-  background: #1e222b;
+  background: linear-gradient(180deg, #222733, #191d27);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
 }
 
 .formIcon {
@@ -589,14 +721,18 @@ input:focus {
 .panel {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--panel);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 72px),
+    var(--panel);
   overflow: hidden;
+  box-shadow: var(--shadow-soft);
 }
 
 .panel h2 {
   font-size: 15px;
   padding: 13px 15px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.018);
 }
 
 .panelBody {
@@ -621,7 +757,8 @@ input:focus {
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 10px;
-  background: #151821;
+  background: linear-gradient(180deg, #171b24, #11151c);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
 .statLabel {
@@ -634,6 +771,7 @@ input:focus {
   font-weight: 800;
 }
 
+.statCore,
 .statAttributes {
   grid-column: 1 / -1;
   min-height: 0;
@@ -650,6 +788,12 @@ input:focus {
   grid-column: 1 / -1;
   min-height: 0;
   padding: 9px 10px;
+}
+
+.statCoreRows {
+  display: grid;
+  gap: 6px;
+  margin-top: 7px;
 }
 
 .attributeRow {
@@ -673,11 +817,17 @@ input:focus {
   margin-top: 7px;
 }
 
+.statCore .attributeRow,
+.statCore .vitalRow,
+.statCore .combatRow {
+  margin-top: 0;
+}
+
 .attributePill {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #10131a;
+  background: rgba(11, 14, 20, 0.72);
   padding: 5px 6px;
   font-size: 12px;
   font-weight: 800;
@@ -712,7 +862,7 @@ input:focus {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #10131a;
+  background: rgba(11, 14, 20, 0.72);
   padding: 5px 6px;
   display: flex;
   align-items: center;
@@ -738,7 +888,7 @@ input:focus {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #10131a;
+  background: rgba(11, 14, 20, 0.72);
   padding: 5px 6px;
   display: flex;
   align-items: center;
@@ -763,7 +913,7 @@ input:focus {
 .standPanel {
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-soft);
 }
 
 .standHeader {
@@ -802,20 +952,18 @@ input:focus {
   font-weight: 800;
 }
 
-.tierSelect,
-.standScoreSelect {
+.tierSelect {
   height: 28px;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #0f1117;
+  background: #0f1218;
   color: var(--text);
   font-size: 12px;
   font-weight: 800;
   outline: none;
 }
 
-.tierSelect:focus,
-.standScoreSelect:focus {
+.tierSelect:focus {
   border-color: var(--accent);
 }
 
@@ -832,14 +980,19 @@ input:focus {
   margin: 0 auto 10px;
 }
 
+.standRadar.editable {
+  cursor: crosshair;
+  touch-action: none;
+}
+
 .radarGrid {
   fill: none;
-  stroke: #303746;
+  stroke: #333c4c;
   stroke-width: 1;
 }
 
 .radarAxis {
-  stroke: #2a303c;
+  stroke: #2c3341;
   stroke-width: 1;
 }
 
@@ -849,8 +1002,63 @@ input:focus {
   stroke-width: 2;
 }
 
+.radarVertex {
+  pointer-events: none;
+}
+
+.radarVertex.editable {
+  pointer-events: all;
+}
+
+.radarRing {
+  fill: rgba(245, 191, 78, 0.08);
+  stroke: rgba(245, 191, 78, 0.5);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition:
+    opacity 120ms ease,
+    r 120ms ease;
+}
+
 .radarDot {
   fill: var(--accent);
+  transition:
+    fill 120ms ease,
+    stroke 120ms ease,
+    r 120ms ease;
+}
+
+.standRadar.editable .radarDot {
+  fill: var(--accent-2);
+  stroke: #0d0f13;
+  stroke-width: 2;
+}
+
+.radarVertex.editable:hover .radarRing,
+.radarVertex.editable.active .radarRing {
+  opacity: 1;
+}
+
+.radarVertex.editable:hover .radarDot,
+.radarVertex.editable.active .radarDot {
+  fill: var(--accent);
+  stroke: #fff3bd;
+  r: 5.5px;
+}
+
+.radarHandle {
+  fill: transparent;
+  cursor: grab;
+  pointer-events: all;
+}
+
+body.radarDragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+body.radarDragging .radarHandle {
+  cursor: grabbing;
 }
 
 .radarLabel {
@@ -870,14 +1078,8 @@ input:focus {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #151821;
+  background: linear-gradient(180deg, #171b24, #11151c);
   padding: 7px;
-}
-
-.standScoreSelect {
-  width: 100%;
-  margin-top: 7px;
-  padding: 0 4px;
 }
 
 .standAxisHeader {
@@ -908,7 +1110,7 @@ input:focus {
   height: 5px;
   margin-top: 6px;
   border-radius: 999px;
-  background: #0c0e12;
+  background: #0a0c10;
   overflow: hidden;
 }
 
@@ -916,6 +1118,7 @@ input:focus {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  box-shadow: 0 0 12px rgba(245, 191, 78, 0.24);
 }
 
 .rankingPage {
@@ -934,7 +1137,7 @@ input:focus {
   justify-content: space-between;
   gap: 18px;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .rankingHeader h2 {
@@ -991,6 +1194,9 @@ input:focus {
   box-shadow:
     0 0 20px rgba(96, 165, 250, 0.24),
     0 0 24px rgba(244, 189, 80, 0.2);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .toolRandomButton::before {
@@ -1012,6 +1218,7 @@ input:focus {
   box-shadow:
     0 0 24px rgba(96, 165, 250, 0.34),
     0 0 30px rgba(192, 132, 252, 0.25);
+  transform: translateY(-1px);
 }
 
 .toolRandomButton:disabled {
@@ -1027,8 +1234,11 @@ input:focus {
   gap: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--panel);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.026), transparent 80px),
+    var(--panel);
   padding: 16px;
+  box-shadow: var(--shadow-soft);
 }
 
 .toolRoulettePanel h3 {
@@ -1088,6 +1298,7 @@ input:focus {
   border-radius: 8px;
   background: var(--panel);
   padding: 10px;
+  box-shadow: var(--shadow-soft);
 }
 
 .toolHeroRows {
@@ -1104,17 +1315,23 @@ input:focus {
   place-items: center;
   border: 1px solid transparent;
   border-radius: 5px;
-  background: #11151d;
+  background: linear-gradient(180deg, #151923, #10131a);
   padding: 2px;
   cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .toolHeroRow:hover,
 .toolHeroRow:focus-visible,
 .toolHeroRow.active {
   border-color: rgba(244, 189, 80, 0.68);
-  background: #20242d;
+  background: linear-gradient(180deg, #222733, #181d26);
   outline: none;
+  transform: translateY(-1px);
 }
 
 .toolHeroRow.active {
@@ -1132,12 +1349,16 @@ input:focus {
   height: 34px;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #10131a;
+  background: linear-gradient(180deg, #151923, #10131a);
   color: var(--text);
   padding: 0 12px;
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    color 120ms ease,
+    background-color 120ms ease;
 }
 
 .ratingToolButton:hover {
@@ -1160,7 +1381,7 @@ input:focus {
   resize: vertical;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #0f1117;
+  background: #0f1218;
   color: #d8dee8;
   padding: 10px;
   font-family: Consolas, "SFMono-Regular", monospace;
@@ -1203,7 +1424,7 @@ input:focus {
   display: grid;
   gap: 8px;
   padding-top: 12px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-soft);
 }
 
 .diffField:first-child {
@@ -1316,7 +1537,7 @@ input:focus {
   gap: 10px;
   align-items: start;
   padding-top: 10px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-soft);
 }
 
 .changelogEntry:first-child {
@@ -1330,6 +1551,8 @@ input:focus {
   width: 28px;
   height: 28px;
   border: 1px solid var(--line);
+  border-radius: 5px;
+  background: rgba(245, 191, 78, 0.06);
   color: var(--accent);
   font-size: 12px;
   font-weight: 900;
@@ -1359,7 +1582,7 @@ input:focus {
   gap: 6px;
   margin-bottom: 12px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .itemTip span {
@@ -1386,7 +1609,7 @@ input:focus {
   gap: 5px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #10131a;
+  background: rgba(11, 14, 20, 0.72);
   padding: 9px;
 }
 
@@ -1438,7 +1661,7 @@ input:focus {
   justify-content: space-between;
   gap: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .shareVersionHeader h3 {
@@ -1461,9 +1684,12 @@ input:focus {
   gap: 14px;
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: var(--panel);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.026), transparent 84px),
+    var(--panel);
   padding: 14px;
   cursor: pointer;
+  box-shadow: var(--shadow-soft);
   transition:
     border-color 120ms ease,
     background-color 120ms ease,
@@ -1473,7 +1699,9 @@ input:focus {
 .shareCard:hover,
 .shareCard:focus-visible {
   border-color: rgba(244, 189, 80, 0.7);
-  background: #1e222b;
+  background:
+    linear-gradient(180deg, rgba(245, 191, 78, 0.055), transparent 88px),
+    #1e222b;
   outline: none;
   transform: translateY(-1px);
 }
@@ -1593,10 +1821,16 @@ input:focus {
 }
 
 .tierRow {
+  position: relative;
   display: grid;
   grid-template-columns: 58px minmax(0, 1fr);
   align-items: start;
   gap: 12px;
+}
+
+.tierRow:hover,
+.tierRow:focus-within {
+  z-index: 40;
 }
 
 .tierLabel {
@@ -1622,6 +1856,7 @@ input:focus {
   padding: 4px;
   border: 1px solid transparent;
   border-radius: 8px;
+  background: rgba(255, 255, 255, 0.01);
   transition:
     background-color 120ms ease,
     border-color 120ms ease;
@@ -1668,22 +1903,36 @@ input:focus {
   gap: 7px;
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: var(--panel);
+  background: linear-gradient(180deg, #181c25, #12161e);
   color: var(--text);
   padding: 5px 8px 5px 5px;
   text-align: left;
   cursor: grab;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .tierHero:hover,
 .tierHero:focus-visible,
 .tierHero.active {
   border-color: rgba(244, 189, 80, 0.7);
-  background: #1e222b;
+  background: linear-gradient(180deg, #222733, #181d26);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
+}
+
+.tierHero:hover,
+.tierHero:focus-visible {
+  z-index: 45;
 }
 
 .tierHero:active {
   cursor: grabbing;
+  transform: translateY(0);
 }
 
 .tierHero.dragging {
@@ -1722,7 +1971,7 @@ body.tierDragging .tierTooltip {
 
 .tierTooltip {
   position: absolute;
-  z-index: 20;
+  z-index: 50;
   left: 50%;
   bottom: calc(100% + 10px);
   width: 256px;
@@ -1730,7 +1979,9 @@ body.tierDragging .tierTooltip {
   gap: 8px;
   border: 1px solid rgba(244, 189, 80, 0.58);
   border-radius: 8px;
-  background: #11141b;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 80px),
+    #11141b;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
   padding: 12px;
   opacity: 0;
@@ -1797,7 +2048,7 @@ body.tierDragging .tierTooltip {
   gap: 5px;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #10131a;
+  background: rgba(11, 14, 20, 0.72);
   padding: 5px 6px;
 }
 
@@ -1830,6 +2081,7 @@ body.tierDragging .tierTooltip {
   grid-auto-rows: 76px;
   gap: 10px;
   align-items: stretch;
+  padding: 2px;
 }
 
 .exclusiveItemRail {
@@ -1865,7 +2117,10 @@ body.tierDragging .tierTooltip {
   padding: 7px;
   border: 1px solid #2a3f43;
   border-radius: 6px;
-  background: #11171b;
+  background:
+    linear-gradient(180deg, rgba(95, 208, 194, 0.055), transparent 78px),
+    #11171b;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 .temporaryPanelTitle {
@@ -1910,9 +2165,11 @@ body.tierDragging .tierTooltip {
   grid-auto-rows: minmax(0, 1fr);
   gap: 4px;
   padding: 4px;
-  border: 1px solid #282e39;
+  border: 1px solid #2b3340;
   border-radius: 6px;
-  background: #11141b;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    #11141b;
 }
 
 .abilitySlot.multi {
@@ -1935,8 +2192,9 @@ body.tierDragging .tierTooltip {
 
 .abilitySlot:empty::after {
   content: "";
-  border: 1px dashed #252b35;
+  border: 1px dashed #303747;
   border-radius: 4px;
+  background: rgba(255, 255, 255, 0.012);
 }
 
 .abilityLoose {
@@ -1955,16 +2213,26 @@ body.tierDragging .tierTooltip {
   gap: 4px;
   border: 1px solid var(--line);
   border-radius: 5px;
-  background: #151821;
+  background: linear-gradient(180deg, #171b24, #11151c);
   color: var(--text);
   cursor: pointer;
   padding: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
 }
 
 .abilityButton:hover,
 .abilityButton.active {
   border-color: var(--accent);
-  background: #20222a;
+  background: linear-gradient(180deg, #252936, #1a1e27);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 8px 18px rgba(0, 0, 0, 0.24);
+  transform: translateY(-1px);
 }
 
 .abilityButton.exclusiveItem,
@@ -1995,12 +2263,57 @@ body.tierDragging .tierTooltip {
   white-space: nowrap;
 }
 
+.abilityTooltip {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: min(460px, calc(100vw - 20px));
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-9999px, -9999px);
+  transition: opacity 90ms ease;
+}
+
+.abilityTooltip[hidden] {
+  display: none;
+}
+
+.abilityTooltip.visible {
+  opacity: 1;
+}
+
+.abilityTooltip .abilityTooltipCard {
+  width: 100%;
+  max-height: calc(100vh - 20px);
+  margin-top: 0;
+  overflow: auto;
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.46),
+    0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.abilityTooltip .abilityTooltipCard .profileMeta {
+  gap: 6px;
+}
+
+.abilityTooltip .abilityTooltipCard .pill {
+  font-size: 12px;
+}
+
+.abilityTooltip .abilityTooltipCard .sourcePath {
+  margin-top: 8px;
+}
+
 .abilityDetail {
   margin-top: 14px;
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #151821;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.026), transparent 74px),
+    #151821;
+  box-shadow: var(--shadow-soft);
 }
 
 .abilityDetailHeader {
@@ -2050,6 +2363,7 @@ body.tierDragging .tierTooltip {
     align-items: stretch;
     flex-direction: column;
     gap: 14px;
+    padding: 18px 16px;
   }
 
   .searchBox {
@@ -2066,6 +2380,20 @@ body.tierDragging .tierTooltip {
   .diffToggle,
   .languageSwitch {
     align-self: flex-start;
+  }
+
+  .viewTabs {
+    width: 100%;
+  }
+
+  .viewTabs button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 6px;
+  }
+
+  .versionSwitch {
+    max-width: 100%;
   }
 
   .layout,

@@ -34,6 +34,7 @@ const state = {
   draggingHeroId: "",
   suppressNextTierClick: false,
   pointerDrag: null,
+  radarDrag: null,
   toolRouletteHeroId: "",
   toolRouletteHeroIds: [],
   toolRouletteMode: "single",
@@ -56,6 +57,14 @@ const els = {
   heroList: document.querySelector("#heroList"),
   detail: document.querySelector("#detail"),
 };
+
+const abilityTooltip = document.createElement("div");
+abilityTooltip.className = "abilityTooltip";
+abilityTooltip.setAttribute("role", "tooltip");
+abilityTooltip.hidden = true;
+document.body.appendChild(abilityTooltip);
+
+let activeAbilityTooltipButton = null;
 
 const views = [
   { id: "heroes", labelKey: "viewHeroes" },
@@ -406,7 +415,6 @@ const uiText = {
 const defaultStandScore = 0;
 const defaultTier = 0;
 const standGrades = ["0", "E", "D", "C", "B", "A"];
-const scoreLevels = [0, 1, 2, 3, 4, 5];
 const tierLevels = [0, 1, 2, 3, 4, 5];
 const skinAbilityPanelBaseExceptionIds = new Set(["E00Y"]);
 const legacyCompactRatingVersion = 2;
@@ -2218,9 +2226,10 @@ function pointList(points) {
   return points.map((point) => `${point.x.toFixed(1)},${point.y.toFixed(1)}`).join(" ");
 }
 
-function renderStandRadar(ratings) {
+function renderStandRadar(ratings, options = {}) {
   const maxRadius = 58;
   const center = 92;
+  const editable = Boolean(options.editable && options.heroId);
   const grid = [1, 2, 3, 4, 5]
     .map((level) => {
       const radius = (maxRadius * level) / 5;
@@ -2239,16 +2248,36 @@ function renderStandRadar(ratings) {
     })
     .join("");
   const points = ratings.map((axis, index) => radarPoint(index, (maxRadius * axis.score) / 5, center));
-  const dots = points
-    .map((point) => `<circle class="radarDot" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="2.5"></circle>`)
+  const vertices = points
+    .map((point, index) => {
+      const axis = ratings[index] || standAxes[index];
+      const active =
+        editable && state.radarDrag?.heroId === options.heroId && state.radarDrag?.axisIndex === index;
+      return `
+        <g
+          class="radarVertex ${editable ? "editable" : ""} ${active ? "active" : ""}"
+          ${editable ? `data-axis-index="${index}" data-axis-key="${escapeHtml(axis.key)}"` : ""}
+        >
+          <circle class="radarRing" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="8"></circle>
+          <circle class="radarDot" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="${editable ? "4" : "2.5"}"></circle>
+          ${editable ? `<circle class="radarHandle" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="13"></circle>` : ""}
+        </g>
+      `;
+    })
     .join("");
 
   return `
-    <svg class="standRadar" viewBox="0 0 184 184" role="img" aria-label="${escapeHtml(t("radarAriaLabel"))}">
+    <svg
+      class="standRadar ${editable ? "editable" : ""}"
+      viewBox="0 0 184 184"
+      role="img"
+      aria-label="${escapeHtml(t("radarAriaLabel"))}"
+      ${editable ? `data-stand-radar="true" data-hero-id="${escapeHtml(options.heroId)}"` : ""}
+    >
       ${grid}
       ${axes}
       <polygon class="radarArea" points="${pointList(points)}"></polygon>
-      ${dots}
+      ${vertices}
     </svg>
   `;
 }
@@ -2268,25 +2297,6 @@ function renderTierSelect(hero) {
           .join("")}
       </select>
     </label>
-  `;
-}
-
-function renderScoreSelect(hero, axis) {
-  return `
-    <select
-      class="standScoreSelect"
-      data-hero-id="${escapeHtml(hero.id)}"
-      data-axis-key="${escapeHtml(axis.key)}"
-      aria-label="${escapeHtml(t("scoreLabel", { axis: axisLabel(axis) }))}"
-    >
-      ${scoreLevels
-        .map(
-          (score) => `
-            <option value="${score}" ${score === axis.score ? "selected" : ""}>${score ? `${standGrades[score]} ${score}` : "0"}</option>
-          `,
-        )
-        .join("")}
-    </select>
   `;
 }
 
@@ -2310,7 +2320,7 @@ function renderStandPanel(hero, options = true) {
           <div class="standSignature">${escapeHtml(t("hexScore", { score: ratingTotal }))}</div>
         </div>
       </div>
-      ${renderStandRadar(ratings)}
+      ${renderStandRadar(ratings, { heroId: hero.id, editable: settings.scoresEditable })}
       <div class="standStats">
         ${ratings
           .map(
@@ -2323,7 +2333,6 @@ function renderStandPanel(hero, options = true) {
                 <div class="standBar" aria-hidden="true">
                   <div class="standFill" style="width: ${axis.score * 20}%"></div>
                 </div>
-                ${settings.scoresEditable ? renderScoreSelect(hero, axis) : ""}
               </div>
             `,
           )
@@ -2361,53 +2370,49 @@ function renderStats(hero) {
   const stats = hero.stats || {};
 
   return `
-    <div class="stat statAttributes">
-      <div class="statLabel">${escapeHtml(t("attributes"))}</div>
-      <div class="attributeRow">
-        ${["str", "agi", "int"]
-          .map((key) => {
-            const code = key.toUpperCase();
-            const isPrimary = stats.primary === code;
-            const statName = t(`primaryStatNames.${code}`);
-            const title = isPrimary ? t("primaryTitle", { name: statName }) : statName;
-            return `
-              <span class="attributePill ${isPrimary ? "primary" : ""}" title="${escapeHtml(title)}">
-                <span class="attributePillValue">${escapeHtml(code)} ${escapeHtml(stats[key] || t("missing"))}</span>
-                ${isPrimary ? `<span class="primaryBadge">${escapeHtml(t("primaryBadge"))}</span>` : ""}
-              </span>
-            `;
-          })
-          .join("")}
-      </div>
-    </div>
-    <div class="stat statVitals">
-      <div class="statLabel">${escapeHtml(t("vitals"))}</div>
-      <div class="vitalRow">
-        ${["hp", "mana"]
-          .map(
-            (key) => `
-              <span class="vitalPill">
-                <span class="vitalLabel">${escapeHtml(t(`statLabels.${key}`))}</span>
-                <span class="vitalValue ${stats[key] ? "" : "missing"}">${escapeHtml(stats[key] || t("missing"))}</span>
-              </span>
-            `,
-          )
-          .join("")}
-      </div>
-    </div>
-    <div class="stat statCombat">
-      <div class="statLabel">${escapeHtml(t("combat"))}</div>
-      <div class="combatRow">
-        ${["attackBase", "cooldown", "range"]
-          .map(
-            (key) => `
-              <span class="combatPill">
-                <span class="combatLabel">${escapeHtml(t(`combatStatLabels.${key}`))}</span>
-                <span class="combatValue">${escapeHtml(stats[key] || t("missing"))}</span>
-              </span>
-            `,
-          )
-          .join("")}
+    <div class="stat statCore">
+      <div class="statLabel">${escapeHtml(`${t("attributes")} / ${t("vitals")} / ${t("combat")}`)}</div>
+      <div class="statCoreRows">
+        <div class="attributeRow">
+          ${["str", "agi", "int"]
+            .map((key) => {
+              const code = key.toUpperCase();
+              const isPrimary = stats.primary === code;
+              const statName = t(`primaryStatNames.${code}`);
+              const title = isPrimary ? t("primaryTitle", { name: statName }) : statName;
+              return `
+                <span class="attributePill ${isPrimary ? "primary" : ""}" title="${escapeHtml(title)}">
+                  <span class="attributePillValue">${escapeHtml(code)} ${escapeHtml(stats[key] || t("missing"))}</span>
+                  ${isPrimary ? `<span class="primaryBadge">${escapeHtml(t("primaryBadge"))}</span>` : ""}
+                </span>
+              `;
+            })
+            .join("")}
+        </div>
+        <div class="vitalRow">
+          ${["hp", "mana"]
+            .map(
+              (key) => `
+                <span class="vitalPill">
+                  <span class="vitalLabel">${escapeHtml(t(`statLabels.${key}`))}</span>
+                  <span class="vitalValue ${stats[key] ? "" : "missing"}">${escapeHtml(stats[key] || t("missing"))}</span>
+                </span>
+              `,
+            )
+            .join("")}
+        </div>
+        <div class="combatRow">
+          ${["attackBase", "cooldown", "range"]
+            .map(
+              (key) => `
+                <span class="combatPill">
+                  <span class="combatLabel">${escapeHtml(t(`combatStatLabels.${key}`))}</span>
+                  <span class="combatValue">${escapeHtml(stats[key] || t("missing"))}</span>
+                </span>
+              `,
+            )
+            .join("")}
+        </div>
       </div>
     </div>
   `;
@@ -2515,17 +2520,134 @@ function renderAbilityButton(ability) {
   const name = localized(ability, "name") || ability.id;
   const buttonLabel = ability.buttonLabelKey ? t(ability.buttonLabelKey) : ability.buttonLabel || ability.hotkey || ability.id;
   const entryKey = ability.entryKey || ability.id;
+  const tooltipAttributes = abilityTooltipAttributes(ability, name);
 
   return `
     <button
       class="abilityButton${kindClass} ${entryKey === state.expandedAbilityId ? "active" : ""}"
       data-entry-id="${escapeHtml(entryKey)}"
-      title="${escapeHtml(name)}"
+      ${tooltipAttributes}
     >
       ${renderIcon(ability.iconAsset, ability.hotkey || ability.id.slice(-1), "abilityIcon", name)}
       <span>${escapeHtml(buttonLabel)}</span>
     </button>
   `;
+}
+
+function abilityMetaItems(ability) {
+  const parts = [];
+  if (ability.categoryKey || ability.categoryLabel) {
+    parts.push(ability.categoryKey ? t(ability.categoryKey) : ability.categoryLabel);
+  }
+  if (ability.id) parts.push(ability.id);
+  if (ability.hotkey) parts.push(`${t("hotkey")} ${ability.hotkey}`);
+  if (ability.buttonPos) parts.push(`${t("position")} ${ability.buttonPos.x},${ability.buttonPos.y}`);
+  if (ability.sourceWeapon) parts.push(`${t("from")} ${ability.sourceWeapon}`);
+  if (ability.sourceAbilityName) parts.push(`${t("from")} ${ability.sourceAbilityName}`);
+  if (ability.inheritedFrom) parts.push(`${t("inheritedFrom")} ${ability.inheritedFrom}`);
+  return parts.filter(Boolean);
+}
+
+function renderAbilityMetaPills(ability) {
+  return abilityMetaItems(ability)
+    .map((item) => `<span class="pill">${escapeHtml(item)}</span>`)
+    .join("");
+}
+
+function renderAbilityDetailCard(ability, className = "abilityDetail") {
+  const name = ability.name || ability.id;
+  return `
+    <article class="${className}">
+      <div class="abilityDetailHeader">
+        ${renderIcon(ability.iconAsset, ability.hotkey || ability.id.slice(-1), "abilityIcon large", name || ability.id)}
+        <div>
+          <div class="abilityName">${escapeHtml(name || ability.id)}</div>
+          <div class="profileMeta">
+            ${renderAbilityMetaPills(ability)}
+          </div>
+        </div>
+      </div>
+      ${ability.description ? `<div class="abilityText">${escapeHtml(ability.description)}</div>` : ""}
+      ${ability.icon ? `<div class="sourcePath">${escapeHtml(ability.icon)}</div>` : ""}
+    </article>
+  `;
+}
+
+function abilityTooltipAttributes(ability, fallbackName) {
+  const title = fallbackName || ability.id || "";
+  const meta = abilityMetaItems(ability).join(" / ");
+  const body = String(ability.description || "").replace(/\s+/g, " ").trim();
+  const ariaLabel = [title, meta, body].filter(Boolean).join(". ");
+  const tooltipHtml = renderAbilityDetailCard(ability, "abilityDetail abilityTooltipCard");
+  return [
+    `data-tooltip-title="${escapeHtml(title)}"`,
+    `data-tooltip-html="${escapeHtml(tooltipHtml)}"`,
+    `aria-label="${escapeHtml(ariaLabel || title)}"`,
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+function clampTooltipCoord(value, min, max) {
+  return Math.min(Math.max(value, min), Math.max(min, max));
+}
+
+function positionAbilityTooltip(button) {
+  if (!button || abilityTooltip.hidden) return;
+
+  const margin = 10;
+  const gap = 10;
+  const buttonRect = button.getBoundingClientRect();
+  const tooltipRect = abilityTooltip.getBoundingClientRect();
+  const detailRect = els.detail.getBoundingClientRect();
+  const minX = Math.max(margin, detailRect.left + margin);
+  const maxX = Math.min(window.innerWidth - tooltipRect.width - margin, detailRect.right - tooltipRect.width - margin);
+  const rightX = buttonRect.right + gap;
+  const leftX = buttonRect.left - tooltipRect.width - gap;
+  const canPlaceRight = rightX <= maxX;
+  const canPlaceLeft = leftX >= minX;
+  let x = canPlaceRight ? rightX : canPlaceLeft ? leftX : buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
+  let y = buttonRect.top + buttonRect.height / 2 - tooltipRect.height / 2;
+
+  if (!canPlaceRight && !canPlaceLeft) {
+    y = buttonRect.top - tooltipRect.height - gap;
+    if (y < margin) y = buttonRect.bottom + gap;
+  }
+
+  if (y + tooltipRect.height > window.innerHeight - margin) y = window.innerHeight - tooltipRect.height - margin;
+
+  x = clampTooltipCoord(x, minX, maxX);
+  y = clampTooltipCoord(y, margin, window.innerHeight - tooltipRect.height - margin);
+  abilityTooltip.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+}
+
+function showAbilityTooltip(button) {
+  const tooltipHtml = button?.dataset.tooltipHtml || "";
+  if (!tooltipHtml) return;
+
+  activeAbilityTooltipButton = button;
+  abilityTooltip.innerHTML = tooltipHtml;
+  abilityTooltip.hidden = false;
+  abilityTooltip.classList.remove("visible");
+  positionAbilityTooltip(button);
+
+  requestAnimationFrame(() => {
+    if (activeAbilityTooltipButton !== button || abilityTooltip.hidden) return;
+    positionAbilityTooltip(button);
+    abilityTooltip.classList.add("visible");
+  });
+}
+
+function hideAbilityTooltip() {
+  activeAbilityTooltipButton = null;
+  abilityTooltip.classList.remove("visible");
+  abilityTooltip.hidden = true;
+  abilityTooltip.innerHTML = "";
+}
+
+function abilityTooltipButtonFromEvent(event) {
+  const button = event.target.closest(".abilityButton[data-tooltip-title]");
+  return button && els.detail.contains(button) ? button : null;
 }
 
 function relatedHeroOptions(hero, activeHero) {
@@ -2647,29 +2769,7 @@ function renderAbilities(hero) {
         : ""
     }
     ${
-      expanded
-        ? `
-          <article class="abilityDetail">
-            <div class="abilityDetailHeader">
-              ${renderIcon(expanded.iconAsset, expanded.hotkey || expanded.id.slice(-1), "abilityIcon large", expanded.name || expanded.id)}
-              <div>
-                <div class="abilityName">${escapeHtml(expanded.name || expanded.id)}</div>
-                <div class="profileMeta">
-                  ${expanded.categoryKey || expanded.categoryLabel ? `<span class="pill">${escapeHtml(expanded.categoryKey ? t(expanded.categoryKey) : expanded.categoryLabel)}</span>` : ""}
-                  <span class="pill">${escapeHtml(expanded.id)}</span>
-                  ${expanded.hotkey ? `<span class="pill">${escapeHtml(t("hotkey"))} ${escapeHtml(expanded.hotkey)}</span>` : ""}
-                  ${expanded.buttonPos ? `<span class="pill">${escapeHtml(t("position"))} ${escapeHtml(`${expanded.buttonPos.x},${expanded.buttonPos.y}`)}</span>` : ""}
-                  ${expanded.sourceWeapon ? `<span class="pill">${escapeHtml(t("from"))} ${escapeHtml(expanded.sourceWeapon)}</span>` : ""}
-                  ${expanded.sourceAbilityName ? `<span class="pill">${escapeHtml(t("from"))} ${escapeHtml(expanded.sourceAbilityName)}</span>` : ""}
-                  ${expanded.inheritedFrom ? `<span class="pill">${escapeHtml(t("inheritedFrom"))} ${escapeHtml(expanded.inheritedFrom)}</span>` : ""}
-                </div>
-              </div>
-            </div>
-            ${expanded.description ? `<div class="abilityText">${escapeHtml(expanded.description)}</div>` : ""}
-            ${expanded.icon ? `<div class="sourcePath">${escapeHtml(expanded.icon)}</div>` : ""}
-          </article>
-        `
-        : `<div class="abilityHint">${escapeHtml(t("abilityHint"))}</div>`
+      expanded ? renderAbilityDetailCard(expanded) : `<div class="abilityHint">${escapeHtml(t("abilityHint"))}</div>`
     }
   `;
 }
@@ -3896,6 +3996,101 @@ function updateHeroScore(id, axisKey, value) {
   saveRatingCache();
 }
 
+function radarSvgPoint(svg, clientX, clientY) {
+  const matrix = svg.getScreenCTM();
+  if (!matrix) return null;
+
+  const point = svg.createSVGPoint();
+  point.x = clientX;
+  point.y = clientY;
+  return point.matrixTransform(matrix.inverse());
+}
+
+function nearestRadarAxisIndex(point, center = 92) {
+  const dx = point.x - center;
+  const dy = point.y - center;
+  const distance = Math.hypot(dx, dy);
+  if (!distance) return 0;
+
+  let bestIndex = 0;
+  let bestScore = -Infinity;
+  standAxes.forEach((_, index) => {
+    const unit = radarPoint(index, 1, center);
+    const score = (dx * (unit.x - center) + dy * (unit.y - center)) / distance;
+    if (score > bestScore) {
+      bestScore = score;
+      bestIndex = index;
+    }
+  });
+  return bestIndex;
+}
+
+function radarScoreForPoint(point, axisIndex, center = 92, maxRadius = 58) {
+  const unit = radarPoint(axisIndex, 1, center);
+  const projection = (point.x - center) * (unit.x - center) + (point.y - center) * (unit.y - center);
+  const normalized = Math.max(0, Math.min(maxRadius, projection)) / maxRadius;
+  return normalizeScore(Math.round(normalized * 5));
+}
+
+function currentHeroAxisScore(heroId, axisKey) {
+  const current = heroOverride(heroId);
+  return normalizeScore((current.scores || {})[axisKey] ?? defaultStandScore);
+}
+
+function updateRadarDragScore(event) {
+  const drag = state.radarDrag;
+  if (!drag) return false;
+
+  const radar = els.detail.querySelector(`.standRadar[data-hero-id="${CSS.escape(drag.heroId)}"]`);
+  if (!radar) return false;
+
+  const point = radarSvgPoint(radar, event.clientX, event.clientY);
+  if (!point) return false;
+
+  const score = radarScoreForPoint(point, drag.axisIndex);
+  if (score === currentHeroAxisScore(drag.heroId, drag.axisKey)) return false;
+
+  updateHeroScore(drag.heroId, drag.axisKey, score);
+  renderCurrentView();
+  return true;
+}
+
+function beginRadarDrag(event, radar) {
+  if (event.button !== 0 || radar.dataset.standRadar !== "true") return false;
+
+  const point = radarSvgPoint(radar, event.clientX, event.clientY);
+  if (!point) return false;
+
+  const vertex = event.target.closest(".radarVertex[data-axis-index]");
+  const vertexAxisIndex = Number.parseInt(vertex?.dataset.axisIndex ?? "", 10);
+  const axisIndex = Number.isInteger(vertexAxisIndex) ? vertexAxisIndex : nearestRadarAxisIndex(point);
+  state.radarDrag = {
+    heroId: radar.dataset.heroId,
+    axisIndex,
+    axisKey: standAxes[axisIndex].key,
+    pointerId: event.pointerId,
+  };
+  document.body.classList.add("radarDragging");
+  event.preventDefault();
+  updateRadarDragScore(event);
+  return true;
+}
+
+function updateRadarDrag(event) {
+  if (!state.radarDrag || state.radarDrag.pointerId !== event.pointerId) return;
+
+  event.preventDefault();
+  updateRadarDragScore(event);
+}
+
+function finishRadarDrag(event) {
+  if (!state.radarDrag || state.radarDrag.pointerId !== event.pointerId) return;
+
+  state.radarDrag = null;
+  document.body.classList.remove("radarDragging");
+  els.detail.querySelectorAll(".radarVertex.active").forEach((vertex) => vertex.classList.remove("active"));
+}
+
 function clearTierDropTargets() {
   els.detail.querySelectorAll(".tierRow.dragOver").forEach((row) => row.classList.remove("dragOver"));
   els.detail.querySelectorAll(".tierHero.insertBefore").forEach((hero) => hero.classList.remove("insertBefore"));
@@ -4434,6 +4629,31 @@ els.heroList.addEventListener("click", (event) => {
   if (button) selectHero(button.dataset.id);
 });
 
+els.detail.addEventListener("pointerover", (event) => {
+  const button = abilityTooltipButtonFromEvent(event);
+  if (!button || button === activeAbilityTooltipButton) return;
+  showAbilityTooltip(button);
+});
+
+els.detail.addEventListener("pointerout", (event) => {
+  const button = abilityTooltipButtonFromEvent(event);
+  if (!button || button.contains(event.relatedTarget)) return;
+  hideAbilityTooltip();
+});
+
+els.detail.addEventListener("focusin", (event) => {
+  const button = abilityTooltipButtonFromEvent(event);
+  if (button) showAbilityTooltip(button);
+});
+
+els.detail.addEventListener("focusout", (event) => {
+  const button = abilityTooltipButtonFromEvent(event);
+  if (button) hideAbilityTooltip();
+});
+
+els.detail.addEventListener("mouseleave", hideAbilityTooltip);
+els.detail.addEventListener("scroll", hideAbilityTooltip);
+
 els.detail.addEventListener("click", (event) => {
   const toolRandom = event.target.closest("[data-tool-random]");
   if (toolRandom) {
@@ -4494,11 +4714,17 @@ els.detail.addEventListener("click", (event) => {
   const button = event.target.closest(".abilityButton");
   if (!button) return;
 
+  hideAbilityTooltip();
   state.expandedAbilityId = state.expandedAbilityId === button.dataset.entryId ? "" : button.dataset.entryId;
   renderCurrentView();
 });
 
 els.detail.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    hideAbilityTooltip();
+    return;
+  }
+
   if (event.key !== "Enter" && event.key !== " ") return;
   if (event.target.closest("button")) return;
 
@@ -4554,6 +4780,9 @@ els.detail.addEventListener("dragend", () => {
 
 els.detail.addEventListener("pointerdown", (event) => {
   if (event.button !== 0) return;
+  const radar = event.target.closest(".standRadar[data-stand-radar]");
+  if (radar && beginRadarDrag(event, radar)) return;
+
   const tierHero = event.target.closest(".tierHero");
   if (!tierHero) return;
 
@@ -4561,32 +4790,32 @@ els.detail.addEventListener("pointerdown", (event) => {
 });
 
 window.addEventListener("pointermove", (event) => {
+  updateRadarDrag(event);
   updatePointerDrag(event);
 });
 
 window.addEventListener("pointerup", (event) => {
+  finishRadarDrag(event);
   finishPointerDrag(event);
 });
 
-window.addEventListener("pointercancel", () => {
+window.addEventListener("pointercancel", (event) => {
+  hideAbilityTooltip();
+  finishRadarDrag(event);
   state.pointerDrag = null;
   state.draggingHeroId = "";
   document.body.classList.remove("tierDragging");
+  document.body.classList.remove("radarDragging");
   clearTierDropTargets();
   els.detail.querySelectorAll(".tierHero.dragging").forEach((hero) => hero.classList.remove("dragging"));
 });
+
+window.addEventListener("resize", hideAbilityTooltip);
 
 els.detail.addEventListener("change", (event) => {
   const tierSelect = event.target.closest(".tierSelect");
   if (tierSelect) {
     updateHeroTier(tierSelect.dataset.heroId, tierSelect.value);
-    renderCurrentView();
-    return;
-  }
-
-  const scoreSelect = event.target.closest(".standScoreSelect");
-  if (scoreSelect) {
-    updateHeroScore(scoreSelect.dataset.heroId, scoreSelect.dataset.axisKey, scoreSelect.value);
     renderCurrentView();
   }
 });
