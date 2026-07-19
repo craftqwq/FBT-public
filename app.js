@@ -408,6 +408,7 @@ const defaultTier = 0;
 const standGrades = ["0", "E", "D", "C", "B", "A"];
 const scoreLevels = [0, 1, 2, 3, 4, 5];
 const tierLevels = [0, 1, 2, 3, 4, 5];
+const skinAbilityPanelBaseExceptionIds = new Set(["E00Y"]);
 const legacyCompactRatingVersion = 2;
 const compactRatingVersion = 3;
 const compactRatingMagic = [70, 66, 84, 82];
@@ -2673,6 +2674,13 @@ function renderAbilities(hero) {
   `;
 }
 
+function abilityPanelHeroForDisplay(baseHero, activeHero) {
+  const exceptionApplies =
+    skinAbilityPanelBaseExceptionIds.has(baseHero.id) || skinAbilityPanelBaseExceptionIds.has(activeHero.id);
+  if (activeHero.relationType === "skin" && !exceptionApplies) return baseHero;
+  return activeHero;
+}
+
 function standPanelContext(baseHero, activeHero) {
   if (activeHero.relationType && activeHero.relationType !== "skin") {
     return null;
@@ -2706,6 +2714,7 @@ function renderDetail(hero) {
   const description = (displayHero.description || "").trim();
   const standContext = standPanelContext(hero, activeHero);
   const relatedSwitch = renderRelatedHeroSwitch(hero, activeHero);
+  const abilityPanelHero = abilityPanelHeroForDisplay(hero, activeHero);
   const gridClasses = ["contentGrid"];
   if (!relatedSwitch) gridClasses.push("noForms");
   if (!description) gridClasses.push("noDescription");
@@ -2742,7 +2751,7 @@ function renderDetail(hero) {
 
         <section class="panel skillsPanel">
           <h2>${escapeHtml(t("skillsTitle"))}</h2>
-          <div class="panelBody">${renderAbilities(activeHero)}</div>
+          <div class="panelBody">${renderAbilities(abilityPanelHero)}</div>
         </section>
       </div>
 

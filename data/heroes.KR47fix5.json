@@ -1,6 +1,6 @@
 {
   "version": "KR47fix5",
-  "generatedAt": "2026-07-13T11:43:06.663Z",
+  "generatedAt": "2026-07-19T07:57:36.528Z",
   "source": {
     "unitStrings": "Mpq/Units/CampaignUnitStrings.txt",
     "abilityStrings": "Mpq/Units/CampaignAbilityStrings.txt",
@@ -28,7 +28,7 @@
   "defaultLanguage": "zhCN",
   "inheritedPresentation": {
     "relatedHeroes": 18,
-    "temporaryPanels": 52,
+    "temporaryPanels": 54,
     "exclusiveSkills": 12,
     "previousVersion": "KR47fix4"
   },
@@ -4022,6 +4022,68 @@
           "relationLabel": "皮肤变体",
           "relationSourceHeroId": "E00Y",
           "relationSourceSkillId": "",
+          "temporaryAbilityPanels": [
+            {
+              "sourceAbilityId": "HB0D",
+              "sourceAbilityName": "无下限术式",
+              "sourceAbilityHotkey": "D",
+              "abilities": [
+                {
+                  "id": "HB00",
+                  "name": "无下限术式",
+                  "description": "立即结束「无下限术式」。\n技能类型：瞬发型\n冷却时间：0秒",
+                  "hotkey": "Q",
+                  "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_D.blp",
+                  "buttonPos": {
+                    "x": 0,
+                    "y": 2
+                  },
+                  "translations": {
+                    "zhCN": {
+                      "name": "无下限术式",
+                      "description": "立即结束「无下限术式」。\n技能类型：瞬发型\n冷却时间：0秒"
+                    }
+                  },
+                  "iconAsset": "assets/icons/dc61d6f3224e-BTNSandalphone_D.png"
+                }
+              ],
+              "translations": {
+                "zhCN": {
+                  "sourceAbilityName": "无下限术式"
+                }
+              }
+            },
+            {
+              "sourceAbilityId": "HB04",
+              "sourceAbilityName": "无差别连打",
+              "sourceAbilityHotkey": "E",
+              "abilities": [
+                {
+                  "id": "HB07",
+                  "name": "无差别连打",
+                  "description": "对指定目标连续施展拳击，每一击造成敏捷X1.6的伤害并附带1秒的眩晕。随后借助「赫」的力量将敌人击退，再以「苍」的力量将其拉回，最后以灌注「苍」之力的踢击将敌人踢飞，造成敏捷X12的伤害与2秒的眩晕。\n 若再次使用该技能，则会立即终止技能效果。\n技能类型：指定型\n射程：225\n冷却时间：17秒",
+                  "hotkey": "Q",
+                  "icon": "ReplaceableTextures/CommandButtons/BTNSandalphone_TE.blp",
+                  "buttonPos": {
+                    "x": 0,
+                    "y": 2
+                  },
+                  "translations": {
+                    "zhCN": {
+                      "name": "无差别连打",
+                      "description": "对指定目标连续施展拳击，每一击造成敏捷X1.6的伤害并附带1秒的眩晕。随后借助「赫」的力量将敌人击退，再以「苍」的力量将其拉回，最后以灌注「苍」之力的踢击将敌人踢飞，造成敏捷X12的伤害与2秒的眩晕。\n 若再次使用该技能，则会立即终止技能效果。\n技能类型：指定型\n射程：225\n冷却时间：17秒"
+                    }
+                  },
+                  "iconAsset": "assets/icons/c30a5bc529f4-BTNSandalphone_TE.png"
+                }
+              ],
+              "translations": {
+                "zhCN": {
+                  "sourceAbilityName": "无差别连打"
+                }
+              }
+            }
+          ],
           "iconAsset": "assets/icons/1bbb1bfe2c69-BTNSandalphone_TX.png"
         }
       ],
@@ -13442,7 +13504,7 @@
           "translations": {
             "zhCN": {
               "name": "仙人模式",
-              "description": "1秒后进入仙人模式，持续20秒。使用仙术查克拉增强忍术威力，感知能力提升。\n　① : 恢复1800点生命值并重置\"螺旋丸\"的冷却时间。\n　② : 获得\"仙法螺旋丸\"，感知周围隐形单位，并将\"螺旋丸\"的伤害变为真实伤害。\n　③ : 使用\"飞雷神二段\"时限一次变为\"时空螺旋丸\"。回收苦无后腾空移动，以螺旋丸向下砸击，对周围敌人造成智力X24的伤害与1.5秒眩晕，并在原位置留下持续10秒的\"苦无\"。\n技能类型 : 即时发动\n伤害类型 : 真实伤害\n影响范围 : 1200/450\n冷却时间 : 32秒"
+              "description": "1秒后进入仙人模式，持续20秒。使用仙术查克拉增强忍术威力，感知能力提升。\n　① : 恢复1800点生命值并重置\"螺旋丸\"的冷却时间。\n　② : 获得\"仙法螺旋丸\"，感知周围隐形单位，并将\"螺旋丸\"的伤害变为绝对伤害。\n　③ : 使用\"飞雷神二段\"时限一次变为\"时空螺旋丸\"。回收苦无后腾空移动，以螺旋丸向下砸击，对周围敌人造成智力X24的伤害与1.5秒眩晕，并在原位置留下持续10秒的\"苦无\"。\n技能类型 : 即时发动\n伤害类型 : 绝对伤害\n影响范围 : 1200/450\n冷却时间 : 32秒"
             }
           },
           "iconAsset": "assets/icons/b00a3ec48ca8-BTN4D-R.png"
@@ -13478,7 +13540,7 @@
           "translations": {
             "zhCN": {
               "name": "仙法·螺旋丸",
-              "description": "此技能只能对刻有“飞雷神标记”的英雄施放。瞬间移动至敌人上空，以螺旋丸攻击，对周围敌人造成智力X16伤害和2秒眩晕。随后迅速向后跳跃，留下6枚持续10秒的“苦无”。\n技能类型 : 单位目标\n伤害类型 : 真实伤害\n施法范围 : 无限制\n影响范围 : 450\n冷却时间 : 15秒"
+              "description": "此技能只能对刻有“飞雷神标记”的英雄施放。瞬间移动至敌人上空，以螺旋丸攻击，对周围敌人造成智力X16伤害和2秒眩晕。随后迅速向后跳跃，留下6枚持续10秒的“苦无”。\n技能类型 : 单位目标\n伤害类型 : 绝对伤害\n施法范围 : 无限制\n影响范围 : 450\n冷却时间 : 15秒"
             }
           },
           "iconAsset": "assets/icons/f5d8eeaa6d76-BTNBFSM-RR2.png"
@@ -15588,7 +15650,7 @@
           "translations": {
             "zhCN": {
               "name": "红魔「疯狂盛宴」",
-              "description": "迅速刺穿敌人的心脏，每0.2秒造成100点伤害和1秒眩晕，期间会汲取该数值150％的血气，技能持续2秒，该技能无法被打断。/该技能击中时，目标每拥有1000点生命值就会增加0.2秒持续时间，结束时会对周围的敌人造成智力值*10的伤害和1.5秒眩晕。\n技能类型 : 单位目标\n伤害类型 : 真实伤害\n物理等级 : LV2\n施法范围 : 900\n影响范围 : 450\n冷却时间 : 16秒"
+              "description": "迅速刺穿敌人的心脏，每0.2秒造成100点伤害和1秒眩晕，期间会汲取该数值150％的血气，技能持续2秒，该技能无法被打断。/该技能击中时，目标每拥有1000点生命值就会增加0.2秒持续时间，结束时会对周围的敌人造成智力值*10的伤害和1.5秒眩晕。\n技能类型 : 单位目标\n伤害类型 : 绝对伤害\n物理等级 : LV2\n施法范围 : 900\n影响范围 : 450\n冷却时间 : 16秒"
             }
           },
           "iconAsset": "assets/icons/c9b2fef8d2b2-BTN-FLDL-D.png"
@@ -20304,7 +20366,7 @@
     }
   ],
   "iconBuild": {
-    "converted": 954,
+    "converted": 956,
     "filteredAbilities": 386,
     "filteredHeroes": 2,
     "missing": [
