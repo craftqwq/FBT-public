@@ -98,6 +98,10 @@ body.tierDragging {
   z-index: 5;
 }
 
+.topbar > div:first-child {
+  flex-shrink: 0;
+}
+
 h1,
 h2,
 h3,
@@ -152,6 +156,27 @@ h1 {
   background: rgba(11, 13, 18, 0.72);
   padding: 0 10px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.versionField {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.versionField[hidden] {
+  display: none;
+}
+
+.versionField > span {
+  flex-shrink: 0;
+}
+
+.versionSwitch .versionDirection {
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .versionSwitch span {
@@ -1419,6 +1444,159 @@ body.radarDragging .radarHandle {
   gap: 12px;
 }
 
+.diffStatsTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+.diffStatsTable th,
+.diffStatsTable td {
+  padding: 8px 10px;
+  text-align: right;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.diffStatsTable th:first-child {
+  width: 44%;
+  padding-left: 0;
+  text-align: left;
+}
+
+.diffStatsTable th:last-child,
+.diffStatsTable td:last-child {
+  padding-right: 0;
+}
+
+.diffStatsTable thead th {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.diffStatsTable tbody th {
+  font-weight: 600;
+}
+
+.diffStatsTable .old {
+  color: var(--muted);
+}
+
+.diffStatsTable .new {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+.diffStatsTable tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.diffAttributesTable {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.diffAttributesTable .str { --attribute-color: #ed9290; }
+.diffAttributesTable .agi { --attribute-color: #7ad4a0; }
+.diffAttributesTable .int { --attribute-color: #88baf1; }
+
+.diffAttributesTable th,
+.diffAttributesTable td {
+  padding: 10px 4px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.diffAttributesTable th:first-child {
+  width: 48px;
+  padding-left: 0;
+  text-align: left;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.diffAttributesTable thead th {
+  border-bottom: 1px solid var(--line);
+  color: var(--attribute-color);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.diffAttributesTable td {
+  border-left: 1px solid var(--line-soft);
+}
+
+.diffAttributesTable .old {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.diffAttributesTable .new {
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.diffAttributesTable .primary .diffAttributeValue,
+.diffAttributesTable .changed .diffAttributeValue {
+  color: var(--attribute-color);
+}
+
+.diffAttributesTable .primary {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.diffPrimaryBadge {
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--attribute-color);
+  font-size: 10px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.diffAbilityTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.diffOldName {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.diffRenamedTo {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.diffNameArrow {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.diffNewName {
+  min-width: 0;
+  color: var(--accent-2);
+}
+
 .diffField {
   min-width: 0;
   display: grid;
@@ -1447,6 +1625,36 @@ body.radarDragging .radarHandle {
 
 .diffValueGrid.single {
   grid-template-columns: minmax(0, 1fr);
+}
+
+.diffIconComparison {
+  display: grid;
+  grid-template-columns: 64px 24px 64px;
+  align-items: end;
+  gap: 12px;
+}
+
+.diffIcon {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.diffIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.diffIconArrow {
+  height: 64px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 20px;
 }
 
 .diffValue {
@@ -1523,6 +1731,79 @@ body.radarDragging .radarHandle {
   font-weight: 900;
 }
 
+.changelogGroup {
+  min-width: 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.changelogGroupHeader {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.changelogGroupIcons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 84px;
+}
+
+.changelogGroupIcons .heroIcon,
+.changelogSystemIcon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+}
+
+.changelogSystemIcon {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 26px;
+}
+
+.changelogGroupTitle {
+  min-width: 0;
+}
+
+.changelogGroupTitle h3 {
+  margin: 3px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.changelogGroupKind,
+.changelogGroupCount {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.changelogGroupCount {
+  white-space: nowrap;
+}
+
+.changelogNotes {
+  margin-top: 16px;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent);
+}
+
+.changelogNotes h4 {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.changelogNotes p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
 .changelogEntries {
   display: grid;
   gap: 10px;
@@ -1564,6 +1845,22 @@ body.radarDragging .radarHandle {
   line-height: 1.55;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .changelogGroupHeader {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .changelogGroupCount {
+    grid-column: 2;
+    margin-top: -5px;
+  }
+
+  .changelogGroupTitle h3 {
+    font-size: 16px;
+  }
 }
 
 .itemProfile {
@@ -2396,6 +2693,23 @@ body.tierDragging .tierTooltip {
     max-width: 100%;
   }
 
+  .versionSwitch.comparing {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: 100%;
+    height: auto;
+    padding: 8px 10px;
+  }
+
+  .versionSwitch.comparing select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .versionSwitch.comparing .diffToggle {
+    grid-column: 1 / -1;
+  }
+
   .layout,
   .contentGrid,
   .itemContentGrid {
@@ -2508,6 +2822,16 @@ body.tierDragging .tierTooltip {
     transform: translate(0, 0);
   }
 
+}
+
+@media (max-width: 380px) {
+  .versionSwitch.comparing {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .versionSwitch.comparing .versionDirection {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

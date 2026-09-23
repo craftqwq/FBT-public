@@ -10,6 +10,8 @@ const state = {
   expandedAbilityId: "",
   view: "heroes",
   diffMode: false,
+  diffSelectedVersionId: "",
+  versionLoading: false,
   diffCompareVersionId: "",
   diffCompareVersionLabel: "",
   diffCompareHeroes: [],
@@ -43,6 +45,7 @@ const state = {
 };
 
 const versionDataCache = new Map();
+let versionSelectionRequest = 0;
 
 const els = {
   heading: document.querySelector(".topbar h1"),
@@ -50,7 +53,11 @@ const els = {
   search: document.querySelector("#search"),
   viewTabs: document.querySelector("#viewTabs"),
   versionSwitchLabel: document.querySelector("#versionSwitchLabel"),
+  versionSwitch: document.querySelector(".versionSwitch"),
   versionSelect: document.querySelector("#versionSelect"),
+  diffComparisonControls: document.querySelector("#diffComparisonControls"),
+  diffVersionLabel: document.querySelector("#diffVersionLabel"),
+  diffVersionSelect: document.querySelector("#diffVersionSelect"),
   diffToggle: document.querySelector("#diffToggle"),
   languageSwitch: document.querySelector("#languageSwitch"),
   sidebarTitle: document.querySelector(".sectionTitle"),
@@ -93,15 +100,30 @@ const uiText = {
     versionLabel: "버전",
     diffToggle: "버전 차이",
     diffToggleLabel: "버전 차이",
-    diffCompare: "{current} / {compare}",
+    diffCompare: "{compare} → {current}",
+    diffBaseLabel: "기준",
+    diffTargetLabel: "대상",
+    diffBaseSelect: "기준 버전",
+    diffTargetSelect: "대상 버전",
     diffNoChanges: "차이가 없습니다",
     diffAdded: "추가",
     diffRemoved: "삭제",
     diffChanged: "변경",
-    diffOld: "이전",
-    diffNew: "현재",
+    diffOld: "기준",
+    diffIcon: "아이콘",
+    diffFieldNames: {
+      name: "이름", title: "칭호", description: "설명", tip: "구매 안내",
+      icon: "아이콘", hotkey: "단축키", primary: "주 속성",
+      str: "힘", agi: "민첩", int: "지능", hp: "체력", mana: "마나",
+      armor: "방어력", speed: "이동 속도", attackBase: "기본 공격력",
+      cooldown: "공격 간격 (초)", range: "공격 사거리",
+      goldCost: "골드 가격", lumberCost: "목재 가격",
+      stockMax: "최대 재고", stockRegen: "재입고 시간 (초)",
+    },
+    diffNew: "대상",
     diffBasic: "기본 정보",
     diffStats: "기본 데이터",
+    diffAttributes: "기본 능력치",
     diffSkills: "스킬",
     diffForms: "형태 / 소환",
     diffFields: "변경 항목",
@@ -256,15 +278,30 @@ const uiText = {
     versionLabel: "版本",
     diffToggle: "版本差异",
     diffToggleLabel: "版本差异",
-    diffCompare: "{current} / {compare}",
+    diffCompare: "{compare} → {current}",
+    diffBaseLabel: "基准",
+    diffTargetLabel: "目标",
+    diffBaseSelect: "基准版本",
+    diffTargetSelect: "目标版本",
     diffNoChanges: "没有差异",
     diffAdded: "新增",
     diffRemoved: "移除",
     diffChanged: "变更",
-    diffOld: "旧版",
-    diffNew: "当前",
+    diffOld: "基准",
+    diffIcon: "图标",
+    diffFieldNames: {
+      name: "名称", title: "称号", description: "说明", tip: "购买提示",
+      icon: "图标", hotkey: "快捷键", primary: "主属性",
+      str: "力量", agi: "敏捷", int: "智力", hp: "生命值", mana: "魔法值",
+      armor: "护甲", speed: "移动速度", attackBase: "基础攻击力",
+      cooldown: "攻击间隔（秒）", range: "攻击距离",
+      goldCost: "金币价格", lumberCost: "木材价格",
+      stockMax: "最大库存", stockRegen: "补货时间（秒）",
+    },
+    diffNew: "目标",
     diffBasic: "基础信息",
     diffStats: "基础数据",
+    diffAttributes: "三维属性",
     diffSkills: "技能",
     diffForms: "形态 / 召唤",
     diffFields: "变更字段",
@@ -428,7 +465,7 @@ const ratingShortIdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const ratingUrlParamNames = ["rating", "ratings", "r", "fbt", "config"];
 const versionManifestPath = "data/versions.json";
 const versionUrlParamNames = ["version", "mapVersion"];
-const fallbackVersions = [{ id: "KR47fix5", label: "KR47fix5", file: "data/heroes.json" }];
+const fallbackVersions = [{ id: "KR48fix3", label: "KR48fix3", file: "data/heroes.json" }];
 const legacyRatingStorageKey = "fbt.ratingOverrides.v2";
 const ratingStorageKeyPrefix = "fbt.ratingOverrides.v2";
 const communityIssueUrl = "https://github.com/craftqwq/FBT-public/issues/new";
@@ -499,6 +536,7 @@ function normalizeChangelogEntry(entry, index) {
     id: String(rawEntry.id || `entry-${index + 1}`).trim(),
     text,
     translations: rawEntry.translations || {},
+    note: rawEntry.note === true,
   };
 }
 
@@ -514,6 +552,9 @@ function normalizeChangelogSection(section, index) {
     id: String(rawSection.id || `section-${index + 1}`).trim(),
     title,
     translations: rawSection.translations || {},
+    subjects: (Array.isArray(rawSection.subjects) ? rawSection.subjects : [])
+      .filter((subject) => ["hero", "item"].includes(subject?.type) && typeof subject?.id === "string" && subject.id.trim())
+      .map((subject) => ({ type: subject.type, id: subject.id.trim() })),
     entries,
   };
 }
@@ -564,14 +605,14 @@ function normalizeVersionManifest(data) {
   };
 }
 
-function versionIdFromCurrentUrl() {
+function versionParameterFromCurrentUrl(names) {
   try {
     const url = new URL(window.location.href);
     const hashText = url.hash.startsWith("#") ? url.hash.slice(1) : url.hash;
     const hashQueryText = hashText.includes("?") ? hashText.slice(hashText.indexOf("?") + 1) : hashText;
     const hashParams = new URLSearchParams(hashQueryText);
 
-    for (const name of versionUrlParamNames) {
+    for (const name of names) {
       const fromSearch = url.searchParams.get(name);
       if (fromSearch) return fromSearch.trim();
 
@@ -581,6 +622,10 @@ function versionIdFromCurrentUrl() {
   } catch {}
 
   return "";
+}
+
+function versionIdFromCurrentUrl() {
+  return versionParameterFromCurrentUrl(versionUrlParamNames);
 }
 
 function validVersionId(versionId) {
@@ -605,6 +650,19 @@ function syncVersionUrl(versionId = state.currentVersionId) {
       url.searchParams.delete(name);
     }
     url.searchParams.set(versionUrlParamNames[0], versionId);
+    url.searchParams.delete("compare");
+    const hash = url.hash.slice(1);
+    const hashQueryIndex = hash.indexOf("?");
+    const hashParams = new URLSearchParams(hashQueryIndex >= 0 ? hash.slice(hashQueryIndex + 1) : hash);
+    if (hashParams.has("compare")) {
+      hashParams.delete("compare");
+      const prefix = hashQueryIndex >= 0 ? hash.slice(0, hashQueryIndex) : "";
+      const query = hashParams.toString();
+      url.hash = prefix + (prefix && query ? "?" : "") + query;
+    }
+    if (state.diffMode && state.diffCompareVersionId && state.diffCompareVersionId !== versionId) {
+      url.searchParams.set("compare", state.diffCompareVersionId);
+    }
     window.history.replaceState(window.history.state, "", url);
   } catch (error) {
     console.warn("Failed to sync version URL", error);
@@ -637,14 +695,24 @@ function renderStaticChrome() {
   if (els.heading) els.heading.textContent = t("pageTitle");
   if (els.search) els.search.placeholder = t("searchPlaceholder");
   if (els.viewTabs) els.viewTabs.setAttribute("aria-label", t("viewTabsLabel"));
-  if (els.versionSwitchLabel) els.versionSwitchLabel.textContent = t("versionLabel");
-  if (els.versionSelect) els.versionSelect.setAttribute("aria-label", t("versionSwitchLabel"));
+  if (els.versionSwitchLabel) els.versionSwitchLabel.textContent = t(state.diffMode ? "diffTargetLabel" : "versionLabel");
+  if (els.versionSwitch) els.versionSwitch.classList.toggle("comparing", state.diffMode);
+  if (els.versionSelect) {
+    els.versionSelect.setAttribute("aria-label", t(state.diffMode ? "diffTargetSelect" : "versionSwitchLabel"));
+    els.versionSelect.disabled = state.versionLoading || state.versions.length <= 1;
+  }
+  if (els.diffComparisonControls) els.diffComparisonControls.hidden = !state.diffMode;
+  if (els.diffVersionLabel) els.diffVersionLabel.textContent = t("diffBaseLabel");
+  if (els.diffVersionSelect) {
+    els.diffVersionSelect.setAttribute("aria-label", t("diffBaseSelect"));
+    els.diffVersionSelect.disabled = state.versionLoading || state.versions.length <= 1;
+  }
   if (els.diffToggle) {
     els.diffToggle.textContent = t("diffToggle");
     els.diffToggle.title = t("diffToggleLabel");
     els.diffToggle.setAttribute("aria-pressed", state.diffMode ? "true" : "false");
     els.diffToggle.classList.toggle("active", state.diffMode);
-    els.diffToggle.disabled = state.versions.length <= 1;
+    els.diffToggle.disabled = state.versionLoading || state.versions.length <= 1;
   }
   if (els.languageSwitch) els.languageSwitch.setAttribute("aria-label", t("languageSwitchLabel"));
   if (els.sidebarTitle) els.sidebarTitle.textContent = state.view === "items" ? t("itemList") : t("heroList");
@@ -800,40 +868,30 @@ function searchableItem(item) {
   return [itemTextForSearch(item), itemTextForSearch(localizedSearchItem)].join(" ").toLowerCase();
 }
 
-const heroBasicDiffFields = [
-  "hotkey",
-  "requirements",
-  "model",
-  "icon",
-  "scoreIcon",
-];
-const heroLocalizedDiffFields = ["name", "title", "summonTip", "reviveTip", "awakenTip", "description"];
-const heroStatDiffFields = ["primary", "str", "agi", "int", "hp", "mana", "attackBase", "cooldown", "range"];
-const abilityDiffFields = [
-  "hotkey",
-  "icon",
-  "buttonPos",
-  "kind",
-  "categoryKey",
-  "buttonLabelKey",
-  "sourceAbilityId",
-  "sourceAbilityHotkey",
-  "inheritedFrom",
-];
-const abilityDisplayDiffFields = ["categoryLabel", "buttonLabel", "sourceWeapon", "sourceAbilityName"];
-const abilityLocalizedDiffFields = ["name", "description"];
-const itemDiffFields = [
-  "icon",
-  "level",
-  "goldCost",
-  "lumberCost",
-  "stockMax",
-  "stockRegen",
-  "cooldownId",
-  "abilityIds",
-  "model",
-];
-const itemLocalizedDiffFields = ["name", "tip", "description", "class"];
+// Only player-facing fields participate in diff detection and rendering.
+const diffFieldWhitelist = {
+  hero: {
+    basic: ["hotkey", "icon"],
+    text: ["name", "title", "description"],
+    stats: ["primary", "str", "agi", "int", "hp", "mana", "armor", "speed", "attackBase", "cooldown", "range"],
+  },
+  ability: {
+    basic: ["hotkey", "icon"],
+    text: ["name", "description"],
+  },
+  item: {
+    basic: ["icon", "goldCost", "lumberCost", "stockMax", "stockRegen"],
+    text: ["name", "tip", "description"],
+  },
+};
+const visibleDiffFieldWhitelist = new Set(
+  Object.values(diffFieldWhitelist).flatMap((entity) => Object.values(entity).flat()),
+);
+const addedDiffFieldWhitelist = new Set([
+  "name", "title", "description", "tip",
+  ...diffFieldWhitelist.hero.stats,
+  "goldCost", "lumberCost", "stockMax", "stockRegen",
+]);
 
 function diffStatusLabel(type) {
   return (
@@ -852,15 +910,16 @@ function diffCompareText() {
   });
 }
 
-function comparisonVersionForCurrent() {
+function comparisonVersionForCurrent(currentId = state.currentVersionId, preferredId = state.diffSelectedVersionId) {
   if (state.versions.length <= 1) return null;
 
+  const preferred = state.versions.find((version) => version.id === preferredId && version.id !== currentId);
+  if (preferred) return preferred;
   const currentIndex = Math.max(
     0,
-    state.versions.findIndex((version) => version.id === state.currentVersionId),
+    state.versions.findIndex((version) => version.id === currentId),
   );
-  const compareIndex = currentIndex === 0 ? 1 : currentIndex - 1;
-  return state.versions[compareIndex] || null;
+  return state.versions[currentIndex + 1] || state.versions[currentIndex - 1] || null;
 }
 
 function versionDataCacheKey(version) {
@@ -879,10 +938,6 @@ async function loadVersionData(version) {
   const data = await response.json();
   versionDataCache.set(key, data);
   return data;
-}
-
-async function loadVersionDataForDiff(version) {
-  return loadVersionData(version);
 }
 
 function normalizeComparable(value) {
@@ -938,23 +993,14 @@ function collectFieldDiffs(currentEntity, previousEntity, fields) {
       if (!currentEntity && !hasDiffValue(previousValue)) return null;
       if (!previousEntity && !hasDiffValue(currentValue)) return null;
       if (!valuesDifferent(currentValue, previousValue)) return null;
-      return { label: field, oldValue: previousValue, newValue: currentValue };
-    })
-    .filter(Boolean);
-}
-
-function collectDisplayedFieldDiffs(currentEntity, previousEntity, displayCurrentEntity, displayPreviousEntity, fields) {
-  return fields
-    .map((field) => {
-      const currentSourceValue = readPath(currentEntity || {}, field);
-      const previousSourceValue = readPath(previousEntity || {}, field);
-      if (!currentEntity && !hasDiffValue(previousSourceValue)) return null;
-      if (!previousEntity && !hasDiffValue(currentSourceValue)) return null;
-      if (!valuesDifferent(currentSourceValue, previousSourceValue)) return null;
       return {
         label: field,
-        oldValue: readPath(displayPreviousEntity || {}, field),
-        newValue: readPath(displayCurrentEntity || {}, field),
+        oldValue: previousValue,
+        newValue: currentValue,
+        ...(field === "icon" ? {
+          oldIconAsset: previousEntity?.iconAsset,
+          newIconAsset: currentEntity?.iconAsset,
+        } : {}),
       };
     })
     .filter(Boolean);
@@ -1043,18 +1089,11 @@ function orderedDiffKeys(currentMap, previousMap) {
 
 function buildAbilityDiff(currentAbility, previousAbility, displayCurrentAbility = currentAbility, displayPreviousAbility = previousAbility) {
   return [
-    ...collectFieldDiffs(currentAbility, previousAbility, abilityDiffFields),
-    ...collectDisplayedFieldDiffs(
-      currentAbility,
-      previousAbility,
-      displayCurrentAbility,
-      displayPreviousAbility,
-      abilityDisplayDiffFields,
-    ),
+    ...collectFieldDiffs(currentAbility, previousAbility, diffFieldWhitelist.ability.basic),
     ...collectSourceTextDiffs(
       currentAbility,
       previousAbility,
-      abilityLocalizedDiffFields,
+      diffFieldWhitelist.ability.text,
       displayCurrentAbility,
       displayPreviousAbility,
     ),
@@ -1093,10 +1132,10 @@ function diffAbilityEntries(currentHero, previousHero) {
 function buildRelatedHeroDiff(currentHero, previousHero) {
   return {
     basic: [
-      ...collectFieldDiffs(currentHero, previousHero, heroBasicDiffFields),
-      ...collectSourceTextDiffs(currentHero, previousHero, heroLocalizedDiffFields),
+      ...collectFieldDiffs(currentHero, previousHero, diffFieldWhitelist.hero.basic),
+      ...collectSourceTextDiffs(currentHero, previousHero, diffFieldWhitelist.hero.text),
     ],
-    stats: collectFieldDiffs(currentHero?.stats, previousHero?.stats, heroStatDiffFields),
+    stats: collectFieldDiffs(currentHero?.stats, previousHero?.stats, diffFieldWhitelist.hero.stats),
     skills: diffAbilityEntries(currentHero, previousHero),
   };
 }
@@ -1131,10 +1170,10 @@ function diffRelatedHeroes(currentHero, previousHero) {
 function buildHeroDiff(hero, previousHero) {
   return {
     basic: [
-      ...collectFieldDiffs(hero, previousHero, heroBasicDiffFields),
-      ...collectSourceTextDiffs(hero, previousHero, heroLocalizedDiffFields),
+      ...collectFieldDiffs(hero, previousHero, diffFieldWhitelist.hero.basic),
+      ...collectSourceTextDiffs(hero, previousHero, diffFieldWhitelist.hero.text),
     ],
-    stats: collectFieldDiffs(hero?.stats, previousHero?.stats, heroStatDiffFields),
+    stats: collectFieldDiffs(hero?.stats, previousHero?.stats, diffFieldWhitelist.hero.stats),
     forms: diffRelatedHeroes(hero, previousHero),
     skills: diffAbilityEntries(hero, previousHero),
   };
@@ -1143,8 +1182,8 @@ function buildHeroDiff(hero, previousHero) {
 function buildItemDiff(item, previousItem) {
   return {
     fields: [
-      ...collectFieldDiffs(item, previousItem, itemDiffFields),
-      ...collectSourceTextDiffs(item, previousItem, itemLocalizedDiffFields),
+      ...collectFieldDiffs(item, previousItem, diffFieldWhitelist.item.basic),
+      ...collectSourceTextDiffs(item, previousItem, diffFieldWhitelist.item.text),
     ],
   };
 }
@@ -1243,19 +1282,16 @@ function resetDiffState() {
   state.diffFilteredItemRows = [];
 }
 
-async function refreshDiffMode() {
-  const compareVersion = comparisonVersionForCurrent();
-  if (!compareVersion) {
-    resetDiffState();
-    return;
-  }
-
-  const data = await loadVersionDataForDiff(compareVersion);
-  const version = currentVersion();
+function applyComparisonData(compareVersion, data) {
+  state.diffSelectedVersionId = compareVersion.id;
   state.diffCompareVersionId = compareVersion.id;
   state.diffCompareVersionLabel = versionLabel(compareVersion);
   state.diffCompareHeroes = playableHeroes(data.heroes || []);
   state.diffCompareItems = playableItems(data.items || []);
+  rebuildDiffRows();
+}
+
+function rebuildDiffRows() {
   state.diffHeroRows = buildHeroDiffRows(state.heroes, state.diffCompareHeroes);
   state.diffItemRows = buildItemDiffRows(state.items, state.diffCompareItems);
 }
@@ -1426,7 +1462,13 @@ function renderVersionSwitch() {
       `;
     })
     .join("");
-  els.versionSelect.disabled = state.versions.length <= 1;
+  if (els.diffVersionSelect) {
+    const selected = comparisonVersionForCurrent();
+    els.diffVersionSelect.innerHTML = state.versions
+      .filter((version) => version.id !== state.currentVersionId)
+      .map((version) => `<option value="${escapeHtml(version.id)}" ${version.id === selected?.id ? "selected" : ""}>${escapeHtml(versionLabel(version))}</option>`)
+      .join("");
+  }
   renderStaticChrome();
 }
 
@@ -2974,18 +3016,34 @@ function renderDiffValue(label, value, className) {
   `;
 }
 
-const addedHiddenDiffFields = new Set(["hotkey", "icon", "buttonPos"]);
-
 function visibleDiffChanges(changes = [], type = "") {
-  if (type !== "added") return changes;
-  return changes.filter((change) => !addedHiddenDiffFields.has(change.label));
+  const whitelist = type === "added" ? addedDiffFieldWhitelist : visibleDiffFieldWhitelist;
+  return changes.filter((change) => whitelist.has(change.label));
 }
 
 function renderDiffChange(change, type = "") {
   const isAdded = type === "added";
+  if (change.label === "icon") {
+    return `
+      <div class="diffField">
+        <div class="diffFieldLabel">${escapeHtml(t("diffIcon"))}</div>
+        <div class="diffIconComparison">
+          <div class="diffValue old">
+            <div class="diffValueLabel">${escapeHtml(t("diffOld"))}</div>
+            ${renderIcon(change.oldIconAsset, t("missing"), "diffIcon", t("diffOld"))}
+          </div>
+          <span class="diffIconArrow" aria-hidden="true">&rarr;</span>
+          <div class="diffValue new">
+            <div class="diffValueLabel">${escapeHtml(t("diffNew"))}</div>
+            ${renderIcon(change.newIconAsset, t("missing"), "diffIcon", t("diffNew"))}
+          </div>
+        </div>
+      </div>
+    `;
+  }
   return `
     <div class="diffField">
-      <div class="diffFieldLabel">${escapeHtml(change.label)}</div>
+      <div class="diffFieldLabel">${escapeHtml(t(`diffFieldNames.${change.label}`))}</div>
       <div class="diffValueGrid ${isAdded ? "single" : ""}">
         ${isAdded ? "" : renderDiffValue(t("diffOld"), change.oldValue, "old")}
         ${renderDiffValue(t("diffNew"), change.newValue, "new")}
@@ -2998,6 +3056,75 @@ function renderDiffChanges(changes = [], type = "") {
   const visibleChanges = visibleDiffChanges(changes, type);
   if (!visibleChanges.length) return "";
   return `<div class="diffFieldList">${visibleChanges.map((change) => renderDiffChange(change, type)).join("")}</div>`;
+}
+
+function renderDiffAttributes(changes, type, currentStats, previousStats) {
+  const attributes = ["str", "agi", "int"];
+  if (!changes.some((change) => change.label === "primary" || attributes.includes(change.label))) return "";
+  const before = { ...Object.fromEntries(changes.map((change) => [change.label, change.oldValue])), ...previousStats };
+  const after = { ...Object.fromEntries(changes.map((change) => [change.label, change.newValue])), ...currentStats };
+  const renderRow = (stats, version) => `
+    <tr class="${version}">
+      <th scope="row">${escapeHtml(t(version === "old" ? "diffOld" : "diffNew"))}</th>
+      ${attributes.map((field) => {
+        const primary = stats.primary === field.toUpperCase();
+        const changed = version === "new" && type !== "added" && (
+          valuesDifferent(before[field], after[field]) ||
+          (before.primary !== after.primary && [before.primary, after.primary].includes(field.toUpperCase()))
+        );
+        return `
+          <td class="diffAttribute ${field}${primary ? " primary" : ""}${changed ? " changed" : ""}">
+            <span class="diffAttributeValue">${escapeHtml(formatDiffValue(stats[field]))}</span>
+            ${primary ? `<span class="diffPrimaryBadge" title="${escapeHtml(t("diffFieldNames.primary"))}">${escapeHtml(t("primaryBadge"))}</span>` : ""}
+          </td>
+        `;
+      }).join("")}
+    </tr>
+  `;
+  return `
+    <table class="diffAttributesTable" aria-label="${escapeHtml(t("diffAttributes"))}">
+      <thead>
+        <tr>
+          <th scope="col">${escapeHtml(t("versionLabel"))}</th>
+          ${attributes.map((field) => `<th scope="col" class="${field}">${escapeHtml(t(`diffFieldNames.${field}`))}</th>`).join("")}
+        </tr>
+      </thead>
+      <tbody>
+        ${type === "added" ? "" : renderRow(before, "old")}
+        ${type === "removed" ? "" : renderRow(after, "new")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderDiffStats(changes = [], type = "", currentStats = {}, previousStats = {}) {
+  const stats = visibleDiffChanges(changes, type)
+    .filter((change) => diffFieldWhitelist.hero.stats.includes(change.label));
+  if (!stats.length) return "";
+  const isAdded = type === "added";
+  const attributes = renderDiffAttributes(stats, type, currentStats, previousStats);
+  const otherStats = stats.filter((change) => !["primary", "str", "agi", "int"].includes(change.label));
+  if (!otherStats.length) return attributes;
+  return attributes + `
+    <table class="diffStatsTable" aria-label="${escapeHtml(t("diffStats"))}">
+      <thead>
+        <tr>
+          <th scope="col">${escapeHtml(t("attributes"))}</th>
+          ${isAdded ? "" : `<th scope="col">${escapeHtml(t("diffOld"))}</th>`}
+          <th scope="col">${escapeHtml(t("diffNew"))}</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${otherStats.map((change) => `
+          <tr>
+            <th scope="row">${escapeHtml(t(`diffFieldNames.${change.label}`))}</th>
+            ${isAdded ? "" : `<td class="old">${escapeHtml(formatDiffValue(change.oldValue))}</td>`}
+            <td class="new">${escapeHtml(formatDiffValue(change.newValue))}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
 }
 
 function renderDiffSection(title, content) {
@@ -3024,18 +3151,24 @@ function renderAbilityDiffs(rows = []) {
         .map((row) => {
           const ability = row.ability || row.previousAbility;
           const name = diffAbilityName(ability) || t("missing");
+          const nameChange = row.fields.find((change) => change.label === "name");
+          const renamed = row.type === "changed" && nameChange && valuesDifferent(nameChange.oldValue, nameChange.newValue);
+          const title = renamed
+            ? `<span class="diffOldName" title="${escapeHtml(t("diffOld"))}">${escapeHtml(formatDiffValue(nameChange.oldValue))}</span>
+               <span class="diffRenamedTo"><span class="diffNameArrow" aria-hidden="true">&rarr;</span><span class="diffNewName" title="${escapeHtml(t("diffNew"))}">${escapeHtml(formatDiffValue(nameChange.newValue))}</span></span>`
+            : escapeHtml(name);
           return `
             <article class="diffEntry ${escapeHtml(row.type)}">
               <div class="diffEntryHeader">
                 ${renderIcon(ability?.iconAsset, ability?.hotkey || initials(name, ""), "abilityIcon", name)}
                 <div>
-                  <div class="abilityName">${escapeHtml(name)}</div>
+                  <h3 class="abilityName diffAbilityTitle">${title}</h3>
                   <div class="profileMeta">
                     ${renderDiffBadge(row.type)}
                   </div>
                 </div>
               </div>
-              ${renderDiffChanges(row.fields, row.type)}
+              ${renderDiffChanges(row.fields.filter((change) => change.label !== "name"), row.type)}
             </article>
           `;
         })
@@ -3056,7 +3189,7 @@ function renderRelatedHeroDiffs(rows = []) {
           const name = displayHero.name || t("unnamedHero");
           const title = displayHero.title || "";
           const basic = renderDiffChanges(row.diff.basic, row.type);
-          const stats = renderDiffChanges(row.diff.stats, row.type);
+          const stats = renderDiffStats(row.diff.stats, row.type, row.hero?.stats, row.previousHero?.stats);
           const skills = renderAbilityDiffs(row.diff.skills);
           return `
             <article class="diffEntry ${escapeHtml(row.type)}">
@@ -3093,7 +3226,7 @@ function renderHeroDiffDetail(row) {
   const title = displayHero.title || "";
   const sections = [
     renderDiffSection(t("diffBasic"), renderDiffChanges(row.diff.basic, row.type)),
-    renderDiffSection(t("diffStats"), renderDiffChanges(row.diff.stats, row.type)),
+    renderDiffSection(t("diffStats"), renderDiffStats(row.diff.stats, row.type, row.hero?.stats, row.previousHero?.stats)),
     renderDiffSection(t("diffForms"), renderRelatedHeroDiffs(row.diff.forms)),
     renderDiffSection(t("diffSkills"), renderAbilityDiffs(row.diff.skills)),
   ].join("");
@@ -3154,7 +3287,6 @@ function renderItemDiffDetail(row) {
             <h2 class="profileName">${escapeHtml(name)}</h2>
             <div class="profileMeta">
               ${tip ? `<span class="pill">${escapeHtml(tip)}</span>` : ""}
-              ${item.class ? `<span class="pill">${escapeHtml(item.class)}</span>` : ""}
             </div>
           </div>
         </div>
@@ -3182,26 +3314,7 @@ function renderChangelogDetail() {
     return;
   }
 
-  const content = sections
-    .map((section) => {
-      const title = changelogSectionTitle(section);
-      const entries = (section.entries || [])
-        .map(
-          (entry, index) => `
-            <li class="changelogEntry">
-              <span class="changelogIndex">${escapeHtml(String(index + 1))}</span>
-              <div class="changelogText">${escapeHtml(changelogEntryText(entry))}</div>
-            </li>
-          `,
-        )
-        .join("");
-
-      return renderDiffSection(
-        title,
-        entries ? `<ol class="changelogEntries">${entries}</ol>` : `<div class="empty">${escapeHtml(changelogEmptyText())}</div>`,
-      );
-    })
-    .join("");
+  const content = sections.map(renderChangelogGroup).join("");
 
   els.detail.innerHTML = `
     <div class="diffPage changelogPage">
@@ -3215,6 +3328,53 @@ function renderChangelogDetail() {
 
       ${content || renderDiffEmpty()}
     </div>
+  `;
+}
+
+function renderChangelogGroup(section) {
+  const subjects = (section.subjects || []).map((subject) => {
+    const entities = subject.type === "hero" ? state.heroes : state.items;
+    return entities.find((entity) => entity.id === subject.id);
+  });
+  const title = subjects.length && subjects.every(Boolean)
+    ? subjects.map((entity) => localized(entity, "name")).join(" / ")
+    : changelogSectionTitle(section);
+  const icons = subjects.length
+    ? subjects.map((entity) => renderIcon(entity?.iconAsset, initials(title, ""), "heroIcon", entity ? localized(entity, "name") : title)).join("")
+    : '<span class="changelogSystemIcon" aria-hidden="true">&#9881;</span>';
+  const kind = section.subjects?.[0]?.type;
+  const category = state.language === "zhCN"
+    ? kind === "hero" ? "角色调整" : kind === "item" ? "物品调整" : "通用调整"
+    : kind === "hero" ? "캐릭터 조정" : kind === "item" ? "아이템 조정" : "공통 조정";
+  const changes = (section.entries || []).filter((entry) => !entry.note);
+  const notes = (section.entries || []).filter((entry) => entry.note);
+  return `
+    <section class="changelogGroup">
+      <header class="changelogGroupHeader">
+        <div class="changelogGroupIcons">${icons}</div>
+        <div class="changelogGroupTitle">
+          <div class="changelogGroupKind">${escapeHtml(category)}</div>
+          <h3>${escapeHtml(title)}</h3>
+        </div>
+        <span class="changelogGroupCount">${escapeHtml(changelogEntryCount(section.entries?.length || 0))}</span>
+      </header>
+      ${changes.length ? `
+        <ol class="changelogEntries">
+          ${changes.map((entry, index) => `
+            <li class="changelogEntry">
+              <span class="changelogIndex" aria-hidden="true">${index + 1}</span>
+              <div class="changelogText">${escapeHtml(changelogEntryText(entry))}</div>
+            </li>
+          `).join("")}
+        </ol>
+      ` : ""}
+      ${notes.length ? `
+        <div class="changelogNotes">
+          <h4>${state.language === "zhCN" ? "调整说明" : "개발자 코멘트"}</h4>
+          ${notes.map((entry) => `<p class="changelogText">${escapeHtml(changelogEntryText(entry))}</p>`).join("")}
+        </div>
+      ` : ""}
+    </section>
   `;
 }
 
@@ -4542,68 +4702,94 @@ function renderLoadedData(options = {}) {
   applyFilter(options);
 }
 
-async function toggleDiffMode() {
-  if (state.diffMode) {
-    state.diffMode = false;
-    resetDiffState();
-    renderStaticChrome();
-    applyFilter();
-    return;
-  }
-
-  const compareVersion = comparisonVersionForCurrent();
-  if (!compareVersion) return;
-
-  state.diffMode = true;
-  state.expandedAbilityId = "";
-  state.view = "heroes";
+async function changeVersionSelection(versionId, compareId = state.diffSelectedVersionId, diffMode = state.diffMode) {
+  const version = state.versions.find((entry) => entry.id === versionId);
+  if (!version) return false;
+  const compareVersion = diffMode ? comparisonVersionForCurrent(versionId, compareId) : null;
+  const request = ++versionSelectionRequest;
+  state.versionLoading = true;
   renderStaticChrome();
-  renderViewTabs();
   if (els.summary) els.summary.textContent = t("loading");
 
   try {
-    await refreshDiffMode();
-    applyFilter();
+    // Commit the pair together; a slower, superseded request must not replace it.
+    const [data, compareData] = await Promise.all([
+      loadVersionData(version),
+      compareVersion ? loadVersionData(compareVersion) : Promise.resolve(null),
+    ]);
+    if (request !== versionSelectionRequest) return false;
+
+    clearToolRoulette();
+    applyHeroData(data, version);
+    state.diffMode = Boolean(compareVersion);
+    if (compareVersion) {
+      state.selectedChangelog = false;
+      if (!["heroes", "items"].includes(state.view)) state.view = "heroes";
+      applyComparisonData(compareVersion, compareData);
+    } else {
+      resetDiffState();
+    }
+    state.versionLoading = false;
+    syncVersionUrl();
+    renderLoadedData();
+    warmVersionDataCache();
+    return true;
   } catch (error) {
+    if (request !== versionSelectionRequest) return false;
     console.error(error);
-    state.diffMode = false;
-    resetDiffState();
-    renderStaticChrome();
-    renderSummary();
-    if (els.detail) els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+    state.versionLoading = false;
+    renderLoadedData();
+    if (els.summary) els.summary.textContent = error.message;
+    return false;
   }
 }
 
+async function toggleDiffMode() {
+  if (!state.diffMode && !comparisonVersionForCurrent()) return false;
+  return changeVersionSelection(state.currentVersionId, state.diffSelectedVersionId, !state.diffMode);
+}
+
 async function switchVersion(versionId) {
-  if (!versionId || versionId === state.currentVersionId) return;
+  if (!versionId || (versionId === state.currentVersionId && !state.versionLoading)) return false;
+  const compareId = state.diffSelectedVersionId === versionId ? state.currentVersionId : state.diffSelectedVersionId;
+  return changeVersionSelection(versionId, compareId);
+}
 
-  clearToolRoulette();
-  if (els.versionSelect) els.versionSelect.disabled = true;
-  if (els.summary) els.summary.textContent = t("loading");
-
-  try {
-    await loadHeroVersion(versionId);
-    if (state.diffMode) await refreshDiffMode();
-    renderLoadedData({ deferDetail: true });
-    warmVersionDataCache();
-  } catch (error) {
-    console.error(error);
+async function switchComparisonVersion(versionId) {
+  if (!state.diffMode || versionId === state.currentVersionId || !validVersionId(versionId)) {
     renderVersionSwitch();
-    if (els.summary) els.summary.textContent = t("versionFetchFailed", { version: versionId });
-    if (els.detail) els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+    return false;
   }
+  return changeVersionSelection(state.currentVersionId, versionId, true);
 }
 
 async function boot() {
   try {
     const manifestCurrent = await loadVersionManifest();
     const requestedVersionId = versionIdFromCurrentUrl();
+    const requestedCompareId = versionParameterFromCurrentUrl(["compare"]);
     await loadHeroVersion(initialVersionId(manifestCurrent, requestedVersionId), {
-      syncUrl: Boolean(requestedVersionId),
+      syncUrl: false,
     });
+    const compareVersion = state.versions.find((version) => version.id === requestedCompareId && version.id !== state.currentVersionId);
+    let comparisonError = "";
+    if (compareVersion) {
+      try {
+        const data = await loadVersionData(compareVersion);
+        state.diffMode = true;
+        applyComparisonData(compareVersion, data);
+      } catch (error) {
+        console.error(error);
+        state.diffMode = false;
+        resetDiffState();
+        comparisonError = error.message;
+      }
+    }
+    if (requestedVersionId || requestedCompareId) syncVersionUrl();
     await loadCommunityShares();
     hydrateRatingsForCurrentVersion({ allowRatingUrl: true });
     renderLoadedData();
+    if (comparisonError) els.summary.textContent = comparisonError;
     warmVersionDataCache();
   } catch (error) {
     console.error(error);
@@ -4833,28 +5019,22 @@ els.versionSelect?.addEventListener("change", (event) => {
   switchVersion(event.target.value);
 });
 
+els.diffVersionSelect?.addEventListener("change", (event) => {
+  switchComparisonVersion(event.target.value);
+});
+
 els.diffToggle?.addEventListener("click", () => {
   toggleDiffMode();
 });
 
-els.languageSwitch?.addEventListener("click", async (event) => {
+els.languageSwitch?.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-language]");
   if (!button || button.dataset.language === state.language) return;
 
   state.language = button.dataset.language;
   renderViewTabs();
   renderLanguageSwitch();
-  if (state.diffMode) {
-    if (els.summary) els.summary.textContent = t("loading");
-    try {
-      await refreshDiffMode();
-    } catch (error) {
-      console.error(error);
-      state.diffMode = false;
-      resetDiffState();
-      if (els.detail) els.detail.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
-    }
-  }
+  if (state.diffMode) rebuildDiffRows();
   applyFilter();
 });
 
