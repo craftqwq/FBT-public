@@ -16,8 +16,15 @@
       <div class="topbarTools">
         <div id="viewTabs" class="viewTabs" aria-label="页面切换"></div>
         <div class="versionSwitch">
-          <span id="versionSwitchLabel">版本</span>
-          <select id="versionSelect" aria-labelledby="versionSwitchLabel"></select>
+          <div id="diffComparisonControls" class="versionField" hidden>
+            <span id="diffVersionLabel">基准</span>
+            <select id="diffVersionSelect" aria-labelledby="diffVersionLabel"></select>
+            <span class="versionDirection" aria-hidden="true">&rarr;</span>
+          </div>
+          <div class="versionField">
+            <span id="versionSwitchLabel">版本</span>
+            <select id="versionSelect" aria-labelledby="versionSwitchLabel"></select>
+          </div>
           <button id="diffToggle" class="diffToggle" type="button" aria-pressed="false">版本差异</button>
         </div>
         <div id="languageSwitch" class="languageSwitch" aria-label="语言切换"></div>
