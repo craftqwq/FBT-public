@@ -9,9 +9,13 @@
   </head>
   <body>
     <header class="topbar">
-      <div>
-        <h1>FBT 角色资料</h1>
-        <p id="summary">正在读取地图数据...</p>
+      <div class="brand">
+        <div class="brandMark" aria-hidden="true">F<span>B</span>T</div>
+        <div class="brandCopy">
+          <div class="brandEyebrow" aria-hidden="true">FATE · BATTLE TIDE</div>
+          <h1>FBT 角色资料</h1>
+          <p id="summary">正在读取地图数据...</p>
+        </div>
       </div>
       <div class="topbarTools">
         <div id="viewTabs" class="viewTabs" aria-label="页面切换"></div>
@@ -22,13 +26,15 @@
             <span class="versionDirection" aria-hidden="true">&rarr;</span>
           </div>
           <div class="versionField">
-            <span id="versionSwitchLabel">版本</span>
+            <span id="versionSwitchLabel">地图资料</span>
             <select id="versionSelect" aria-labelledby="versionSwitchLabel"></select>
           </div>
           <button id="diffToggle" class="diffToggle" type="button" aria-pressed="false">版本差异</button>
         </div>
+        <button id="announcementButton" class="announcementButton" type="button" aria-pressed="false">更新公告</button>
         <div id="languageSwitch" class="languageSwitch" aria-label="语言切换"></div>
         <div class="searchBox">
+          <span class="searchGlyph" aria-hidden="true">⌕</span>
           <input id="search" type="search" placeholder="搜索角色、称号、技能、说明" autocomplete="off" />
         </div>
       </div>
