@@ -1,6 +1,1527 @@
 {
-  "current": "KR48fix3",
+  "current": "KR49",
   "versions": [
+    {
+      "id": "KR49fix2",
+      "label": "KR49fix2",
+      "file": "data/heroes.KR49fix2.json",
+      "build": {
+        "source": "Mpq/KR49fix2",
+        "translations": "CN/KR49fix2",
+        "inheritPreviousPresentation": false
+      },
+      "changelog": {
+        "sections": [
+          {
+            "id": "kr49fix2-system",
+            "title": "시스템 및 공통",
+            "translations": {
+              "zhCN": {
+                "title": "系统与通用调整"
+              }
+            },
+            "subjects": [],
+            "entries": [
+              {
+                "id": "kr49fix2-1",
+                "text": "맵에 있는 고용량 모델 및 사운드를 전체적으로 압축하였습니다. 이에 따라 심히 저하된 음질/모델이 발견된다면 제보 바랍니다.",
+                "translations": {
+                  "zhCN": "已全面压缩地图中体积较大的模型和音效。如发现音质或模型质量明显下降，请反馈。"
+                }
+              },
+              {
+                "id": "kr49fix2-6",
+                "text": "팀 믹스 모드일 때 DPS 확인 시 플레이어 정렬이 섞기 전으로 출력되는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复混队模式下查看 DPS 时，玩家仍按混队前的顺序排列的问题。"
+                }
+              },
+              {
+                "id": "kr49fix2-7",
+                "text": "번개 이펙트류의 입자가 OpenGL 환경에서 제대로 표기되지 않는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复雷电类特效的粒子在 OpenGL 环境下无法正常显示的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49fix2-e014",
+            "title": "우치하 사스케",
+            "translations": {
+              "zhCN": {
+                "title": "宇智波佐助"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E014",
+                "display": {
+                  "id": "E014",
+                  "name": "우치하 사스케",
+                  "iconAsset": "assets/icons/cd4f5d80d2e4-BTNZZ-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波佐助"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix2-2",
+                "text": "우치하 사스케가 우즈마키 나루토를 죽이는 상호 대사가 추가됩니다.",
+                "translations": {
+                  "zhCN": "新增宇智波佐助击杀漩涡鸣人时的互动台词。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49fix2-e033",
+            "title": "나미카제 미나토",
+            "translations": {
+              "zhCN": {
+                "title": "波风水门"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E033",
+                "display": {
+                  "id": "E033",
+                  "name": "나미카제 미나토",
+                  "iconAsset": "assets/icons/1baaebd10831-BTN4D-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "波风水门"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix2-3",
+                "text": "나미카제 미나토가 우즈마키 나루토를 죽이는 상호 대사가 추가됩니다.",
+                "translations": {
+                  "zhCN": "新增波风水门击杀漩涡鸣人时的互动台词。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49fix2-e02j",
+            "title": "쿠로가네 잇키",
+            "translations": {
+              "zhCN": {
+                "title": "黑铁一辉"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E02J",
+                "display": {
+                  "id": "E02J",
+                  "name": "쿠로가네 잇키",
+                  "iconAsset": "assets/icons/f4cb50a0ba7e-BTNHT-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑铁一辉"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix2-4",
+                "text": "일도나찰(F2) 사용 중 일도수라 버프 종료 시 캐릭터가 굳는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复使用一刀罗刹（F2）期间，一刀修罗增益结束时角色卡住的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49fix2-e00z",
+            "title": "알트리아·펜드래곤 [Alter]",
+            "translations": {
+              "zhCN": {
+                "title": "阿尔托莉雅 [Alter]"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E00Z",
+                "display": {
+                  "id": "E00Z",
+                  "name": "알트리아·펜드래곤 [Alter]",
+                  "iconAsset": "assets/icons/55b1254e651c-BTNAltoria_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "阿尔托莉雅 [Alter]"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix2-5",
+                "text": "추격 기교(Q)의 잔상 이펙트가 OpenGL 환경에서 깨져 보이는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复追击技巧（Q）的残影特效在 OpenGL 环境下显示破损的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49fix2-e00y",
+            "title": "고죠 사토루",
+            "translations": {
+              "zhCN": {
+                "title": "五条悟"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E00Y",
+                "display": {
+                  "id": "E00Y",
+                  "name": "고죠 사토루",
+                  "iconAsset": "assets/icons/2200932743ab-BTNSatoru_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "五条悟"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix2-8",
+                "text": "영역 전개『무량공처』(G) 범위 내 적에게 정지를 거는 시간이 단축됩니다. [2.3초 → 1.8초]",
+                "translations": {
+                  "zhCN": "领域展开『无量空处』（G）：对范围内敌人施加停止效果的时间缩短。【2.3 秒 → 1.8 秒】"
+                }
+              },
+              {
+                "id": "kr49fix2-9",
+                "text": "영역 전개『무량공처』(G) 영역 지속 중 고죠 사토루가 범위 면역을 획득합니다.",
+                "translations": {
+                  "zhCN": "领域展开『无量空处』（G）：领域持续期间，五条悟获得范围免疫。"
+                }
+              },
+              {
+                "id": "kr49fix2-note-1",
+                "text": "궁극기의 쿨타임에 비해 이득을 보는 경우의 수가 더 적었기에 이를 개선합니다.",
+                "translations": {
+                  "zhCN": "相对于终极技能的冷却时间，能够获得收益的情况偏少，因此予以改善。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49fix2-e09k",
+            "title": "우즈마키 나루토",
+            "translations": {
+              "zhCN": {
+                "title": "漩涡鸣人"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E09K",
+                "display": {
+                  "id": "E09K",
+                  "name": "우즈마키 나루토",
+                  "iconAsset": "assets/icons/f09ca843b957-BTNNaruto_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "漩涡鸣人"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix2-10",
+                "text": "체술·홍련연타(Q) 선딜레이가 감소합니다. [0.16초 → 0.1초]",
+                "translations": {
+                  "zhCN": "体术·红莲连打（Q）的施放前摇缩短。【0.16 秒 → 0.1 秒】"
+                }
+              },
+              {
+                "id": "kr49fix2-11",
+                "text": "체술·홍련열충(W) 2타 돌진을 차징하는 시간이 감소합니다. [0.5초 → 0.4초]",
+                "translations": {
+                  "zhCN": "体术·红莲烈冲（W）第二段突进的蓄力时间缩短。【0.5 秒 → 0.4 秒】"
+                }
+              },
+              {
+                "id": "kr49fix2-12",
+                "text": "바리온 나선환(E) 선딜레이가 감소합니다. [0.3초 → 0.2초]",
+                "translations": {
+                  "zhCN": "重粒子螺旋丸（E）的施放前摇缩短。【0.3 秒 → 0.2 秒】"
+                }
+              },
+              {
+                "id": "kr49fix2-13",
+                "text": "바리온 나선환(E) 시전 거리가 증가합니다. [850 → 900]",
+                "translations": {
+                  "zhCN": "重粒子螺旋丸（E）的施法距离增加。【850 → 900】"
+                }
+              },
+              {
+                "id": "kr49fix2-14",
+                "text": "전용 아이템 2번 효과가 자신에게도 적용되도록 개선합니다.",
+                "translations": {
+                  "zhCN": "专属物品的第二项效果现在也会对自身生效。"
+                }
+              },
+              {
+                "id": "kr49fix2-note-2",
+                "text": "나루토는 돌진캐릭터임에도 긴 선딜레이 때문에 여전히 사용하기 어려웠습니다. 그리하여 이를 개선합니다.",
+                "translations": {
+                  "zhCN": "鸣人虽是突进型角色，但较长的前摇仍使其难以使用，因此予以改善。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49fix2-e09f",
+            "title": "비소",
+            "translations": {
+              "zhCN": {
+                "title": "飞霄"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E09F",
+                "display": {
+                  "id": "E09F",
+                  "name": "비소",
+                  "iconAsset": "assets/icons/03e3fbd5bf47-BTNFeixiao_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "飞霄"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix2-15",
+                "text": "천격해방(G)의 연출 시간이 감소합니다. [3초 → 2.7초]",
+                "translations": {
+                  "zhCN": "天击解放（G）的演出时间缩短。【3 秒 → 2.7 秒】"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "announcementOnly": true
+    },
+    {
+      "id": "KR49fix1",
+      "label": "KR49fix1",
+      "announcementOnly": true,
+      "changelog": {
+        "sections": [
+          {
+            "id": "kr49fix1-system",
+            "title": "시스템 개선",
+            "translations": {
+              "zhCN": {
+                "title": "系统改进"
+              }
+            },
+            "subjects": [],
+            "entries": [
+              {
+                "id": "kr49fix1-1",
+                "text": "정규 성배 전쟁/거짓된 성배 전쟁 모드의 선택 순서가 서로 변경됩니다.",
+                "translations": {
+                  "zhCN": "交换“正规圣杯战争”与“虚假的圣杯战争”模式的选择顺序。"
+                }
+              },
+              {
+                "id": "kr49fix1-2",
+                "text": "라운드 선택 중 6라운드를 삭제하고, 그 자리에 16라운드를 추가합니다.",
+                "translations": {
+                  "zhCN": "回合数选项中移除 6 回合，并在原位置新增 16 回合。"
+                }
+              },
+              {
+                "id": "kr49fix1-3",
+                "text": "이제부터 중앙 상점에서 긴급 회피를 판매합니다.",
+                "translations": {
+                  "zhCN": "中央商店开始出售“紧急回避”。"
+                }
+              },
+              {
+                "id": "kr49fix1-4",
+                "text": "이제부터 중앙 상점에서 응급 처치를 판매합니다.",
+                "translations": {
+                  "zhCN": "中央商店开始出售“应急处理”。"
+                }
+              },
+              {
+                "id": "kr49fix1-note-1",
+                "text": "스페이스바로 편하게 모드를 선택할 수 있게 개선하며, 중앙 상점이 세뱃돈 상점외에도 전투 중간에 들릴 수 있는 전략 요충지로 설정합니다.",
+                "translations": {
+                  "zhCN": "方便使用空格键选择模式；让中央商店除出售新年红包外，也成为战斗期间可前往的战略要地。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49fix1-e021",
+            "title": "미사카 미코토",
+            "translations": {
+              "zhCN": {
+                "title": "御坂美琴"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E021",
+                "display": {
+                  "id": "E021",
+                  "name": "미사카 미코토",
+                  "iconAsset": "assets/icons/59346f5aa959-BTNYBMQ-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "御坂美琴"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix1-5",
+                "text": "전자기동(W) 사용 시 이동 속도 버프가 제거되던 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复使用电磁机动（W）时，移动速度增益被移除的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49fix1-e09j",
+            "title": "우치하 사스케Ex",
+            "translations": {
+              "zhCN": {
+                "title": "宇智波佐助Ex"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E09J",
+                "display": {
+                  "id": "E09J",
+                  "name": "우치하 사스케Ex",
+                  "iconAsset": "assets/icons/16130c1855c2-BTNEXSasuke_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波佐助Ex"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix1-6",
+                "text": "치도리 흘리기(W)의 설명이 바뀌지 않았던 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复千鸟流（W）的说明未更新的问题。"
+                }
+              },
+              {
+                "id": "kr49fix1-16",
+                "text": "치도리(E) 쿨타임이 증가합니다. [9초 → 10초]",
+                "translations": {
+                  "zhCN": "千鸟（E）的冷却时间延长。【9 秒 → 10 秒】"
+                }
+              },
+              {
+                "id": "kr49fix1-note-4",
+                "text": "치도리 강화 이후 높은 성능을 보이고 있기에 이를 약화합니다.",
+                "translations": {
+                  "zhCN": "千鸟加强后表现过强，因此予以削弱。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49fix1-i03n",
+            "title": "강철의 단련",
+            "translations": {
+              "zhCN": {
+                "title": "钢之锻炼"
+              }
+            },
+            "subjects": [
+              {
+                "type": "item",
+                "id": "I03N",
+                "display": {
+                  "id": "I03N",
+                  "name": "강철의 단련",
+                  "iconAsset": "assets/icons/972ec0c88630-BTNLZ-GZDL.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "钢之锻炼"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix1-7",
+                "text": "레벨이 없는 범위 면역 돌진을 막을 수 있는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复能够阻挡无等级的范围免疫突进的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49fix1-e09k",
+            "title": "우즈마키 나루토",
+            "translations": {
+              "zhCN": {
+                "title": "漩涡鸣人"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E09K",
+                "display": {
+                  "id": "E09K",
+                  "name": "우즈마키 나루토",
+                  "iconAsset": "assets/icons/f09ca843b957-BTNNaruto_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "漩涡鸣人"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49fix1-8",
+                "text": "기본 공격이 적에게 표식을 새기도록 수정합니다.",
+                "translations": {
+                  "zhCN": "普通攻击现在会为敌人施加印记。"
+                }
+              },
+              {
+                "id": "kr49fix1-9",
+                "text": "체술·홍련열충(W) 쿨타임이 감소합니다. [14초 → 13초]",
+                "translations": {
+                  "zhCN": "体术·红莲烈冲（W）的冷却时间缩短。【14 秒 → 13 秒】"
+                }
+              },
+              {
+                "id": "kr49fix1-10",
+                "text": "바리온 나선환(E) 선딜레이가 감소합니다. [0.4초 → 0.3초]",
+                "translations": {
+                  "zhCN": "重粒子螺旋丸（E）的施放前摇缩短。【0.4 秒 → 0.3 秒】"
+                }
+              },
+              {
+                "id": "kr49fix1-11",
+                "text": "바리온 나선환(E) 폭발에 적중당한 대상에게 불의 의지 표식을 새기도록 개선합니다.",
+                "translations": {
+                  "zhCN": "重粒子螺旋丸（E）的爆炸现在会为命中的目标施加“火之意志”印记。"
+                }
+              },
+              {
+                "id": "kr49fix1-12",
+                "text": "풍둔·나선수리검(R) 최대 거리가 감소합니다. [2000 → 1800]",
+                "translations": {
+                  "zhCN": "风遁·螺旋手里剑（R）的最大距离缩短。【2000 → 1800】"
+                }
+              },
+              {
+                "id": "kr49fix1-13",
+                "text": "체술·순추련탄(D) 스턴 시간이 증가합니다. [1초 → 1.2초]",
+                "translations": {
+                  "zhCN": "体术·瞬追连弹（D）的眩晕时间延长。【1 秒 → 1.2 秒】"
+                }
+              },
+              {
+                "id": "kr49fix1-14",
+                "text": "바리온 모드(T) 발동 성공 시 체술·홍련열충(W)의 쿨타임이 초기화되는 기능이 추가됩니다.",
+                "translations": {
+                  "zhCN": "重粒子模式（T）成功发动时，新增重置体术·红莲烈冲（W）冷却时间的效果。"
+                }
+              },
+              {
+                "id": "kr49fix1-15",
+                "text": "바리온 모드(T) 지속 중 체술·홍련열충(W)의 LV이 3으로 증가하는 기능이 추가됩니다.",
+                "translations": {
+                  "zhCN": "重粒子模式（T）持续期间，体术·红莲烈冲（W）的 LV 提升至 3。"
+                }
+              },
+              {
+                "id": "kr49fix1-note-3",
+                "text": "현재 나루토는 돌진 위주형 캐릭터이지만 LV3 돌진이 전무하고 바리온 모드가 체력을 소모하는 효과에 비해 낮은 위력을 지니고 있으며 콤보가 매끄럽지 않은 문제를 개선합니다.",
+                "translations": {
+                  "zhCN": "鸣人以突进为主，却没有 LV3 突进；重粒子模式相对于消耗生命值的代价，威力偏低，连招也不够流畅。本次改善这些问题。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49fix1-bugs",
+            "title": "버그 수정",
+            "translations": {
+              "zhCN": {
+                "title": "错误修复说明"
+              }
+            },
+            "subjects": [],
+            "entries": [
+              {
+                "id": "kr49fix1-note-2",
+                "text": "게임에 영향을 미치는 버그를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复影响游戏的错误。"
+                },
+                "note": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "KR49",
+      "label": "KR49",
+      "file": "data/heroes.KR49.json",
+      "build": {
+        "source": "Mpq/KR49",
+        "translations": "CN/KR49",
+        "inheritPreviousPresentation": false
+      },
+      "changelog": {
+        "sections": [
+          {
+            "id": "kr49-e09k",
+            "title": "우즈마키 나루토",
+            "translations": {
+              "zhCN": {
+                "title": "漩涡鸣人"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E09K",
+                "display": {
+                  "id": "E09K",
+                  "name": "우즈마키 나루토",
+                  "iconAsset": "assets/icons/f09ca843b957-BTNNaruto_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "漩涡鸣人"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-1",
+                "text": "신규 영웅 추가 [우즈마키 나루토]",
+                "translations": {
+                  "zhCN": "新增英雄【漩涡鸣人】。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-i093",
+            "title": "요람의 노래",
+            "translations": {
+              "zhCN": {
+                "title": "摇篮之歌"
+              }
+            },
+            "subjects": [
+              {
+                "type": "item",
+                "id": "I093",
+                "display": {
+                  "id": "I093",
+                  "name": "요람의 노래",
+                  "iconAsset": "assets/icons/f53cfb28d772-BTNSilver_Art.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "摇篮之歌"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-2",
+                "text": "신규 아이템 추가 [요람의 노래]",
+                "translations": {
+                  "zhCN": "新增物品【摇篮之歌】。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-system",
+            "title": "시스템 및 공통",
+            "translations": {
+              "zhCN": {
+                "title": "系统与通用调整"
+              }
+            },
+            "subjects": [],
+            "entries": [
+              {
+                "id": "kr49-3",
+                "text": "신규 모드 \"거짓된 성배 전쟁\"이 추가됩니다. [팀을 자동으로 섞는 기능입니다. 버그 발생 시 제보 바랍니다.]",
+                "translations": {
+                  "zhCN": "新增模式“虚假的圣杯战争”。【自动打乱队伍的功能，如遇错误请反馈。】"
+                }
+              },
+              {
+                "id": "kr49-4",
+                "text": "새로운 명령어가 추가됩니다. [-vib] : ON/OFF 기능이며 카메라 흔들림을 켜고 끌 수 있는 기능입니다. (기본 사용값은 ON입니다.)",
+                "translations": {
+                  "zhCN": "新增命令：-vib，用于开启／关闭镜头震动，默认开启。"
+                }
+              },
+              {
+                "id": "kr49-5",
+                "text": "싱글 플레이 중 쿨타임 초기화 사용 시 영주의 마나 및 쿨타임 또한 초기화되도록 변경합니다.",
+                "translations": {
+                  "zhCN": "单人游戏中使用冷却重置时，也会重置令咒的魔法值与冷却时间。"
+                }
+              },
+              {
+                "id": "kr49-6",
+                "text": "아이템 상점에 개념 예장을 1종 더 팔도록 개선합니다.",
+                "translations": {
+                  "zhCN": "物品商店增加一种概念礼装出售。"
+                }
+              },
+              {
+                "id": "kr49-7",
+                "text": "영자 이동 외 몇몇 시스템 누수를 최적화합니다.",
+                "translations": {
+                  "zhCN": "优化灵子移动等部分系统的泄漏问题。"
+                }
+              },
+              {
+                "id": "kr49-8",
+                "text": "일부 모델 및 함수를 이어 최적화합니다.",
+                "translations": {
+                  "zhCN": "继续优化部分模型与函数。"
+                }
+              },
+              {
+                "id": "kr49-19",
+                "text": "간혹 커스텀 GIF가 타인에게도 보이던 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复自定义 GIF 偶尔也会被其他玩家看到的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-e001",
+            "title": "료우기 시키",
+            "translations": {
+              "zhCN": {
+                "title": "两仪式"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E001",
+                "display": {
+                  "id": "E001",
+                  "name": "료우기 시키",
+                  "iconAsset": "assets/icons/ac230dc14538-BTN214-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "两仪式"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-9",
+                "text": "W스킬 적중 후 추가타 미연계 시 캐릭터가 선택되지 않는 오류를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复 W 技能命中后，未衔接追加攻击时无法选中角色的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-e00y",
+            "title": "고죠 사토루",
+            "translations": {
+              "zhCN": {
+                "title": "五条悟"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E00Y",
+                "display": {
+                  "id": "E00Y",
+                  "name": "고죠 사토루",
+                  "iconAsset": "assets/icons/2200932743ab-BTNSatoru_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "五条悟"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-10",
+                "text": "술식 순전 출력 최대『창』(Q) 기술이 DIO의 시간 정지에 영향을 받았을 경우 이펙트가 미리 제거되는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复术式全功率输出『苍』（Q）受到 DIO 时间停止影响时，特效提前消失的问题。"
+                }
+              },
+              {
+                "id": "kr49-11",
+                "text": "무량공처(G) 기술이 DIO의 시간 정지에 영향을 받았을 경우 이펙트가 미리 제거되는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复无量空处（G）受到 DIO 时间停止影响时，特效提前消失的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-e00u",
+            "title": "엘리시아",
+            "translations": {
+              "zhCN": {
+                "title": "爱莉希雅"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E00U",
+                "display": {
+                  "id": "E00U",
+                  "name": "엘리시아",
+                  "iconAsset": "assets/icons/5e3822ea100e-BTNElysia_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "爱莉希雅"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-12",
+                "text": "운명을 정하는 찬란한 영원(G) 기술이 DIO의 시간 정지에 영향을 받았을 경우 이펙트가 미리 제거되는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复裁定命运的璨耀永恒（G）受到 DIO 时间停止影响时，特效提前消失的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-e01q",
+            "title": "시로 렌",
+            "translations": {
+              "zhCN": {
+                "title": "白莲"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E01Q",
+                "display": {
+                  "id": "E01Q",
+                  "name": "시로 렌",
+                  "iconAsset": "assets/icons/090b69b71a6a-BTNWL-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "白莲"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-13",
+                "text": "한 여름의 설원(G) 기술이 DIO의 시간 정지에 영향을 받았을 경우 이펙트가 미리 제거되는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复盛夏雪原（G）受到 DIO 时间停止影响时，特效提前消失的问题。"
+                }
+              },
+              {
+                "id": "kr49-14",
+                "text": "무한포용(G2) 반격을 터트린 대상의 카메라 시점이 궁극기가 끝날 때 흔들리는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复触发无限包容（G2）反击的目标，在终极技能结束时镜头晃动的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-e09j",
+            "title": "우치하 사스케Ex",
+            "translations": {
+              "zhCN": {
+                "title": "宇智波佐助Ex"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E09J",
+                "display": {
+                  "id": "E09J",
+                  "name": "우치하 사스케Ex",
+                  "iconAsset": "assets/icons/16130c1855c2-BTNEXSasuke_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波佐助Ex"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-15",
+                "text": "드래그 선택 범위가 넓었던 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复拖拽框选范围过大的问题。"
+                }
+              },
+              {
+                "id": "kr49-20",
+                "text": "치도리 흘리기(W/W2) W2스킬의 사용 방식이 재사용이 아닌 자신에게 사용으로 변경됩니다.",
+                "translations": {
+                  "zhCN": "千鸟流（W／W2）：W2 的施放方式由再次施放改为对自身施放。"
+                }
+              },
+              {
+                "id": "kr49-21",
+                "text": "치도리 흘리기(W2) 선딜레이가 0.1초 감소합니다.",
+                "translations": {
+                  "zhCN": "千鸟流（W2）的施放前摇缩短 0.1 秒。"
+                }
+              },
+              {
+                "id": "kr49-22",
+                "text": "치도리(E) 선딜레이가 0.14초 감소합니다.",
+                "translations": {
+                  "zhCN": "千鸟（E）的施放前摇缩短 0.14 秒。"
+                }
+              },
+              {
+                "id": "kr49-23",
+                "text": "통곡의 치도리(E) 돌진 중 기절 면역을 제거합니다.",
+                "translations": {
+                  "zhCN": "移除恸哭之千鸟（E）突进期间的眩晕免疫。"
+                }
+              },
+              {
+                "id": "kr49-24",
+                "text": "뇌둔·풍마 수리검(D)이 사출된 후 기절로 인해 사출된 수리검이 사라지지 않도록 개선합니다.",
+                "translations": {
+                  "zhCN": "雷遁·风魔手里剑（D）射出后，不再因施术者眩晕而消失。"
+                }
+              },
+              {
+                "id": "kr49-25",
+                "text": "쿠사나기의 검·착검(D) 활성화 시간이 감소합니다. [2.5초 → 2초]",
+                "translations": {
+                  "zhCN": "草薙之剑·插剑（D）的激活时间缩短。【2.5 秒 → 2 秒】"
+                }
+              },
+              {
+                "id": "kr49-26",
+                "text": "쿠사나기의 검·착검(D) 뇌둔·풍마 수리검 활성화 시간이 감소합니다. [3초 → 2초]",
+                "translations": {
+                  "zhCN": "草薙之剑·插剑（D）：雷遁·风魔手里剑的激活时间缩短。【3 秒 → 2 秒】"
+                }
+              },
+              {
+                "id": "kr49-27",
+                "text": "주인(F) 발동 성공 시 치도리(E)의 쿨타임을 초기화하는 기능이 추가됩니다.",
+                "translations": {
+                  "zhCN": "咒印（F）成功发动时，新增重置千鸟（E）冷却时间的效果。"
+                }
+              },
+              {
+                "id": "kr49-28",
+                "text": "치도리 예창(T) 선딜레이가 0.14초 감소합니다.",
+                "translations": {
+                  "zhCN": "千鸟锐枪（T）的施放前摇缩短 0.14 秒。"
+                }
+              },
+              {
+                "id": "kr49-note-1",
+                "text": "우치하 사스케Ex는 선후딜이 굉장히 길어 사용하기 어려웠던 문제가 있었기에 이를 개선하며 W스킬의 조작감을 개선합니다.",
+                "translations": {
+                  "zhCN": "宇智波佐助 Ex 的前后摇过长，导致使用困难，本次对此进行改善，并优化 W 技能的操作手感。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-e042",
+            "title": "사토미 렌타로",
+            "translations": {
+              "zhCN": {
+                "title": "里见莲太郎"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E042",
+                "display": {
+                  "id": "E042",
+                  "name": "사토미 렌타로",
+                  "iconAsset": "assets/icons/95e14f8a4f06-BTNLJLTL-TX0.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "里见莲太郎"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-16",
+                "text": "텐도식 전투술(T)의 패시브 효과가 다음 라운드에도 지속되는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复天童式战斗术（T）的被动效果持续到下一回合的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-e00z",
+            "title": "알트리아·펜드래곤 [Alter]",
+            "translations": {
+              "zhCN": {
+                "title": "阿尔托莉雅 [Alter]"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E00Z",
+                "display": {
+                  "id": "E00Z",
+                  "name": "알트리아·펜드래곤 [Alter]",
+                  "iconAsset": "assets/icons/55b1254e651c-BTNAltoria_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "阿尔托莉雅 [Alter]"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-17",
+                "text": "해변의 꽃(E)의 참격이 반격 아이템의 기절 면역을 무시하는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复海滨之花（E）的斩击无视反击物品眩晕免疫的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-hh02",
+            "title": "콘파쿠·요우무",
+            "translations": {
+              "zhCN": {
+                "title": "魂魄妖梦"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "HH02",
+                "display": {
+                  "id": "HH02",
+                  "name": "콘파쿠·요우무",
+                  "iconAsset": "assets/icons/f21a96c6472d-btnyoumu_tx.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "魂魄妖梦"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-18",
+                "text": "전생검「원심유전참」(F)의 참격이 반격 아이템의 기절 면역을 무시하는 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "修复转生剑「圆心流转斩」（F）的斩击无视反击物品眩晕免疫的问题。"
+                }
+              }
+            ]
+          },
+          {
+            "id": "kr49-e01l",
+            "title": "나나야 시키",
+            "translations": {
+              "zhCN": {
+                "title": "七夜志贵"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E01L",
+                "display": {
+                  "id": "E01L",
+                  "name": "나나야 시키",
+                  "iconAsset": "assets/icons/26976e2dd0ba-BTNQY-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "七夜志贵"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-29",
+                "text": "섬주·명월(E)의 은신 시간이 증가합니다. [0.8초 → 1초]",
+                "translations": {
+                  "zhCN": "闪走·名月（E）的隐身时间延长。【0.8 秒 → 1 秒】"
+                }
+              },
+              {
+                "id": "kr49-30",
+                "text": "섬초 팔천(R)의 추가타가 종료되었을 때 은신이 즉시 종료되지 않고 0.2초 후 종료되도록 개선됩니다.",
+                "translations": {
+                  "zhCN": "闪鞘·八穿（R）的追加攻击结束后，隐身不再立即结束，而是在 0.2 秒后结束。"
+                }
+              },
+              {
+                "id": "kr49-note-2",
+                "text": "나나야 시키가 너프 이후 약한 모습을 보이고 있기에 강화합니다.",
+                "translations": {
+                  "zhCN": "七夜志贵在削弱后表现偏弱，因此予以加强。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-e052",
+            "title": "헤라클레스",
+            "translations": {
+              "zhCN": {
+                "title": "赫拉克勒斯"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E052",
+                "display": {
+                  "id": "E052",
+                  "name": "헤라클레스",
+                  "iconAsset": "assets/icons/e29cfa59da7b-BTNBerserker-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "赫拉克勒斯"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-31",
+                "text": "열두 번의 시련(T) 시련을 최대치로 보유 중일 때 최대 체력 증가량이 감소합니다. [2000 → 1500]",
+                "translations": {
+                  "zhCN": "十二试炼（T）：试炼数量达到上限时，最大生命值加成降低。【2000 → 1500】"
+                }
+              },
+              {
+                "id": "kr49-note-3",
+                "text": "최대 목숨을 지닌 헤라클레스의 성능이 매우 좋았기에 이를 약화합니다.",
+                "translations": {
+                  "zhCN": "拥有最多生命次数时的赫拉克勒斯表现过强，因此予以削弱。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-e060",
+            "title": "네로·클라우디우스",
+            "translations": {
+              "zhCN": {
+                "title": "尼禄·克劳狄乌斯"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E060",
+                "display": {
+                  "id": "E060",
+                  "name": "네로·클라우디우스",
+                  "iconAsset": "assets/icons/c846a39812b2-BTN-YX-NL-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "尼禄·克劳狄乌斯"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-32",
+                "text": "황홀로 초대하는 황금극장(T) 상처를 씻는 성자의 샘/시간을 휘감는 성자의 샘의 회복량 비례가 변경됩니다. [n(자신+아군의 수) → n(자신+적군의 수)]",
+                "translations": {
+                  "zhCN": "邀至心荡神驰的黄金剧场（T）：抚平伤口的圣者之泉／连结时光的圣者之泉，恢复量的计算依据调整。【n（自身＋友军数量）→ n（自身＋敌军数量）】"
+                }
+              },
+              {
+                "id": "kr49-note-4",
+                "text": "한타 이후 아군끼리 정비를 하는 시간에 매우 높은 효용을 지녔던 기술을 약화하여 전투중에만 효과를 볼 수 있게 개선합니다.",
+                "translations": {
+                  "zhCN": "削弱该技能在团战后友军集结休整时过高的收益，使其主要在战斗中发挥效果。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-e02j",
+            "title": "쿠로가네 잇키",
+            "translations": {
+              "zhCN": {
+                "title": "黑铁一辉"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E02J",
+                "display": {
+                  "id": "E02J",
+                  "name": "쿠로가네 잇키",
+                  "iconAsset": "assets/icons/f4cb50a0ba7e-BTNHT-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑铁一辉"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-33",
+                "text": "일도수라(F) 공격 명령을 통한 순간 이동이 침묵 상태에서 발동되지 않도록 수정합니다.",
+                "translations": {
+                  "zhCN": "一刀修罗（F）：沉默状态下不再能通过攻击指令触发瞬间移动。"
+                }
+              },
+              {
+                "id": "kr49-34",
+                "text": "제7 비검·뇌광(T) 적의 기술을 감지하는 시점이 기술을 사용하는 시점으로 롤백합니다.",
+                "translations": {
+                  "zhCN": "第七秘剑·雷光（T）：将侦测敌方技能的时机回调为敌方施放技能时。"
+                }
+              },
+              {
+                "id": "kr49-note-5",
+                "text": "침묵 상태에서 이동이 가능했던 문제를 수정하고, 약화되었던 성능을 일부 롤백합니다.",
+                "translations": {
+                  "zhCN": "修复沉默状态下仍可移动的问题，并回调部分此前削弱的性能。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-e00k",
+            "title": "오키타 소지",
+            "translations": {
+              "zhCN": {
+                "title": "冲田总司"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E00K",
+                "display": {
+                  "id": "E00K",
+                  "name": "오키타 소지",
+                  "iconAsset": "assets/icons/eb37e92411f9-BTNCT-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "冲田总司"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-35",
+                "text": "육명검(D)의 쿨타임이 증가합니다. [10초 → 12초]",
+                "translations": {
+                  "zhCN": "六命剑（D）的冷却时间延长。【10 秒 → 12 秒】"
+                }
+              },
+              {
+                "id": "kr49-36",
+                "text": "축지(F) 공격 명령을 통한 순간 이동이 침묵 상태에서 발동되지 않도록 수정합니다.",
+                "translations": {
+                  "zhCN": "缩地（F）：沉默状态下不再能通过攻击指令触发瞬间移动。"
+                }
+              },
+              {
+                "id": "kr49-note-6",
+                "text": "강한 성능을 보이고 있었던 D스킬의 성능을 약화하고 침묵 상태에서 이동이 가능했던 문제를 수정합니다.",
+                "translations": {
+                  "zhCN": "削弱表现强势的 D 技能，并修复沉默状态下仍可移动的问题。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-e09f",
+            "title": "비소",
+            "translations": {
+              "zhCN": {
+                "title": "飞霄"
+              }
+            },
+            "subjects": [
+              {
+                "type": "hero",
+                "id": "E09F",
+                "display": {
+                  "id": "E09F",
+                  "name": "비소",
+                  "iconAsset": "assets/icons/03e3fbd5bf47-BTNFeixiao_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "飞霄"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-37",
+                "text": "비술·폭풍의 몸(D2)의 활성화에 걸리는 시간이 단축됩니다. [1초 → 0.5초]",
+                "translations": {
+                  "zhCN": "秘技·岚身（D2）的激活所需时间缩短。【1 秒 → 0.5 秒】"
+                }
+              },
+              {
+                "id": "kr49-note-7",
+                "text": "D스킬의 사용이 매우 까다로웠던 점을 개선합니다.",
+                "translations": {
+                  "zhCN": "改善 D 技能使用条件过于苛刻的问题。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-i091",
+            "title": "여명",
+            "translations": {
+              "zhCN": {
+                "title": "黎明"
+              }
+            },
+            "subjects": [
+              {
+                "type": "item",
+                "id": "I091",
+                "display": {
+                  "id": "I091",
+                  "name": "여명",
+                  "iconAsset": "assets/icons/f1f1fa07e4e6-BTNArtMashu.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黎明"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-38",
+                "text": "작동 방식 및 효과가 변경됩니다.\n[타겟팅 → 즉시발동형] [지정한 적이 기절이라면 1.5초 침묵 패널티 → 1000 범위 내 적이 존재할 경우 1.5초 침묵 패널티] [대상의 현재 체력 18%+850 → 본인의 잃은 체력 14%+850]",
+                "translations": {
+                  "zhCN": "施放方式及效果调整。\n【指定目标 → 立即生效】\n【指定的敌人处于眩晕状态时，自身沉默 1.5 秒 → 1000 范围内存在敌人时，自身沉默 1.5 秒】\n【目标当前生命值的 18%＋850 → 自身已损失生命值的 14%＋850】"
+                }
+              },
+              {
+                "id": "kr49-note-8",
+                "text": "사용이 어려웠던 문제를 개선하고 사용하기 쉽게 변경됩니다.",
+                "translations": {
+                  "zhCN": "改善使用困难的问题，使其更易使用。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-i092",
+            "title": "검은 성배",
+            "translations": {
+              "zhCN": {
+                "title": "黑之圣杯"
+              }
+            },
+            "subjects": [
+              {
+                "type": "item",
+                "id": "I092",
+                "display": {
+                  "id": "I092",
+                  "name": "검은 성배",
+                  "iconAsset": "assets/icons/7c89089a7182-BTNDark_Grail.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑之圣杯"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-39",
+                "text": "작동 방식 및 효과가 변경됩니다.\n[타겟팅 → 즉시발동형] [기록 대상 : 지정한 적 → 사용자 본인] [3초 후 발동 → 2초 후 발동] [2초 후 기록한 체력보다 체력이 높으면 1000 회복 → 2초 후 기록한 체력보다 체력이 500이상 높다면 1000 회복] [2초 후 기록한 체력과 체력이 같거나 낮으면 체력 1000 소모 + 8초간 올스텟 12 증가 → 2초 후 기록한 체력보다 500미만 증가했거나 감소했다면 체력 1000 소모 + 8초간 올스텟 12 증가]",
+                "translations": {
+                  "zhCN": "施放方式及效果调整。\n【指定目标 → 立即生效】\n【记录对象：指定的敌人 → 使用者自身】\n【3 秒后生效 → 2 秒后生效】\n【2 秒后生命值高于记录值时恢复 1000 → 2 秒后生命值比记录值至少高 500 时恢复 1000】\n【2 秒后生命值等于或低于记录值时，消耗 1000 生命值并在 8 秒内全属性＋12 → 2 秒后生命值增幅不足 500 或下降时，消耗 1000 生命值并在 8 秒内全属性＋12】"
+                }
+              },
+              {
+                "id": "kr49-note-9",
+                "text": "사용이 어려웠던 문제를 개선하고 사용하기 쉽게 변경됩니다.",
+                "translations": {
+                  "zhCN": "改善使用困难的问题，使其更易使用。"
+                },
+                "note": true
+              }
+            ]
+          },
+          {
+            "id": "kr49-i03n",
+            "title": "강철의 단련",
+            "translations": {
+              "zhCN": {
+                "title": "钢之锻炼"
+              }
+            },
+            "subjects": [
+              {
+                "type": "item",
+                "id": "I03N",
+                "display": {
+                  "id": "I03N",
+                  "name": "강철의 단련",
+                  "iconAsset": "assets/icons/972ec0c88630-BTNLZ-GZDL.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "钢之锻炼"
+                    }
+                  }
+                }
+              }
+            ],
+            "entries": [
+              {
+                "id": "kr49-40",
+                "text": "판정을 재제작하여 LV1 기술의 판정을 차단하도록 시스템을 개선합니다.",
+                "translations": {
+                  "zhCN": "重做判定，改进阻挡 LV1 技能判定的系统。"
+                }
+              },
+              {
+                "id": "kr49-note-10",
+                "text": "해당 아이템을 사용하고도 간혹 LV1의 투사체/돌진을 막지 못했던 문제를 개선합니다.",
+                "translations": {
+                  "zhCN": "改善使用该物品后，偶尔仍无法阻挡 LV1 投射物／突进的问题。"
+                },
+                "note": true
+              }
+            ]
+          }
+        ]
+      }
+    },
     {
       "id": "KR48fix3",
       "label": "KR48fix3",
@@ -22,7 +1543,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09C"
+                "id": "E09C",
+                "display": {
+                  "id": "E09C",
+                  "name": "아이젠 소스케",
+                  "iconAsset": "assets/icons/f10f48a44b28-BTNAizen_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "蓝染惣右介"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -46,7 +1577,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09J"
+                "id": "E09J",
+                "display": {
+                  "id": "E09J",
+                  "name": "우치하 사스케Ex",
+                  "iconAsset": "assets/icons/16130c1855c2-BTNEXSasuke_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波佐助 Ex"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -113,7 +1654,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01Q"
+                "id": "E01Q",
+                "display": {
+                  "id": "E01Q",
+                  "name": "시로 렌",
+                  "iconAsset": "assets/icons/090b69b71a6a-BTNWL-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "白莲"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -137,7 +1688,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00U"
+                "id": "E00U",
+                "display": {
+                  "id": "E00U",
+                  "name": "엘리시아",
+                  "iconAsset": "assets/icons/5e3822ea100e-BTNElysia_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "爱莉希雅"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -168,7 +1729,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01L"
+                "id": "E01L",
+                "display": {
+                  "id": "E01L",
+                  "name": "나나야 시키",
+                  "iconAsset": "assets/icons/26976e2dd0ba-BTNQY-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "七夜志贵"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -214,7 +1785,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I092"
+                "id": "I092",
+                "display": {
+                  "id": "I092",
+                  "name": "검은 성배",
+                  "iconAsset": "assets/icons/7c89089a7182-BTNDark_Grail.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑之圣杯"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -238,7 +1819,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I091"
+                "id": "I091",
+                "display": {
+                  "id": "I091",
+                  "name": "여명",
+                  "iconAsset": "assets/icons/f1f1fa07e4e6-BTNArtMashu.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黎明"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -269,11 +1860,31 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I092"
+                "id": "I092",
+                "display": {
+                  "id": "I092",
+                  "name": "검은 성배",
+                  "iconAsset": "assets/icons/7c89089a7182-BTNDark_Grail.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑之圣杯"
+                    }
+                  }
+                }
               },
               {
                 "type": "item",
-                "id": "I091"
+                "id": "I091",
+                "display": {
+                  "id": "I091",
+                  "name": "여명",
+                  "iconAsset": "assets/icons/f1f1fa07e4e6-BTNArtMashu.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黎明"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -341,7 +1952,8 @@
             ]
           }
         ]
-      }
+      },
+      "announcementOnly": true
     },
     {
       "id": "KR48fix2",
@@ -364,7 +1976,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00R"
+                "id": "E00R",
+                "display": {
+                  "id": "E00R",
+                  "name": "쿠사나기 쿄",
+                  "iconAsset": "assets/icons/b547cfce18cd-BTN_KYO_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "草薙京"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -417,7 +2039,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09J"
+                "id": "E09J",
+                "display": {
+                  "id": "E09J",
+                  "name": "우치하 사스케Ex",
+                  "iconAsset": "assets/icons/16130c1855c2-BTNEXSasuke_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波佐助 Ex"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -519,7 +2151,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00K"
+                "id": "E00K",
+                "display": {
+                  "id": "E00K",
+                  "name": "오키타 소지",
+                  "iconAsset": "assets/icons/eb37e92411f9-BTNCT-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "冲田总司"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -551,7 +2193,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I091"
+                "id": "I091",
+                "display": {
+                  "id": "I091",
+                  "name": "여명",
+                  "iconAsset": "assets/icons/f1f1fa07e4e6-BTNArtMashu.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黎明"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -573,7 +2225,8 @@
             ]
           }
         ]
-      }
+      },
+      "announcementOnly": true
     },
     {
       "id": "KR48fix1",
@@ -596,7 +2249,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09J"
+                "id": "E09J",
+                "display": {
+                  "id": "E09J",
+                  "name": "우치하 사스케Ex",
+                  "iconAsset": "assets/icons/16130c1855c2-BTNEXSasuke_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波佐助 Ex"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -610,7 +2273,8 @@
             ]
           }
         ]
-      }
+      },
+      "announcementOnly": true
     },
     {
       "id": "KR48",
@@ -634,7 +2298,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09J"
+                "id": "E09J",
+                "display": {
+                  "id": "E09J",
+                  "name": "우치하 사스케Ex",
+                  "iconAsset": "assets/icons/16130c1855c2-BTNEXSasuke_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波佐助 Ex"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -658,7 +2332,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00Y"
+                "id": "E00Y",
+                "display": {
+                  "id": "E00Y",
+                  "name": "고죠 사토루",
+                  "iconAsset": "assets/icons/2200932743ab-BTNSatoru_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "五条悟"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -689,7 +2373,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09I"
+                "id": "E09I",
+                "display": {
+                  "id": "E09I",
+                  "name": "DIO",
+                  "iconAsset": "assets/icons/7d66d0422e9e-BTNDIO_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "DIO"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -868,7 +2562,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09F"
+                "id": "E09F",
+                "display": {
+                  "id": "E09F",
+                  "name": "비소",
+                  "iconAsset": "assets/icons/03e3fbd5bf47-BTNFeixiao_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "飞霄"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -935,7 +2639,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E02J"
+                "id": "E02J",
+                "display": {
+                  "id": "E02J",
+                  "name": "쿠로가네 잇키",
+                  "iconAsset": "assets/icons/f4cb50a0ba7e-BTNHT-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑铁一辉"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1051,7 +2765,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01E"
+                "id": "E01E",
+                "display": {
+                  "id": "E01E",
+                  "name": "토오노 시키",
+                  "iconAsset": "assets/icons/77fcce4d9d35-BTNYY-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "远野志贵"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1082,7 +2806,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E042"
+                "id": "E042",
+                "display": {
+                  "id": "E042",
+                  "name": "사토미 렌타로",
+                  "iconAsset": "assets/icons/95e14f8a4f06-BTNLJLTL-TX0.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "里见莲太郎"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1142,7 +2876,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01Z"
+                "id": "E01Z",
+                "display": {
+                  "id": "E01Z",
+                  "name": "우치하 마다라",
+                  "iconAsset": "assets/icons/3b073e0a1a9b-BTNYZBB-TX0.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波斑"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1265,7 +3009,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00R"
+                "id": "E00R",
+                "display": {
+                  "id": "E00R",
+                  "name": "쿠사나기 쿄",
+                  "iconAsset": "assets/icons/b547cfce18cd-BTN_KYO_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "草薙京"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1381,7 +3135,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00U"
+                "id": "E00U",
+                "display": {
+                  "id": "E00U",
+                  "name": "엘리시아",
+                  "iconAsset": "assets/icons/5e3822ea100e-BTNElysia_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "爱莉希雅"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1412,7 +3176,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00Q"
+                "id": "E00Q",
+                "display": {
+                  "id": "E00Q",
+                  "name": "키리가야 카즈토",
+                  "iconAsset": "assets/icons/8c82639b41f0-BTNTR-TX0.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "桐谷和人"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1472,7 +3246,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E02W"
+                "id": "E02W",
+                "display": {
+                  "id": "E02W",
+                  "name": "야가미 이오리",
+                  "iconAsset": "assets/icons/ceaa225d5065-BTNBSA-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "八神庵"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1510,7 +3294,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E033"
+                "id": "E033",
+                "display": {
+                  "id": "E033",
+                  "name": "나미카제 미나토",
+                  "iconAsset": "assets/icons/1baaebd10831-BTN4D-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "波风水门"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1563,7 +3357,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00P"
+                "id": "E00P",
+                "display": {
+                  "id": "E00P",
+                  "name": "오지터 SSGSS",
+                  "iconAsset": "assets/icons/85f522e38f62-BTNGogetaBlue_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "悟吉塔 SSGSS"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1623,7 +3427,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E04F"
+                "id": "E04F",
+                "display": {
+                  "id": "E04F",
+                  "name": "아서·펜드래곤",
+                  "iconAsset": "assets/icons/7704fbe382af-BTNYS-TX0.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "亚瑟·潘德拉贡"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1697,7 +3511,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00K"
+                "id": "E00K",
+                "display": {
+                  "id": "E00K",
+                  "name": "오키타 소지",
+                  "iconAsset": "assets/icons/eb37e92411f9-BTNCT-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "冲田总司"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1806,7 +3630,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E057"
+                "id": "E057",
+                "display": {
+                  "id": "E057",
+                  "name": "플랑드르·스칼렛",
+                  "iconAsset": "assets/icons/3a4c30477d00-BTN-FLDL-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "芙兰朵露·斯卡雷特"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1866,7 +3700,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09A"
+                "id": "E09A",
+                "display": {
+                  "id": "E09A",
+                  "name": "오지터 SSJ4",
+                  "iconAsset": "assets/icons/bc8c11bc4d78-BTNwujita_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "悟吉塔 SSJ4"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1919,7 +3763,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00S"
+                "id": "E00S",
+                "display": {
+                  "id": "E00S",
+                  "name": "키아나 카스라나",
+                  "iconAsset": "assets/icons/669f93b3c356-BTNKiana_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "琪亚娜·卡斯兰娜"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1943,7 +3797,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00W"
+                "id": "E00W",
+                "display": {
+                  "id": "E00W",
+                  "name": "아가츠마 젠이츠",
+                  "iconAsset": "assets/icons/864f46cc3b5a-BTNZenitsu_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "我妻善逸"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -1974,7 +3838,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00X"
+                "id": "E00X",
+                "display": {
+                  "id": "E00X",
+                  "name": "사카마키 이자요이",
+                  "iconAsset": "assets/icons/d44e1ba10834-BTNIzayoi_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "逆回十六夜"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2055,7 +3929,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09G"
+                "id": "E09G",
+                "display": {
+                  "id": "E09G",
+                  "name": "히츠가야 토시로",
+                  "iconAsset": "assets/icons/a8948eb9948c-BTNToshiro_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "日番谷冬狮郎"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2079,7 +3963,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01Q"
+                "id": "E01Q",
+                "display": {
+                  "id": "E01Q",
+                  "name": "시로 렌",
+                  "iconAsset": "assets/icons/090b69b71a6a-BTNWL-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "白莲"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2132,7 +4026,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E02O"
+                "id": "E02O",
+                "display": {
+                  "id": "E02O",
+                  "name": "테루미 메이",
+                  "iconAsset": "assets/icons/4d217c8d9515-BTNZMM-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "照美冥"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2171,7 +4075,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09C"
+                "id": "E09C",
+                "display": {
+                  "id": "E09C",
+                  "name": "아이젠 소스케",
+                  "iconAsset": "assets/icons/f10f48a44b28-BTNAizen_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "蓝染惣右介"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2224,7 +4138,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01C"
+                "id": "E01C",
+                "display": {
+                  "id": "E01C",
+                  "name": "쿠로사키 이치고",
+                  "iconAsset": "assets/icons/f6117b7ab1bc-BTNIchigo_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑崎一护"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2248,7 +4172,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "HH02"
+                "id": "HH02",
+                "display": {
+                  "id": "HH02",
+                  "name": "콘파쿠·요우무",
+                  "iconAsset": "assets/icons/f21a96c6472d-btnyoumu_tx.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "魂魄妖梦"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2272,7 +4206,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E060"
+                "id": "E060",
+                "display": {
+                  "id": "E060",
+                  "name": "네로·클라우디우스",
+                  "iconAsset": "assets/icons/c846a39812b2-BTN-YX-NL-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "尼禄·克劳狄乌斯"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2304,7 +4248,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E052"
+                "id": "E052",
+                "display": {
+                  "id": "E052",
+                  "name": "헤라클레스",
+                  "iconAsset": "assets/icons/e29cfa59da7b-BTNBerserker-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "赫拉克勒斯"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2343,7 +4297,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E020"
+                "id": "E020",
+                "display": {
+                  "id": "E020",
+                  "name": "키요히메",
+                  "iconAsset": "assets/icons/910408a06606-BTNQJ-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "清姬"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2389,7 +4353,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00Z"
+                "id": "E00Z",
+                "display": {
+                  "id": "E00Z",
+                  "name": "알트리아·펜드래곤 [Alter]",
+                  "iconAsset": "assets/icons/55b1254e651c-BTNAltoria_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "阿尔托莉雅 [Alter]"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2428,7 +4402,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E001"
+                "id": "E001",
+                "display": {
+                  "id": "E001",
+                  "name": "료우기 시키",
+                  "iconAsset": "assets/icons/ac230dc14538-BTN214-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "两仪式"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2460,7 +4444,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E02C"
+                "id": "E02C",
+                "display": {
+                  "id": "E02C",
+                  "name": "K-BW",
+                  "iconAsset": "assets/icons/5f4b0c4d9acd-BTNHBK-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "K-BW"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2492,7 +4486,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01F"
+                "id": "E01F",
+                "display": {
+                  "id": "E01F",
+                  "name": "에밀리아",
+                  "iconAsset": "assets/icons/ac6dea56adbc-BTNEmilia_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "爱蜜莉雅"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2524,7 +4528,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09E"
+                "id": "E09E",
+                "display": {
+                  "id": "E09E",
+                  "name": "쿠사나기 쿄Ex",
+                  "iconAsset": "assets/icons/e1ee0fc253fc-BTNKyoEX_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "草薙京Ex"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2556,7 +4570,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E021"
+                "id": "E021",
+                "display": {
+                  "id": "E021",
+                  "name": "미사카 미코토",
+                  "iconAsset": "assets/icons/59346f5aa959-BTNYBMQ-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "御坂美琴"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2595,7 +4619,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01L"
+                "id": "E01L",
+                "display": {
+                  "id": "E01L",
+                  "name": "나나야 시키",
+                  "iconAsset": "assets/icons/26976e2dd0ba-BTNQY-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "七夜志贵"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2641,7 +4675,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E01P"
+                "id": "E01P",
+                "display": {
+                  "id": "E01P",
+                  "name": "이나바 츠쿠요",
+                  "iconAsset": "assets/icons/16ad55c5360d-BTNYE-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "因幡月夜"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2680,7 +4724,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E05U"
+                "id": "E05U",
+                "display": {
+                  "id": "E05U",
+                  "name": "스자쿠인 츠바키",
+                  "iconAsset": "assets/icons/fa6de84673ea-BTN-ZQYC-TX1.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "朱雀院椿"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2712,7 +4766,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I091"
+                "id": "I091",
+                "display": {
+                  "id": "I091",
+                  "name": "여명",
+                  "iconAsset": "assets/icons/f1f1fa07e4e6-BTNArtMashu.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黎明"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2736,7 +4800,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I092"
+                "id": "I092",
+                "display": {
+                  "id": "I092",
+                  "name": "검은 성배",
+                  "iconAsset": "assets/icons/7c89089a7182-BTNDark_Grail.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黑之圣杯"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2760,7 +4834,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I02V"
+                "id": "I02V",
+                "display": {
+                  "id": "I02V",
+                  "name": "히메지 박쥐",
+                  "iconAsset": "assets/icons/d9f809c9cd37-BTN-LZ10.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "姬路蝙蝠"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2784,7 +4868,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I055"
+                "id": "I055",
+                "display": {
+                  "id": "I055",
+                  "name": "황혼의 왕성",
+                  "iconAsset": "assets/icons/b9963413f3b9-BTNHW01.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黄昏王城"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2808,7 +4902,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I02Y"
+                "id": "I02Y",
+                "display": {
+                  "id": "I02Y",
+                  "name": "파란 줄무늬 팬티",
+                  "iconAsset": "assets/icons/5c55d68d6fc7-BTN-LZ05.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "蓝白胖次"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2847,7 +4951,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I089"
+                "id": "I089",
+                "display": {
+                  "id": "I089",
+                  "name": "황금과 태양의 승부사",
+                  "iconAsset": "assets/icons/f228f0ea0962-BTNGilgaArt.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "黄金与太阳的赌徒"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2900,7 +5014,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I02Z"
+                "id": "I02Z",
+                "display": {
+                  "id": "I02Z",
+                  "name": "컬라이도스코프",
+                  "iconAsset": "assets/icons/c7ce9b775e40-BTN-LZ04.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "万华镜"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -2932,7 +5056,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I03R"
+                "id": "I03R",
+                "display": {
+                  "id": "I03R",
+                  "name": "예복 재구축",
+                  "iconAsset": "assets/icons/a2805493885a-BTN-LZ01.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "礼装重构"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3131,7 +5265,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E05U"
+                "id": "E05U",
+                "display": {
+                  "id": "E05U",
+                  "name": "스자쿠인 츠바키",
+                  "iconAsset": "assets/icons/fa6de84673ea-BTN-ZQYC-TX1.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "朱雀院椿"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3154,7 +5298,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09C"
+                "id": "E09C",
+                "display": {
+                  "id": "E09C",
+                  "name": "아이젠 소스케",
+                  "iconAsset": "assets/icons/f10f48a44b28-BTNAizen_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "蓝染惣右介"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3190,7 +5344,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09F"
+                "id": "E09F",
+                "display": {
+                  "id": "E09F",
+                  "name": "비소",
+                  "iconAsset": "assets/icons/03e3fbd5bf47-BTNFeixiao_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "飞霄"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3213,7 +5377,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00T"
+                "id": "E00T",
+                "display": {
+                  "id": "E00T",
+                  "name": "우치하 이타치",
+                  "iconAsset": "assets/icons/6f4500914b38-BTNItachi_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "宇智波鼬"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3236,7 +5410,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E05Q"
+                "id": "E05Q",
+                "display": {
+                  "id": "E05Q",
+                  "name": "로즈웰",
+                  "iconAsset": "assets/icons/1692ca3ce1a2-BTN_Rozwel_TX-A.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "罗兹威尔"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3259,7 +5443,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09I"
+                "id": "E09I",
+                "display": {
+                  "id": "E09I",
+                  "name": "DIO",
+                  "iconAsset": "assets/icons/7d66d0422e9e-BTNDIO_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "DIO"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3367,7 +5561,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E04X"
+                "id": "E04X",
+                "display": {
+                  "id": "E04X",
+                  "name": "케빈·카스라나",
+                  "iconAsset": "assets/icons/da15ff85e5b7-BTNKW3-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "凯文·卡斯兰娜"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3409,7 +5613,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00R"
+                "id": "E00R",
+                "display": {
+                  "id": "E00R",
+                  "name": "쿠사나기 쿄",
+                  "iconAsset": "assets/icons/b547cfce18cd-BTN_KYO_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "草薙京"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3432,7 +5646,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E00S"
+                "id": "E00S",
+                "display": {
+                  "id": "E00S",
+                  "name": "키아나 카스라나",
+                  "iconAsset": "assets/icons/669f93b3c356-BTNKiana_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "琪亚娜·卡斯兰娜"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3455,7 +5679,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E09A"
+                "id": "E09A",
+                "display": {
+                  "id": "E09A",
+                  "name": "오지터 SSJ4",
+                  "iconAsset": "assets/icons/bc8c11bc4d78-BTNwujita_TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "悟吉塔 SSJ4"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3497,7 +5731,17 @@
             "subjects": [
               {
                 "type": "hero",
-                "id": "E033"
+                "id": "E033",
+                "display": {
+                  "id": "E033",
+                  "name": "나미카제 미나토",
+                  "iconAsset": "assets/icons/1baaebd10831-BTN4D-TX.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "波风水门"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3545,7 +5789,17 @@
             "subjects": [
               {
                 "type": "item",
-                "id": "I02Z"
+                "id": "I02Z",
+                "display": {
+                  "id": "I02Z",
+                  "name": "컬라이도스코프",
+                  "iconAsset": "assets/icons/c7ce9b775e40-BTN-LZ04.png",
+                  "translations": {
+                    "zhCN": {
+                      "name": "万华镜"
+                    }
+                  }
+                }
               }
             ],
             "entries": [
@@ -3589,12 +5843,14 @@
             ]
           }
         ]
-      }
+      },
+      "seriesRepresentative": "KR47"
     },
     {
       "id": "KR47fix4",
       "label": "KR47fix4",
-      "file": "data/heroes.KR47fix4.json"
+      "file": "data/heroes.KR47fix4.json",
+      "announcementOnly": true
     }
   ]
 }
